@@ -1,0 +1,6 @@
+{
+  "original_file": "pncp-contratos.json",
+  "original_sha256": "cf4d05136dc0218389bd1b38e68ee36c24cbc9b3fe64d1475c1e6820d19226a0",
+  "published_sha256": "600b980a93772acfdaab91faa85632fbe8174c592d9903082a50de0f7d2a7684",
+  "transformation": "Masked structured individual supplier and subcontractor identifiers and names. Published copy is not byte-identical to source."
+}

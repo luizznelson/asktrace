@@ -1,0 +1,44 @@
+{
+  "scope": "Existing sample files; not a complete or independently validated dataset",
+  "inventory": [
+    {
+      "file": "diarios-picos.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "empty_not_usable"
+    },
+    {
+      "file": "pncp-contratacoes-pi.json",
+      "bytes": 92902,
+      "sha256": "6c14568d8dfcb5015f8ffc8ae1cf23af6a98d43eba79321d1771fe1833dfa01b",
+      "status": "valid_json",
+      "records_in_file": 50,
+      "reported_total": 454,
+      "reported_pages": 10,
+      "page": 1,
+      "complete_download": false
+    },
+    {
+      "file": "pncp-contratacoes.json",
+      "bytes": 98601,
+      "sha256": "150405629c5095c4d673a379f34d5eeff02c4a32287976b7c0d01790f58e0cfb",
+      "status": "valid_json",
+      "records_in_file": 50,
+      "reported_total": 38545,
+      "reported_pages": 771,
+      "page": 1,
+      "complete_download": false
+    },
+    {
+      "file": "pncp-contratos.json",
+      "bytes": 83726,
+      "sha256": "cf4d05136dc0218389bd1b38e68ee36c24cbc9b3fe64d1475c1e6820d19226a0",
+      "status": "valid_json",
+      "records_in_file": 50,
+      "reported_total": 201691,
+      "reported_pages": 4034,
+      "page": 1,
+      "complete_download": false
+    }
+  ]
+}
