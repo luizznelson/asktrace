@@ -1,0 +1,23 @@
+# Como explorar o AskTrace
+
+## Se você tem 5 minutos
+
+1. Leia “Em 1 minuto” e “O que os dados permitem afirmar” no [README](../README.md).
+2. Abra o [estudo de caso](case-study.md) para entender a pergunta e os riscos de interpretação.
+3. Veja [arquitetura](architecture.md) e uma decisão ligada ao código.
+4. Confira [qualidade](quality.md) e os comandos de [reprodução](ingestion.md).
+
+## Por pergunta
+
+| O que você quer entender? | Comece aqui |
+| --- | --- |
+| Para quem serve e qual problema trata? | [Estudo de caso](case-study.md) |
+| O que já foi coletado e como? | [Ingestão, evidências e limites](ingestion.md) |
+| Por que o código está organizado assim? | [Decisões de arquitetura](architecture.md) |
+| Os testes comprovam o quê? | [Qualidade](quality.md) |
+| Como executar e preparar commits? | [Desenvolvimento](development.md), [contribuição](../CONTRIBUTING.md) |
+| O que são os arquivos de exploração? | [Amostras](../amostras/README.md), [inventário](sample-inventory.json) |
+| Onde estão as execuções publicadas? | [Índice de runs](../runs/README.md) |
+| O que ainda será feito? | [Plano](../PLANO.md) |
+
+O README apresenta o projeto; os guias técnicos explicam a reprodução. Os relatórios de `runs/` preservam evidências de execuções específicas. Números de amostras históricas não são somados à coleta real de 2026.

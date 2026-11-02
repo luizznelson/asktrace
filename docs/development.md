@@ -27,7 +27,7 @@ git status --short
 git add --dry-run .
 ```
 
-Esses comandos permitem conferir a seleção sem adicionar arquivos ao índice. Após adicionar os arquivos, confira também `git diff --cached --stat`. Exclusões não removem arquivos já rastreados de commits antigos; esta revisão encontrou o projeto ainda sem repositório e inicializou um Git local vazio, sem commits.
+Esses comandos permitem conferir a seleção sem adicionar arquivos ao índice. Após adicionar os arquivos, confira também `git diff --cached --stat`. Exclusões não removem arquivos já rastreados de commits antigos; o repositório já possui histórico e remoto; confira o estado atual antes de adicionar arquivos.
 
 ## Limites desta entrega
 
@@ -38,3 +38,5 @@ A auditoria não substitui validação do domínio, testes da ingestão ou revis
 Os arquivos de `/docker-entrypoint-initdb.d/` inicializam um volume novo. Alterar o SQL não migra um banco existente; mudanças posteriores precisarão de migrações explícitas, sem apagar o volume para atualizar o esquema.
 
 A entrega de ingestão validou o SQL no PostgreSQL 17.11, com testes de integração em asktrace_test. O Compose fixa o digest da imagem observada. A documentação da primeira revisão descrevia o Docker desligado; essa limitação foi resolvida nesta etapa. Veja ingestion.md para comandos de reprodução e evidências.
+
+[Índice da documentação](README.md) · [Arquitetura](architecture.md) · [Qualidade](quality.md) · [Padrões de contribuição](../CONTRIBUTING.md).

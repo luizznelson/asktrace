@@ -1,50 +1,99 @@
 # AskTrace
 
-Projeto de portfólio em preparação: responder perguntas sobre compras públicas do Piauí e mostrar os dados, consultas e ferramentas usados para chegar a cada resposta.
+[![Quality](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml)
 
-## O problema proposto
+**Investigar compras públicas com dados de origem e um caminho verificável até a resposta.**
 
-Registros de contratações e contratos estão distribuídos em páginas e contêm descrições em texto livre. O objetivo é facilitar a investigação sem esconder os filtros, o período, a cobertura dos dados ou as contas executadas.
+Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A primeira entrega constrói a base auditável de pregões eletrônicos do Piauí. O agente de perguntas e respostas é a próxima camada, ainda não implementada.
 
-Perguntas iniciais: quais órgãos publicaram compras em determinado período? Quais objetos mencionam um produto? Que contratos estão relacionados a uma contratação? Quais registros têm valores ou datas ausentes?
+[English](README.en.md) · [Estudo de caso](docs/case-study.md) · [Decisões de engenharia](docs/architecture.md) · [Documentação](docs/README.md)
 
-## Estado verificado
+## Em 1 minuto
 
-Há um plano e três amostras JSON válidas do PNCP, com 50 registros em cada arquivo. A consulta filtrada do Piauí informa 454 pregões para outubro de 2025, distribuídos em 10 páginas; a amostra contém somente a primeira página. Os totais nacionais de 201.691 contratos e 38.545 contratações são metadados das consultas históricas fornecidas, não volume já ingerido pelo projeto.
+| | |
+| --- | --- |
+| **Problema** | Uma resposta sobre compras públicas pode ignorar páginas, tratar um valor ausente como zero ou misturar períodos e modalidades. |
+| **O que construí** | Coletor paginado do PNCP, normalização com precisão decimal, carga transacional no PostgreSQL e relatórios que ligam cada registro à página original. |
+| **Resultado verificado** | 1.081 pregões publicados de agosto a outubro de 2026, em 23 páginas, conferidos no banco. São 749 registros sem valor homologado informado, mantidos como NULL. |
+| **Habilidades demonstradas** | Python 3.14, integração com API pública, qualidade de dados, SQL, PostgreSQL com Docker, rastreabilidade, testes de falhas e CI configurada. |
+| **Estágio atual** | Ingestão executada localmente. Sem agente, avaliação de respostas, interface ou demonstração online ainda. |
+| **Onde começar** | [Resultado e método](docs/ingestion.md) · [Evidência no banco](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Como verificar](docs/quality.md) |
 
-O arquivo do Querido Diário está vazio. O relato anterior registra falhas TLS, mas não permite atribuir definitivamente a causa ao servidor. Essa fonte permanece opcional; a verificação de certificados não será desativada.
+## 1. O problema: contar registros não basta
 
-A ingestão paginada e a carga PostgreSQL foram implementadas e executadas para agosto a outubro de 2026. Agente, avaliação de perguntas e demonstração ainda não existem. O [inventário dos arquivos](docs/sample-inventory.json) registra tamanho, hash e paginação sem reproduzir dados de fornecedores.
+Uma amostra do PNCP contém 50 registros, mas informa **454 resultados em 10 páginas**. Tomar apenas o arquivo recebido como a base completa eliminaria a maior parte daquela consulta. Essa amostra é de outubro de 2025 e não faz parte dos números da coleta de 2026.
 
-## Próxima entrega
+O cenário proposto é alguém investigando compras públicas: precisa conhecer o período, a modalidade, a cobertura e a origem de cada valor antes de interpretar uma resposta. A documentação e o código precisam tornar esses limites visíveis.
 
-Ampliar a base com uma estratégia própria para contratos e atas, antes de implementar as ferramentas do agente. Banco e período confirmados: PostgreSQL via Docker e agosto a outubro de 2026. A primeira coleta completa do recorte de pregões retornou 1.081 registros em 23 páginas.
+## 2. A solução atual: uma base antes do agente
 
-A primeira versão deve distinguir resultado vazio, falha de rede e download incompleto. Valores financeiros serão tratados com precisão decimal. A relação entre compra e contratos não autoriza comparar um contrato isolado com o orçamento total da compra; a granularidade e a cobertura precisam ser verificadas.
+**Consulta delimitada → páginas originais → validação → normalização → PostgreSQL → relatório verificável.**
 
-## Organização
-
-- `PLANO.md`: plano recebido, ainda sujeito à revisão de escopo.
-- `docs/sample-inventory.json`: inventário verificável das amostras disponíveis.
-- `amostras/`: amostras públicas parciais preservadas no Git, com origem e limitações documentadas.
-
-A documentação e a implementação devem separar objetivo, evidência disponível e resultado medido. Não serão afirmadas acurácia, economia de trabalho ou cobertura estadual completa antes de avaliação própria.
-
-## Conferir a primeira etapa
-
-```powershell
-python -m unittest discover -s tests -v
-python scripts/audit_samples.py amostras --output runs/sample-audit.json
+```mermaid
+flowchart LR
+  A[PNCP: PI, modalidade 6<br/>agosto a outubro de 2026] --> B[Coleta por mês e página]
+  B --> C[JSON original e hash]
+  C --> D[Validação de cobertura<br/>e normalização decimal]
+  D --> E[Carga transacional<br/>no PostgreSQL]
+  E --> F[Relatórios e consulta<br/>por execução]
 ```
 
-A auditoria retorna código de saída 1 se encontrar arquivo inválido, inclusive o arquivo vazio do Querido Diário. Isso é um diagnóstico esperado, não um download concluído.
+Cada execução recebe um identificador. Amostra, falha e coleta real concluída têm estados diferentes. Os snapshots ficam separados, permitindo conferir uma execução sem somar a mesma compra novamente em outra coleta.
 
-Com Docker Desktop aberto, use `docker compose up -d` e `docker compose ps`. A configuração usa PostgreSQL 17, porta local 15432 e volume persistente. A senha local está no `.env` ignorado pelo Git; não publique esse arquivo. O esquema registra execuções, páginas, órgãos e contratações normalizadas. O agente ainda será implementado.
+## 3. O que os dados permitem afirmar
 
-[Verificações de desenvolvimento, arquivos do commit e limites atuais](docs/development.md).
+| Pergunta | Evidência disponível |
+| --- | --- |
+| Quantos pregões foram recebidos no recorte? | **1.081**, com totais de paginação conferidos: 412 em agosto, 373 em setembro e 296 em outubro de 2026. |
+| Foram carregados no banco? | Sim. A conferência PostgreSQL encontrou os mesmos 1.081 registros. Uma segunda carga retornou `already_loaded`. |
+| Todos informam valor homologado? | Não. **749** não informam esse campo; ausência não virou zero. |
+| É toda a contratação pública do Piauí? | Não. O recorte é modalidade 6, UF da unidade igual a PI e data de publicação. Não inclui contratos e atas. |
+| Já há respostas de IA avaliadas? | Não. Coleta e testes de software não medem qualidade de respostas de um agente. |
 
-## Primeira ingestão concluída
+Igualdade entre contagens não prova que o portal permaneceu inalterado durante a coleta. Valor homologado não é valor pago; sua ausência não comprova cancelamento. Ganhos de produtividade ou economia ainda não foram medidos.
 
-**1.081 pregões eletrônicos** publicados no Piauí entre agosto e outubro de 2026 foram coletados e carregados no PostgreSQL. A conferência por mês resultou em 412, 373 e 296 registros. Em 749 deles, o valor homologado não foi informado: o campo permanece NULL, sem assumir zero ou pagamento.
+[Método, limites e reprodução](docs/ingestion.md) · [Manifesto da coleta](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json) · [Qualidade](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/quality.json)
 
-Veja [método, evidências, limitações e reprodução](docs/ingestion.md). A coleta da modalidade 6 não representa todas as compras públicas do Piauí.
+## 4. O que a implementação demonstra
+
+| Decisão | Por que foi feita | Onde conferir |
+| --- | --- | --- |
+| Separar aquisição e carga | Reexaminar os mesmos bytes sem depender de uma nova resposta da API. | [Arquitetura](docs/architecture.md) |
+| Verificar datas, UF e modalidade | Não confiar somente no filtro enviado ao servidor. | `normalize` em [ingest.py](asktrace/ingest.py) |
+| Usar Decimal e NUMERIC | Preservar valores sem passar por float; ausências continuam desconhecidas. | [Ingestão](docs/ingestion.md), [esquema SQL](sql/002_purchases.sql) |
+| Usar transação e identidade da execução | Evitar carga parcial e duplicação ao carregar novamente o mesmo manifesto. | [database.py](asktrace/database.py), [testes PostgreSQL](tests/test_database_integration.py) |
+| Manter estados de falha explícitos | Não apresentar timeout, interrupção ou download limitado como sucesso. | [Testes da ingestão](tests/test_ingestion.py) |
+
+## 5. Como conferir sem baixar os dados novamente
+
+Comece pelos relatórios vinculados acima. Para testar o código, use Python 3.14 e uv, na pasta do projeto:
+
+```powershell
+uv venv --python 3.14
+uv pip install --python .venv/Scripts/python.exe --require-hashes -r requirements.txt
+uv pip install --python .venv/Scripts/python.exe -r requirements-dev.txt
+.venv/Scripts/python.exe -m unittest discover -s tests -v
+```
+
+Se `.venv` já existir e estiver configurado, não é necessário recriá-lo. Sem a opção de integração, dois testes PostgreSQL são ignorados explicitamente. Para executá-los, iniciar o banco e reproduzir a coleta, siga o [guia de ingestão](docs/ingestion.md) e o [guia de desenvolvimento](docs/development.md). No primeiro uso, configure a senha local a partir de `.env.example`; nunca versione `.env`.
+
+## 6. Como investigar o repositório
+
+| Pasta | O que mostra |
+| --- | --- |
+| `asktrace/` | Coleta, normalização e carga verificável. |
+| `sql/` | Registro de origem, tabelas normalizadas e visão que separa amostras de dados reais. |
+| `tests/` | Paginação, falhas, precisão, integridade e transações PostgreSQL. |
+| `amostras/` | Páginas históricas públicas para exploração; contratos têm cópia mascarada com proveniência. |
+| `runs/` | Manifestos e relatórios publicados, com modo e estado de cada execução. |
+| `docs/` | Caso de uso, decisões, evidências, comandos e limitações. |
+
+Os downloads completos ficam localmente em `data/raw/` e `data/processed/`, excluídos do Git. Os relatórios registram os hashes, mas não disponibilizam esses arquivos por si só. [Índice de documentação](docs/README.md).
+
+## 7. O que vem depois
+
+Contratos e atas precisam de uma estratégia de cobertura própria: seus endpoints consultados não aceitam o filtro estadual usado aqui. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
+
+Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
+
+Houve assistência de IA no desenvolvimento. A responsabilidade por compreender, revisar e verificar as entregas é do mantenedor.
