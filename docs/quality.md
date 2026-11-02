@@ -36,3 +36,11 @@ As amostras históricas e os relatórios iniciais têm contexto próprio. Consul
 Os bytes completos de dados reais ficam locais em pastas ignoradas pelo Git. Os manifestos publicados permitem verificar uma cópia disponível, mas não substituem sua disponibilização. Uma nova consulta pode retornar conteúdo atualizado, com hashes diferentes.
 
 Não foram medidos produtividade, desempenho sob carga, acurácia de respostas ou cobertura de todas as compras públicas. Nenhuma afirmação de irregularidade ou aprovação financeira decorre desta etapa.
+
+## Contratos: validação adicional em 02/11/2026
+
+Após a implementação do coletor de contratos, a suíte completa passou com **36 testes**,
+incluindo PostgreSQL. Os 27 testes citados acima correspondem à entrega anterior.
+Os nove novos testes cobrem relações, integridade, falhas, valores e transações.
+O piloto real não validou vínculos por falhas de consulta; testes sintéticos não substituem essa etapa.
+Veja [relatório e reprodução](contracts.md). A execução remota do CI não foi verificada nesta entrega.

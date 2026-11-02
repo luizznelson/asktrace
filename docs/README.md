@@ -13,6 +13,7 @@
 | --- | --- |
 | Para quem serve e qual problema trata? | [Estudo de caso](case-study.md) |
 | O que já foi coletado e como? | [Ingestão, evidências e limites](ingestion.md) |
+| Como compras se ligam a contratos e qual a cobertura? | [Piloto de contratos](contracts.md) |
 | Por que o código está organizado assim? | [Decisões de arquitetura](architecture.md) |
 | Os testes comprovam o quê? | [Qualidade](quality.md) |
 | Como executar e preparar commits? | [Desenvolvimento](development.md), [contribuição](../CONTRIBUTING.md) |

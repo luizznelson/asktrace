@@ -29,3 +29,9 @@ Fonte técnica: https://pncp.gov.br/api/consulta/v3/api-docs
 ## Estado atual
 
 Criados inventário, auditor local de amostras, testes e configuração inicial de PostgreSQL. Docker e PostgreSQL foram validados. Ingestão de pregões de agosto a outubro de 2026 concluída: 1.081 registros. Agente ainda não implementado. Veja docs/ingestion.md para evidências e limites. As pequenas amostras públicas e os relatórios de auditoria ficam no Git; credenciais e downloads completos permanecem fora.
+
+## Atualização: piloto de contratos
+
+Coletor e carga de contratos vinculados implementados. Piloto de 12 compras sem contratos validados
+por falhas de consulta; nenhuma carga real de contratos. Repetir piloto antes de ampliar.
+Veja [cobertura e limites](docs/contracts.md). Atas ainda pendentes.

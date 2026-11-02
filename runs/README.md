@@ -22,3 +22,9 @@ Compare os hashes e diagnósticos, considerando a evolução do código. Os rela
 - `pncp-3020d59b-d274-4f4c-be4f-d59e8be30101`: coleta real concluída, 1.081 registros e 23 páginas, com conferência da carga no PostgreSQL.
 
 Os JSONs brutos e normalizados dessas execuções ficam em data/raw e data/processed, fora do Git; os manifestos registram seus hashes e caminhos. Não some as amostras aos resultados reais. [Método e reprodução](../docs/ingestion.md).
+
+## Piloto de contratos
+
+[contracts-a6fa16c6-13c4-4205-94e9-cd01e9322636/manifest.json](contracts-a6fa16c6-13c4-4205-94e9-cd01e9322636/manifest.json): 12 compras tentadas, 11 respostas 503,
+uma falha sem status HTTP, nenhum contrato validado; não carregado no banco.
+Veja [método e interpretação](../docs/contracts.md). Preservar esta tentativa, mesmo após novas coletas.

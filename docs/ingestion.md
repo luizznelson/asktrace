@@ -82,3 +82,8 @@ $env:ASKTRACE_TEST_DATABASE='1'
 ```
 
 Crie `asktrace_test` somente na primeira vez. Os testes de integração usam esse banco isolado, não os dados reais. Verificam idempotência, exclusão de amostras da visão analítica e rollback da execução inteira diante de violação de restrição. A CI foi configurada para executar esses testes com PostgreSQL; sua execução remota não foi confirmada nesta entrega.
+
+## Contratos vinculados
+
+A aquisição por compra tem [guia próprio de cobertura e reprodução](contracts.md).
+Seu primeiro piloto ficou `needs_review` e não foi carregado no PostgreSQL.

@@ -90,9 +90,18 @@ Do not recreate an already configured environment. Two PostgreSQL tests are expl
 
 Full downloads stay local in ignored `data/raw/` and `data/processed/`. Hashes in reports do not make those files remotely available. [Documentation index](docs/README.md).
 
+## Linked contracts: validation stage
+
+The purchase-linked collector and transactional loader are implemented and tested. The first live pilot
+attempted 12 purchases but validated no contracts: 11 HTTP 503 responses and one failure without a
+captured HTTP status. The pilot was not loaded into PostgreSQL. This does not establish that contracts
+are absent. See the [method, evidence and reproduction guide (Portuguese)](docs/contracts.md).
+The local suite passed all 36 tests, including PostgreSQL integration. Real contract links still need
+validation through a successful acquisition. Contract notices are not payment records.
+
 ## 7. Next steps and attribution
 
-Contracts and price-registration records need a separate coverage strategy: their consulted endpoints lack the state filter used here. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
+Next, validate real links through a new contract pilot before expanding coverage. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
 
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 

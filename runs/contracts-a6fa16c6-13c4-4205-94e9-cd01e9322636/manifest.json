@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "run_id": "a6fa16c6-13c4-4205-94e9-cd01e9322636",
+  "parent_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+  "parent_manifest_sha256": "21950f605d9d13888228ec51582957299e5f76a71bdcab5e68e758a880615520",
+  "started_at": "2026-11-02T22:10:42.560241+00:00",
+  "status": "needs_review",
+  "selection": "round_robin_publication_month_then_control_id_v1",
+  "population": 1081,
+  "selected": [
+    {
+      "purchase_id": "00348003000110-1-000856/2026",
+      "cnpj": "00348003000110",
+      "year": 2026,
+      "sequence": 856
+    },
+    {
+      "purchase_id": "00107790000109-1-000002/2026",
+      "cnpj": "00107790000109",
+      "year": 2026,
+      "sequence": 2
+    },
+    {
+      "purchase_id": "00348003000110-1-001156/2026",
+      "cnpj": "00348003000110",
+      "year": 2026,
+      "sequence": 1156
+    },
+    {
+      "purchase_id": "00394452000103-1-016189/2026",
+      "cnpj": "00394452000103",
+      "year": 2026,
+      "sequence": 16189
+    },
+    {
+      "purchase_id": "00348003000110-1-001056/2026",
+      "cnpj": "00348003000110",
+      "year": 2026,
+      "sequence": 1056
+    },
+    {
+      "purchase_id": "00348003000110-1-001166/2026",
+      "cnpj": "00348003000110",
+      "year": 2026,
+      "sequence": 1166
+    },
+    {
+      "purchase_id": "00394452000103-1-016491/2026",
+      "cnpj": "00394452000103",
+      "year": 2026,
+      "sequence": 16491
+    },
+    {
+      "purchase_id": "00348003000110-1-001088/2026",
+      "cnpj": "00348003000110",
+      "year": 2026,
+      "sequence": 1088
+    },
+    {
+      "purchase_id": "00348003000110-1-001366/2026",
+      "cnpj": "00348003000110",
+      "year": 2026,
+      "sequence": 1366
+    },
+    {
+      "purchase_id": "00394452000103-1-016720/2026",
+      "cnpj": "00394452000103",
+      "year": 2026,
+      "sequence": 16720
+    },
+    {
+      "purchase_id": "00394452000103-1-019150/2026",
+      "cnpj": "00394452000103",
+      "year": 2026,
+      "sequence": 19150
+    },
+    {
+      "purchase_id": "00394452000103-1-021515/2026",
+      "cnpj": "00394452000103",
+      "year": 2026,
+      "sequence": 21515
+    }
+  ],
+  "requests": [
+    {
+      "purchase_id": "00348003000110-1-000856/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00348003000110/contratos/contratacao/2026/856",
+      "fetched_at": "2026-11-02T22:10:42.560266+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0000.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00107790000109-1-000002/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00107790000109/contratos/contratacao/2026/2",
+      "fetched_at": "2026-11-02T22:11:07.357470+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0001.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00348003000110-1-001156/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00348003000110/contratos/contratacao/2026/1156",
+      "fetched_at": "2026-11-02T22:11:12.124071+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0002.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00394452000103-1-016189/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00394452000103/contratos/contratacao/2026/16189",
+      "fetched_at": "2026-11-02T22:11:16.827081+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0003.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00348003000110-1-001056/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00348003000110/contratos/contratacao/2026/1056",
+      "fetched_at": "2026-11-02T22:11:21.545426+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0004.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00348003000110-1-001166/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00348003000110/contratos/contratacao/2026/1166",
+      "fetched_at": "2026-11-02T22:11:26.308828+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0005.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00394452000103-1-016491/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00394452000103/contratos/contratacao/2026/16491",
+      "fetched_at": "2026-11-02T22:11:31.023270+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0006.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00348003000110-1-001088/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00348003000110/contratos/contratacao/2026/1088",
+      "fetched_at": "2026-11-02T22:11:35.782405+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0007.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00348003000110-1-001366/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00348003000110/contratos/contratacao/2026/1366",
+      "fetched_at": "2026-11-02T22:11:40.613079+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0008.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00394452000103-1-016720/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00394452000103/contratos/contratacao/2026/16720",
+      "fetched_at": "2026-11-02T22:12:05.382101+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0009.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00394452000103-1-019150/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00394452000103/contratos/contratacao/2026/19150",
+      "fetched_at": "2026-11-02T22:12:10.161572+00:00",
+      "http_status": 503,
+      "relative_path": "data/raw/a6fa16c6-13c4-4205-94e9-cd01e9322636/request-0010.json",
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00394452000103-1-021515/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00394452000103/contratos/contratacao/2026/21515",
+      "fetched_at": "2026-11-02T22:12:14.917413+00:00",
+      "outcome": "invalid_response",
+      "contracts_count": 0
+    }
+  ],
+  "contracts": [],
+  "quality": {
+    "selected": 12,
+    "attempted": 12,
+    "request_failed": 11,
+    "invalid_response": 1,
+    "contracts": 0
+  },
+  "finished_at": "2026-11-02T22:12:36.175990+00:00"
+}
