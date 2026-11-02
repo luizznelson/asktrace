@@ -28,4 +28,4 @@ Fonte técnica: https://pncp.gov.br/api/consulta/v3/api-docs
 
 ## Estado atual
 
-Criados inventário, auditor local de amostras, testes e configuração inicial de PostgreSQL. Docker ainda precisa estar em execução para validar o banco. Não foi executada coleta completa nem implementado o agente. As pequenas amostras públicas e os relatórios de auditoria ficam no Git; credenciais e downloads completos permanecem fora.
+Criados inventário, auditor local de amostras, testes e configuração inicial de PostgreSQL. Docker e PostgreSQL foram validados. Ingestão de pregões de agosto a outubro de 2026 concluída: 1.081 registros. Agente ainda não implementado. Veja docs/ingestion.md para evidências e limites. As pequenas amostras públicas e os relatórios de auditoria ficam no Git; credenciais e downloads completos permanecem fora.

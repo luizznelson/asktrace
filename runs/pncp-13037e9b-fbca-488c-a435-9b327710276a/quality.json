@@ -1,0 +1,22 @@
+{
+  "run_id": "13037e9b-fbca-488c-a435-9b327710276a",
+  "mode": "live",
+  "status": "failed",
+  "scope": {
+    "uf": "PI",
+    "modality": 6,
+    "date_basis": "publication",
+    "resource": "purchases"
+  },
+  "counts": {
+    "source_records": 50,
+    "awarded_missing": 26,
+    "normalized_records": 50
+  },
+  "windows": [],
+  "limitations": [
+    "Not all procurement modalities",
+    "Publication period, not signature or payment period",
+    "Counts do not prove source completeness or absence of later corrections"
+  ]
+}

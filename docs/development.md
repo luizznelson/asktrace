@@ -2,7 +2,7 @@
 
 ## Ambiente e verificações
 
-Esta etapa usa Python 3.14 e biblioteca padrão para a auditoria. Ruff é uma ferramenta de desenvolvimento fixada em `requirements-dev.txt`.
+A auditoria e o coletor usam Python 3.14 e biblioteca padrão. A carga usa psycopg e python-dotenv, fixados com hashes em requirements.txt. Ruff é uma ferramenta de desenvolvimento fixada em `requirements-dev.txt`.
 
 ```powershell
 python -m pip install -r requirements-dev.txt
@@ -33,8 +33,8 @@ Esses comandos permitem conferir a seleção sem adicionar arquivos ao índice. 
 
 `complete_dataset` descreve somente a paginação informada pelo arquivo. Não atesta atualização, cobertura geográfica, ausência de duplicados ou correção financeira. Duplicados e IDs ausentes são indicadores separados no relatório.
 
-A auditoria não substitui validação do domínio, testes da ingestão ou revisão de SQL executado por agente. O esquema atual é o registro inicial de origem; tabelas normalizadas e o usuário de consulta somente leitura ainda não foram implementados. A credencial administrativa do Compose não deve ser usada pelo futuro agente.
+A auditoria não substitui validação do domínio, testes da ingestão ou revisão de SQL executado por agente. O esquema atual é o registro inicial de origem; as tabelas normalizadas foram adicionadas na migração 002. O usuário de consulta somente leitura ainda não foi implementado. A credencial administrativa do Compose não deve ser usada pelo futuro agente.
 
 Os arquivos de `/docker-entrypoint-initdb.d/` inicializam um volume novo. Alterar o SQL não migra um banco existente; mudanças posteriores precisarão de migrações explícitas, sem apagar o volume para atualizar o esquema.
 
-A revisão local validou o Compose, mas não iniciou PostgreSQL nem verificou o SQL contra um banco em execução: o Docker estava desligado. O uso de `postgres:17` fixa a versão principal, não o digest da imagem. A versão efetivamente utilizada deve ser registrada quando o banco for iniciado.
+A entrega de ingestão validou o SQL no PostgreSQL 17.11, com testes de integração em asktrace_test. O Compose fixa o digest da imagem observada. A documentação da primeira revisão descrevia o Docker desligado; essa limitação foi resolvida nesta etapa. Veja ingestion.md para comandos de reprodução e evidências.

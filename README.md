@@ -14,11 +14,11 @@ Há um plano e três amostras JSON válidas do PNCP, com 50 registros em cada ar
 
 O arquivo do Querido Diário está vazio. O relato anterior registra falhas TLS, mas não permite atribuir definitivamente a causa ao servidor. Essa fonte permanece opcional; a verificação de certificados não será desativada.
 
-Ainda não existem ingestão implementada, banco normalizado, agente, avaliação ou demonstração deste projeto. O [inventário dos arquivos](docs/sample-inventory.json) registra tamanho, hash e paginação sem reproduzir dados de fornecedores.
+A ingestão paginada e a carga PostgreSQL foram implementadas e executadas para agosto a outubro de 2026. Agente, avaliação de perguntas e demonstração ainda não existem. O [inventário dos arquivos](docs/sample-inventory.json) registra tamanho, hash e paginação sem reproduzir dados de fornecedores.
 
 ## Próxima entrega
 
-Implementar aquisição paginada, preservação dos arquivos brutos, normalização e relatório de qualidade. Banco e período confirmados: PostgreSQL via Docker e agosto a outubro de 2026. A coleta completa ainda não foi executada.
+Ampliar a base com uma estratégia própria para contratos e atas, antes de implementar as ferramentas do agente. Banco e período confirmados: PostgreSQL via Docker e agosto a outubro de 2026. A primeira coleta completa do recorte de pregões retornou 1.081 registros em 23 páginas.
 
 A primeira versão deve distinguir resultado vazio, falha de rede e download incompleto. Valores financeiros serão tratados com precisão decimal. A relação entre compra e contratos não autoriza comparar um contrato isolado com o orçamento total da compra; a granularidade e a cobertura precisam ser verificadas.
 
@@ -39,6 +39,12 @@ python scripts/audit_samples.py amostras --output runs/sample-audit.json
 
 A auditoria retorna código de saída 1 se encontrar arquivo inválido, inclusive o arquivo vazio do Querido Diário. Isso é um diagnóstico esperado, não um download concluído.
 
-Com Docker Desktop aberto, use `docker compose up -d` e `docker compose ps`. A configuração usa PostgreSQL 17, porta local 15432 e volume persistente. A senha local está no `.env` ignorado pelo Git; não publique esse arquivo. O esquema inicial registra execuções e páginas de origem; tabelas normalizadas e agente ainda serão implementados.
+Com Docker Desktop aberto, use `docker compose up -d` e `docker compose ps`. A configuração usa PostgreSQL 17, porta local 15432 e volume persistente. A senha local está no `.env` ignorado pelo Git; não publique esse arquivo. O esquema registra execuções, páginas, órgãos e contratações normalizadas. O agente ainda será implementado.
 
 [Verificações de desenvolvimento, arquivos do commit e limites atuais](docs/development.md).
+
+## Primeira ingestão concluída
+
+**1.081 pregões eletrônicos** publicados no Piauí entre agosto e outubro de 2026 foram coletados e carregados no PostgreSQL. A conferência por mês resultou em 412, 373 e 296 registros. Em 749 deles, o valor homologado não foi informado: o campo permanece NULL, sem assumir zero ou pagamento.
+
+Veja [método, evidências, limitações e reprodução](docs/ingestion.md). A coleta da modalidade 6 não representa todas as compras públicas do Piauí.

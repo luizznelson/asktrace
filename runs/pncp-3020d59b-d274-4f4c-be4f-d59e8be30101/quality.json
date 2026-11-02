@@ -1,0 +1,44 @@
+{
+  "run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+  "mode": "live",
+  "status": "complete",
+  "scope": {
+    "uf": "PI",
+    "modality": 6,
+    "date_basis": "publication",
+    "resource": "purchases"
+  },
+  "counts": {
+    "source_records": 1081,
+    "awarded_missing": 749,
+    "normalized_records": 1081
+  },
+  "windows": [
+    {
+      "start": "2026-08-01",
+      "end": "2026-08-31",
+      "reported_total": 412,
+      "downloaded_records": 412,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "reported_total": 373,
+      "downloaded_records": 373,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-10-01",
+      "end": "2026-10-31",
+      "reported_total": 296,
+      "downloaded_records": 296,
+      "pagination_complete": true
+    }
+  ],
+  "limitations": [
+    "Not all procurement modalities",
+    "Publication period, not signature or payment period",
+    "Counts do not prove source completeness or absence of later corrections"
+  ]
+}
