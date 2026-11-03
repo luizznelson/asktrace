@@ -50,3 +50,7 @@ O plano `contracts-resume-88d30f38-2d39-4a7c-a0e5-782f10ca128e` não terminou po
 ## Consolidação dos lotes restantes
 
 [contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json](contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json): 1.080 compras distintas confirmadas. 125 contratos distintos e 0 compras elegíveis pendentes. [Conferência no banco](contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/database-verification.json). [Interpretação](../docs/contract-coverage.md).
+
+## Perguntas de negócio
+
+[queries-ee5ffc31-e565-4e75-8ce4-cfa6aac17046/verification.json](queries-ee5ffc31-e565-4e75-8ce4-cfa6aac17046/verification.json): consultas reais com login somente leitura, contagens conferidas e escrita negada. Exemplos em summary.json, municipalities.json e purchase.json; o texto livre do objeto foi omitido do exemplo de rastreio. [Método](../docs/business-queries.md).

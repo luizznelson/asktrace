@@ -16,7 +16,7 @@ An applied AI engineering portfolio project developed by Luiz. The first deliver
 | **What I built** | A paginated PNCP collector, exact decimal normalization, transactional PostgreSQL loading and reports linking records to original pages. |
 | **Verified result** | 1,081 auctions published August–October 2026, across 23 pages, checked in PostgreSQL. Missing awarded amounts in 749 records remain NULL. Contract acquisition covered all 1,080 eligible purchases: 125 contracts, with one purchase excluded due to an invalid year. [Coverage](docs/contract-coverage.md). |
 | **Skills demonstrated** | Python 3.14, public API integration, data quality, SQL, PostgreSQL with Docker, provenance, failure testing and configured CI. |
-| **Current stage** | Purchases and linked contracts collected and verified locally. No agent, answer evaluation, interface or hosted demo yet. |
+| **Current stage** | Purchases, linked contracts and read-only business queries verified locally. No agent, answer evaluation, interface or hosted demo yet. |
 | **Start here** | [Method and results](docs/ingestion.md) · [Database verification](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Quality checks](docs/quality.md) |
 
 ## 1. The problem: a page is not a dataset
@@ -99,9 +99,13 @@ There are 85 purchases with contracts and 995 with no
 published records returned. This covers the selected purchase scope, not every contract in Piauí.
 See [evidence and limitations (Portuguese)](docs/contract-coverage.md). The agent is not implemented yet.
 
+## Available business questions
+
+Fixed queries provide a coverage summary, municipality breakdown and purchase-level provenance. They use a separate read-only login and never accept arbitrary SQL. Real examples are published and all 51 local tests passed. [Commands and evidence (Portuguese)](docs/business-queries.md). The agent is not implemented yet.
+
 ## 7. Next steps and attribution
 
-Next, build read-only queries with explicit source and coverage information. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
+Next, evaluate questions and connect the verified queries to a bounded agent. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
 
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 

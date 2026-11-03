@@ -51,3 +51,7 @@ O lote terminou completo, foi carregado e a carga repetida não duplicou registr
 ## Consolidação de contratos vinculados
 
 Cobertura elegível concluída: 1.080 compras distintas confirmadas. 125 contratos distintos e 0 compras elegíveis pendentes. Uma exclusão por ano inválido permanece explícita. Próxima etapa: consultas somente leitura com origem e cobertura, antes do agente. [Evidências](docs/contract-coverage.md).
+
+## Consultas de negócio implementadas
+
+Resumo, municípios e rastreio por compra disponíveis com credencial de leitura. Totais e permissões verificados; 51 testes locais passaram. Próximo passo: avaliação de perguntas e integração limitada com agente. [Evidências](docs/business-queries.md).

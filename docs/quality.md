@@ -56,3 +56,7 @@ Suíte atual: **41 testes locais passaram**, incluindo PostgreSQL. A exclusão p
 ## Retomada por lotes
 
 Suíte atual: **46 testes locais passaram** com PostgreSQL ativo. Cinco testes cobrem seleção de intervalos, deduplicação de cobertura, parada por falha e integridade da retomada. [Evidências](contract-resumption.md).
+
+## Consultas de negócio
+
+Suíte atual: **51 testes locais passaram**, incluindo PostgreSQL. Cinco testes novos validam consultas fixas, totais, nulos, rastreabilidade, parametrização, permissões e integridade da cobertura. [Evidências](business-queries.md).
