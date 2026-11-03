@@ -6,7 +6,6 @@ import os
 import time
 from collections import Counter
 from datetime import UTC, datetime
-from decimal import Decimal
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -40,8 +39,11 @@ def fetch(url):
     raise RuntimeError("unreachable")
 
 
-def request_url(locator):
-    return f"{BASE}/{locator['cnpj']}/contratos/contratacao/{locator['year']}/{locator['sequence']}"
+def request_url(locator, page=1):
+    return (
+        f"{BASE}/{locator['cnpj']}/contratos/contratacao/"
+        f"{locator['year']}/{locator['sequence']}?pagina={page}&tamanhoPagina=50"
+    )
 
 
 def select_purchases(root, parent, limit):
@@ -84,18 +86,30 @@ def select_purchases(root, parent, limit):
     return manifest, parent_hash, selected
 
 
+def unpublished_response(body, status):
+    # Observed official API response, distinct from a generic HTTP 404.
+    if status != 404:
+        return False
+    try:
+        payload = json.loads(body)
+    except ValueError, UnicodeError:
+        return False
+    return (
+        isinstance(payload, dict)
+        and str(payload.get("status")) == "404"
+        and payload.get("message") == "Não há contrato publicado no PNCP para esta contratação."
+    )
+
+
 def parse(body, status, purchase_id):
+    if unpublished_response(body, status):
+        return [], "none_returned"
     if status == 204 and not body:
         return [], "none_returned"
     if status != 200:
         return [], "request_failed"
 
-    def reject(value):
-        raise ValueError("nonfinite_json")
-
-    data = json.loads(body, parse_float=Decimal, parse_constant=reject)
-    if not isinstance(data, list):
-        raise ValueError("unexpected_response_shape")
+    data = decode(body)["data"]
     rows, seen = [], set()
     for index, raw in enumerate(data):
         if not isinstance(raw, dict):
@@ -131,7 +145,42 @@ def write_json(path, data):
         stream.write("\n")
 
 
-def collect(root, parent, limit=12, transport=fetch, interval=1):
+def replay(pages, purchase_id, read):
+    rows, expected, seen = [], None, set()
+    if not pages:
+        raise ValueError("missing_pages")
+    for number, page in enumerate(pages, 1):
+        body = read(page)
+        status = page["http_status"]
+        if (
+            number == 1
+            and len(pages) == 1
+            and ((status == 204 and not body) or unpublished_response(body, status))
+        ):
+            return [], "none_returned"
+        if status != 200:
+            return [], "request_failed"
+        envelope = decode(body)
+        totals = (envelope["totalRegistros"], envelope["totalPaginas"])
+        if envelope["numeroPagina"] != number or (expected is not None and totals != expected):
+            raise ValueError("pagination_changed")
+        expected = totals
+        part, _ = parse(body, status, purchase_id)
+        for row in part:
+            if row["contract_id"] in seen:
+                raise ValueError("duplicate_contract_across_pages")
+            seen.add(row["contract_id"])
+            # Index in the logical concatenation of all source pages, in page order.
+            row["source_record_index"] += len(rows)
+        rows.extend(part)
+    if len(pages) != max(1, expected[1]) or len(rows) != expected[0]:
+        raise ValueError("incomplete_contract_pagination")
+    return rows, "with_contracts" if rows else "none_returned"
+
+
+def collect(root, parent, limit=12, transport=fetch, interval=1, max_pages=100):
+    if not 1 <= max_pages <= 100:
+        raise ValueError("invalid_page_budget")
     parent_manifest, parent_hash, selected = select_purchases(root, parent, limit)
     run_id = str(uuid4())
     folder = root / "runs" / f"contracts-{run_id}"
@@ -139,7 +188,7 @@ def collect(root, parent, limit=12, transport=fetch, interval=1):
     folder.mkdir(parents=True)
     raw_folder.mkdir(parents=True)
     manifest = {
-        "schema_version": 1,
+        "schema_version": 2,
         "run_id": run_id,
         "parent_run_id": parent_manifest["run_id"],
         "parent_manifest_sha256": parent_hash,
@@ -154,50 +203,69 @@ def collect(root, parent, limit=12, transport=fetch, interval=1):
     interrupted = False
     try:
         for index, locator in enumerate(selected):
-            url = request_url(locator)
             evidence = {
                 "purchase_id": locator["purchase_id"],
-                "url": url,
-                "fetched_at": datetime.now(UTC).isoformat(),
+                "pages": [],
+                "outcome": "invalid_response",
+                "contracts_count": 0,
             }
+            manifest["requests"].append(evidence)
             try:
-                body, status = transport(url)
-                path = raw_folder / f"request-{index:04}.json"
-                path.write_bytes(body)
-                evidence.update(
-                    http_status=status,
-                    relative_path=path.relative_to(root).as_posix(),
-                    body_sha256=digest(body),
+                for number in range(1, max_pages + 1):
+                    url = request_url(locator, number)
+                    body, status = transport(url)
+                    path = raw_folder / f"request-{index:04}-page-{number:04}.json"
+                    path.write_bytes(body)
+                    evidence["pages"].append(
+                        {
+                            "url": url,
+                            "http_status": status,
+                            "fetched_at": datetime.now(UTC).isoformat(),
+                            "relative_path": path.relative_to(root).as_posix(),
+                            "body_sha256": digest(body),
+                        }
+                    )
+                    if interval:
+                        time.sleep(interval)
+                    if status != 200:
+                        break
+                    envelope = decode(body)
+                    if number >= envelope["totalPaginas"]:
+                        break
+                rows, outcome = replay(
+                    evidence["pages"],
+                    locator["purchase_id"],
+                    lambda page: (root / page["relative_path"]).read_bytes(),
                 )
-                rows, outcome = parse(body, status, locator["purchase_id"])
                 evidence.update(outcome=outcome, contracts_count=len(rows))
                 manifest["contracts"].extend(rows)
-            except ValueError, OSError, RuntimeError:
-                evidence.update(outcome="invalid_response", contracts_count=0)
-            manifest["requests"].append(evidence)
-            if interval:
-                time.sleep(interval)
+            except (ValueError, OSError, RuntimeError) as error:
+                evidence["error_type"] = type(error).__name__
     except KeyboardInterrupt:
         interrupted = True
-    counts = Counter(request["outcome"] for request in manifest["requests"])
-    manifest["quality"] = {
-        "selected": len(selected),
-        "attempted": len(manifest["requests"]),
-        **dict(counts),
-        "contracts": len(manifest["contracts"]),
-    }
+    manifest["quality"] = quality(manifest)
+    counts = manifest["quality"]
     manifest["status"] = (
         "interrupted"
         if interrupted
         else (
-            "pilot_complete"
-            if not (counts["request_failed"] or counts["invalid_response"])
-            else "needs_review"
+            "needs_review"
+            if counts.get("request_failed") or counts.get("invalid_response")
+            else "pilot_complete"
         )
     )
     manifest["finished_at"] = datetime.now(UTC).isoformat()
     write_json(folder / "manifest.json", manifest)
     return folder / "manifest.json"
+
+
+def quality(manifest):
+    return {
+        "selected": len(manifest["selected"]),
+        "attempted": len(manifest["requests"]),
+        **dict(Counter(request["outcome"] for request in manifest["requests"])),
+        "contracts": len(manifest["contracts"]),
+    }
 
 
 def verify(root, path):
@@ -207,38 +275,41 @@ def verify(root, path):
     UUID(manifest["parent_run_id"])
     if manifest["status"] != "pilot_complete":
         raise ValueError("only_complete_pilots_can_be_loaded")
+    if manifest["schema_version"] != 2:
+        raise ValueError("unsupported_contract_manifest")
     parent = root / "runs" / f"pncp-{manifest['parent_run_id']}" / "manifest.json"
     _, parent_hash, selected = select_purchases(root, parent, len(manifest["selected"]))
     if parent_hash != manifest["parent_manifest_sha256"] or selected != manifest["selected"]:
         raise ValueError("parent_or_selection_mismatch")
     if len(manifest["requests"]) != len(selected):
         raise ValueError("incomplete_coverage")
-    rows = []
-    for locator, request in zip(selected, manifest["requests"], strict=True):
-        expected_url = request_url(locator)
-        if request["purchase_id"] != locator["purchase_id"] or request["url"] != expected_url:
-            raise ValueError("request_locator_mismatch")
-        source = (root / request["relative_path"]).resolve()
+
+    def read(page):
+        source = (root / page["relative_path"]).resolve()
         if not source.is_relative_to((root / "data/raw" / manifest["run_id"]).resolve()):
             raise ValueError("unsafe_source_path")
         raw = source.read_bytes()
-        if digest(raw) != request["body_sha256"]:
+        if digest(raw) != page["body_sha256"]:
             raise ValueError("source_hash_mismatch")
-        parsed, outcome = parse(raw, request["http_status"], request["purchase_id"])
-        if outcome != request["outcome"] or len(parsed) != request["contracts_count"]:
+        return raw
+
+    rows = []
+    for locator, request in zip(selected, manifest["requests"], strict=True):
+        if request["purchase_id"] != locator["purchase_id"]:
+            raise ValueError("request_locator_mismatch")
+        for number, page in enumerate(request["pages"], 1):
+            if page["url"] != request_url(locator, number):
+                raise ValueError("request_locator_mismatch")
+        parsed, outcome = replay(request["pages"], locator["purchase_id"], read)
+        if outcome != request["outcome"] or outcome == "request_failed":
+            raise ValueError("outcome_mismatch")
+        if len(parsed) != request["contracts_count"]:
             raise ValueError("outcome_mismatch")
         rows.extend(parsed)
-    counts = Counter(request["outcome"] for request in manifest["requests"])
-    quality = {
-        "selected": len(selected),
-        "attempted": len(selected),
-        **dict(counts),
-        "contracts": len(rows),
-    }
-    if manifest["quality"] != quality:
-        raise ValueError("quality_mismatch")
     if rows != manifest["contracts"]:
         raise ValueError("normalized_contracts_mismatch")
+    if manifest["quality"] != quality(manifest):
+        raise ValueError("quality_mismatch")
     return manifest, digest(body)
 
 
@@ -286,7 +357,7 @@ def load(root, path):
                     manifest["parent_run_id"],
                     request["purchase_id"],
                     request["outcome"],
-                    request["body_sha256"],
+                    digest("".join(page["body_sha256"] for page in request["pages"]).encode()),
                     request["contracts_count"],
                 ),
             )

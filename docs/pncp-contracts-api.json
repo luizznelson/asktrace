@@ -1,0 +1,170 @@
+{
+  "source": "https://pncp.gov.br/api/pncp/v3/api-docs",
+  "retrieved_at": "2026-11-03T11:50:32.812531+00:00",
+  "path": "/v1/orgaos/{cnpj}/contratos/contratacao/{anoContratacao}/{sequencialContratacao}",
+  "operation": {
+    "tags": [
+      "Contrato/Empenho"
+    ],
+    "summary": "Consultar Contratos de uma Contratação",
+    "operationId": "consultarContratosContratacao",
+    "parameters": [
+      {
+        "name": "cnpj",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "anoContratacao",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "sequencialContratacao",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "minimum": 1,
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "pagina",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "minimum": 1,
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "tamanhoPagina",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "maximum": 50,
+          "minimum": 10,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ],
+    "responses": {
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/RespostaErroValidacaoDTO"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "204": {
+        "description": "No Content",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "200": {
+        "description": "OK",
+        "content": {
+          "*/*": {
+            "schema": {
+              "$ref": "#/components/schemas/PaginaRetornoRecuperarContratoDTO"
+            }
+          }
+        }
+      }
+    }
+  },
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RecuperarContratoDTO"
+        }
+      },
+      "totalRegistros": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "totalPaginas": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "numeroPagina": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "paginasRestantes": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "empty": {
+        "type": "boolean"
+      }
+    }
+  }
+}
