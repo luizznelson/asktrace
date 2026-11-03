@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "run_id": "4e458e67-f581-448d-b28a-2362deda4d93",
+  "parent_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+  "parent_manifest_sha256": "21950f605d9d13888228ec51582957299e5f76a71bdcab5e68e758a880615520",
+  "started_at": "2026-11-03T11:47:07.960270+00:00",
+  "status": "needs_review",
+  "selection": "round_robin_publication_month_then_control_id_v1",
+  "population": 1081,
+  "selected": [
+    {
+      "purchase_id": "00348003000110-1-000856/2026",
+      "cnpj": "00348003000110",
+      "year": 2026,
+      "sequence": 856
+    },
+    {
+      "purchase_id": "00107790000109-1-000002/2026",
+      "cnpj": "00107790000109",
+      "year": 2026,
+      "sequence": 2
+    },
+    {
+      "purchase_id": "00348003000110-1-001156/2026",
+      "cnpj": "00348003000110",
+      "year": 2026,
+      "sequence": 1156
+    }
+  ],
+  "requests": [
+    {
+      "purchase_id": "00348003000110-1-000856/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00348003000110/contratos/contratacao/2026/856",
+      "fetched_at": "2026-11-03T11:47:07.960369+00:00",
+      "http_status": 400,
+      "relative_path": "data/raw/4e458e67-f581-448d-b28a-2362deda4d93/request-0000.json",
+      "body_sha256": "3eef1671ed0237915b0649ebe1cc7a126a838e28ae7127d94a9bb87312fb878f",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00107790000109-1-000002/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00107790000109/contratos/contratacao/2026/2",
+      "fetched_at": "2026-11-03T11:47:09.392489+00:00",
+      "http_status": 400,
+      "relative_path": "data/raw/4e458e67-f581-448d-b28a-2362deda4d93/request-0001.json",
+      "body_sha256": "a1e3031ab0684240060ec2cf40fc646cdb615ae2bbd23d99efea4d20d901faa7",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "00348003000110-1-001156/2026",
+      "url": "https://pncp.gov.br/api/pncp/v1/orgaos/00348003000110/contratos/contratacao/2026/1156",
+      "fetched_at": "2026-11-03T11:47:10.590382+00:00",
+      "http_status": 400,
+      "relative_path": "data/raw/4e458e67-f581-448d-b28a-2362deda4d93/request-0002.json",
+      "body_sha256": "f1c97271ff3b62c6537b14adbb95c13ae09ac4b324013bbfb94dd92ee2c3b7eb",
+      "outcome": "request_failed",
+      "contracts_count": 0
+    }
+  ],
+  "contracts": [],
+  "quality": {
+    "selected": 3,
+    "attempted": 3,
+    "request_failed": 3,
+    "contracts": 0
+  },
+  "finished_at": "2026-11-03T11:47:11.790219+00:00"
+}

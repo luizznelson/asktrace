@@ -30,8 +30,8 @@ Fonte técnica: https://pncp.gov.br/api/consulta/v3/api-docs
 
 Criados inventário, auditor local de amostras, testes e configuração inicial de PostgreSQL. Docker e PostgreSQL foram validados. Ingestão de pregões de agosto a outubro de 2026 concluída: 1.081 registros. Agente ainda não implementado. Veja docs/ingestion.md para evidências e limites. As pequenas amostras públicas e os relatórios de auditoria ficam no Git; credenciais e downloads completos permanecem fora.
 
-## Atualização: piloto de contratos
+## Atualização: piloto de contratos em 03/11/2026
 
-Coletor e carga de contratos vinculados implementados. Piloto de 12 compras sem contratos validados
-por falhas de consulta; nenhuma carga real de contratos. Repetir piloto antes de ampliar.
-Veja [cobertura e limites](docs/contracts.md). Atas ainda pendentes.
+Piloto de 12 compras validado e carregado: um contrato e 11 respostas explícitas de nenhum contrato
+publicado no PNCP. Paginação e tratamento do 404 específico corrigidos conforme evidências reais.
+Ampliar gradualmente às compras restantes; atas ainda pendentes. [Método e limites](docs/contracts.md).

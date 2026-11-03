@@ -90,17 +90,17 @@ Se `.venv` já existir e estiver configurado, não é necessário recriá-lo. Se
 
 Os downloads completos ficam localmente em `data/raw/` e `data/processed/`, excluídos do Git. Os relatórios registram os hashes, mas não disponibilizam esses arquivos por si só. [Índice de documentação](docs/README.md).
 
-## Contratos vinculados: etapa de validação
+## Contratos vinculados: piloto validado
 
-O coletor por compra e a carga transacional estão implementados e testados. O primeiro piloto real
-tentou 12 compras, mas não validou contratos: 11 respostas 503 e uma falha sem status HTTP capturado.
-O piloto não foi carregado no banco. Isso não comprova ausência de contratos.
-Veja [método, evidências e reprodução](docs/contracts.md). A suíte local passou com 36 testes,
-incluindo PostgreSQL; a validação dos vínculos reais depende de uma nova coleta bem-sucedida.
+Em 03/11/2026, o piloto consultou 12 das 1.081 compras e validou um contrato ligado a uma delas.
+Nas outras 11, o PNCP informou que não havia contrato publicado. O banco registra as 12 consultas
+e o contrato; repetir a carga não duplica registros. Isso não representa as 1.069 compras restantes.
+Veja [método, correções e limites](docs/contracts.md) e [verificação no banco](runs/contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/database-load.json).
+A suíte local passou com 39 testes, incluindo PostgreSQL. O agente ainda não foi implementado.
 
 ## 7. O que vem depois
 
-O próximo passo é validar vínculos reais em um novo piloto de contratos e, depois, ampliar a cobertura. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
+O próximo passo é ampliar gradualmente a cobertura de contratos vinculados. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
 
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 

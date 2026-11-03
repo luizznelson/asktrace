@@ -1,0 +1,27 @@
+{
+  "verified_at": "2026-11-03T11:52:59.970182+00:00",
+  "run_id": "52c725b6-9b6f-42a6-b65e-e3858060c9ed",
+  "parent_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+  "manifest_sha256": "397910726c47fa0b0fd988c79d954fd2ecfde2dbb09dc23389dcfea748b55dd7",
+  "contracts_in_database": 1,
+  "coverage_in_database": {
+    "none_returned": 11,
+    "with_contracts": 1
+  },
+  "manifest_and_sources_verified": true,
+  "load_result": "loaded",
+  "repeated_load_result": "already_loaded",
+  "software_checks": {
+    "unittest": {
+      "passed": 39,
+      "skipped": 0,
+      "postgresql_integration": true
+    },
+    "ruff_check": "passed",
+    "ruff_format_check": "passed"
+  },
+  "code_sha256": {
+    "asktrace/contracts.py": "df6af1292922bb0e3155f74a80f911a1b23047e302a530a2d8b8646f4af37891",
+    "tests/test_contracts.py": "b7c6771fa57481bf54a66adcb4604baff1bba980a898e275b0223ad91a53127e"
+  }
+}

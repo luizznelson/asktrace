@@ -1,83 +1,107 @@
-# Contratos vinculados: cobertura antes de análise
+# Contratos vinculados: da consulta à evidência
 
 ## Pergunta de negócio
 
-Quais contratos ou empenhos com força de contrato o PNCP retorna para cada compra consultada?
-Uma compra pode gerar vários contratos. Resultado vazio não comprova ausência de contrato;
-indisponibilidade não pode ser convertida em resultado vazio.
+Quais contratos ou empenhos com força de contrato o PNCP retorna para uma compra selecionada?
+Uma compra pode gerar vários contratos. Nenhum registro publicado não comprova ausência de contrato
+fora do portal; valor contratado não representa pagamento nem execução financeira.
 
-## O que foi implementado
+## Resultado validado em 03/11/2026
 
-- Seleção determinística de até 100 compras de uma coleta real íntegra: alternar meses de publicação,
-  ordenando pelo identificador dentro de cada mês. O padrão é um piloto de 12 compras.
-- Localizadores do órgão, ano e sequencial recuperados das páginas originais, verificadas por hash.
-- Consulta oficial por compra, com limite de tamanho, timeout e até três tentativas para falhas transitórias.
-- Respostas locais preservadas e relatório público sem nomes ou identificadores de fornecedores.
-- Validação do vínculo explícito, valores decimais, duplicações e origem de cada contrato.
-- Carga atômica e idempotente em PostgreSQL, com cobertura separada dos contratos.
+O piloto consultou **12 das 1.081 compras** da coleta original, quatro de cada mês de publicação.
+Uma compra retornou um contrato com vínculo explícito; as outras 11 receberam a mensagem do PNCP
+“Não há contrato publicado no PNCP para esta contratação.” Todos esses resultados foram carregados
+no PostgreSQL: 12 registros de cobertura e um contrato. Repetir a carga retornou `already_loaded`.
 
-Este piloto não é amostra estatisticamente representativa. Seu objetivo é validar o caminho de integração.
-Nenhum total do piloto deve ser extrapolado às 1.081 compras ou a todos os contratos do Piauí.
+- [Manifesto do piloto](../runs/contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/manifest.json): seleção, páginas, horários, hashes e registros normalizados.
+- [Verificação no banco](../runs/contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/database-load.json): contagens, integridade e carga repetida.
+- [Especificação oficial preservada](pncp-contracts-api.json): parâmetros e formato de resposta consultados.
 
-## Resultado real em 02/11/2026
+O piloto valida a integração, **não é uma amostra estatisticamente representativa**. As outras 1.069
+compras não foram consultadas nesta execução. Não extrapolar os resultados para todos os contratos
+do Piauí, calcular taxa geral de contratação ou interpretar falta de publicação como irregularidade.
 
-[Manifesto do piloto](../runs/contracts-a6fa16c6-13c4-4205-94e9-cd01e9322636/manifest.json): 12 compras selecionadas e tentadas;
-11 respostas HTTP 503 e uma falha sem status HTTP capturado. O último caso ficou classificado
-genericamente como `invalid_response`; o relatório não permite diagnosticar sua causa.
-Nenhum contrato foi validado. Estado `needs_review`; **não houve carga real de contratos**.
+## Seleção e paginação
 
-Os corpos dos erros HTTP não foram capturados na primeira versão executada deste piloto: seus arquivos
-vazios registram apenas os bytes preservados localmente, não o conteúdo enviado pelo servidor.
-A versão atual preserva também o corpo do erro HTTP, com limite de tamanho.
-Não atribuímos a indisponibilidade a uma causa específica nem afirmamos que as compras não têm contratos.
-As respostas 503 foram observadas mesmo após retentativas. Uma nova execução terá outro identificador;
-esta evidência não será sobrescrita.
+A seleção alterna meses de publicação; em cada mês ordena compras pelo identificador de controle.
+Não escolhe compras pelo resultado de contratos. CNPJ do órgão, ano e sequencial vêm das páginas
+originais da compra, verificadas por hash, sem dedução a partir de texto livre.
 
-## Como reproduzir
+O endpoint oficial exige `pagina`, embora o manual narrativo consultado inicialmente não apresentasse
+esse parâmetro. A OpenAPI confirmou `pagina` obrigatória e `tamanhoPagina` entre 10 e 50. O coletor
+envia ambos, percorre todas as páginas e verifica os totais, número de página, repetição de contratos e
+vínculo com a compra. Há orçamento de até 100 páginas por compra; excedê-lo impede declarar completude.
+Timeout, limite de bytes e até três tentativas para falhas transitórias limitam cada aquisição.
 
-Com as dependências instaladas e a coleta original disponível localmente:
+## Respostas vazias versus falhas
+
+| Resposta | Interpretação |
+| --- | --- |
+| 200 com envelope paginado válido e zero registros | `none_returned` |
+| 204 sem corpo na primeira e única página | `none_returned` |
+| 404 com status 404 no JSON e a mensagem exata de nenhum contrato publicado | `none_returned`, preservando o 404 na evidência |
+| 404 genérico, 400, 503 ou falha de conexão | Falha de consulta; não comprova ausência de contratos |
+| Páginas faltantes, totais alterados, valores inválidos ou vínculo divergente | Resposta inválida; impede carga do piloto |
+
+A regra do 404 específico foi baseada nas respostas reais do PNCP preservadas neste piloto;
+a especificação consultada não descrevia essa resposta. Mudanças na mensagem exigem nova revisão:
+o comportamento conservador é tratar como falha, sem inventar ausência de contratos.
+
+## Reproduzir
+
+Com dependências, PostgreSQL e páginas da coleta original disponíveis localmente:
 
 ```powershell
 .venv/Scripts/python.exe -m asktrace.contracts collect runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json --limit 12
 ```
 
-O comando imprime o caminho do novo manifesto. Somente um piloto `pilot_complete` pode ser carregado:
+O comando imprime o manifesto da nova execução. Para carregar um piloto `pilot_complete`:
 
 ```powershell
 .venv/Scripts/python.exe -m asktrace.contracts load runs/contracts-ID-DA-NOVA-EXECUCAO/manifest.json
 ```
 
-`pilot_complete` significa que todas as compras selecionadas receberam respostas válidas. Não significa
-cobertura de toda a população. HTTP 200 com lista vazia ou 204 vazio gera `none_returned`;
-404, 503 e falhas de conexão não são interpretados como ausência de contratos.
+Cada execução usa outro identificador; relatórios anteriores não são sobrescritos.
+O carregador verifica novamente fontes, normalização, seleção e manifesto da compra já carregada.
+Falhas provocam rollback de toda a transação. A migração `sql/003_contracts.sql` é aplicada na carga;
+não apagar volumes. Valores desconhecidos permanecem nulos e os valores monetários usam decimais.
 
-O carregador verifica novamente as páginas, o manifesto da compra, os localizadores e a normalização.
-A compra original precisa estar carregada e ter o mesmo hash. A migração `sql/003_contracts.sql`
-é aplicada na transação; não é necessário apagar o volume. O banco recebe apenas pilotos completos.
-Falhas permanecem documentadas em `runs/`, disponíveis para auditoria.
+## Rastreabilidade no banco e no Git
 
-## O que fica no banco e no Git
+`contract_runs` identifica o piloto e a coleta original. `contract_coverage` registra cada compra
+consultada com sucesso. `contracts` permite vários contratos por compra. Filtrar sempre pelo piloto
+e pela coleta original para não somar snapshots repetidos.
 
-`contract_runs` identifica o piloto e sua coleta de compras. `contract_coverage` registra cada compra
-consultada com sucesso, seu resultado e hash. `contracts` permite vários contratos por compra,
-com valores inicial/global e índice na resposta original. As consultas devem filtrar o piloto e a coleta
-para não somar snapshots repetidos. A tabela não representa pagamentos nem execução financeira.
+No manifesto versão 2, cada compra guarda sua lista ordenada de páginas e hashes. A coluna
+`contract_coverage.body_sha256` guarda o SHA-256 da concatenação textual dos hashes das páginas,
+na ordem da consulta. Não é o hash de uma única resposta. `source_record_index` identifica a posição
+do contrato na concatenação lógica dos registros de todas as páginas, começando em zero.
 
-`runs/contracts-*/manifest.json` fica no Git: seleção, URLs públicas, datas, estados, hashes e valores
-normalizados. Respostas completas ficam em `data/raw/`, ignoradas, pois podem conter dados pessoais.
-Um hash publicado não torna o download original disponível no repositório. Nomes, CPF e textos livres
-de fornecedores não são incluídos nos registros normalizados publicados.
+Manifestos publicados excluem nomes, CPF e textos livres de fornecedores. Respostas completas ficam
+em `data/raw/`, ignoradas pelo Git. Publicar o hash não disponibiliza esses arquivos remotamente.
+Os manifestos contêm identificadores públicos dos órgãos, compras e contratos, além de valores.
 
-## Validação e próximos passos
+## Histórico preservado
 
-A suíte local tem 36 testes, incluindo testes de contrato e integração em `asktrace_test`:
-relações de um para muitos, respostas vazias versus falhas, valores inválidos, alteração de evidências,
-retentativas, carga repetida e rollback. Dados sintéticos de teste não comprovam cobertura da API real.
+| Execução | O que demonstrou |
+| --- | --- |
+| [02/11: piloto inicial](../runs/contracts-a6fa16c6-13c4-4205-94e9-cd01e9322636/manifest.json) | 11 respostas 503 e uma falha sem status; nenhum contrato validado, sem carga. Os corpos dos erros HTTP não foram capturados nessa versão. |
+| [03/11: diagnóstico](../runs/contracts-4e458e67-f581-448d-b28a-2362deda4d93/manifest.json) | Três respostas 400 revelaram a falta de `pagina`; sem carga. |
+| [03/11: paginação corrigida](../runs/contracts-f5d0d7be-60fe-43d7-9007-666f868aeeca/manifest.json) | Um contrato retornou, mas 11 respostas 404 ainda eram falhas genéricas; sem carga. |
+| [03/11: piloto validado](../runs/contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/manifest.json) | Mesmas 12 compras; um contrato e 11 mensagens explícitas de nenhum contrato publicado; carga validada. |
 
-Próximo passo: repetir um piloto pequeno quando a consulta responder, conferir seus vínculos reais e
-só então ampliar a coleta. Atas, ferramentas do agente, avaliação de perguntas e interface continuam
-pendentes. Não calcular economia ou sobrepreço subtraindo um contrato do orçamento inteiro da compra.
+Os relatórios intermediários mantêm a classificação aplicada na execução, sem reescrever o histórico.
+O erro inicial do coletor foi corrigido; os testes anteriores usavam listas simples em vez do envelope
+paginado real, por isso não detectaram o problema. Os testes agora usam o formato documentado e
+cobrem múltiplas páginas, duplicações, totais alterados, orçamento de páginas e o 404 específico.
+A suíte completa passou com **39 testes**, incluindo integração em `asktrace_test`. CI remoto não
+verificado nesta entrega.
 
-Fontes oficiais consultadas:
-- [Consulta de contratos de uma contratação](https://pncp.gov.br/manual/pt-br/latest/contrato_empenho/consultar_contratos_ou_empenhos_de_uma_contratacao.html).
-- [Endereços e acesso ao PNCP](https://pncp.gov.br/manual/pt-br/latest/acesso_ao_pncp/index.html).
+## Próximo passo
+
+Ampliar gradualmente a consulta às compras restantes, mantendo o controle de cobertura e falhas.
+Atas, ferramentas de consulta somente leitura, agente, avaliação de perguntas e interface continuam
+pendentes. Não chamar a diferença entre um contrato e o orçamento inteiro da compra de economia.
+
+Fontes oficiais: [OpenAPI](https://pncp.gov.br/api/pncp/v3/api-docs),
+[manual da consulta por compra](https://pncp.gov.br/manual/pt-br/latest/contrato_empenho/consultar_contratos_ou_empenhos_de_uma_contratacao.html).

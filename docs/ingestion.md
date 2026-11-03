@@ -86,4 +86,4 @@ Crie `asktrace_test` somente na primeira vez. Os testes de integração usam ess
 ## Contratos vinculados
 
 A aquisição por compra tem [guia próprio de cobertura e reprodução](contracts.md).
-Seu primeiro piloto ficou `needs_review` e não foi carregado no PostgreSQL.
+O primeiro piloto ficou `needs_review`; o piloto corrigido de 03/11/2026 foi validado e carregado (12 compras, um contrato).

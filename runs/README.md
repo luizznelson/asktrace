@@ -28,3 +28,9 @@ Os JSONs brutos e normalizados dessas execuções ficam em data/raw e data/proce
 [contracts-a6fa16c6-13c4-4205-94e9-cd01e9322636/manifest.json](contracts-a6fa16c6-13c4-4205-94e9-cd01e9322636/manifest.json): 12 compras tentadas, 11 respostas 503,
 uma falha sem status HTTP, nenhum contrato validado; não carregado no banco.
 Veja [método e interpretação](../docs/contracts.md). Preservar esta tentativa, mesmo após novas coletas.
+
+## Atualização de contratos em 03/11/2026
+
+Diagnóstico preservado em `contracts-4e458e67-f581-448d-b28a-2362deda4d93` (400 por falta de página) e `contracts-f5d0d7be-60fe-43d7-9007-666f868aeeca` (paginação corrigida, 404 ainda genérico). Nenhum deles foi carregado.
+
+[Piloto validado](contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/manifest.json): 12 compras, um contrato e 11 mensagens explícitas de nenhum contrato publicado. [Verificação no banco](contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/database-load.json). [Guia de interpretação](../docs/contracts.md).
