@@ -1,0 +1,23 @@
+{
+  "verified_at": "2026-11-03T17:36:32.744117+00:00",
+  "coverage_report": "runs/contracts-resume-d88d70d6-06d1-44ee-8923-5d9b17eb364a/coverage.json",
+  "status": "bounded_run_complete",
+  "covered_distinct_purchases": 200,
+  "remaining_eligible": 880,
+  "distinct_contracts": 12,
+  "new_batches": [
+    {
+      "path": "runs/contracts-1fcfbf8d-5c33-4ed5-b95c-8041f94da1d4/manifest.json",
+      "status": "pilot_complete",
+      "offset": 100,
+      "selected": 100,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded",
+      "coverage_in_database": {
+        "none_returned": 96,
+        "with_contracts": 4
+      },
+      "contracts_in_database": 6
+    }
+  ]
+}

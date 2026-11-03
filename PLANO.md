@@ -43,3 +43,7 @@ Lote completo e carregado: 6 compras com contratos, 94 sem registros retornados,
 ## Retomada implementada
 
 Lotes completos são verificados e pulados; o lote seguinte teve 40 falhas de conexão e não foi carregado. Repetir a retomada após normalizar a consulta ao PNCP. [Evidências](docs/contract-resumption.md).
+
+## Cobertura atualizada
+
+O lote terminou completo, foi carregado e a carga repetida não duplicou registros. A cobertura confirmada passou a 200 compras distintas e 12 contratos distintos. Restam 880 compras elegíveis e uma exclusão por ano inválido. [Relatório](docs/contract-progress.md).

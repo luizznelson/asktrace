@@ -90,12 +90,9 @@ Se `.venv` já existir e estiver configurado, não é necessário recriá-lo. Se
 
 Os downloads completos ficam localmente em `data/raw/` e `data/processed/`, excluídos do Git. Os relatórios registram os hashes, mas não disponibilizam esses arquivos por si só. [Índice de documentação](docs/README.md).
 
-## Contratos vinculados: lote de 100 compras
+## Contratos vinculados: cobertura atual
 
-Lote completo e carregado: 6 compras com contratos, 94 sem registros retornados, 6 contratos.
-Uma compra da fonte foi excluída da consulta por informar o ano `20226`, sem correção presumida.
-O lote inclui as 12 compras anteriores; não somamos snapshots. Os 41 testes locais passaram.
-Veja [cobertura, evidências e limites](docs/contract-expansion.md). O agente ainda não foi implementado.
+A retomada consolidou **200 compras distintas e 12 contratos** no PostgreSQL. O último lote terminou sem falhas; repetir a carga não duplicou registros. Restam 880 compras elegíveis e uma exclusão por ano inválido na fonte. Não somamos snapshots sobrepostos. Veja [evidências atuais](docs/contract-progress.md) e [como retomar](docs/contract-resumption.md). A suíte da entrega anterior tem 46 testes locais aprovados; não houve alteração de código nesta execução. O agente ainda não está implementado.
 
 ## 7. O que vem depois
 
@@ -104,7 +101,3 @@ O próximo passo é ampliar gradualmente a cobertura de contratos vinculados. At
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 
 Houve assistência de IA no desenvolvimento. A responsabilidade por compreender, revisar e verificar as entregas é do mantenedor.
-
-## Retomada por lotes
-
-A retomada evita repetir compras de lotes já verificados e carregados. O próximo lote foi tentado, mas 40 falhas de conexão impediram sua carga; a cobertura confirmada continua em 100 compras. [Execução, evidências e limites](docs/contract-resumption.md). Os 46 testes locais passaram com PostgreSQL ativo.

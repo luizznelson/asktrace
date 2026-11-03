@@ -42,3 +42,7 @@ Diagnóstico preservado em `contracts-4e458e67-f581-448d-b28a-2362deda4d93` (400
 ## Retomada de contratos
 
 O plano `contracts-resume-88d30f38-2d39-4a7c-a0e5-782f10ca128e` não terminou por indisponibilidade do banco. `contracts-resume-f93f55c8-753a-4d8d-a505-843bc7deb32e/coverage.json` registra a tentativa seguinte: lote `contracts-3eec93d4-abbc-4072-8f7b-66194aa4d685` pendente por 40 falhas de conexão, sem carga. [Método e cobertura consolidada](../docs/contract-resumption.md).
+
+## Nova tentativa da retomada
+
+[contracts-resume-d88d70d6-06d1-44ee-8923-5d9b17eb364a/coverage.json](contracts-resume-d88d70d6-06d1-44ee-8923-5d9b17eb364a/coverage.json): O lote terminou completo, foi carregado e a carga repetida não duplicou registros. A cobertura confirmada passou a 200 compras distintas e 12 contratos distintos. Restam 880 compras elegíveis e uma exclusão por ano inválido.

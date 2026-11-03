@@ -26,3 +26,5 @@ O README apresenta o projeto; os guias técnicos explicam a reprodução. Os rel
 A cobertura mais recente de contratos está na [ampliação para 100 compras](contract-expansion.md).
 
 [Retomada da coleta e cobertura consolidada](contract-resumption.md): executar lotes sem repetir compras já consolidadas.
+
+[Resultado mais recente da retomada](contract-progress.md).

@@ -90,15 +90,9 @@ Do not recreate an already configured environment. Two PostgreSQL tests are expl
 
 Full downloads stay local in ignored `data/raw/` and `data/processed/`. Hashes in reports do not make those files remotely available. [Documentation index](docs/README.md).
 
-## Linked contracts: 100-purchase batch
+## Linked contracts: current coverage
 
-The new batch queried 100 purchases with valid source locators. Status: `pilot_complete`.
-It returned 6 contracts; 6 purchases had contracts and
-94 returned no published records. Database load: `loaded`.
-One source purchase reports year `20226` and is explicitly excluded without guessing a correction.
-The batch includes the previous 12 purchases; snapshots must not be added together.
-All 41 local tests passed, including PostgreSQL. See [coverage and evidence (Portuguese)](docs/contract-expansion.md).
-The agent is not implemented yet.
+Resumption consolidated **200 distinct purchases and 12 contracts** in PostgreSQL. The latest batch completed without failures, and repeated loading did not duplicate records. There are 880 eligible purchases remaining and one exclusion due to an invalid source year. Overlapping snapshots are not added together. See [current evidence](docs/contract-progress.md) and [resumption guide](docs/contract-resumption.md), both in Portuguese. The previous delivery passed 46 local tests; no code changed in this execution. The agent is not implemented yet.
 
 ## 7. Next steps and attribution
 
@@ -107,7 +101,3 @@ Next, gradually expand linked-contract coverage. Price-registration records stil
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 
 AI assisted development. The maintainer remains responsible for understanding, reviewing and verifying the result.
-
-## Resumable batches
-
-Resumption skips purchases in verified, successfully loaded batches. The next batch was attempted but 40 connection failures prevented loading; confirmed coverage remains 100 purchases. Partial batches are retried in full. All 46 local tests passed with PostgreSQL running. [Execution and limitations (Portuguese)](docs/contract-resumption.md).

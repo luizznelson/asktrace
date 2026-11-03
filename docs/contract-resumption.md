@@ -68,3 +68,7 @@ desligado; a suíte completa foi repetida com sucesso após a reinicialização.
 Repetir o comando de retomada quando a conexão com PNCP estiver disponível. Ele selecionará o lote
 pendente; depois de uma carga bem-sucedida, avançará automaticamente para o próximo intervalo.
 O agente e a interface ainda não estão implementados. Este resultado não mede pagamentos ou economia.
+
+## Continuação
+
+O resultado acima é histórico. Veja a [tentativa mais recente e a cobertura atualizada](contract-progress.md).
