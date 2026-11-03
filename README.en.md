@@ -14,9 +14,9 @@ An applied AI engineering portfolio project developed by Luiz. The first deliver
 | --- | --- |
 | **Problem** | An answer about procurement can omit pages, treat unknown values as zero or mix periods and procurement methods. |
 | **What I built** | A paginated PNCP collector, exact decimal normalization, transactional PostgreSQL loading and reports linking records to original pages. |
-| **Verified result** | 1,081 auctions published August–October 2026, across 23 pages, checked in PostgreSQL. Missing awarded amounts in 749 records remain NULL. |
+| **Verified result** | 1,081 auctions published August–October 2026, across 23 pages, checked in PostgreSQL. Missing awarded amounts in 749 records remain NULL. Contract acquisition covered all 1,080 eligible purchases: 125 contracts, with one purchase excluded due to an invalid year. [Coverage](docs/contract-coverage.md). |
 | **Skills demonstrated** | Python 3.14, public API integration, data quality, SQL, PostgreSQL with Docker, provenance, failure testing and configured CI. |
-| **Current stage** | Ingestion executed locally. No agent, answer evaluation, interface or hosted demo yet. |
+| **Current stage** | Purchases and linked contracts collected and verified locally. No agent, answer evaluation, interface or hosted demo yet. |
 | **Start here** | [Method and results](docs/ingestion.md) · [Database verification](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Quality checks](docs/quality.md) |
 
 ## 1. The problem: a page is not a dataset
@@ -92,11 +92,16 @@ Full downloads stay local in ignored `data/raw/` and `data/processed/`. Hashes i
 
 ## Linked contracts: current coverage
 
-Resumption consolidated **200 distinct purchases and 12 contracts** in PostgreSQL. The latest batch completed without failures, and repeated loading did not duplicate records. There are 880 eligible purchases remaining and one exclusion due to an invalid source year. Overlapping snapshots are not added together. See [current evidence](docs/contract-progress.md) and [resumption guide](docs/contract-resumption.md), both in Portuguese. The previous delivery passed 46 local tests; no code changed in this execution. The agent is not implemented yet.
+Confirmed coverage: **1080 distinct purchases and 125 distinct contracts**;
+0 eligible purchases remain. The original population contains 1081
+purchases, including one excluded from contract acquisition due to an invalid source year.
+There are 85 purchases with contracts and 995 with no
+published records returned. This covers the selected purchase scope, not every contract in Piauí.
+See [evidence and limitations (Portuguese)](docs/contract-coverage.md). The agent is not implemented yet.
 
 ## 7. Next steps and attribution
 
-Next, gradually expand linked-contract coverage. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
+Next, build read-only queries with explicit source and coverage information. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
 
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 

@@ -46,3 +46,7 @@ O plano `contracts-resume-88d30f38-2d39-4a7c-a0e5-782f10ca128e` não terminou po
 ## Nova tentativa da retomada
 
 [contracts-resume-d88d70d6-06d1-44ee-8923-5d9b17eb364a/coverage.json](contracts-resume-d88d70d6-06d1-44ee-8923-5d9b17eb364a/coverage.json): O lote terminou completo, foi carregado e a carga repetida não duplicou registros. A cobertura confirmada passou a 200 compras distintas e 12 contratos distintos. Restam 880 compras elegíveis e uma exclusão por ano inválido.
+
+## Consolidação dos lotes restantes
+
+[contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json](contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json): 1.080 compras distintas confirmadas. 125 contratos distintos e 0 compras elegíveis pendentes. [Conferência no banco](contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/database-verification.json). [Interpretação](../docs/contract-coverage.md).

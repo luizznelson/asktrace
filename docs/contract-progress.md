@@ -19,3 +19,7 @@ ou execução financeira. As respostas são observações do portal em momentos 
 O comando avança somente após verificar e carregar o lote completo. Caso encontre falhas, para e
 deixa o intervalo pendente. Consulte [limites da retomada](contract-resumption.md). Nenhum código
 do coletor foi alterado nesta execução; a suíte de 46 testes da entrega anterior não foi repetida.
+
+## Consolidação posterior
+
+A execução acima é histórica. Consulte a [cobertura consolidada mais recente](contract-coverage.md).

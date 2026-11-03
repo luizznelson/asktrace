@@ -1,0 +1,86 @@
+{
+  "verified_at": "2026-11-03T18:05:52.821902+00:00",
+  "coverage_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+  "database_distinct_purchases": 1080,
+  "database_distinct_contracts": 125,
+  "database_outcomes": {
+    "none_returned": 995,
+    "with_contracts": 85
+  },
+  "eligible_remaining": 0,
+  "new_batches": [
+    {
+      "path": "runs/contracts-f64365d9-f0d5-4f85-84a5-27421dc035cb/manifest.json",
+      "status": "pilot_complete",
+      "offset": 200,
+      "selected": 100,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-9356e018-c555-45b0-8b31-23064deab50b/manifest.json",
+      "status": "pilot_complete",
+      "offset": 300,
+      "selected": 100,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-1bd721aa-d010-43d4-86c1-16e87424b18c/manifest.json",
+      "status": "pilot_complete",
+      "offset": 400,
+      "selected": 100,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-d87e7783-f156-480c-a5d0-681816bd1c5b/manifest.json",
+      "status": "pilot_complete",
+      "offset": 500,
+      "selected": 100,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-8f2d9189-c4a9-4ab2-9f5d-bbb36e788c1c/manifest.json",
+      "status": "pilot_complete",
+      "offset": 600,
+      "selected": 100,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-038f34fa-750e-47c0-bc94-4a5838c87bca/manifest.json",
+      "status": "pilot_complete",
+      "offset": 700,
+      "selected": 100,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-8c8f1bb0-79a0-42bf-b670-77e5e3be6ff6/manifest.json",
+      "status": "pilot_complete",
+      "offset": 800,
+      "selected": 100,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-aee7a586-48b1-49d3-ad38-38b153172a2b/manifest.json",
+      "status": "pilot_complete",
+      "offset": 900,
+      "selected": 100,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-3ae286d1-2abc-4cf1-892e-3c0a88c23ba1/manifest.json",
+      "status": "pilot_complete",
+      "offset": 1000,
+      "selected": 80,
+      "load_result": "loaded",
+      "repeated_load_result": "already_loaded"
+    }
+  ],
+  "all_snapshot_manifests_verified": true
+}

@@ -47,3 +47,7 @@ Lotes completos são verificados e pulados; o lote seguinte teve 40 falhas de co
 ## Cobertura atualizada
 
 O lote terminou completo, foi carregado e a carga repetida não duplicou registros. A cobertura confirmada passou a 200 compras distintas e 12 contratos distintos. Restam 880 compras elegíveis e uma exclusão por ano inválido. [Relatório](docs/contract-progress.md).
+
+## Consolidação de contratos vinculados
+
+Cobertura elegível concluída: 1.080 compras distintas confirmadas. 125 contratos distintos e 0 compras elegíveis pendentes. Uma exclusão por ano inválido permanece explícita. Próxima etapa: consultas somente leitura com origem e cobertura, antes do agente. [Evidências](docs/contract-coverage.md).

@@ -14,9 +14,9 @@ Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A pri
 | --- | --- |
 | **Problema** | Uma resposta sobre compras públicas pode ignorar páginas, tratar um valor ausente como zero ou misturar períodos e modalidades. |
 | **O que construí** | Coletor paginado do PNCP, normalização com precisão decimal, carga transacional no PostgreSQL e relatórios que ligam cada registro à página original. |
-| **Resultado verificado** | 1.081 pregões publicados de agosto a outubro de 2026, em 23 páginas, conferidos no banco. São 749 registros sem valor homologado informado, mantidos como NULL. |
+| **Resultado verificado** | 1.081 pregões publicados de agosto a outubro de 2026, em 23 páginas, conferidos no banco. São 749 registros sem valor homologado informado, mantidos como NULL. Consulta de contratos concluída para 1.080 compras elegíveis: 125 contratos; uma compra excluída por ano inválido. [Cobertura](docs/contract-coverage.md). |
 | **Habilidades demonstradas** | Python 3.14, integração com API pública, qualidade de dados, SQL, PostgreSQL com Docker, rastreabilidade, testes de falhas e CI configurada. |
-| **Estágio atual** | Ingestão executada localmente. Sem agente, avaliação de respostas, interface ou demonstração online ainda. |
+| **Estágio atual** | Compras e contratos vinculados coletados e verificados localmente. Sem agente, avaliação de respostas, interface ou demonstração online ainda. |
 | **Onde começar** | [Resultado e método](docs/ingestion.md) · [Evidência no banco](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Como verificar](docs/quality.md) |
 
 ## 1. O problema: contar registros não basta
@@ -92,11 +92,15 @@ Os downloads completos ficam localmente em `data/raw/` e `data/processed/`, excl
 
 ## Contratos vinculados: cobertura atual
 
-A retomada consolidou **200 compras distintas e 12 contratos** no PostgreSQL. O último lote terminou sem falhas; repetir a carga não duplicou registros. Restam 880 compras elegíveis e uma exclusão por ano inválido na fonte. Não somamos snapshots sobrepostos. Veja [evidências atuais](docs/contract-progress.md) e [como retomar](docs/contract-resumption.md). A suíte da entrega anterior tem 46 testes locais aprovados; não houve alteração de código nesta execução. O agente ainda não está implementado.
+**Cobertura elegível concluída:** 1.080 compras distintas confirmadas. 125 contratos distintos e 0 compras elegíveis pendentes.
+A população original tem 1081 compras; uma ficou excluída por ano inválido na fonte.
+São 85 compras com contratos e 995 sem publicação retornada.
+Isso descreve o recorte de pregões selecionado, não todos os contratos do Piauí.
+Veja [método, evidências e limites](docs/contract-coverage.md). O agente ainda não foi implementado.
 
 ## 7. O que vem depois
 
-O próximo passo é ampliar gradualmente a cobertura de contratos vinculados. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
+O próximo passo é criar consultas somente leitura com origem e cobertura explícitas. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
 
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 

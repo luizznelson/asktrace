@@ -28,3 +28,5 @@ A cobertura mais recente de contratos está na [ampliação para 100 compras](co
 [Retomada da coleta e cobertura consolidada](contract-resumption.md): executar lotes sem repetir compras já consolidadas.
 
 [Resultado mais recente da retomada](contract-progress.md).
+
+[Contrato: cobertura consolidada mais recente](contract-coverage.md).
