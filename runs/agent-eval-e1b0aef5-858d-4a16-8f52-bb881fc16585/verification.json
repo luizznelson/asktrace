@@ -1,0 +1,22 @@
+{
+  "verified_at": "2026-11-03T18:30:07.942318+00:00",
+  "evaluation_sha256": "02d18b55c01cbc10d5ba5759c011d0c9becef4d8bed0c7aa8949898bc5c1030f",
+  "code_and_suite_hashes_match": true,
+  "live_provider": "gemini-2.5-flash",
+  "executed": 3,
+  "passed": 3,
+  "errors": 0,
+  "actions": [
+    "summary",
+    "municipalities",
+    "purchase"
+  ],
+  "logical_tool_calls": 3,
+  "total_tokens_reported": 840,
+  "input_tokens_reported": 613,
+  "candidate_tokens_reported": 68,
+  "thinking_tokens_reported": 159,
+  "monetary_cost": null,
+  "cost_note": "Billing not verified; usage tokens do not establish free billing.",
+  "scope_note": "Three-case integration smoke test, not the full 60-case Gemini evaluation."
+}

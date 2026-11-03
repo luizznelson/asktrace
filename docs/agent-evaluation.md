@@ -9,11 +9,11 @@ Esta entrega acrescenta um **roteador de uma etapa**, com dois modos explícitos
 | Modo | Seleção da ferramenta | Estado validado |
 | --- | --- | --- |
 | `baseline` | Regras locais determinísticas | 60 de 60 casos de desenvolvimento passaram com consultas reais |
-| `gemini` | Modelo propõe plano JSON validado | Adaptador implementado e testado com respostas simuladas; chamada real pendente da chave |
+| `gemini` | Modelo propõe plano JSON validado | Teste real de integração: três casos suportados, três aprovados; suíte completa ainda não executada |
 
 Não é um agente autônomo com pesquisa, memória ou várias iterações. O modo baseline não usa LLM.
-O teste com Gemini não foi executado: `GEMINI_API_KEY` ainda não estava configurada no AskTrace.
-Não reutilizamos credenciais de outro projeto nem confundimos testes simulados com chamadas reais.
+O teste inicial com Gemini foi executado com a chave configurada localmente. O resultado abaixo
+é separado do baseline e dos testes com mocks do provedor.
 
 ## Fluxo e limites
 
@@ -123,9 +123,30 @@ erros sem vazamento, texto não confiável, entrada inválida, payload do adapta
 São testes com mocks para o provedor; não são métricas de qualidade de um modelo real. Ruff e
 formatação passaram; CI remoto não verificado nesta entrega.
 
+## Teste real Gemini em 03/11/2026
+
+O teste inicial executou três perguntas com **Gemini 2.5 Flash**: resumo, municípios e rastreio de uma
+compra. **Três executadas, três aprovadas, zero erros**, uma tentativa de LLM e uma chamada lógica
+de ferramenta em cada pergunta. Os planos escolheram as três ações esperadas; as contagens de
+cobertura e o identificador do rastreio corresponderam aos valores esperados. Não houve fallback.
+
+[Execução real](../runs/agent-eval-e1b0aef5-858d-4a16-8f52-bb881fc16585/evaluation.json) · [Conferência dos hashes e uso](../runs/agent-eval-e1b0aef5-858d-4a16-8f52-bb881fc16585/verification.json).
+
+O provedor informou **840 tokens totais** nas três chamadas: 613 de entrada, 68 de saída candidata
+e 159 de raciocínio. A mediana observada foi 2.80 segundos por pergunta,
+incluindo roteamento e consulta local; é uma amostra de três casos, não uma estimativa de produção.
+O avaliador tem cache local habilitado, mas as três ações desta execução usam chaves de consulta
+diferentes. O custo monetário não foi verificado e não é apresentado como zero.
+
+Esta execução comprova a integração real com o provedor para três caminhos suportados. Ela **não
+aprova automaticamente os 60 casos com Gemini**, não mede generalização e não testa recusas do
+modelo. O resultado baseline 60/60 continua separado. A chave permanece apenas no `.env` local,
+ignorado pelo Git; os relatórios não contêm a chave nem os corpos HTTP do provedor.
+
 ## Próximo passo
 
-Configurar a chave local, executar o teste Gemini de três casos e revisar o rastro antes de ampliar
-essa avaliação. Depois, acrescentar perguntas novas separadas dos casos de desenvolvimento e
-uma interface que apresente pergunta, resposta, fonte, cobertura e motivo de recusa. A interface e
-o deploy continuam pendentes; a integração Gemini segue sem validação real até a configuração.
+Executar a suíte completa com Gemini dentro da quota disponível, mantendo o relatório separado do
+baseline e interrompendo no primeiro erro. Depois, acrescentar perguntas novas separadas dos casos
+de desenvolvimento e revisar erros de roteamento antes de construir a interface. Interface e deploy
+continuam pendentes. Os 59 testes de software da entrega anterior não foram repetidos, pois nenhum
+código foi alterado nesta execução; foram conferidos os hashes e rastros do teste real.

@@ -64,3 +64,9 @@ Suíte atual: **51 testes locais passaram**, incluindo PostgreSQL. Cinco testes 
 ## Roteamento e avaliação
 
 Suíte de software: **59 testes locais passaram**, incluindo PostgreSQL. Oito novos testes cobrem limites, planos, provedor e avaliador. Separadamente, o baseline passou nos 60 casos curados de desenvolvimento; isso não mede um LLM real. [Método e limitações](agent-evaluation.md).
+
+## Teste de integração real Gemini
+
+Três perguntas suportadas passaram em chamadas reais ao Gemini 2.5 Flash: resumo, municípios e rastreio.
+Não equivale à suíte completa nem a testes de recusa do modelo. Os 59 testes de software anteriores
+não foram repetidos nesta execução sem alterações de código. [Rastros e limites](agent-evaluation.md).

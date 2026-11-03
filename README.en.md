@@ -4,7 +4,7 @@
 
 **Investigate public procurement with source data and a verifiable path to the answer.**
 
-An applied AI engineering portfolio project developed by Luiz. The first delivery builds an auditable database of electronic procurement auctions in Piauí, Brazil. A bounded question router is implemented; the baseline is evaluated and live Gemini validation is pending.
+An applied AI engineering portfolio project developed by Luiz. The first delivery builds an auditable database of electronic procurement auctions in Piauí, Brazil. A bounded question router is implemented; the baseline is evaluated and Gemini integration passed three live questions.
 
 [Português](README.md) · [Case study](docs/case-study.md) · [Engineering decisions](docs/architecture.md) · [Documentation](docs/README.md)
 
@@ -16,7 +16,7 @@ An applied AI engineering portfolio project developed by Luiz. The first deliver
 | **What I built** | A paginated PNCP collector, exact decimal normalization, transactional PostgreSQL loading and reports linking records to original pages. |
 | **Verified result** | 1,081 auctions published August–October 2026, across 23 pages, checked in PostgreSQL. Missing awarded amounts in 749 records remain NULL. Contract acquisition covered all 1,080 eligible purchases: 125 contracts, with one purchase excluded due to an invalid year. [Coverage](docs/contract-coverage.md). |
 | **Skills demonstrated** | Python 3.14, public API integration, data quality, SQL, PostgreSQL with Docker, provenance, failure testing and configured CI. |
-| **Current stage** | Purchases, linked contracts and read-only business queries verified locally. Evaluated baseline, Gemini pending live validation; no interface or hosted demo yet. |
+| **Current stage** | Purchases, linked contracts and read-only business queries verified locally. Evaluated baseline, Gemini integration validated on three live questions; no interface or hosted demo yet. |
 | **Start here** | [Method and results](docs/ingestion.md) · [Database verification](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Quality checks](docs/quality.md) |
 
 ## 1. The problem: a page is not a dataset
@@ -107,13 +107,12 @@ Fixed queries provide a coverage summary, municipality breakdown and purchase-le
 
 A one-step router selects at most one read-only query and returns a grounded template with sources,
 coverage and a trace. The **baseline uses no LLM** and passed all 60 curated development cases.
-The Gemini adapter is implemented but has not been validated through a live call: a local API key
-is still required. All 59 software tests passed, including PostgreSQL integration. These are separate
+Gemini 2.5 Flash passed three live integration questions; its full evaluation suite has not been run. All 59 software tests passed, including PostgreSQL integration. These are separate
 measurements. See [commands, evidence and limitations (Portuguese)](docs/agent-evaluation.md).
 
 ## 7. Next steps and attribution
 
-Next, configure Gemini, validate a small live run and evaluate that mode separately. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
+Next, run the full Gemini evaluation independently of the baseline. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
 
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 

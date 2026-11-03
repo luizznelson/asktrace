@@ -58,4 +58,4 @@ Resumo, municípios e rastreio por compra disponíveis com credencial de leitura
 
 ## Roteador limitado e corpus de avaliação
 
-Baseline de uma etapa avaliado em 60 casos curados (60 aprovados). Adaptador Gemini implementado com validação de plano; chamada real pendente de GEMINI_API_KEY local. Próximo passo: teste inicial Gemini, revisão do rastro e avaliação separada. Interface continua pendente. [Evidências](docs/agent-evaluation.md).
+Baseline de uma etapa avaliado em 60 casos curados (60 aprovados). Gemini 2.5 Flash validado em três perguntas reais, sem erros e com rastro revisado. Próximo passo: avaliação completa separada do baseline, dentro da quota disponível. Interface continua pendente. [Evidências](docs/agent-evaluation.md).
