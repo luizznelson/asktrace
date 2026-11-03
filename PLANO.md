@@ -59,3 +59,7 @@ Resumo, municípios e rastreio por compra disponíveis com credencial de leitura
 ## Roteador limitado e corpus de avaliação
 
 Baseline de uma etapa avaliado em 60 casos curados (60 aprovados). Gemini 2.5 Flash validado em três perguntas reais, sem erros e com rastro revisado. Próximo passo: avaliação completa separada do baseline, dentro da quota disponível. Interface continua pendente. [Evidências](docs/agent-evaluation.md).
+
+## Avaliação completa pendente por limite do provedor
+
+A primeira tentativa identificou recusa indevida e erro técnico. O prompt foi esclarecido e o status HTTP corrigido. Nova tentativa com espaçamento parou em HTTP 429: seis casos aprovados e 53 não executados. Continuar do caso sete quando a quota permitir. Não somar tentativas com prompts diferentes. Suíte de software: 61 testes aprovados. [Evidências](docs/agent-evaluation.md).

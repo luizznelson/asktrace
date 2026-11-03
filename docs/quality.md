@@ -70,3 +70,7 @@ Suíte de software: **59 testes locais passaram**, incluindo PostgreSQL. Oito no
 Três perguntas suportadas passaram em chamadas reais ao Gemini 2.5 Flash: resumo, municípios e rastreio.
 Não equivale à suíte completa nem a testes de recusa do modelo. Os 59 testes de software anteriores
 não foram repetidos nesta execução sem alterações de código. [Rastros e limites](agent-evaluation.md).
+
+## Diagnóstico da avaliação Gemini
+
+Suíte atual: **61 testes locais passaram**, incluindo PostgreSQL. Dois testes novos cobrem HTTP 429 preservado e continuação por posição com journal por caso. A avaliação do modelo está incompleta: última tentativa com seis aprovados, um erro 429 e 53 casos não executados. [Evidências](agent-evaluation.md).

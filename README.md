@@ -106,13 +106,13 @@ Consultas fixas respondem o resumo da cobertura, a distribuição por município
 
 Um roteador de uma etapa seleciona no máximo uma consulta somente leitura e apresenta resposta,
 fonte, cobertura e rastro. O modo **baseline não usa LLM**: passou nos 60 casos curados de
-desenvolvimento. O Gemini 2.5 Flash passou em três perguntas reais de integração; sua suíte completa ainda não foi executada.
-Os 59 testes de software passaram, incluindo PostgreSQL. Esses dois resultados medem coisas diferentes.
+desenvolvimento. O Gemini 2.5 Flash passou em três perguntas reais de integração; sua avaliação completa foi iniciada, mas parou por HTTP 429. Na última tentativa, seis casos passaram antes do erro; 53 não foram executados.
+Os 61 testes de software passaram, incluindo PostgreSQL. Esses dois resultados medem coisas diferentes.
 Veja [comandos, evidências e limites](docs/agent-evaluation.md).
 
 ## 7. O que vem depois
 
-O próximo passo é executar a avaliação completa com Gemini, separadamente do baseline. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
+O próximo passo é retomar a avaliação Gemini do caso sete quando a quota permitir; não há aprovação da suíte completa. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
 
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 

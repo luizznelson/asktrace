@@ -65,3 +65,7 @@ O plano `contracts-resume-88d30f38-2d39-4a7c-a0e5-782f10ca128e` não terminou po
 zero erros; resumo, municípios e rastreio. [agent-eval-e1b0aef5-858d-4a16-8f52-bb881fc16585/verification.json](agent-eval-e1b0aef5-858d-4a16-8f52-bb881fc16585/verification.json)
 confere hashes e metadados de uso (840 tokens totais). Custo monetário desconhecido. Não representa
 a suíte completa de 60 casos com Gemini. [Interpretação](../docs/agent-evaluation.md).
+
+## Avaliação Gemini interrompida
+
+[agent-eval-6908e93c-b894-4638-8ddf-96d21200a3c8/evaluation.json](agent-eval-6908e93c-b894-4638-8ddf-96d21200a3c8/evaluation.json): 11 executados, nove aprovados, uma recusa indevida e uma falha técnica sem status preservado. [agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/evaluation.json](agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/evaluation.json): novo prompt, sete executados, seis aprovados e um HTTP 429; 53 não executados. Não somar resultados. [Conferência](agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/verification.json) e [continuação](../docs/agent-evaluation.md).

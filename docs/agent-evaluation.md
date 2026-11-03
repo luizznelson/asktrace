@@ -9,7 +9,7 @@ Esta entrega acrescenta um **roteador de uma etapa**, com dois modos explícitos
 | Modo | Seleção da ferramenta | Estado validado |
 | --- | --- | --- |
 | `baseline` | Regras locais determinísticas | 60 de 60 casos de desenvolvimento passaram com consultas reais |
-| `gemini` | Modelo propõe plano JSON validado | Teste real de integração: três casos suportados, três aprovados; suíte completa ainda não executada |
+| `gemini` | Modelo propõe plano JSON validado | Integração 3/3; avaliação completa iniciada e interrompida por HTTP 429 |
 
 Não é um agente autônomo com pesquisa, memória ou várias iterações. O modo baseline não usa LLM.
 O teste inicial com Gemini foi executado com a chave configurada localmente. O resultado abaixo
@@ -143,10 +143,65 @@ aprova automaticamente os 60 casos com Gemini**, não mede generalização e nã
 modelo. O resultado baseline 60/60 continua separado. A chave permanece apenas no `.env` local,
 ignorado pelo Git; os relatórios não contêm a chave nem os corpos HTTP do provedor.
 
+## Tentativas da suíte completa e limite do provedor
+
+As tentativas completas pediram os 60 casos, mas **a suíte Gemini continua incompleta**:
+
+| Execução | Executados | Aprovados | Erro de roteamento sem falha técnica | Erro técnico | Não executados |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| [Primeira tentativa](../runs/agent-eval-6908e93c-b894-4638-8ddf-96d21200a3c8/evaluation.json) | 11 | 9 | 1 | 1 | 49 |
+| [Prompt esclarecido e intervalo de 6 s](../runs/agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/evaluation.json) | 7 | 6 | 0 | 1 | 53 |
+
+Na primeira tentativa, “Quantas consultas de contratos foram confirmadas?” foi recusada indevidamente.
+O catálogo foi esclarecido para definir `covered_purchases` como consultas de compra concluídas e
+carregadas, inclusive sem contratos retornados. Isso não confirma assinatura ou execução contratual.
+Não foram alteradas perguntas, valores esperados, modelo ou permissões para melhorar a nota.
+
+O tratamento HTTP anterior capturava erros genericamente, apesar de já existir uma classe para
+registrar status. A correção liga essa classe ao erro HTTP e tem teste de regressão. A primeira falha
+técnica não pode ser diagnosticada retrospectivamente com os dados preservados. A segunda tentativa
+registrou **HTTP 429**, sem corpo do provedor ou credencial. Não afirmamos qual limite específico foi
+atingido nem quando será liberado. Os limites dependem da conta e podem ser conferidos no painel do
+provedor; veja a [documentação oficial de limites](https://ai.google.dev/gemini-api/docs/rate-limits).
+
+Um reteste avulso da pergunta de cobertura retornou `summary` depois da explicação do catálogo.
+Ele não compõe a pontuação da suíte: na tentativa formal seguinte, o caso sete foi interrompido por
+429. As seis perguntas anteriores passaram nessa versão do prompt. As duas tentativas não são
+somadas, pois há sobreposição e os prompts diferem. O resultado baseline 60/60 permanece separado.
+
+[Conferência da tentativa parcial](../runs/agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/verification.json) registra os hashes,
+53 casos não executados, o erro 429 e a posição para continuar. Uma falha técnica não foi classificada
+como recusa correta, e perguntas não executadas não foram aprovadas. Nenhuma chamada adicional foi
+feita após o segundo bloqueio. O custo monetário continua desconhecido.
+
+## Continuação sem repetir casos aprovados
+
+O avaliador ganhou `--start-case` (posição começando em 1), `--interval` (segundos) e arquivos
+`case-NNN.json` por caso concluído. O relatório final distingue casos solicitados, executados e não
+executados; o rastro preserva status de erro. Um processo interrompido antes de `evaluation.json`
+não equivale a uma avaliação completa, mesmo que existam arquivos de casos.
+
+Quando o limite do provedor permitir novas chamadas, continuar a partir do caso sete:
+
+```powershell
+.venv/Scripts/python.exe -m asktrace.evaluate --provider gemini --start-case 7 --interval 6 --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
+```
+
+Esse comando solicita os **54 casos** da posição 7 à 60, incluindo a pergunta interrompida, sem
+repetir as seis aprovadas. Cria outro relatório; não altera os anteriores. Não há soma automática de
+pontuações entre execuções. Para uma medição única dos 60 casos, executar desde o início quando
+a quota permitir. Conferir hashes do corpus, cobertura e prompt antes de comparar segmentos.
+
+O intervalo padrão da CLI Gemini é seis segundos após a tentativa anterior; não garante evitar
+limites diários ou outros limites da conta. As latências por pergunta não incluem essa espera entre
+casos. Não há repetição automática da chamada que falhou nem troca de modelo para contornar o limite.
+
+Nesta entrega passaram **61 testes locais de software**, incluindo PostgreSQL. Os dois testes novos
+verificam status HTTP 429 sem vazamento e continuação com journal sem repetir casos anteriores.
+Ruff, formatação e links foram conferidos. CI remoto não verificado. Este resultado é separado da
+avaliação do LLM, que não foi concluída. Interface e deploy permanecem pendentes.
+
 ## Próximo passo
 
-Executar a suíte completa com Gemini dentro da quota disponível, mantendo o relatório separado do
-baseline e interrompendo no primeiro erro. Depois, acrescentar perguntas novas separadas dos casos
-de desenvolvimento e revisar erros de roteamento antes de construir a interface. Interface e deploy
-continuam pendentes. Os 59 testes de software da entrega anterior não foram repetidos, pois nenhum
-código foi alterado nesta execução; foram conferidos os hashes e rastros do teste real.
+Conferir a quota disponível e continuar a partir do caso sete. Revisar os erros antes de ampliar
+o corpus com perguntas separadas das usadas em desenvolvimento e construir a interface.
