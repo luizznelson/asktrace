@@ -46,9 +46,14 @@ def request_url(locator, page=1):
     )
 
 
-def select_purchases(root, parent, limit):
+def select_purchases(root, parent, limit, offset=0):
     manifest, purchases, parent_hash = verified_snapshot(root, parent)
-    if manifest["mode"] != "live" or not 1 <= limit <= 100:
+    if (
+        manifest["mode"] != "live"
+        or not 1 <= limit <= 100
+        or type(offset) is not int
+        or not 0 <= offset <= len(purchases)
+    ):
         raise ValueError("live_snapshot_and_limit_1_to_100_required")
     sources = {}
     for page in manifest["pages"]:
@@ -84,14 +89,14 @@ def select_purchases(root, parent, limit):
             }
         )
     selected = []
-    while groups and len(selected) < limit:
+    while groups and len(selected) < limit + offset:
         for month in sorted(list(groups)):
             selected.append(groups[month].pop(0))
             if not groups[month]:
                 del groups[month]
-            if len(selected) == limit:
+            if len(selected) == limit + offset:
                 break
-    return {**manifest, "contract_locator_exclusions": exclusions}, parent_hash, selected
+    return {**manifest, "contract_locator_exclusions": exclusions}, parent_hash, selected[offset:]
 
 
 def unpublished_response(body, status):
@@ -186,10 +191,12 @@ def replay(pages, purchase_id, read):
     return rows, "with_contracts" if rows else "none_returned"
 
 
-def collect(root, parent, limit=12, transport=fetch, interval=1, max_pages=100):
+def collect(root, parent, limit=12, transport=fetch, interval=1, max_pages=100, offset=0):
     if not 1 <= max_pages <= 100:
         raise ValueError("invalid_page_budget")
-    parent_manifest, parent_hash, selected = select_purchases(root, parent, limit)
+    parent_manifest, parent_hash, selected = select_purchases(root, parent, limit, offset)
+    if not selected:
+        raise ValueError("no_eligible_purchases_at_offset")
     run_id = str(uuid4())
     folder = root / "runs" / f"contracts-{run_id}"
     raw_folder = root / "data/raw" / run_id
@@ -197,6 +204,7 @@ def collect(root, parent, limit=12, transport=fetch, interval=1, max_pages=100):
     raw_folder.mkdir(parents=True)
     manifest = {
         "schema_version": 2,
+        "selection_offset": offset,
         "run_id": run_id,
         "parent_run_id": parent_manifest["run_id"],
         "parent_manifest_sha256": parent_hash,
@@ -288,7 +296,7 @@ def verify(root, path):
         raise ValueError("unsupported_contract_manifest")
     parent = root / "runs" / f"pncp-{manifest['parent_run_id']}" / "manifest.json"
     parent_manifest, parent_hash, selected = select_purchases(
-        root, parent, len(manifest["selected"])
+        root, parent, len(manifest["selected"]), manifest.get("selection_offset", 0)
     )
     if "excluded_purchases" in manifest and (
         manifest["excluded_purchases"] != parent_manifest["contract_locator_exclusions"]
@@ -400,8 +408,17 @@ def main():
     acquisition.add_argument("--limit", type=int, default=12)
     loading = sub.add_parser("load")
     loading.add_argument("manifest", type=Path)
+    resuming = sub.add_parser("resume")
+    resuming.add_argument("parent", type=Path)
+    resuming.add_argument("--max-batches", type=int, default=1)
     args = parser.parse_args()
     try:
+        if args.command == "resume":
+            from asktrace.contract_batches import resume
+
+            report = resume(Path.cwd(), args.parent, args.max_batches)
+            print(report)
+            return 0 if json.loads(report.read_bytes())["status"] != "needs_review" else 1
         if args.command == "collect":
             path = collect(Path.cwd(), args.parent, args.limit)
             print(path.relative_to(Path.cwd()))
