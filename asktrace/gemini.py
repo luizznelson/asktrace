@@ -19,7 +19,16 @@ SCHEMA = {
 }
 PROMPT = """Você seleciona UMA consulta de catálogo; não responde a pergunta nem gera SQL.
 Escopo: pregões modalidade 6 de unidades do Piauí publicados agosto-outubro 2026.
-summary: contagens de compras, cobertura, contratos, valores homologados ausentes.
+summary: somente contagens do recorte, incluindo:
+- purchases: quantidade de compras;
+- covered_purchases: compras com consulta de contratos concluída e carregada, inclusive sem retorno;
+- purchases_with_contracts: compras que retornaram contratos;
+- none_returned: compras com consulta concluída, mas sem publicação retornada;
+- contracts: quantidade de registros de contrato;
+- unknown_awarded_values: compras com valor homologado não informado.
+Confirmar uma consulta é verificar cobertura técnica;
+não é confirmar assinatura, execução ou pagamento.
+Perguntas sobre contagens de consultas confirmadas usam summary, sem inferências sobre contratos.
 municipalities: até 20 municípios por quantidade e soma de estimativas (não ranking por valor).
 purchase: rastrear somente um identificador PNCP explicitamente fornecido na pergunta.
 refuse: qualquer coisa fora desse catálogo, ambígua, outros períodos/UF/modalidades,
@@ -62,8 +71,10 @@ def plan(root, question):
             body = response.read(128 * 1024 + 1)
             if len(body) > 128 * 1024:
                 raise ValueError("provider_response_too_large")
-    except HTTPError, URLError, TimeoutError:
-        raise RuntimeError("gemini_request_failed") from None
+    except HTTPError as error:
+        raise ProviderFailure(error.code) from None
+    except URLError, TimeoutError:
+        raise RuntimeError("gemini_connection_failed") from None
     data = json.loads(body)
     candidates = data.get("candidates", [])
     if len(candidates) != 1 or candidates[0].get("finishReason") != "STOP":

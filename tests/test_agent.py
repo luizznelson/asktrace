@@ -119,6 +119,62 @@ class AgentTests(unittest.TestCase):
                     self.assertNotIn("test-key", sent.full_url)
                     self.assertNotIn("postgres", sent.data.decode())
 
+    def test_http_quota_error_preserves_status_without_provider_body(self):
+        from urllib.error import HTTPError
+
+        error = HTTPError("https://generativelanguage.googleapis.com", 429, "quota", {}, None)
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.dict("os.environ", {"GEMINI_API_KEY": "test-key"}):
+                with patch.object(gemini, "urlopen", side_effect=error):
+                    with self.assertRaises(gemini.ProviderFailure) as caught:
+                        gemini.plan(Path(folder), "Resumo")
+                    self.assertEqual(caught.exception.http_status, 429)
+                    self.assertNotIn("test-key", str(caught.exception))
+
+    def test_evaluation_start_case_skips_prior_cases_and_journals_results(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            suite = root / "cases.json"
+            suite.write_text(
+                json.dumps(
+                    {
+                        "scope": "synthetic",
+                        "cases": [
+                            {
+                                "id": "a",
+                                "category": "refuse",
+                                "question": "one",
+                                "expected": {"action": "refuse", "status": "refused"},
+                            },
+                            {
+                                "id": "b",
+                                "category": "refuse",
+                                "question": "two",
+                                "expected": {"action": "refuse", "status": "refused"},
+                            },
+                        ],
+                    }
+                )
+            )
+            report = root / "coverage.json"
+            report.write_text("{}")
+            refused = {
+                "status": "refused",
+                "trace": [],
+                "latency_ms": 1,
+                "llm_attempts": 0,
+                "tool_calls": 0,
+            }
+            with patch.object(evaluate, "run", return_value=refused) as runner:
+                path = evaluate.evaluate(root, report, suite, start_case=2)
+                result = json.loads(path.read_bytes())
+                self.assertEqual(runner.call_args.args[2], "two")
+                self.assertEqual(result["requested_cases"], 1)
+                self.assertEqual(result["unexecuted_requested_cases"], 0)
+                self.assertTrue((path.parent / "case-002.json").exists())
+            with self.assertRaises(ValueError):
+                evaluate.evaluate(root, report, suite, start_case=0)
+
     def test_evaluation_does_not_call_provider_errors_successes(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

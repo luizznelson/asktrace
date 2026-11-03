@@ -3,6 +3,7 @@
 import argparse
 import json
 import statistics
+import time
 from datetime import UTC, datetime
 from pathlib import Path
 from uuid import uuid4
@@ -12,10 +13,15 @@ from asktrace.ingest import digest
 from asktrace.query import answer, serialize
 
 
-def evaluate(root, report, cases_path, provider="baseline", limit=None):
+def evaluate(root, report, cases_path, provider="baseline", limit=None, interval=0, start_case=1):
+    if not 0 <= interval <= 60:
+        raise ValueError("interval_must_be_0_to_60")
     corpus = cases_path.read_bytes()
     suite = json.loads(corpus)
-    cases = suite["cases"][:limit] if limit else suite["cases"]
+    if type(start_case) is not int or not 1 <= start_case <= len(suite["cases"]):
+        raise ValueError("invalid_start_case")
+    cases = suite["cases"][start_case - 1 :]
+    cases = cases[:limit] if limit else cases
     cache = {}
 
     def tool(root, report, action, identifier):
@@ -29,6 +35,8 @@ def evaluate(root, report, cases_path, provider="baseline", limit=None):
     folder.mkdir(parents=True)
     results = []
     for case in cases:
+        if provider == "gemini" and results and results[-1]["actual"]["llm_attempts"]:
+            time.sleep(interval)
         result = run(root, report, case["question"], provider, tool=tool)
         action = next(
             (step["plan"]["action"] for step in result["trace"] if step["step"] == "plan"), "refuse"
@@ -54,12 +62,18 @@ def evaluate(root, report, cases_path, provider="baseline", limit=None):
                 "actual": result,
             }
         )
+        # Journal each completed case even if a later call or the process is interrupted.
+        case_path = folder / f"case-{start_case + len(results) - 1:03}.json"
+        with case_path.open("x", encoding="utf-8") as stream:
+            json.dump(results[-1], stream, default=serialize, ensure_ascii=False, indent=2)
+            stream.write("\n")
         if result["status"] == "error" and provider == "gemini":
             break  # Preserve quota/provider failure; never fall back to a different provider.
     latencies = [row["actual"]["latency_ms"] for row in results]
     summary = {
         "started_scope": suite["scope"],
         "provider": provider,
+        "request_interval_seconds": interval if provider == "gemini" else 0,
         "code_sha256": {
             name: digest((root / "asktrace" / name).read_bytes())
             for name in ("agent.py", "gemini.py", "query.py", "evaluate.py")
@@ -70,6 +84,12 @@ def evaluate(root, report, cases_path, provider="baseline", limit=None):
         "coverage_report_sha256": digest(report.read_bytes()),
         "suite_size": len(suite["cases"]),
         "requested_cases": len(cases),
+        "start_case": start_case,
+        "unexecuted_requested_cases": len(cases) - len(results),
+        "completion": "complete" if len(results) == len(cases) else "interrupted",
+        "routing_failures_without_errors": sum(
+            not row["routing_passed"] and row["actual"]["status"] != "error" for row in results
+        ),
         "executed": len(results),
         "passed": sum(row["passed"] for row in results),
         "errors": sum(row["actual"]["status"] == "error" for row in results),
@@ -94,11 +114,21 @@ def main():
     parser.add_argument("--cases", type=Path, default=Path("evals/business-v1.json"))
     parser.add_argument("--provider", choices=["baseline", "gemini"], default="baseline")
     parser.add_argument("--limit", type=int)
+    parser.add_argument("--interval", type=float, default=6)
+    parser.add_argument("--start-case", type=int, default=1)
     args = parser.parse_args()
     try:
         if args.limit is not None and not 1 <= args.limit <= 100:
             raise ValueError("invalid_case_limit")
-        path = evaluate(Path.cwd(), args.coverage, args.cases, args.provider, args.limit)
+        path = evaluate(
+            Path.cwd(),
+            args.coverage,
+            args.cases,
+            args.provider,
+            args.limit,
+            args.interval,
+            args.start_case,
+        )
         result = json.loads(path.read_bytes())
         print(path.relative_to(Path.cwd()))
         print(
