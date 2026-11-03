@@ -4,7 +4,7 @@
 
 **Investigar compras públicas com dados de origem e um caminho verificável até a resposta.**
 
-Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A primeira entrega constrói a base auditável de pregões eletrônicos do Piauí. O agente de perguntas e respostas é a próxima camada, ainda não implementada.
+Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A primeira entrega constrói a base auditável de pregões eletrônicos do Piauí. Um roteador limitado de perguntas está implementado; o baseline foi avaliado e a integração Gemini aguarda teste real.
 
 [English](README.en.md) · [Estudo de caso](docs/case-study.md) · [Decisões de engenharia](docs/architecture.md) · [Documentação](docs/README.md)
 
@@ -16,7 +16,7 @@ Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A pri
 | **O que construí** | Coletor paginado do PNCP, normalização com precisão decimal, carga transacional no PostgreSQL e relatórios que ligam cada registro à página original. |
 | **Resultado verificado** | 1.081 pregões publicados de agosto a outubro de 2026, em 23 páginas, conferidos no banco. São 749 registros sem valor homologado informado, mantidos como NULL. Consulta de contratos concluída para 1.080 compras elegíveis: 125 contratos; uma compra excluída por ano inválido. [Cobertura](docs/contract-coverage.md). |
 | **Habilidades demonstradas** | Python 3.14, integração com API pública, qualidade de dados, SQL, PostgreSQL com Docker, rastreabilidade, testes de falhas e CI configurada. |
-| **Estágio atual** | Compras, contratos vinculados e consultas de negócio somente leitura verificados localmente. Sem agente, avaliação de respostas, interface ou demonstração online ainda. |
+| **Estágio atual** | Compras, contratos vinculados e consultas de negócio somente leitura verificados localmente. Baseline avaliado, adaptador Gemini pendente de teste real; sem interface ou demonstração online. |
 | **Onde começar** | [Resultado e método](docs/ingestion.md) · [Evidência no banco](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Como verificar](docs/quality.md) |
 
 ## 1. O problema: contar registros não basta
@@ -96,15 +96,23 @@ Os downloads completos ficam localmente em `data/raw/` e `data/processed/`, excl
 A população original tem 1081 compras; uma ficou excluída por ano inválido na fonte.
 São 85 compras com contratos e 995 sem publicação retornada.
 Isso descreve o recorte de pregões selecionado, não todos os contratos do Piauí.
-Veja [método, evidências e limites](docs/contract-coverage.md). O agente ainda não foi implementado.
+Veja [método, evidências e limites](docs/contract-coverage.md). O roteador limitado e sua avaliação estão descritos abaixo.
 
 ## Perguntas de negócio disponíveis
 
-Consultas fixas respondem o resumo da cobertura, a distribuição por município e o rastreio de uma compra. Usam credencial separada somente leitura, sem receber SQL livre. Há exemplos reais e 51 testes locais aprovados. [Como consultar e verificar](docs/business-queries.md). O agente ainda não está implementado.
+Consultas fixas respondem o resumo da cobertura, a distribuição por município e o rastreio de uma compra. Usam credencial separada somente leitura, sem receber SQL livre. Há exemplos reais e 51 testes locais aprovados. [Como consultar e verificar](docs/business-queries.md). Roteamento em texto e avaliação estão descritos a seguir.
+
+## Perguntas em texto e avaliação
+
+Um roteador de uma etapa seleciona no máximo uma consulta somente leitura e apresenta resposta,
+fonte, cobertura e rastro. O modo **baseline não usa LLM**: passou nos 60 casos curados de
+desenvolvimento. O adaptador Gemini está implementado, mas sua validação real depende da chave local.
+Os 59 testes de software passaram, incluindo PostgreSQL. Esses dois resultados medem coisas diferentes.
+Veja [comandos, evidências e limites](docs/agent-evaluation.md).
 
 ## 7. O que vem depois
 
-O próximo passo é avaliar perguntas e conectar as consultas verificadas a um agente limitado. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
+O próximo passo é configurar Gemini, validar uma execução pequena e avaliar esse modo separadamente. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
 
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 

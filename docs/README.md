@@ -32,3 +32,5 @@ A cobertura mais recente de contratos está na [ampliação para 100 compras](co
 [Contrato: cobertura consolidada mais recente](contract-coverage.md).
 
 [Perguntas de negócio com acesso somente leitura](business-queries.md): comandos, permissões e exemplos reais.
+
+[Roteador limitado e avaliação de perguntas](agent-evaluation.md): baseline medido e estado da integração Gemini.

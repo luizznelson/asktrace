@@ -60,3 +60,7 @@ Suíte atual: **46 testes locais passaram** com PostgreSQL ativo. Cinco testes c
 ## Consultas de negócio
 
 Suíte atual: **51 testes locais passaram**, incluindo PostgreSQL. Cinco testes novos validam consultas fixas, totais, nulos, rastreabilidade, parametrização, permissões e integridade da cobertura. [Evidências](business-queries.md).
+
+## Roteamento e avaliação
+
+Suíte de software: **59 testes locais passaram**, incluindo PostgreSQL. Oito novos testes cobrem limites, planos, provedor e avaliador. Separadamente, o baseline passou nos 60 casos curados de desenvolvimento; isso não mede um LLM real. [Método e limitações](agent-evaluation.md).

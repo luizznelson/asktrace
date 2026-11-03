@@ -54,3 +54,7 @@ O plano `contracts-resume-88d30f38-2d39-4a7c-a0e5-782f10ca128e` não terminou po
 ## Perguntas de negócio
 
 [queries-ee5ffc31-e565-4e75-8ce4-cfa6aac17046/verification.json](queries-ee5ffc31-e565-4e75-8ce4-cfa6aac17046/verification.json): consultas reais com login somente leitura, contagens conferidas e escrita negada. Exemplos em summary.json, municipalities.json e purchase.json; o texto livre do objeto foi omitido do exemplo de rastreio. [Método](../docs/business-queries.md).
+
+## Avaliação de perguntas
+
+[agent-eval-3ad8ae41-4327-4033-ae56-2c59a60e451d/evaluation.json](agent-eval-3ad8ae41-4327-4033-ae56-2c59a60e451d/evaluation.json): baseline final, 60/60 casos curados, zero LLM. As execuções anteriores `agent-eval-56477761-a3a6-41de-bfb1-49f5a8a9a6e6` e `agent-eval-eb123db5-c11b-4efa-8926-752a0e39af4f` foram preservadas. [Interpretação](../docs/agent-evaluation.md).
