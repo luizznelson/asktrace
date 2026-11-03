@@ -90,14 +90,15 @@ Do not recreate an already configured environment. Two PostgreSQL tests are expl
 
 Full downloads stay local in ignored `data/raw/` and `data/processed/`. Hashes in reports do not make those files remotely available. [Documentation index](docs/README.md).
 
-## Linked contracts: validated pilot
+## Linked contracts: 100-purchase batch
 
-On November 3, 2026, a pilot queried 12 of the 1,081 purchases and validated one linked contract.
-For the other 11, PNCP explicitly reported no published contract. PostgreSQL stores all 12 coverage
-records and the contract; repeated loading does not duplicate records. The remaining 1,069 purchases
-are outside this pilot. See the [method, fixes and limitations (Portuguese)](docs/contracts.md)
-and [database verification](runs/contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/database-load.json). All 39 local tests passed, including PostgreSQL.
-Contract notices do not establish payment or financial execution. The agent is not implemented yet.
+The new batch queried 100 purchases with valid source locators. Status: `pilot_complete`.
+It returned 6 contracts; 6 purchases had contracts and
+94 returned no published records. Database load: `loaded`.
+One source purchase reports year `20226` and is explicitly excluded without guessing a correction.
+The batch includes the previous 12 purchases; snapshots must not be added together.
+All 41 local tests passed, including PostgreSQL. See [coverage and evidence (Portuguese)](docs/contract-expansion.md).
+The agent is not implemented yet.
 
 ## 7. Next steps and attribution
 

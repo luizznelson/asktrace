@@ -35,3 +35,7 @@ Criados inventário, auditor local de amostras, testes e configuração inicial 
 Piloto de 12 compras validado e carregado: um contrato e 11 respostas explícitas de nenhum contrato
 publicado no PNCP. Paginação e tratamento do 404 específico corrigidos conforme evidências reais.
 Ampliar gradualmente às compras restantes; atas ainda pendentes. [Método e limites](docs/contracts.md).
+
+## Ampliação para 100 compras
+
+Lote completo e carregado: 6 compras com contratos, 94 sem registros retornados, 6 contratos. Uma exclusão por ano inválido na fonte. [Limites e sequência](docs/contract-expansion.md).

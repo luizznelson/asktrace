@@ -22,3 +22,5 @@
 | O que ainda será feito? | [Plano](../PLANO.md) |
 
 O README apresenta o projeto; os guias técnicos explicam a reprodução. Os relatórios de `runs/` preservam evidências de execuções específicas. Números de amostras históricas não são somados à coleta real de 2026.
+
+A cobertura mais recente de contratos está na [ampliação para 100 compras](contract-expansion.md).

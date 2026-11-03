@@ -90,13 +90,12 @@ Se `.venv` já existir e estiver configurado, não é necessário recriá-lo. Se
 
 Os downloads completos ficam localmente em `data/raw/` e `data/processed/`, excluídos do Git. Os relatórios registram os hashes, mas não disponibilizam esses arquivos por si só. [Índice de documentação](docs/README.md).
 
-## Contratos vinculados: piloto validado
+## Contratos vinculados: lote de 100 compras
 
-Em 03/11/2026, o piloto consultou 12 das 1.081 compras e validou um contrato ligado a uma delas.
-Nas outras 11, o PNCP informou que não havia contrato publicado. O banco registra as 12 consultas
-e o contrato; repetir a carga não duplica registros. Isso não representa as 1.069 compras restantes.
-Veja [método, correções e limites](docs/contracts.md) e [verificação no banco](runs/contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/database-load.json).
-A suíte local passou com 39 testes, incluindo PostgreSQL. O agente ainda não foi implementado.
+Lote completo e carregado: 6 compras com contratos, 94 sem registros retornados, 6 contratos.
+Uma compra da fonte foi excluída da consulta por informar o ano `20226`, sem correção presumida.
+O lote inclui as 12 compras anteriores; não somamos snapshots. Os 41 testes locais passaram.
+Veja [cobertura, evidências e limites](docs/contract-expansion.md). O agente ainda não foi implementado.
 
 ## 7. O que vem depois
 

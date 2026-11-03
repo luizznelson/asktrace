@@ -34,3 +34,7 @@ Veja [método e interpretação](../docs/contracts.md). Preservar esta tentativa
 Diagnóstico preservado em `contracts-4e458e67-f581-448d-b28a-2362deda4d93` (400 por falta de página) e `contracts-f5d0d7be-60fe-43d7-9007-666f868aeeca` (paginação corrigida, 404 ainda genérico). Nenhum deles foi carregado.
 
 [Piloto validado](contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/manifest.json): 12 compras, um contrato e 11 mensagens explícitas de nenhum contrato publicado. [Verificação no banco](contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/database-load.json). [Guia de interpretação](../docs/contracts.md).
+
+## Ampliação para 100 compras
+
+[contracts-78f81b23-e1b7-4fbf-b8dc-a442b64fe259/manifest.json](contracts-78f81b23-e1b7-4fbf-b8dc-a442b64fe259/manifest.json): Lote completo e carregado: 6 compras com contratos, 94 sem registros retornados, 6 contratos. Uma exclusão por localizador inválido na população. [Método](../docs/contract-expansion.md).

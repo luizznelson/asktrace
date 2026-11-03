@@ -48,3 +48,7 @@ Veja [relatório e reprodução](contracts.md). A execução remota do CI não f
 ## Validação de contratos em 03/11/2026
 
 A suíte atual passou com **39 testes**, incluindo PostgreSQL. Foram acrescentados testes de múltiplas páginas, totais alterados, páginas repetidas ou faltantes e o 404 específico de nenhum contrato publicado. O piloto real foi validado e carregado, com carga repetida idempotente. [Evidências e limites](contracts.md). Os números anteriores descrevem entregas anteriores. CI remoto não verificado.
+
+## Ampliação de contratos em 03/11/2026
+
+Suíte atual: **41 testes locais passaram**, incluindo PostgreSQL. A exclusão por localizador inválido e sua integridade são testadas. [Resultado da ampliação](contract-expansion.md).

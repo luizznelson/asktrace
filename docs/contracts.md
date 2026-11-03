@@ -105,3 +105,7 @@ pendentes. Não chamar a diferença entre um contrato e o orçamento inteiro da 
 
 Fontes oficiais: [OpenAPI](https://pncp.gov.br/api/pncp/v3/api-docs),
 [manual da consulta por compra](https://pncp.gov.br/manual/pt-br/latest/contrato_empenho/consultar_contratos_ou_empenhos_de_uma_contratacao.html).
+
+## Ampliação posterior
+
+O piloto de 12 acima é histórico. Consulte o [lote de 100 compras e suas exclusões](contract-expansion.md) para a cobertura mais recente.

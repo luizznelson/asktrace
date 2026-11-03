@@ -1,0 +1,22 @@
+{
+  "verified_at": "2026-11-03T12:10:04.976386+00:00",
+  "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+  "status": "pilot_complete",
+  "quality": {
+    "selected": 100,
+    "attempted": 100,
+    "none_returned": 94,
+    "with_contracts": 6,
+    "contracts": 6
+  },
+  "excluded_purchases": 1,
+  "software_tests_passed": 41,
+  "postgresql_integration": true,
+  "load_result": "loaded",
+  "repeated_load_result": "already_loaded",
+  "database_coverage": {
+    "none_returned": 94,
+    "with_contracts": 6
+  },
+  "database_contracts": 6
+}
