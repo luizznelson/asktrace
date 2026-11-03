@@ -38,3 +38,7 @@ Diagnóstico preservado em `contracts-4e458e67-f581-448d-b28a-2362deda4d93` (400
 ## Ampliação para 100 compras
 
 [contracts-78f81b23-e1b7-4fbf-b8dc-a442b64fe259/manifest.json](contracts-78f81b23-e1b7-4fbf-b8dc-a442b64fe259/manifest.json): Lote completo e carregado: 6 compras com contratos, 94 sem registros retornados, 6 contratos. Uma exclusão por localizador inválido na população. [Método](../docs/contract-expansion.md).
+
+## Retomada de contratos
+
+O plano `contracts-resume-88d30f38-2d39-4a7c-a0e5-782f10ca128e` não terminou por indisponibilidade do banco. `contracts-resume-f93f55c8-753a-4d8d-a505-843bc7deb32e/coverage.json` registra a tentativa seguinte: lote `contracts-3eec93d4-abbc-4072-8f7b-66194aa4d685` pendente por 40 falhas de conexão, sem carga. [Método e cobertura consolidada](../docs/contract-resumption.md).

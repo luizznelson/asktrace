@@ -1,0 +1,552 @@
+{
+  "finished_at": "2026-11-03T17:30:56.206830+00:00",
+  "parent_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+  "population": 1081,
+  "eligible": 1080,
+  "covered_distinct_purchases": 100,
+  "remaining_eligible": 980,
+  "excluded_purchases": [
+    {
+      "purchase_id": "01612569000170-1-000001/20226",
+      "reason": "invalid_purchase_locator",
+      "source_body_sha256": "24764930c49ad2a8f20cfc1eaf98d10f9356242f7e819830c20c1918731b2cc3",
+      "source_record_index": 21
+    }
+  ],
+  "purchases_with_contracts": 6,
+  "purchases_none_returned": 94,
+  "distinct_contracts": 6,
+  "snapshots": [
+    {
+      "path": "runs/contracts-52c725b6-9b6f-42a6-b65e-e3858060c9ed/manifest.json",
+      "sha256": "397910726c47fa0b0fd988c79d954fd2ecfde2dbb09dc23389dcfea748b55dd7"
+    },
+    {
+      "path": "runs/contracts-78f81b23-e1b7-4fbf-b8dc-a442b64fe259/manifest.json",
+      "sha256": "6d663508cce7d86654b11f7b4a229fe78de8c4d9d73b01a1d0b26a04241c0537"
+    }
+  ],
+  "coverage": {
+    "00348003000110-1-000856/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00107790000109-1-000002/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00348003000110-1-001156/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-016189/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00348003000110-1-001056/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00348003000110-1-001166/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-016491/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00348003000110-1-001088/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00348003000110-1-001366/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-016720/2026": {
+      "outcome": "with_contracts",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": [
+        "00394452000103-2-008837/2026"
+      ]
+    },
+    "00394452000103-1-019150/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-021515/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-017070/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-019605/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-021898/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-017650/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-020423/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-021985/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394544000185-1-001591/2026": {
+      "outcome": "with_contracts",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": [
+        "00394544000185-2-009753/2026"
+      ]
+    },
+    "00394452000103-1-020805/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-022239/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00399857000126-1-000220/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-020814/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-022409/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00399857000126-1-000240/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-020940/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-022727/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00508903000188-1-001517/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-021038/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-022730/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00509968000148-1-002547/2026": {
+      "outcome": "with_contracts",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": [
+        "00509968000148-2-003731/2026"
+      ]
+    },
+    "00394452000103-1-025580/2025": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-022895/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00946687000152-1-000035/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394494011928-1-000108/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394452000103-1-022990/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00946687000152-1-000038/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00399857000126-1-000313/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00394502000144-1-013099/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01519467000105-1-000051/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00399857000126-1-000335/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00399857000126-1-000344/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01519467000105-1-000053/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00946687000152-1-000040/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00399857000126-1-000346/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01519467000105-1-000056/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00946687000152-1-000041/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00399857000126-1-000353/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01519467000105-1-000062/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00946687000152-1-000042/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00399857000126-1-000369/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612565000192-1-000013/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00946687000152-1-000043/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00399857000126-1-000428/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612565000192-1-000014/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01519467000105-1-000063/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00509968000148-1-003365/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612565000192-1-000015/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612556000100-1-000035/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00509968000148-1-003366/2026": {
+      "outcome": "with_contracts",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": [
+        "00509968000148-2-003976/2026"
+      ]
+    },
+    "01612566000137-1-000017/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612557000146-1-000018/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "00946687000152-1-000044/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612566000137-1-000018/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612559000135-1-000011/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01519467000105-1-000064/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612568000126-1-000043/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612561000104-1-000010/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612556000100-1-000037/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612569000170-1-000008/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612561000104-1-000011/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612556000100-1-000038/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612569000170-1-000009/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612565000192-1-000024/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612559000135-1-000012/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612572000194-1-000039/2026": {
+      "outcome": "with_contracts",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": [
+        "01612572000194-2-000002/2026"
+      ]
+    },
+    "01612566000137-1-000019/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612559000135-1-000013/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612572000194-1-000040/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612566000137-1-000021/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612561000104-1-000014/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612572000194-1-000041/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612572000194-1-000043/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612564000148-1-000059/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612573000139-1-000004/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612574000183-1-000039/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612566000137-1-000024/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612573000139-1-000006/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612575000128-1-000025/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612568000126-1-000048/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612573000139-1-000007/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612577000117-1-000021/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612569000170-1-000010/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612574000183-1-000031/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612579000106-1-000032/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612570000103-1-000021/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612575000128-1-000023/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612579000106-1-000033/2026": {
+      "outcome": "with_contracts",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": [
+        "01612579000106-2-000020/2026"
+      ]
+    },
+    "01612570000103-1-000022/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    },
+    "01612576000172-1-000020/2026": {
+      "outcome": "none_returned",
+      "run_id": "78f81b23-e1b7-4fbf-b8dc-a442b64fe259",
+      "contracts": []
+    }
+  },
+  "events": [
+    {
+      "path": "runs/contracts-3eec93d4-abbc-4072-8f7b-66194aa4d685/manifest.json",
+      "status": "needs_review",
+      "offset": 100,
+      "selected": 100
+    }
+  ],
+  "status": "needs_review"
+}

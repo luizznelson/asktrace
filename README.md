@@ -104,3 +104,7 @@ O próximo passo é ampliar gradualmente a cobertura de contratos vinculados. At
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 
 Houve assistência de IA no desenvolvimento. A responsabilidade por compreender, revisar e verificar as entregas é do mantenedor.
+
+## Retomada por lotes
+
+A retomada evita repetir compras de lotes já verificados e carregados. O próximo lote foi tentado, mas 40 falhas de conexão impediram sua carga; a cobertura confirmada continua em 100 compras. [Execução, evidências e limites](docs/contract-resumption.md). Os 46 testes locais passaram com PostgreSQL ativo.

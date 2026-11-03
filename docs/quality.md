@@ -52,3 +52,7 @@ A suíte atual passou com **39 testes**, incluindo PostgreSQL. Foram acrescentad
 ## Ampliação de contratos em 03/11/2026
 
 Suíte atual: **41 testes locais passaram**, incluindo PostgreSQL. A exclusão por localizador inválido e sua integridade são testadas. [Resultado da ampliação](contract-expansion.md).
+
+## Retomada por lotes
+
+Suíte atual: **46 testes locais passaram** com PostgreSQL ativo. Cinco testes cobrem seleção de intervalos, deduplicação de cobertura, parada por falha e integridade da retomada. [Evidências](contract-resumption.md).

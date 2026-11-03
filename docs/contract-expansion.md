@@ -40,3 +40,5 @@ CI remoto não verificado nesta entrega.
 Adicionar processamento dos lotes restantes com retomada, limite de requisições e cobertura consolidada
 por compra, sem reconsultar a mesma seleção inicial. O limite atual de 100 por execução é intencional.
 Antes do agente, criar consultas somente leitura que sempre informem recorte e registros não consultados.
+
+A retomada por lotes está implementada. Veja [execução mais recente e limitações](contract-resumption.md). A cobertura confirmada permanece em 100 compras enquanto o lote seguinte requer revisão.

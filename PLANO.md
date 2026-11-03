@@ -39,3 +39,7 @@ Ampliar gradualmente às compras restantes; atas ainda pendentes. [Método e lim
 ## Ampliação para 100 compras
 
 Lote completo e carregado: 6 compras com contratos, 94 sem registros retornados, 6 contratos. Uma exclusão por ano inválido na fonte. [Limites e sequência](docs/contract-expansion.md).
+
+## Retomada implementada
+
+Lotes completos são verificados e pulados; o lote seguinte teve 40 falhas de conexão e não foi carregado. Repetir a retomada após normalizar a consulta ao PNCP. [Evidências](docs/contract-resumption.md).

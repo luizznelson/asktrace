@@ -107,3 +107,7 @@ Next, gradually expand linked-contract coverage. Price-registration records stil
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 
 AI assisted development. The maintainer remains responsible for understanding, reviewing and verifying the result.
+
+## Resumable batches
+
+Resumption skips purchases in verified, successfully loaded batches. The next batch was attempted but 40 connection failures prevented loading; confirmed coverage remains 100 purchases. Partial batches are retried in full. All 46 local tests passed with PostgreSQL running. [Execution and limitations (Portuguese)](docs/contract-resumption.md).
