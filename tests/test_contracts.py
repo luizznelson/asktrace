@@ -14,10 +14,10 @@ from asktrace.database import load as load_purchases
 from asktrace.ingest import collect as collect_purchases
 
 
-def snapshot(root):
+def snapshot(root, year=2026):
     raw = {
         "numeroControlePNCP": "synthetic-purchase",
-        "anoCompra": 2026,
+        "anoCompra": year,
         "sequencialCompra": 1,
         "orgaoEntidade": {"cnpj": "00000000000000"},
         "unidadeOrgao": {"ufSigla": "PI"},
@@ -101,6 +101,29 @@ class ContractTests(unittest.TestCase):
         generic = json.dumps({"status": "404", "message": "Not found"}).encode()
         self.assertEqual(contracts.parse(generic, 404, "x"), ([], "request_failed"))
         self.assertEqual(contracts.parse(body, 503, "x"), ([], "request_failed"))
+
+    def test_invalid_source_year_is_excluded_without_repair(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            parent = snapshot(root, year=20226)
+            manifest, _, selected = contracts.select_purchases(root, parent, 1)
+            self.assertEqual(selected, [])
+            self.assertEqual(
+                manifest["contract_locator_exclusions"][0]["purchase_id"], "synthetic-purchase"
+            )
+            self.assertEqual(
+                manifest["contract_locator_exclusions"][0]["reason"], "invalid_purchase_locator"
+            )
+
+    def test_exclusion_evidence_is_verified(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            path = contracts.collect(root, snapshot(root), 1, lambda url: (response(), 200), 0)
+            manifest = json.loads(path.read_bytes())
+            manifest["excluded_purchases"] = [{"purchase_id": "invented"}]
+            path.write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(ValueError, "locator_exclusions_mismatch"):
+                contracts.verify(root, path)
 
     def test_one_to_many_and_unknown_amount(self):
         rows, status = contracts.parse(response(), 200, "synthetic-purchase")

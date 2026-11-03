@@ -53,37 +53,45 @@ def select_purchases(root, parent, limit):
     sources = {}
     for page in manifest["pages"]:
         sources[page["body_sha256"]] = decode((root / page["relative_path"]).read_bytes())["data"]
-    # Round-robin months; within each month order by control ID. No outcome-based selection.
-    groups = {}
+    # Exclusions concern source locators, never contract outcomes.
+    groups, exclusions = {}, []
     for row in sorted(purchases, key=lambda row: row["control_id"]):
-        groups.setdefault(row["publication_date"][:7], []).append(row)
+        raw = sources[row["source_body_sha256"]][row["source_record_index"]]
+        if raw.get("numeroControlePNCP") != row["control_id"]:
+            raise ValueError("purchase_source_mismatch")
+        year, sequence = raw.get("anoCompra"), raw.get("sequencialCompra")
+        if (
+            type(year) is not int
+            or type(sequence) is not int
+            or not 1900 <= year <= 9999
+            or sequence < 1
+        ):
+            exclusions.append(
+                {
+                    "purchase_id": row["control_id"],
+                    "reason": "invalid_purchase_locator",
+                    "source_body_sha256": row["source_body_sha256"],
+                    "source_record_index": row["source_record_index"],
+                }
+            )
+            continue
+        groups.setdefault(row["publication_date"][:7], []).append(
+            {
+                "purchase_id": row["control_id"],
+                "cnpj": row["org_cnpj"],
+                "year": year,
+                "sequence": sequence,
+            }
+        )
     selected = []
     while groups and len(selected) < limit:
         for month in sorted(list(groups)):
-            row = groups[month].pop(0)
-            raw = sources[row["source_body_sha256"]][row["source_record_index"]]
-            year, sequence = raw.get("anoCompra"), raw.get("sequencialCompra")
-            if (
-                raw.get("numeroControlePNCP") != row["control_id"]
-                or type(year) is not int
-                or type(sequence) is not int
-                or not 1900 <= year <= 9999
-                or sequence < 1
-            ):
-                raise ValueError("invalid_purchase_locator")
-            selected.append(
-                {
-                    "purchase_id": row["control_id"],
-                    "cnpj": row["org_cnpj"],
-                    "year": year,
-                    "sequence": sequence,
-                }
-            )
+            selected.append(groups[month].pop(0))
             if not groups[month]:
                 del groups[month]
             if len(selected) == limit:
                 break
-    return manifest, parent_hash, selected
+    return {**manifest, "contract_locator_exclusions": exclusions}, parent_hash, selected
 
 
 def unpublished_response(body, status):
@@ -194,7 +202,8 @@ def collect(root, parent, limit=12, transport=fetch, interval=1, max_pages=100):
         "parent_manifest_sha256": parent_hash,
         "started_at": datetime.now(UTC).isoformat(),
         "status": "running",
-        "selection": "round_robin_publication_month_then_control_id_v1",
+        "selection": "round_robin_valid_locators_month_then_control_id_v2",
+        "excluded_purchases": parent_manifest["contract_locator_exclusions"],
         "population": parent_manifest["quality"]["normalized_records"],
         "selected": selected,
         "requests": [],
@@ -278,7 +287,13 @@ def verify(root, path):
     if manifest["schema_version"] != 2:
         raise ValueError("unsupported_contract_manifest")
     parent = root / "runs" / f"pncp-{manifest['parent_run_id']}" / "manifest.json"
-    _, parent_hash, selected = select_purchases(root, parent, len(manifest["selected"]))
+    parent_manifest, parent_hash, selected = select_purchases(
+        root, parent, len(manifest["selected"])
+    )
+    if "excluded_purchases" in manifest and (
+        manifest["excluded_purchases"] != parent_manifest["contract_locator_exclusions"]
+    ):
+        raise ValueError("locator_exclusions_mismatch")
     if parent_hash != manifest["parent_manifest_sha256"] or selected != manifest["selected"]:
         raise ValueError("parent_or_selection_mismatch")
     if len(manifest["requests"]) != len(selected):
