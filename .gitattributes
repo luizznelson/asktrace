@@ -4,3 +4,10 @@
 *.yaml text eol=lf
 *.yml text eol=lf
 *.md text eol=lf
+
+config/*.json text eol=lf
+evals/*.json text eol=lf
+.env.example text eol=lf
+
+# Evidence hashes cover exact bytes; Git must not convert generated JSON line endings.
+runs/**/*.json -text

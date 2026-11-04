@@ -8,3 +8,5 @@ melhorar uma pontuação; alterações de escopo ou cobertura exigem uma versão
 O modo baseline não usa LLM. O adaptador Gemini tem avaliação independente e não deve herdar o
 resultado do baseline. Os testes de software ficam em `tests/`; execuções e rastros em `runs/`.
 Veja [método, comandos e limitações](../docs/agent-evaluation.md).
+
+`business-additional-v1.json` contém oito perguntas congeladas antes da primeira execução, incluindo um registro ausente e uma recusa dependente do modelo. Autoria interna: não é benchmark externo cego. Novas execuções preservam `corpus.source.json` para verificar exatamente os bytes usados, independentemente das quebras de linha do sistema. [Contingência e evidências](../docs/provider-contingency.md).

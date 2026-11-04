@@ -6,11 +6,12 @@ import os
 from pathlib import Path
 from uuid import UUID
 
+from asktrace.evidence import read_evidence
 from asktrace.ingest import digest
 
 
 def verified_snapshot(root: Path, manifest_path: Path, allow_sample: bool = False):
-    manifest_bytes = manifest_path.read_bytes()
+    manifest_bytes = read_evidence(root, manifest_path)
     manifest = json.loads(manifest_bytes)
     UUID(manifest["run_id"])
     allowed = {"complete", "sample_only"} if allow_sample else {"complete"}

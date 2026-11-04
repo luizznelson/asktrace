@@ -12,6 +12,7 @@ from urllib.request import Request, urlopen
 from uuid import UUID, uuid4
 
 from asktrace.database import verified_snapshot
+from asktrace.evidence import read_evidence
 from asktrace.ingest import MAX_BODY, amount, decode, digest
 
 BASE = "https://pncp.gov.br/api/pncp/v1/orgaos"
@@ -286,7 +287,7 @@ def quality(manifest):
 
 
 def verify(root, path):
-    body = path.read_bytes()
+    body = read_evidence(root, path)
     manifest = json.loads(body)
     UUID(manifest["run_id"])
     UUID(manifest["parent_run_id"])

@@ -7,6 +7,7 @@ import time
 import unicodedata
 from pathlib import Path
 
+from asktrace.providers import MODES, select
 from asktrace.query import answer, serialize
 
 ACTIONS = {"summary", "municipalities", "purchase", "refuse"}
@@ -144,7 +145,7 @@ def run(root, report, question, provider="baseline", planner=None, tool=answer):
     started = time.perf_counter()
     if not isinstance(question, str) or not 1 <= len(question.strip()) <= 1000:
         raise ValueError("question_length_must_be_1_to_1000")
-    if provider not in {"baseline", "gemini"}:
+    if provider not in MODES:
         raise ValueError("unsupported_provider")
     trace = []
     result = {
@@ -167,13 +168,28 @@ def run(root, report, question, provider="baseline", planner=None, tool=answer):
 
                     def planner(text):
                         return provider_plan(root, text)
-                else:
+                elif provider == "baseline":
                     planner = baseline
+                else:
+
+                    def planner(text):
+                        return select(
+                            root, text, validate_plan, None if provider == "fallback" else provider
+                        )
+
             result["llm_attempts"] = int(provider == "gemini")
             proposal = planner(question)
             usage = None
             if isinstance(proposal, tuple):
                 proposal, usage = proposal
+            if usage and "provider_events" in usage:
+                result["llm_attempts"] = usage["attempt_count"]
+                result["selected_provider"] = {
+                    key: usage[key] for key in ("candidate", "provider", "model")
+                }
+                trace.extend(
+                    {"step": "provider_attempt", **event} for event in usage["provider_events"]
+                )
             plan = validate_plan(proposal, question)
             trace.append({"step": "plan", "plan": plan, "usage": usage})
             if plan["action"] != "refuse":
@@ -200,6 +216,11 @@ def run(root, report, question, provider="baseline", planner=None, tool=answer):
                 )
         except Exception as error:
             # Never expose provider bodies, credentials or database connection messages.
+            if hasattr(error, "provider_events"):
+                result["llm_attempts"] = error.attempt_count
+                trace.extend(
+                    {"step": "provider_attempt", **event} for event in error.provider_events
+                )
             result.update(status="error", answer="A consulta não pôde ser concluída com segurança.")
             trace.append(
                 {
@@ -217,7 +238,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("question")
     parser.add_argument("--coverage", required=True, type=Path)
-    parser.add_argument("--provider", choices=["baseline", "gemini"], default="baseline")
+    parser.add_argument("--provider", choices=MODES, default="baseline")
     args = parser.parse_args()
     try:
         result = run(Path.cwd(), args.coverage, args.question, args.provider)

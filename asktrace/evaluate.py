@@ -10,6 +10,7 @@ from uuid import uuid4
 
 from asktrace.agent import run
 from asktrace.ingest import digest
+from asktrace.providers import MODES
 from asktrace.query import answer, serialize
 
 
@@ -33,9 +34,11 @@ def evaluate(root, report, cases_path, provider="baseline", limit=None, interval
 
     folder = root / "runs" / f"agent-eval-{uuid4()}"
     folder.mkdir(parents=True)
+    with (folder / "corpus.source.json").open("xb") as source:
+        source.write(corpus)
     results = []
     for case in cases:
-        if provider == "gemini" and results and results[-1]["actual"]["llm_attempts"]:
+        if provider != "baseline" and results and results[-1]["actual"]["llm_attempts"]:
             time.sleep(interval)
         result = run(root, report, case["question"], provider, tool=tool)
         action = next(
@@ -64,24 +67,36 @@ def evaluate(root, report, cases_path, provider="baseline", limit=None, interval
         )
         # Journal each completed case even if a later call or the process is interrupted.
         case_path = folder / f"case-{start_case + len(results) - 1:03}.json"
-        with case_path.open("x", encoding="utf-8") as stream:
+        with case_path.open("x", encoding="utf-8", newline="\n") as stream:
             json.dump(results[-1], stream, default=serialize, ensure_ascii=False, indent=2)
             stream.write("\n")
-        if result["status"] == "error" and provider == "gemini":
+        if result["status"] == "error" and provider != "baseline":
             break  # Preserve quota/provider failure; never fall back to a different provider.
     latencies = [row["actual"]["latency_ms"] for row in results]
     summary = {
         "started_scope": suite["scope"],
         "provider": provider,
-        "request_interval_seconds": interval if provider == "gemini" else 0,
+        "request_interval_seconds": interval if provider != "baseline" else 0,
         "code_sha256": {
             name: digest((root / "asktrace" / name).read_bytes())
-            for name in ("agent.py", "gemini.py", "query.py", "evaluate.py")
+            for name in (
+                "agent.py",
+                "gemini.py",
+                "query.py",
+                "evaluate.py",
+                "providers.py",
+                "provider_gateway.py",
+                "planning.py",
+            )
             if (root / "asktrace" / name).exists()
         },
         "finished_at": datetime.now(UTC).isoformat(),
         "suite_sha256": digest(corpus),
+        "suite_snapshot_path": (folder / "corpus.source.json").relative_to(root).as_posix(),
         "coverage_report_sha256": digest(report.read_bytes()),
+        "provider_config_sha256": digest((root / "config/providers.json").read_bytes())
+        if (root / "config/providers.json").exists()
+        else None,
         "suite_size": len(suite["cases"]),
         "requested_cases": len(cases),
         "start_case": start_case,
@@ -102,7 +117,7 @@ def evaluate(root, report, cases_path, provider="baseline", limit=None, interval
         "generalization_note": "Curated development suite, not a blind employment benchmark.",
         "results": results,
     }
-    with (folder / "evaluation.json").open("x", encoding="utf-8") as stream:
+    with (folder / "evaluation.json").open("x", encoding="utf-8", newline="\n") as stream:
         json.dump(summary, stream, default=serialize, ensure_ascii=False, indent=2)
         stream.write("\n")
     return folder / "evaluation.json"
@@ -112,7 +127,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--coverage", required=True, type=Path)
     parser.add_argument("--cases", type=Path, default=Path("evals/business-v1.json"))
-    parser.add_argument("--provider", choices=["baseline", "gemini"], default="baseline")
+    parser.add_argument("--provider", choices=MODES, default="baseline")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--interval", type=float, default=6)
     parser.add_argument("--start-case", type=int, default=1)

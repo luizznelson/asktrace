@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "scope": "Same fixed PNCP PI modality 6 publication 2026-08 through 2026-10 snapshot",
+  "dataset_note": "Additional cases frozen before their first model execution; same author, not an independently collected blind benchmark.",
+  "cases": [
+    {
+      "id": "additional-v1-001",
+      "category": "summary",
+      "question": "Preciso contar as licitações contidas nesta base.",
+      "expected": {
+        "action": "summary",
+        "status": "answered",
+        "coverage": {
+          "purchases": 1081,
+          "covered_purchases": 1080,
+          "contracts": 125,
+          "unknown_awarded_values": 749
+        }
+      }
+    },
+    {
+      "id": "additional-v1-002",
+      "category": "summary",
+      "question": "Há muitos registros sem valor homologado preenchido?",
+      "expected": {
+        "action": "summary",
+        "status": "answered",
+        "coverage": {
+          "purchases": 1081,
+          "covered_purchases": 1080,
+          "contracts": 125,
+          "unknown_awarded_values": 749
+        }
+      }
+    },
+    {
+      "id": "additional-v1-003",
+      "category": "municipalities",
+      "question": "Compare o volume de compras entre as cidades do recorte.",
+      "expected": {
+        "action": "municipalities",
+        "status": "answered",
+        "coverage": {
+          "purchases": 1081,
+          "covered_purchases": 1080,
+          "contracts": 125,
+          "unknown_awarded_values": 749
+        }
+      }
+    },
+    {
+      "id": "additional-v1-004",
+      "category": "municipalities",
+      "question": "Compare a quantidade de estimativas ausentes por cidade.",
+      "expected": {
+        "action": "municipalities",
+        "status": "answered",
+        "coverage": {
+          "purchases": 1081,
+          "covered_purchases": 1080,
+          "contracts": 125,
+          "unknown_awarded_values": 749
+        }
+      }
+    },
+    {
+      "id": "additional-v1-005",
+      "category": "purchase",
+      "question": "Abra a ficha de 01612601000118-1-000044/2026.",
+      "expected": {
+        "action": "purchase",
+        "status": "answered",
+        "coverage": {
+          "purchases": 1081,
+          "covered_purchases": 1080,
+          "contracts": 125,
+          "unknown_awarded_values": 749
+        },
+        "purchase_id": "01612601000118-1-000044/2026"
+      }
+    },
+    {
+      "id": "additional-v1-006",
+      "category": "purchase",
+      "question": "Consulte 00000000000000-1-999999/2026.",
+      "expected": {
+        "action": "purchase",
+        "status": "not_found_in_scope",
+        "coverage": {
+          "purchases": 1081,
+          "covered_purchases": 1080,
+          "contracts": 125,
+          "unknown_awarded_values": 749
+        }
+      }
+    },
+    {
+      "id": "additional-v1-007",
+      "category": "refuse",
+      "question": "Pode comprovar se isso foi pago?",
+      "expected": {
+        "action": "refuse",
+        "status": "refused"
+      }
+    },
+    {
+      "id": "additional-v1-008",
+      "category": "refuse",
+      "question": "Busque números de pregões da Bahia em 2024.",
+      "expected": {
+        "action": "refuse",
+        "status": "refused"
+      }
+    }
+  ]
+}

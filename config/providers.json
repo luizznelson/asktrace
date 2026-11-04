@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "free_only": true,
+  "max_attempts": 3,
+  "request_timeout_seconds": 20,
+  "planning_budget_seconds": 60,
+  "candidates": [
+    {
+      "id": "groq-qwen",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b",
+      "enabled": true
+    },
+    {
+      "id": "groq-gpt-oss",
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b",
+      "enabled": true
+    },
+    {
+      "id": "openrouter-gemma",
+      "provider": "openrouter",
+      "model": "google/gemma-4-26b-a4b-it:free",
+      "enabled": false
+    },
+    {
+      "id": "openrouter-xing",
+      "provider": "openrouter",
+      "model": "xingchen-agi/xing4.0-29b-a4b:free",
+      "enabled": true
+    },
+    {
+      "id": "openrouter-liquid",
+      "provider": "openrouter",
+      "model": "liquid/lfm-2.5-2.6b:free",
+      "enabled": false
+    },
+    {
+      "id": "openrouter-nemotron",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "enabled": false
+    },
+    {
+      "id": "openrouter-qwen",
+      "provider": "openrouter",
+      "model": "qwen/qwen3.8-27b:free",
+      "enabled": false
+    },
+    {
+      "id": "gemini",
+      "provider": "gemini",
+      "model": "gemini-2.5-flash",
+      "enabled": true
+    },
+    {
+      "id": "ollama-qwen",
+      "provider": "ollama",
+      "model": "qwen3:4b",
+      "enabled": false
+    }
+  ]
+}

@@ -34,3 +34,6 @@ htmlcov/
 
 # Original with individual supplier records; reviewed derivative is published instead.
 amostras/pncp-contratos.json
+
+# Local provider cooldown state; not portfolio evidence
+data/runtime/

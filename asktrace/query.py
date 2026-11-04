@@ -17,6 +17,7 @@ from psycopg.types.json import Jsonb
 
 from asktrace.contracts import verify
 from asktrace.database import verified_snapshot
+from asktrace.evidence import read_evidence
 from asktrace.ingest import digest
 
 
@@ -44,7 +45,7 @@ def setup(root):
 
 
 def dataset(root, report_path):
-    report_bytes = report_path.read_bytes()
+    report_bytes = read_evidence(root, report_path)
     report = json.loads(report_bytes)
     UUID(report["parent_run_id"])
     parent = root / "runs" / f"pncp-{report['parent_run_id']}" / "manifest.json"

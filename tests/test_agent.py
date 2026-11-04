@@ -199,8 +199,50 @@ class AgentTests(unittest.TestCase):
                 self.assertEqual(result["requested_cases"], 1)
                 self.assertEqual(result["unexecuted_requested_cases"], 0)
                 self.assertTrue((path.parent / "case-002.json").exists())
+                source = root / result["suite_snapshot_path"]
+                self.assertEqual(source.read_bytes(), suite.read_bytes())
             with self.assertRaises(ValueError):
                 evaluate.evaluate(root, report, suite, start_case=0)
+
+    def test_evaluation_preserves_exact_crlf_corpus_bytes(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            suite = root / "cases.json"
+            raw = (
+                json.dumps(
+                    {
+                        "scope": "synthetic",
+                        "cases": [
+                            {
+                                "id": "a",
+                                "category": "refuse",
+                                "question": "one",
+                                "expected": {"action": "refuse", "status": "refused"},
+                            }
+                        ],
+                    },
+                    indent=2,
+                )
+                .replace("\n", "\r\n")
+                .encode()
+            )
+            suite.write_bytes(raw)
+            report = root / "coverage.json"
+            report.write_bytes(b"{}")
+            refused = {
+                "status": "refused",
+                "trace": [],
+                "latency_ms": 1,
+                "llm_attempts": 0,
+                "tool_calls": 0,
+            }
+            with patch.object(evaluate, "run", return_value=refused):
+                path = evaluate.evaluate(root, report, suite)
+            result = json.loads(path.read_bytes())
+            from asktrace.ingest import digest
+
+            self.assertEqual(result["suite_sha256"], digest(raw))
+            self.assertEqual((root / result["suite_snapshot_path"]).read_bytes(), raw)
 
     def test_evaluation_does_not_call_provider_errors_successes(self):
         with tempfile.TemporaryDirectory() as folder:
