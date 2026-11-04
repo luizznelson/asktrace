@@ -112,6 +112,14 @@ class WebTests(unittest.TestCase):
             self.server.root, Path("runs/fixture/coverage.json"), "Resumo", "baseline"
         )
 
+    def test_availability_check_does_not_execute_question(self):
+        status, _, body = self.request("GET", "/api/availability")
+        self.assertEqual(status, 200)
+        data = json.loads(body)
+        self.assertIn("can_attempt_ai", data)
+        self.assertFalse(data["database_checked"])
+        self.runner.assert_not_called()
+
     def test_content_type_and_body_size_checked(self):
         self.assertEqual(self.ask(**{"Content-Type": "text/plain"})[0], 415)
         self.assertEqual(self.ask({"question": "x" * 9000, "provider": "baseline"})[0], 400)

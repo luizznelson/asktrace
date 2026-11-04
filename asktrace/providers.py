@@ -193,7 +193,14 @@ def select(
                 delay = 600
             # Shared provider quotas are not multiplied by rotating its model IDs.
             key = "candidate:" + candidate["id"] if status == 404 else "provider:" + provider
-            state[key] = {"not_before": clock() + max(1, delay), "reason": f"http_{status}"}
+            state[key] = {
+                "not_before": clock() + max(1, delay),
+                "reason": f"http_{status}",
+                "limit_kind": error.limits.get("limit_kind", "unknown"),
+                "delay_source": "provider"
+                if "retry_after_seconds" in error.limits
+                else "local_default",
+            }
             save_health(root, state)
             continue
         except Exception as error:
@@ -213,3 +220,39 @@ def select(
             "fallback_used": candidate_id is None and candidate != candidates[0],
         }
     raise ContingencyFailure(events, attempts)
+
+
+def availability(root, clock=time.time):
+    config, _ = configuration(root)
+    state = health(root)
+    load_dotenv(root / ".env", override=False)
+    candidates = []
+    for row in config["candidates"]:
+        if not row["enabled"]:
+            continue
+        records = [
+            state.get("provider:" + row["provider"], {}),
+            state.get("candidate:" + row["id"], {}),
+        ]
+        record = max(records, key=lambda item: item.get("not_before", 0))
+        retry = record.get("not_before", 0)
+        configured = row["provider"] not in KEYS or bool(os.environ.get(KEYS[row["provider"]]))
+        candidates.append(
+            {
+                "candidate": row["id"],
+                "provider": row["provider"],
+                "status": "missing_key"
+                if not configured
+                else "cooldown"
+                if retry > clock()
+                else "can_attempt",
+                "retry_after_seconds": max(0, round(retry - clock())),
+                "limit_kind": record.get("limit_kind", "unknown"),
+                "delay_source": record.get("delay_source", "recorded"),
+            }
+        )
+    return {
+        "can_attempt_ai": any(row["status"] == "can_attempt" for row in candidates),
+        "database_checked": False,
+        "candidates": candidates,
+    }

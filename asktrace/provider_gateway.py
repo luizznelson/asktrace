@@ -9,6 +9,7 @@ from urllib.request import Request, urlopen
 from asktrace.gemini import ProviderFailure
 from asktrace.gemini import plan as gemini_plan
 from asktrace.planning import current_prompt
+from asktrace.rate_limits import hints
 
 KEYS = {"groq": "GROQ_API_KEY", "openrouter": "OPENROUTER_API_KEY", "gemini": "GEMINI_API_KEY"}
 URLS = {
@@ -82,8 +83,10 @@ def call(root, candidate, question, timeout):
         with urlopen(request, timeout=timeout) as response:
             body = response.read(128 * 1024 + 1)
     except HTTPError as error:
-        retry = error.headers.get("Retry-After", "")
-        limits = {"retry_after_seconds": float(retry)} if retry.isdecimal() else {}
+        try:
+            limits = hints(error.headers, error.read(65537)) if error.code == 429 else {}
+        except OSError, AttributeError, TypeError:
+            limits = {}
         raise ProviderFailure(error.code, limits) from None
     except URLError, TimeoutError, ConnectionError:
         raise ProviderFailure(0) from None

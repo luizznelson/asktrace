@@ -10,6 +10,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 from asktrace.agent import run
+from asktrace.providers import availability
 from asktrace.query import dataset, serialize
 
 COVERAGE = "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json"
@@ -104,8 +105,11 @@ class Handler(BaseHTTPRequestHandler):
                     "datasets": self.server.catalog,
                     "default_dataset": self.server.datasets["default"],
                     "providers": ["baseline", "fallback"],
+                    "availability": availability(self.server.root),
                 },
             )
+        elif path == "/api/availability":
+            self.send(200, availability(self.server.root))
         elif path == "/api/evidence":
             # No arbitrary local files, raw responses or .env can be downloaded.
             from asktrace.evidence import read_evidence

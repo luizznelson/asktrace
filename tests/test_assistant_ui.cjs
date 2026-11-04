@@ -37,6 +37,12 @@ assert.equal(requests.filter(r=>r.url==='/api/ask').length,priorRequests,'Render
 get('recovery-actions').children[0].click();await new Promise(resolve=>setImmediate(resolve));
 assert.equal(JSON.parse(requests.filter(r=>r.url==='/api/ask').at(-1).options.body).provider,'baseline');
 assert.equal(get('source-panel').hidden,false);assert.equal(get('recovery-actions').hidden,true);
+const requestCount=requests.length;
+vm.runInContext('showAvailability({can_attempt_ai:false,candidates:[]})',context);
+assert.equal(get('availability-notice').hidden,false);get('choose-local').click();
+assert.equal(get('provider').value,'baseline');assert.equal(requests.length,requestCount);
+vm.runInContext('showAvailability({can_attempt_ai:true,candidates:[]})',context);
+assert.equal(get('availability-notice').hidden,true);
 get('new-session').click();assert.equal(get('question').value,'');assert.equal(get('conversation').hidden,true);
 assert.equal(get('history').children[0].textContent,'Your questions will appear here.');
 assert.equal(JSON.parse(store.get('asktrace.session.v1')).entries.length,0);
