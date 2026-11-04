@@ -96,6 +96,22 @@ class WebTests(unittest.TestCase):
         self.assertEqual(status, 503)
         self.assertNotIn(b"private-key", body)
 
+    def test_unknown_dataset_is_rejected_before_model_or_query(self):
+        self.assertEqual(
+            self.ask({"question": "Resumo", "provider": "baseline", "dataset": "../.env"})[0], 400
+        )
+        self.assertEqual(self.request("GET", "/api/evidence?dataset=unknown")[0], 404)
+        self.runner.assert_not_called()
+
+    def test_selected_dataset_uses_its_explicit_coverage(self):
+        self.server.catalog.append({"id": "fixture", "coverage": "runs/fixture/coverage.json"})
+        self.assertEqual(
+            self.ask({"question": "Resumo", "provider": "baseline", "dataset": "fixture"})[0], 200
+        )
+        self.runner.assert_called_once_with(
+            self.server.root, Path("runs/fixture/coverage.json"), "Resumo", "baseline"
+        )
+
     def test_content_type_and_body_size_checked(self):
         self.assertEqual(self.ask(**{"Content-Type": "text/plain"})[0], 415)
         self.assertEqual(self.ask({"question": "x" * 9000, "provider": "baseline"})[0], 400)

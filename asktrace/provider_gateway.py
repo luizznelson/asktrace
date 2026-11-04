@@ -6,8 +6,9 @@ import os
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from asktrace.gemini import PROMPT, ProviderFailure
+from asktrace.gemini import ProviderFailure
 from asktrace.gemini import plan as gemini_plan
+from asktrace.planning import current_prompt
 
 KEYS = {"groq": "GROQ_API_KEY", "openrouter": "OPENROUTER_API_KEY", "gemini": "GEMINI_API_KEY"}
 URLS = {
@@ -27,7 +28,7 @@ SCHEMA = {
 
 
 def payload(candidate, question):
-    system_prompt = PROMPT
+    system_prompt = current_prompt()
     if candidate["model"] == "google/gemma-4-26b-a4b-it:free":
         system_prompt += "\nRetorne apenas JSON com duas chaves: action e purchase_id."
     messages = [{"role": "system", "content": system_prompt}, {"role": "user", "content": question}]

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "default": "expanded",
+  "datasets": [
+    {
+      "id": "expanded",
+      "coverage": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json"
+    },
+    {
+      "id": "original",
+      "coverage": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json"
+    }
+  ]
+}

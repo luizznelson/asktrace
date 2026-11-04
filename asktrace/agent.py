@@ -7,6 +7,7 @@ import time
 import unicodedata
 from pathlib import Path
 
+from asktrace.planning import ACTIVE_SCOPE
 from asktrace.providers import MODES, select
 from asktrace.query import answer, serialize
 
@@ -161,7 +162,13 @@ def run(root, report, question, provider="baseline", planner=None, tool=answer):
     if reason:
         trace.append({"step": "policy", "outcome": "refused", "reason": reason})
     else:
+        scope_token = None
         try:
+            if planner is None and report.exists() and provider != "baseline":
+                from asktrace.query import dataset
+
+                manifest, _, _, _ = dataset(root, report)
+                scope_token = ACTIVE_SCOPE.set(manifest)
             if planner is None:
                 if provider == "gemini":
                     from asktrace.gemini import plan as provider_plan
@@ -230,6 +237,9 @@ def run(root, report, question, provider="baseline", planner=None, tool=answer):
                     "provider_limits": getattr(error, "limits", None),
                 }
             )
+        finally:
+            if scope_token is not None:
+                ACTIVE_SCOPE.reset(scope_token)
     result["latency_ms"] = round((time.perf_counter() - started) * 1000, 2)
     return result
 

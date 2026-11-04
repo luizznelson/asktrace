@@ -9,7 +9,7 @@ from urllib.request import Request, urlopen
 
 from dotenv import load_dotenv
 
-from asktrace.planning import PROMPT
+from asktrace.planning import current_prompt
 
 SCHEMA = {
     "type": "OBJECT",
@@ -73,7 +73,7 @@ def plan(root, question, model=None, timeout=30):
     if not key or not re.fullmatch(r"gemini-[a-zA-Z0-9.\-]+", model):
         raise ValueError("configure_gemini_key_and_valid_model")
     payload = {
-        "systemInstruction": {"parts": [{"text": PROMPT}]},
+        "systemInstruction": {"parts": [{"text": current_prompt()}]},
         "contents": [{"role": "user", "parts": [{"text": question}]}],
         "generationConfig": {
             "temperature": 0,
@@ -109,6 +109,6 @@ def plan(root, question, model=None, timeout=30):
     text = "".join(part.get("text", "") for part in parts if not part.get("thought"))
     return json.loads(text), {
         "model": model,
-        "prompt_sha256": hashlib.sha256(PROMPT.encode()).hexdigest(),
+        "prompt_sha256": hashlib.sha256(current_prompt().encode()).hexdigest(),
         **data.get("usageMetadata", {}),
     }
