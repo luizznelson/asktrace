@@ -90,3 +90,7 @@ Suíte atual: **86 testes locais passaram**, incluindo PostgreSQL. Sete testes n
 ## Experiência de assistente
 
 86 testes Python passaram novamente. Contrato DOM em Node verifica descoberta, envio, resposta, sugestões, histórico, idioma, reinício e sessão com elementos simulados; não é inspeção de layout. Seis fluxos HTTP reais passaram após o redesenho. Checks de Node adicionados ao CI, execução remota não verificada. [Evidências](interface.md).
+
+## Recortes e sessão restaurável
+
+Passaram **89 testes Python locais**, incluindo PostgreSQL. Três novos testes cobrem IDs de base permitidos, caminho correto do recorte e isolamento do período no planejador. Contrato DOM cobre restauração sem nova API e histórico inválido. HTTP real validou resumo original, ampliado e ampliado com IA. Não transfere a pontuação do corpus antigo ao novo recorte. [Evidências](dataset-expansion.md).

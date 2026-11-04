@@ -92,3 +92,7 @@ O lote `agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9` aprovou os casos 7–14
 ## Redesenho do assistente
 
 [web-verification-ce1eb0aa-e3a5-4888-9af2-984c20385ec2/verification.json](web-verification-ce1eb0aa-e3a5-4888-9af2-984c20385ec2/verification.json): seis exemplos HTTP da versão atual, com hashes de assets. `web-verification-8029bb61-a6e2-4df6-9f9d-624c4795be14` registra uma etapa intermediária. Não houve inspeção visual por navegador; contrato DOM foi testado separadamente. [Método](../docs/interface.md).
+
+## Ampliação de maio a outubro e histórico de sessão
+
+`pncp-74d68096-1e27-451d-b423-f8cded554d54` contém a coleta de seis meses: 2.537 compras, 54 páginas, carga verificada. `contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f` registra 100 consultas de contrato, 21 contratos e 2.436 consultas pendentes. `expanded-interface-57f006b7-e36e-4035-8e8b-cf3988031ae7` verifica os dois recortes e IA ampliada. `expanded-interface-4693e944-1745-4b53-ac60-1c76e9d71b79` é uma tentativa sem relatório final, com dois exemplos baseline apenas. [Método](../docs/dataset-expansion.md).

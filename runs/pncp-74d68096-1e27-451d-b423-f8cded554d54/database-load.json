@@ -1,0 +1,64 @@
+{
+  "verified_at": "2026-11-04T18:41:33.563662+00:00",
+  "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+  "source_pages": 54,
+  "normalized_purchases": 2537,
+  "database_purchases": 2537,
+  "months": [
+    {
+      "start": "2026-05-01",
+      "end": "2026-05-31",
+      "reported_total": 505,
+      "downloaded_records": 505,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-06-01",
+      "end": "2026-06-30",
+      "reported_total": 527,
+      "downloaded_records": 527,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-07-01",
+      "end": "2026-07-31",
+      "reported_total": 424,
+      "downloaded_records": 424,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-08-01",
+      "end": "2026-08-31",
+      "reported_total": 412,
+      "downloaded_records": 412,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "reported_total": 373,
+      "downloaded_records": 373,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-10-01",
+      "end": "2026-10-31",
+      "reported_total": 296,
+      "downloaded_records": 296,
+      "pagination_complete": true
+    }
+  ],
+  "repeated_load_result": "already_loaded",
+  "selected_coverage": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+  "coverage": {
+    "purchases": 2537,
+    "covered_purchases": 100,
+    "purchases_with_contracts": 17,
+    "none_returned": 83,
+    "contracts": 21,
+    "unknown_awarded_values": 1354
+  },
+  "pending_eligible_contract_queries": 2436,
+  "excluded_contract_locators": 1,
+  "note": "Six-month snapshot includes original three months; never add snapshots together."
+}

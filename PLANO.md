@@ -79,3 +79,7 @@ Fluxo PT-BR/EN: contexto → pergunta → resposta → cobertura/fontes → rast
 ## Interface revisada como assistente
 
 Aplicação com navegação lateral, histórico da aba, sugestões por assunto e próximas perguntas, observações de cobertura e evidências expansíveis. Padrão IA com contingência. Perguntas independentes, sem memória no modelo. Seis fluxos HTTP e contrato DOM passaram; inspeção visual ainda pendente por navegador desativado. [Detalhes](docs/interface.md).
+
+## Orientação, histórico e seis meses de dados
+
+Nova base maio–outubro/2026 com 2.537 compras carregadas e 54 páginas; histórico de sessão restaurável e seletor de recortes. Contratos novos: 100 consultas, 21 contratos, 2.436 consultas elegíveis pendentes e uma exclusão. Recorte anterior preservado e não somado. 89 testes Python e verificações de sessão/HTTP passaram. Próximo passo: continuar cobertura e avaliar perguntas do recorte ampliado. [Evidências](docs/dataset-expansion.md).

@@ -1,0 +1,990 @@
+{
+  "schema_version": 1,
+  "run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+  "started_at": "2026-11-04T18:35:07.760904+00:00",
+  "source": "https://pncp.gov.br/api/consulta/v1/contratacoes/publicacao",
+  "date_start": "2026-05-01",
+  "date_end": "2026-10-31",
+  "scope": {
+    "uf": "PI",
+    "modality": 6,
+    "date_basis": "publication",
+    "resource": "purchases"
+  },
+  "mode": "live",
+  "status": "complete",
+  "pages": [
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 1,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "24e94c324e7183629e9fcbf209ff4d2cd27297a3cd7833dacce9871e37b42fbd",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00001.json",
+      "fetched_at": "2026-11-04T18:35:09.305269+00:00",
+      "http_status": 200,
+      "page": 1,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 2,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "b32f73c7da1c3302d3daff141bc51231eb12b406375767d4f226fdbad00d7040",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00002.json",
+      "fetched_at": "2026-11-04T18:35:11.292231+00:00",
+      "http_status": 200,
+      "page": 2,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 3,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "3383f93d3d65c82083e550659165a86b98b051cef51b99339120d81f4b7f58f9",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00003.json",
+      "fetched_at": "2026-11-04T18:35:13.563443+00:00",
+      "http_status": 200,
+      "page": 3,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 4,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "3090082b7c840dff982a45cf3b375a8be416c5784df91fdcdf808f0d35b88728",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00004.json",
+      "fetched_at": "2026-11-04T18:35:15.576249+00:00",
+      "http_status": 200,
+      "page": 4,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 5,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "18355c2495ffc5663da65b7cc8650f10bba980c2877811a7bb700c4e25a9bea1",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00005.json",
+      "fetched_at": "2026-11-04T18:35:18.877904+00:00",
+      "http_status": 200,
+      "page": 5,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 6,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "f74c588817b3b0e0f773ee41f7063a1d03eee56d20b4203b5b170920dff0cdad",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00006.json",
+      "fetched_at": "2026-11-04T18:35:22.947995+00:00",
+      "http_status": 200,
+      "page": 6,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 7,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "3d97d0d6216571f818987b63cdd198c1f38d8e02b716bae94e3f3ae1b2a98e8b",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00007.json",
+      "fetched_at": "2026-11-04T18:35:25.630924+00:00",
+      "http_status": 200,
+      "page": 7,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 8,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "3cbce6cfbf5120a64c36cbf07dd2d70635ee58c22f515f5935894b14b6b51e47",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00008.json",
+      "fetched_at": "2026-11-04T18:35:29.575758+00:00",
+      "http_status": 200,
+      "page": 8,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 9,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "51a338320c9d3b7d4def63930a90608ea3d273b2d2948edef3f2461bf0dd1340",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00009.json",
+      "fetched_at": "2026-11-04T18:35:31.469359+00:00",
+      "http_status": 200,
+      "page": 9,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 10,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "d11611899a84d89c7136107af9f77bf94e7f0ae8299dd7ae9bf7eeb967eda9dc",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00010.json",
+      "fetched_at": "2026-11-04T18:35:34.177850+00:00",
+      "http_status": 200,
+      "page": 10,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260501",
+        "dataFinal": "20260531",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 11,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "01ccfb5411d9fc145305d03684488af6fb1a6f9c9a0105c480d81ffbc6cf25c7",
+      "body_sha256": "0579c6b41ccf66af57c0af1b8df33f98a4eaa354440e71a63e831fb0dd1e0c69",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202605-page-00011.json",
+      "fetched_at": "2026-11-04T18:35:36.163187+00:00",
+      "http_status": 200,
+      "page": 11,
+      "records_count": 5
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 1,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "d7f20882b9013dec96f22b231d43a945dd900fc049f4ae29d65c8b646871ea14",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00001.json",
+      "fetched_at": "2026-11-04T18:35:38.575776+00:00",
+      "http_status": 200,
+      "page": 1,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 2,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "5ad9f4f929571fed4c884430b429f4bf3e896c2e33ec83efd42186fd6fbd52be",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00002.json",
+      "fetched_at": "2026-11-04T18:35:40.827760+00:00",
+      "http_status": 200,
+      "page": 2,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 3,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "160f614e1efa7ab1f22ddadf2521b618531c6c9d56f48be74c9d1d6170734d6a",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00003.json",
+      "fetched_at": "2026-11-04T18:35:44.296970+00:00",
+      "http_status": 200,
+      "page": 3,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 4,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "5aef7980ed40c023618efb56ee2555048c32fca1f171f4711777451300043c17",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00004.json",
+      "fetched_at": "2026-11-04T18:35:48.379973+00:00",
+      "http_status": 200,
+      "page": 4,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 5,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "4da4854e704359a58d54f2baff75a16e7a09425ec5b7e2d44a34c8910b6c9ab9",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00005.json",
+      "fetched_at": "2026-11-04T18:35:51.463449+00:00",
+      "http_status": 200,
+      "page": 5,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 6,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "85f0f3e310598adc03404c270ca453df0b7838616c75381b053feca6b3b5a2ac",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00006.json",
+      "fetched_at": "2026-11-04T18:35:53.654282+00:00",
+      "http_status": 200,
+      "page": 6,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 7,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "01ef4f93bcb750b90fa6213feb00b4231d4568c1d6fc66d3530b7d8b9ec5856c",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00007.json",
+      "fetched_at": "2026-11-04T18:35:55.484599+00:00",
+      "http_status": 200,
+      "page": 7,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 8,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "a6b53ad4dadba65a71ab3922c38657f255fefdafda5bd6664a6173064674a65a",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00008.json",
+      "fetched_at": "2026-11-04T18:35:57.580492+00:00",
+      "http_status": 200,
+      "page": 8,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 9,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "66e5465157ee11f86c01d7e1f4fec660740a1ca620dbac228c09185fb8d8546f",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00009.json",
+      "fetched_at": "2026-11-04T18:35:59.534651+00:00",
+      "http_status": 200,
+      "page": 9,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 10,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "926d35940ca1fb4bdc36cafa8c11f0c973589865aa9591d904a991b91bb306db",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00010.json",
+      "fetched_at": "2026-11-04T18:36:02.386413+00:00",
+      "http_status": 200,
+      "page": 10,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260601",
+        "dataFinal": "20260630",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 11,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "767e095a3820b85b4420fd5a787bbd0dbe2dab770d46c7642368dae58642ef0b",
+      "body_sha256": "c87e70a0f960e70e0971fd3ee941c038175daf194e34c9a3c7476a1afd0cd41c",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202606-page-00011.json",
+      "fetched_at": "2026-11-04T18:36:05.288049+00:00",
+      "http_status": 200,
+      "page": 11,
+      "records_count": 27
+    },
+    {
+      "params": {
+        "dataInicial": "20260701",
+        "dataFinal": "20260731",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 1,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "0ec60e1369c12942247a40b99e754866c9ec91dd82819bf532fb0cc15434b6c5",
+      "body_sha256": "b496ca2ee52add7d56397b39130660d9d88f75f359509a6217e771248ff1e2ac",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202607-page-00001.json",
+      "fetched_at": "2026-11-04T18:36:08.524483+00:00",
+      "http_status": 200,
+      "page": 1,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260701",
+        "dataFinal": "20260731",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 2,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "0ec60e1369c12942247a40b99e754866c9ec91dd82819bf532fb0cc15434b6c5",
+      "body_sha256": "e051d3d82e4fc973b0b4ac10c8eab13926ec317f431c550cd3abce0892f344c1",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202607-page-00002.json",
+      "fetched_at": "2026-11-04T18:36:10.965801+00:00",
+      "http_status": 200,
+      "page": 2,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260701",
+        "dataFinal": "20260731",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 3,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "0ec60e1369c12942247a40b99e754866c9ec91dd82819bf532fb0cc15434b6c5",
+      "body_sha256": "ab11a5cadca6f0c135506bd1d963dbca9d83b4b3aab52d6b0d69a5e171476e9f",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202607-page-00003.json",
+      "fetched_at": "2026-11-04T18:36:17.393835+00:00",
+      "http_status": 200,
+      "page": 3,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260701",
+        "dataFinal": "20260731",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 4,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "0ec60e1369c12942247a40b99e754866c9ec91dd82819bf532fb0cc15434b6c5",
+      "body_sha256": "ca88ed0ab0118a2cdd1f998cae987368cc64cec9ce6c9f64098793075577729a",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202607-page-00004.json",
+      "fetched_at": "2026-11-04T18:36:20.854097+00:00",
+      "http_status": 200,
+      "page": 4,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260701",
+        "dataFinal": "20260731",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 5,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "0ec60e1369c12942247a40b99e754866c9ec91dd82819bf532fb0cc15434b6c5",
+      "body_sha256": "56d5d30f1f1fbb0df8061aaa293567eccd83f57305b4d0030081961e9bd3722b",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202607-page-00005.json",
+      "fetched_at": "2026-11-04T18:36:24.113132+00:00",
+      "http_status": 200,
+      "page": 5,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260701",
+        "dataFinal": "20260731",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 6,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "0ec60e1369c12942247a40b99e754866c9ec91dd82819bf532fb0cc15434b6c5",
+      "body_sha256": "48624effb4cfa237047adee3c5cf079d35a907ae7fb7c395d1cc8747d7d6ddc1",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202607-page-00006.json",
+      "fetched_at": "2026-11-04T18:36:28.405391+00:00",
+      "http_status": 200,
+      "page": 6,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260701",
+        "dataFinal": "20260731",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 7,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "0ec60e1369c12942247a40b99e754866c9ec91dd82819bf532fb0cc15434b6c5",
+      "body_sha256": "8b6224c031b393ceaad088bef0e15eac322941355c45e3db0fc4fe2335f339ab",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202607-page-00007.json",
+      "fetched_at": "2026-11-04T18:36:30.454366+00:00",
+      "http_status": 200,
+      "page": 7,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260701",
+        "dataFinal": "20260731",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 8,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "0ec60e1369c12942247a40b99e754866c9ec91dd82819bf532fb0cc15434b6c5",
+      "body_sha256": "e1bcd1887062e887bdbfdfa95c8c5bde9f4bfce9b4305e66064fdb6f619146ed",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202607-page-00008.json",
+      "fetched_at": "2026-11-04T18:36:33.071418+00:00",
+      "http_status": 200,
+      "page": 8,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260701",
+        "dataFinal": "20260731",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 9,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "0ec60e1369c12942247a40b99e754866c9ec91dd82819bf532fb0cc15434b6c5",
+      "body_sha256": "f9f814f84f06a2c4d0d9b0ebf6579fc36f3acd6da128c6e2e841ef454875785c",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202607-page-00009.json",
+      "fetched_at": "2026-11-04T18:36:36.465395+00:00",
+      "http_status": 200,
+      "page": 9,
+      "records_count": 24
+    },
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 1,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "df9f6d7951d5b7a948743249552060b9e1a64c47ed14d8e02216f491ce5b7c59",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202608-page-00001.json",
+      "fetched_at": "2026-11-04T18:36:39.103268+00:00",
+      "http_status": 200,
+      "page": 1,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 2,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "8012175bdece57ce0b07537ea268ec25071ca709d426e6199705e7f3d5dcd99f",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202608-page-00002.json",
+      "fetched_at": "2026-11-04T18:36:41.019561+00:00",
+      "http_status": 200,
+      "page": 2,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 3,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "a9131cf4cfa0e19145d65e4f0fb6bb8d45c470cd3e4f340b615d07c990a53065",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202608-page-00003.json",
+      "fetched_at": "2026-11-04T18:36:43.320949+00:00",
+      "http_status": 200,
+      "page": 3,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 4,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "cf10ea3fc3dac54a1b712db37d6fc82da04452b3131c94b155a107f3156e0fcc",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202608-page-00004.json",
+      "fetched_at": "2026-11-04T18:36:46.131535+00:00",
+      "http_status": 200,
+      "page": 4,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 5,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "2d3c2aa3b762fe94d0c755d60fec318aa5451cdd32c62720356a6189afcda767",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202608-page-00005.json",
+      "fetched_at": "2026-11-04T18:36:49.794038+00:00",
+      "http_status": 200,
+      "page": 5,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 6,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "068ddcb9d191bf11460ecf4c52b47ddd6b679c25738721f7cacc909c56655b90",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202608-page-00006.json",
+      "fetched_at": "2026-11-04T18:36:58.718798+00:00",
+      "http_status": 200,
+      "page": 6,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 7,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "753a895b0100b7f2b88417f998e57207250fc2a76eeb8ada1b3bd1da97739825",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202608-page-00007.json",
+      "fetched_at": "2026-11-04T18:37:02.574096+00:00",
+      "http_status": 200,
+      "page": 7,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 8,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "9b914c8f935ba173fd5dbcb8b97d8134fc4ff5425b314df39fab141dcde982c3",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202608-page-00008.json",
+      "fetched_at": "2026-11-04T18:37:08.618141+00:00",
+      "http_status": 200,
+      "page": 8,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 9,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "b76f6d9af695cd45aeeb65d07af51f1bbc147372597e22710874644392adb196",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202608-page-00009.json",
+      "fetched_at": "2026-11-04T18:37:10.801750+00:00",
+      "http_status": 200,
+      "page": 9,
+      "records_count": 12
+    },
+    {
+      "params": {
+        "dataInicial": "20260901",
+        "dataFinal": "20260930",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 1,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "f8ae604b3c5118b617d65cff4501cc304a03b40f2a7032c210726751cd9d2b9f",
+      "body_sha256": "5033731fb8593f998937647e20aa1158f4e6f36e0753deb5d7e0126ddcce8ba8",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202609-page-00001.json",
+      "fetched_at": "2026-11-04T18:37:16.035630+00:00",
+      "http_status": 200,
+      "page": 1,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260901",
+        "dataFinal": "20260930",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 2,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "f8ae604b3c5118b617d65cff4501cc304a03b40f2a7032c210726751cd9d2b9f",
+      "body_sha256": "13a8a5381a00353038aa49a21678e82df42e3d63a432bf68025a05295d879130",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202609-page-00002.json",
+      "fetched_at": "2026-11-04T18:37:20.196074+00:00",
+      "http_status": 200,
+      "page": 2,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260901",
+        "dataFinal": "20260930",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 3,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "f8ae604b3c5118b617d65cff4501cc304a03b40f2a7032c210726751cd9d2b9f",
+      "body_sha256": "08e9bee503a8056a8ad2968a55bed63866b6954cbbfb671ebed6537d89813403",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202609-page-00003.json",
+      "fetched_at": "2026-11-04T18:37:24.242130+00:00",
+      "http_status": 200,
+      "page": 3,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260901",
+        "dataFinal": "20260930",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 4,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "f8ae604b3c5118b617d65cff4501cc304a03b40f2a7032c210726751cd9d2b9f",
+      "body_sha256": "9947286648b70db8ed88fbf3fe5a69216faf0770cf1d2ceaa91df4ce8e5832e4",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202609-page-00004.json",
+      "fetched_at": "2026-11-04T18:37:28.121416+00:00",
+      "http_status": 200,
+      "page": 4,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260901",
+        "dataFinal": "20260930",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 5,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "f8ae604b3c5118b617d65cff4501cc304a03b40f2a7032c210726751cd9d2b9f",
+      "body_sha256": "607e37f191369572dc61e5d4dfaf2a3ed1ff071e70cdc594b050c830f9d10bc9",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202609-page-00005.json",
+      "fetched_at": "2026-11-04T18:37:32.498031+00:00",
+      "http_status": 200,
+      "page": 5,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260901",
+        "dataFinal": "20260930",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 6,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "f8ae604b3c5118b617d65cff4501cc304a03b40f2a7032c210726751cd9d2b9f",
+      "body_sha256": "a5b124d5d9ba8af2995dbe04e8e711fcedf675ac7e2dd04f429893e994c185df",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202609-page-00006.json",
+      "fetched_at": "2026-11-04T18:37:40.726858+00:00",
+      "http_status": 200,
+      "page": 6,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260901",
+        "dataFinal": "20260930",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 7,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "f8ae604b3c5118b617d65cff4501cc304a03b40f2a7032c210726751cd9d2b9f",
+      "body_sha256": "206be24407d66109df81dce62bb9ae469f818dbc24f32abc81556335ac80c717",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202609-page-00007.json",
+      "fetched_at": "2026-11-04T18:37:43.405215+00:00",
+      "http_status": 200,
+      "page": 7,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20260901",
+        "dataFinal": "20260930",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 8,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "f8ae604b3c5118b617d65cff4501cc304a03b40f2a7032c210726751cd9d2b9f",
+      "body_sha256": "090a8e18329d8db5188e9a1e5c6db62f58e399aa707d331e578acef3b23de22b",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202609-page-00008.json",
+      "fetched_at": "2026-11-04T18:37:47.725392+00:00",
+      "http_status": 200,
+      "page": 8,
+      "records_count": 23
+    },
+    {
+      "params": {
+        "dataInicial": "20261001",
+        "dataFinal": "20261031",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 1,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "4746e8654fc50ae26a7ccf4b1b7abff5e5664aeb05a0083582feeba19404bd84",
+      "body_sha256": "cddf7f9e42ce571f31d1276463b6f0fd23c4b2fada781100099c72d461a9aa2f",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202610-page-00001.json",
+      "fetched_at": "2026-11-04T18:37:53.580699+00:00",
+      "http_status": 200,
+      "page": 1,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20261001",
+        "dataFinal": "20261031",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 2,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "4746e8654fc50ae26a7ccf4b1b7abff5e5664aeb05a0083582feeba19404bd84",
+      "body_sha256": "43d32cbe7dbda84156e3695bc519ea4fef8b68533469e131c3ebb68fd6eb627c",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202610-page-00002.json",
+      "fetched_at": "2026-11-04T18:37:56.191874+00:00",
+      "http_status": 200,
+      "page": 2,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20261001",
+        "dataFinal": "20261031",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 3,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "4746e8654fc50ae26a7ccf4b1b7abff5e5664aeb05a0083582feeba19404bd84",
+      "body_sha256": "550d1e4716c64a033016ae5b26fa0908a432c8fa553c23e06cc4602c13404815",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202610-page-00003.json",
+      "fetched_at": "2026-11-04T18:37:59.131392+00:00",
+      "http_status": 200,
+      "page": 3,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20261001",
+        "dataFinal": "20261031",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 4,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "4746e8654fc50ae26a7ccf4b1b7abff5e5664aeb05a0083582feeba19404bd84",
+      "body_sha256": "c4d9c1c4a11773bff3defd43b75a47842c8bf85ca61895f46dd8c8cad7ed7c32",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202610-page-00004.json",
+      "fetched_at": "2026-11-04T18:38:04.894089+00:00",
+      "http_status": 200,
+      "page": 4,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20261001",
+        "dataFinal": "20261031",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 5,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "4746e8654fc50ae26a7ccf4b1b7abff5e5664aeb05a0083582feeba19404bd84",
+      "body_sha256": "8182fb44e4c2ab1574d218dfc8af3cbbd5c8617ab17576da0e3cb6017002e3a6",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202610-page-00005.json",
+      "fetched_at": "2026-11-04T18:38:08.365743+00:00",
+      "http_status": 200,
+      "page": 5,
+      "records_count": 50
+    },
+    {
+      "params": {
+        "dataInicial": "20261001",
+        "dataFinal": "20261031",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 6,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "4746e8654fc50ae26a7ccf4b1b7abff5e5664aeb05a0083582feeba19404bd84",
+      "body_sha256": "8cd977d9ba6ae02455a8c83c60d0c047b8df42f46220891bad204dbac3add24e",
+      "relative_path": "data/raw/74d68096-1e27-451d-b423-f8cded554d54/202610-page-00006.json",
+      "fetched_at": "2026-11-04T18:38:13.642830+00:00",
+      "http_status": 200,
+      "page": 6,
+      "records_count": 46
+    }
+  ],
+  "windows": [
+    {
+      "start": "2026-05-01",
+      "end": "2026-05-31",
+      "reported_total": 505,
+      "downloaded_records": 505,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-06-01",
+      "end": "2026-06-30",
+      "reported_total": 527,
+      "downloaded_records": 527,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-07-01",
+      "end": "2026-07-31",
+      "reported_total": 424,
+      "downloaded_records": 424,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-08-01",
+      "end": "2026-08-31",
+      "reported_total": 412,
+      "downloaded_records": 412,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "reported_total": 373,
+      "downloaded_records": 373,
+      "pagination_complete": true
+    },
+    {
+      "start": "2026-10-01",
+      "end": "2026-10-31",
+      "reported_total": 296,
+      "downloaded_records": 296,
+      "pagination_complete": true
+    }
+  ],
+  "ended_at": "2026-11-04T18:38:13.647496+00:00",
+  "quality": {
+    "source_records": 2537,
+    "awarded_missing": 1354,
+    "normalized_records": 2537
+  },
+  "normalized": {
+    "relative_path": "data/processed/74d68096-1e27-451d-b423-f8cded554d54/purchases.json",
+    "sha256": "353b6823d6eb361d59ff90baf670e674ced1a18e15bdc8a655f8166d0b27d5da"
+  }
+}

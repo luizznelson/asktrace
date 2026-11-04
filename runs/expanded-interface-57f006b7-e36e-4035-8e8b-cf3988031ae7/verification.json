@@ -1,0 +1,143 @@
+{
+  "verified_at": "2026-11-04T18:43:59.887526+00:00",
+  "catalog": [
+    {
+      "id": "expanded",
+      "coverage": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+      "start": "2026-05-01",
+      "end": "2026-10-31",
+      "purchases": 2537,
+      "covered": 100,
+      "contracts": 21,
+      "unknown_awarded": 1354,
+      "excluded": 1,
+      "coverage_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+    },
+    {
+      "id": "original",
+      "coverage": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+      "start": "2026-08-01",
+      "end": "2026-10-31",
+      "purchases": 1081,
+      "covered": 1080,
+      "contracts": 125,
+      "unknown_awarded": 749,
+      "excluded": 1,
+      "coverage_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+    }
+  ],
+  "default_dataset": "expanded",
+  "software_tests_passed": 89,
+  "real_http_results": [
+    {
+      "dataset": "original",
+      "provider": "baseline",
+      "status": "answered",
+      "purchases": 1081,
+      "passed": true,
+      "trace": [
+        {
+          "step": "plan",
+          "plan": {
+            "action": "summary",
+            "purchase_id": null
+          },
+          "usage": null
+        },
+        {
+          "step": "read_only_query",
+          "action": "summary",
+          "outcome": "answered",
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+        }
+      ],
+      "selected_model": null
+    },
+    {
+      "dataset": "expanded",
+      "provider": "baseline",
+      "status": "answered",
+      "purchases": 2537,
+      "passed": true,
+      "trace": [
+        {
+          "step": "plan",
+          "plan": {
+            "action": "summary",
+            "purchase_id": null
+          },
+          "usage": null
+        },
+        {
+          "step": "read_only_query",
+          "action": "summary",
+          "outcome": "answered",
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+        }
+      ],
+      "selected_model": null
+    },
+    {
+      "dataset": "expanded",
+      "provider": "fallback",
+      "status": "answered",
+      "purchases": 2537,
+      "passed": true,
+      "trace": [
+        {
+          "step": "provider_attempt",
+          "candidate": "groq-qwen",
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b",
+          "outcome": "selected"
+        },
+        {
+          "step": "plan",
+          "plan": {
+            "action": "summary",
+            "purchase_id": null
+          },
+          "usage": {
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "prompt_sha256": "9c6cef44e8b3e8cbc6ac05c364948824775e496d6b3cc87bdffd64fc29d022b0",
+            "prompt_tokens": 602,
+            "completion_tokens": 14,
+            "total_tokens": 616,
+            "candidate": "groq-qwen",
+            "attempt_count": 1,
+            "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+            "provider_events": [
+              {
+                "candidate": "groq-qwen",
+                "provider": "groq",
+                "model": "qwen/qwen3.8-27b",
+                "outcome": "selected"
+              }
+            ],
+            "fallback_used": false
+          }
+        },
+        {
+          "step": "read_only_query",
+          "action": "summary",
+          "outcome": "answered",
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+        }
+      ],
+      "selected_model": {
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      }
+    }
+  ],
+  "visual_browser_review": "not_performed_local_browser_disabled",
+  "code_sha256": {
+    "asktrace/web.py": "5bf1942fa4e205961914c7e9d7b3eec1ed14e1cfb6bbbdfe19e08c3ba14de183",
+    "asktrace/planning.py": "1d12938af037bbf7c1c46f20454f8e20c8d994e909dc9aa2cbb77d4c8679cc84",
+    "web/index.html": "fece224c344e0fca0a98fb6bda96dcd53e2cd1ea8a4db5e82e3e94bd67a2172d",
+    "web/app.css": "7a03f8c953bd27b548aa18f1f1ffcf09c442851ced9b064127ef9d4bad6c6102",
+    "web/app.js": "f627b245420e43e84f148bd4ca10bd269f4b9c2354bed273062fef7391375600"
+  }
+}

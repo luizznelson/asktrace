@@ -14,7 +14,7 @@ Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A pri
 | --- | --- |
 | **Problema** | Uma resposta sobre compras públicas pode ignorar páginas, tratar um valor ausente como zero ou misturar períodos e modalidades. |
 | **O que construí** | Coletor paginado do PNCP, normalização com precisão decimal, carga transacional no PostgreSQL e relatórios que ligam cada registro à página original. |
-| **Resultado verificado** | 1.081 pregões publicados de agosto a outubro de 2026, em 23 páginas, conferidos no banco. São 749 registros sem valor homologado informado, mantidos como NULL. Consulta de contratos concluída para 1.080 compras elegíveis: 125 contratos; uma compra excluída por ano inválido. [Cobertura](docs/contract-coverage.md). |
+| **Resultado verificado** | Base padrão maio–outubro/2026: 2.537 compras em 54 páginas. Contratos: 100 consultas confirmadas, 21 contratos, 2.436 consultas elegíveis pendentes e uma exclusão. O recorte original segue selecionável com 1.081 compras e 125 contratos. [Cobertura atual](docs/dataset-expansion.md). |
 | **Habilidades demonstradas** | Python 3.14, integração com API pública, qualidade de dados, SQL, PostgreSQL com Docker, rastreabilidade, testes de falhas e CI configurada. |
 | **Estágio atual** | Compras, contratos vinculados e consultas de negócio somente leitura verificados localmente. Roteador com contingência e avaliação local; interface local PT-BR/EN, sem demonstração online. |
 | **Onde começar** | [Resultado e método](docs/ingestion.md) · [Evidência no banco](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Como verificar](docs/quality.md) |
@@ -40,7 +40,7 @@ flowchart LR
 
 Cada execução recebe um identificador. Amostra, falha e coleta real concluída têm estados diferentes. Os snapshots ficam separados, permitindo conferir uma execução sem somar a mesma compra novamente em outra coleta.
 
-## 3. O que os dados permitem afirmar
+## 3. O que foi verificado no recorte original (ago–out/2026)
 
 | Pergunta | Evidência disponível |
 | --- | --- |
@@ -90,7 +90,7 @@ Se `.venv` já existir e estiver configurado, não é necessário recriá-lo. Se
 
 Os downloads completos ficam localmente em `data/raw/` e `data/processed/`, excluídos do Git. Os relatórios registram os hashes, mas não disponibilizam esses arquivos por si só. [Índice de documentação](docs/README.md).
 
-## Contratos vinculados: cobertura atual
+## Contratos vinculados: recorte original preservado
 
 **Cobertura elegível concluída:** 1.080 compras distintas confirmadas. 125 contratos distintos e 0 compras elegíveis pendentes.
 A população original tem 1081 compras; uma ficou excluída por ano inválido na fonte.
@@ -116,15 +116,26 @@ herdam a nota do principal. O código atual passou em 79 testes locais, incluind
 
 ## Interface local
 
-Um espaço de assistente PT-BR/EN conecta perguntas, sugestões, histórico da aba, respostas e evidências. A engenharia do projeto fica acessível sem interromper a exploração.
+Um espaço de assistente PT-BR/EN conecta perguntas, sugestões, histórico restaurável da sessão, respostas e evidências. A engenharia do projeto fica acessível sem interromper a exploração.
 Execute `python -m asktrace.web` no ambiente do projeto e abra `http://127.0.0.1:8010`.
 O início usa IA com contingência; regras locais ficam disponíveis no seletor. As perguntas continuam suportadas em português.
 Seis fluxos HTTP reais passaram; a suíte tem 86 testes locais aprovados. A revisão visual de navegador
 está pendente porque a prévia está desativada no ambiente. [Uso, evidências e limites](docs/interface.md).
 
+## Base ampliada e como começar
+
+O AskTrace ajuda a explorar publicações do PNCP com perguntas e fontes verificáveis. Escolha a base,
+faça uma pergunta concreta e confira cobertura e origem na resposta. As instruções aparecem na aplicação.
+O novo padrão é maio–outubro/2026: **2.537 compras em 54 páginas**, 1.456 compras adicionais no período.
+O primeiro lote confirmou 100 consultas e 21 contratos; restam 2.436 consultas elegíveis, além de uma
+exclusão por ano inválido. O recorte anterior continua disponível com 1.080 consultas e 125 contratos.
+**Não somar snapshots nem interpretar compras ainda não consultadas como compras sem contrato.**
+O histórico da sessão sobrevive a recarregamentos e pode ser limpo. Passaram 89 testes Python,
+contrato DOM e três consultas HTTP dos dois recortes, incluindo IA real. [Uso e evidências](docs/dataset-expansion.md).
+
 ## 7. O que vem depois
 
-O próximo passo é revisar a interface visualmente em desktop/celular e preparar hospedagem com limites de acesso. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
+O próximo passo é ampliar a cobertura de contratos do novo recorte, avaliar suas perguntas e revisar a interface visualmente antes de preparar hospedagem. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
 
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 

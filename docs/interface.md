@@ -12,7 +12,7 @@ do projeto fica em uma área expansível para visitantes do portfólio, sem inte
 5. Fontes, rastro e registro técnico ficam em áreas expansíveis; há download do JSON original.
 6. Perguntas sugeridas permitem continuar a exploração; o histórico permite revisitar resultados.
 
-O histórico guarda até 20 resultados **somente na memória da aba**, sem armazenamento persistente.
+O histórico guarda até 20 resultados no **sessionStorage da aba**, sobrevivendo à atualização da página durante a sessão.
 Nova exploração apaga o histórico visual. Cada pergunta permanece independente no backend: não há
 memória conversacional no modelo, resolução de referências como “e essa?” ou inferência sobre perguntas
 anteriores. Essa distinção é explicada na interface. É uma experiência de assistente sobre consultas
@@ -62,7 +62,7 @@ locais baseados nos resultados, sem outra chamada de modelo.
 - Rastreio mostra valores, contratos, execução e hashes. Compra fora da base é “não encontrada neste
   recorte”, sem afirmar ausência no PNCP.
 - Recusa explica o catálogo disponível; erro indica indisponibilidade e preserva o rastro quando houver.
-- Fontes e rastro podem ser expandidos. O manifesto aberto pela interface é uma rota fixa.
+- Fontes e rastro podem ser expandidos. O manifesto aberto pela interface usa o ID do recorte em uma lista configurada.
 - O download JSON é gerado no navegador a partir da resposta e não persiste perguntas no servidor.
 
 Publicado não significa pago. A interface não atribui fraude nem calcula economia a partir de um
@@ -77,13 +77,14 @@ dependências externas ou framework de frontend. HTML/CSS/JS estão em `web/`.
 O Host é validado. Pedidos de consulta exigem Origin local e token de sessão gerado por processo,
 JSON limitado a 8 KiB, pergunta até 1.000 caracteres e provedor em lista permitida. Há somente uma
 consulta em andamento por processo; outra recebe 429 sem consumir mais API. Sem CORS aberto.
-Não se aceita caminho de arquivo, SQL, cobertura ou endpoint enviado pelo usuário.
+Não se aceita caminho de arquivo, SQL, manifesto de cobertura ou endpoint enviado pelo usuário. Só é aceito o ID da base configurada.
 
-As rotas GET são fixas: página, dois assets, sessão e manifesto de cobertura. `.env`, SQL e respostas
+As rotas GET são fixas: página, dois assets, sessão com catálogo e manifesto de cobertura selecionado por ID permitido. `.env`, SQL e respostas
 brutas não são servidos. CSP restringe recursos ao próprio servidor, bloqueia incorporação em frames
 e base externa; `nosniff`, `no-store` e política de referência são enviados. Dados dinâmicos são
 inseridos com `textContent`, sem interpretar HTML retornado pelo modelo ou pelo banco.
 
+A escolha de base vem de `config/datasets.json`; não se aceitam caminhos de arquivo enviados pelo cliente.
 O token limita pedidos originados de outras páginas; ele não autentica usuários nem protege contra
 outros processos da mesma máquina. Não é uma solução pronta para exposição pública. Antes de
 hospedar, são necessários servidor apropriado, política de acesso/abuso e armazenamento/configuração
@@ -126,3 +127,7 @@ O comando faz cinco consultas por regras e uma com IA, consumindo quota nesse ú
 Revisar visualmente em desktop e celular, testar os estados por interação de navegador e ajustar o
 layout a partir dessa revisão. Depois, preparar a hospedagem com backend, banco e limites de acesso.
 O portfólio deve apresentar os resultados medidos e as limitações reais de cada modo.
+
+## Base ampliada e orientação de uso
+
+A introdução explica PNCP, propósito e os três passos de uso. O padrão passou a maio–outubro/2026, com 2.537 compras e cobertura parcial de contratos explícita. O recorte anterior permanece disponível. O histórico é restaurado do sessionStorage sem chamadas externas. [Método e evidências atuais](dataset-expansion.md).

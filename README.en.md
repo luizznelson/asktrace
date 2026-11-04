@@ -14,7 +14,7 @@ An applied AI engineering portfolio project developed by Luiz. The first deliver
 | --- | --- |
 | **Problem** | An answer about procurement can omit pages, treat unknown values as zero or mix periods and procurement methods. |
 | **What I built** | A paginated PNCP collector, exact decimal normalization, transactional PostgreSQL loading and reports linking records to original pages. |
-| **Verified result** | 1,081 auctions published August–October 2026, across 23 pages, checked in PostgreSQL. Missing awarded amounts in 749 records remain NULL. Contract acquisition covered all 1,080 eligible purchases: 125 contracts, with one purchase excluded due to an invalid year. [Coverage](docs/contract-coverage.md). |
+| **Verified result** | Default scope May–October 2026: 2,537 purchases across 54 pages. Contract coverage: 100 confirmed queries, 21 contracts, 2,436 eligible queries pending and one exclusion. The original scope remains selectable with 1,081 purchases and 125 contracts. [Current coverage](docs/dataset-expansion.md). |
 | **Skills demonstrated** | Python 3.14, public API integration, data quality, SQL, PostgreSQL with Docker, provenance, failure testing and configured CI. |
 | **Current stage** | Purchases, linked contracts and read-only business queries verified locally. Evaluated bounded routing with explicit provider contingency; a local PT-BR/EN interface, with no hosted demo yet. |
 | **Start here** | [Method and results](docs/ingestion.md) · [Database verification](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Quality checks](docs/quality.md) |
@@ -40,7 +40,7 @@ flowchart LR
 
 Runs have unique identifiers and distinguish samples, failures and completed live collections. Snapshots are separate: loading or analyzing multiple snapshots must not count the same purchase twice.
 
-## 3. What was verified
+## 3. What was verified in the original scope (Aug–Oct 2026)
 
 | Question | Evidence |
 | --- | --- |
@@ -90,7 +90,7 @@ Do not recreate an already configured environment. Two PostgreSQL tests are expl
 
 Full downloads stay local in ignored `data/raw/` and `data/processed/`. Hashes in reports do not make those files remotely available. [Documentation index](docs/README.md).
 
-## Linked contracts: current coverage
+## Linked contracts: preserved original scope
 
 Confirmed coverage: **1080 distinct purchases and 125 distinct contracts**;
 0 eligible purchases remain. The original population contains 1081
@@ -117,15 +117,26 @@ model's score. All 79 local software tests passed, including PostgreSQL integrat
 
 ## Local interface
 
-The PT-BR/EN assistant workspace connects discovery cards, tab-only history, contextual suggestions, answers and evidence, with an expandable engineering overview for portfolio visitors.
+The PT-BR/EN assistant workspace connects discovery cards, reload-persistent session history, contextual suggestions, answers and evidence, with an expandable engineering overview for portfolio visitors.
 Run `python -m asktrace.web` in the project environment and open `http://127.0.0.1:8010`.
 AI contingency is the default; local rules remain available; business questions are currently supported in Portuguese.
 All six real HTTP flows passed, alongside 86 local software tests. Browser visual inspection remains
 pending because browser preview is disabled in this environment. [Usage and limitations](docs/interface.md) (Portuguese).
 
+## Expanded dataset and getting started
+
+AskTrace helps visitors explore PNCP publications with questions and verifiable sources. Choose a
+dataset, ask a concrete question, then check coverage and provenance. The application explains these steps.
+The new default spans May–October 2026: **2,537 purchases across 54 pages**, adding 1,456 purchases
+to the period. Its first contract batch covers 100 purchases and 21 contracts; 2,436 eligible queries
+remain, plus one invalid-year exclusion. The original scope is still selectable, with 1,080 confirmed
+queries and 125 contracts. Do not add overlapping snapshots or treat unqueried purchases as missing contracts.
+Session history survives reloads and can be cleared. All 89 Python tests, the DOM contract and three
+real HTTP dataset queries passed, including one live AI query. [Usage and evidence](docs/dataset-expansion.md) (Portuguese).
+
 ## 7. Next steps and attribution
 
-Next, review the interface visually on desktop/mobile and prepare hosting with access controls. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
+Next, expand contract coverage for the new scope, evaluate its questions and review the interface visually before hosting. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
 
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 
