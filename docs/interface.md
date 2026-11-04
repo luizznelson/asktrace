@@ -1,17 +1,33 @@
 # Interface local: da pergunta à evidência
 
-## Jornada apresentada
+## Experiência de assistente
 
-1. **Entender o problema e o recorte:** pregões de unidades do Piauí publicados entre agosto e outubro
-   de 2026. A base reúne 1.081 compras, com 1.080 consultas de contratos e uma exclusão por ano inválido.
-2. **Escolher uma pergunta:** resumo, agrupamento municipal ou rastreio de compra com ID explícito.
-3. **Ler a resposta:** texto, tabela quando aplicável e contagens de cobertura.
-4. **Conferir a origem:** período, modalidade, manifesto, hash e dados da compra.
-5. **Acompanhar a execução:** decisão de política, plano, tentativas de provedores e consulta de leitura.
+A tela principal é uma área de exploração, com barra lateral, perguntas e respostas. A apresentação
+do projeto fica em uma área expansível para visitantes do portfólio, sem interromper a consulta.
 
-A apresentação usa linguagem de negócio e mantém o registro técnico em uma área expansível.
-Os números de abertura são resultados do snapshot fixo documentado, não um monitoramento em tempo
-real. Uma nova coleta exige atualizar a referência de cobertura e a apresentação.
+1. O assistente apresenta o recorte e três caminhos: panorama, municípios e rastreio de uma compra.
+2. Os cartões preenchem uma pergunta que o visitante pode editar antes de enviar.
+3. A pergunta aparece na conversa; o estado de processamento informa a consulta em andamento.
+4. A resposta mostra texto, tabela quando aplicável, cobertura e modelo selecionado.
+5. Fontes, rastro e registro técnico ficam em áreas expansíveis; há download do JSON original.
+6. Perguntas sugeridas permitem continuar a exploração; o histórico permite revisitar resultados.
+
+O histórico guarda até 20 resultados **somente na memória da aba**, sem armazenamento persistente.
+Nova exploração apaga o histórico visual. Cada pergunta permanece independente no backend: não há
+memória conversacional no modelo, resolução de referências como “e essa?” ou inferência sobre perguntas
+anteriores. Essa distinção é explicada na interface. É uma experiência de assistente sobre consultas
+limitadas, sem apresentar capacidades conversacionais ainda não implementadas.
+
+O modo inicial é IA com contingência, com aviso sobre o envio da pergunta e uso de quota. Regras locais
+continuam no seletor. A interface orienta por exemplos, oferece próximos caminhos conforme o tipo de
+resposta e calcula uma observação de cobertura a partir dos valores retornados: consultas confirmadas,
+compra excluída e homologados desconhecidos. Essas observações usam dados verificados e templates;
+não fazem nova chamada LLM ou inferem pagamentos, economia ou irregularidades.
+
+A direção visual combina azul-marinho para orientação, verde-petróleo para ações e evidência e âmbar
+nos pontos de rastreio. Os cartões e o recorte usam valores do snapshot fixo, não dados em tempo real.
+Layouts menores reduzem a barra lateral; o botão de nova exploração permanece no cabeçalho móvel.
+Enter envia, Shift+Enter insere linha; cliques em sugestões não consomem API sem envio.
 
 ## Executar
 
@@ -26,7 +42,7 @@ Abra [http://127.0.0.1:8010](http://127.0.0.1:8010). Para outro porto local, use
 Encerrar o processo com Ctrl+C fecha o servidor. Ele não inicia Docker nem reinstala dependências.
 Se ainda necessário, configurar o leitor com `python -m asktrace.query setup-reader`.
 
-O modo inicial é **regras locais**, sem consumo de API. O seletor **IA com contingência** usa as chaves
+O modo inicial é **IA com contingência**. O seletor também oferece **regras locais**, sem consumo de API. O modo IA usa as chaves
 do `.env` no servidor e respeita a ordem e a espera de `config/providers.json`. A interface explica
 antes da consulta que a pergunta e o catálogo serão enviados ao provedor escolhido.
 Não há chave no navegador. Erros de configuração, quota e banco aparecem sem mensagens sensíveis.
@@ -74,22 +90,28 @@ hospedar, são necessários servidor apropriado, política de acesso/abuso e arm
 para o ambiente hospedado. O servidor padrão não é apresentado como infraestrutura de produção.
 Não há coordenação distribuída ou login de usuário nesta etapa.
 
-## Verificação
+## Verificação da versão atual
 
-[Relatório HTTP real](../runs/web-verification-2179defe-b152-4eaa-b1f6-85f8b39ba5c5/verification.json): seis fluxos aprovados, usando PostgreSQL e,
-em um caso, contingência real de modelo. Exemplos de resposta e seus rastros estão na mesma pasta.
-O relatório registra hashes do backend e dos assets e omite o token de sessão.
+[Relatório HTTP real da versão atual](../runs/web-verification-ce1eb0aa-e3a5-4888-9af2-984c20385ec2/verification.json):
+seis exemplos aprovados (resumo, municípios, compra, recusa, registro ausente e contingência real),
+com hashes dos assets. O [teste intermediário](../runs/web-verification-8029bb61-a6e2-4df6-9f9d-624c4795be14/verification.json)
+e a [primeira interface](../runs/web-verification-2179defe-b152-4eaa-b1f6-85f8b39ba5c5/verification.json)
+foram preservados como histórico.
 
-Passaram **86 testes locais**, incluindo PostgreSQL. Os sete novos testes exercitam rotas fixas,
-sessão/Host/Origin, corpo e pergunta limitados, provedor permitido, uma consulta por processo,
-falha sem vazamento e uso do manifesto fixo. `node --check` validou a sintaxe JS; Ruff e formatação
-validaram Python. Nenhuma chave configurada aparece nos arquivos versionáveis.
+Passaram **86 testes Python locais**, incluindo PostgreSQL. Além deles, o contrato DOM em Node
+verifica descoberta, envio, resposta, sugestões, histórico, idioma, reinício e sessão. Esse teste usa
+elementos simulados: comprova as transições verificadas, não layout de navegador ou acessibilidade.
+Foi incluído no fluxo CI com Node 22, sem novas bibliotecas. Execução remota ainda não verificada.
 
-A prévia automatizada do navegador foi impedida pela configuração “Local browser use is disabled
-in Work settings”. Por isso, **não foi feita inspeção visual no navegador nem teste de interação DOM**.
-O CSS inclui layouts responsivos, foco visível, labels, link de salto, região de status e redução de
-movimento; não afirmamos uma auditoria de acessibilidade ou compatibilidade móvel concluída.
-CI remoto não verificado nesta entrega.
+```powershell
+node --check web/app.js
+node tests/test_assistant_ui.cjs
+```
+
+A prévia continua bloqueada por “Local browser use is disabled in Work settings”. Portanto **não foi
+feita inspeção visual de navegador**, teste de viewport real ou auditoria de acessibilidade. O CSS inclui
+breakpoints, foco visível e redução de movimento; HTML inclui labels, link de salto e região de status.
+Não há screenshot fabricado ou declaração de compatibilidade visual confirmada.
 
 Para repetir os fluxos HTTP com o servidor em execução:
 
@@ -97,7 +119,7 @@ Para repetir os fluxos HTTP com o servidor em execução:
 .venv/Scripts/python.exe -m scripts.verify_web
 ```
 
-O comando executa cinco exemplos por regras e um com IA, consumindo quota nesse último.
+O comando faz cinco consultas por regras e uma com IA, consumindo quota nesse último caso.
 
 ## Próximo passo
 

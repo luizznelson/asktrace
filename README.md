@@ -116,9 +116,9 @@ herdam a nota do principal. O código atual passou em 79 testes locais, incluind
 
 ## Interface local
 
-Apresentação, perguntas, resposta, cobertura, fontes e rastro estão conectados em uma interface PT-BR/EN.
+Um espaço de assistente PT-BR/EN conecta perguntas, sugestões, histórico da aba, respostas e evidências. A engenharia do projeto fica acessível sem interromper a exploração.
 Execute `python -m asktrace.web` no ambiente do projeto e abra `http://127.0.0.1:8010`.
-Comece por regras locais ou selecione IA com contingência. As perguntas continuam suportadas em português.
+O início usa IA com contingência; regras locais ficam disponíveis no seletor. As perguntas continuam suportadas em português.
 Seis fluxos HTTP reais passaram; a suíte tem 86 testes locais aprovados. A revisão visual de navegador
 está pendente porque a prévia está desativada no ambiente. [Uso, evidências e limites](docs/interface.md).
 

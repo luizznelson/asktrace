@@ -1,0 +1,50 @@
+{
+  "verified_at": "2026-11-04T18:29:47.650300+00:00",
+  "mode": "real_local_http",
+  "browser_visual_check": "not_performed_browser_disabled_in_Work_settings",
+  "software_tests_passed": 86,
+  "examples": [
+    {
+      "example": "summary",
+      "expected": "answered",
+      "actual": "answered",
+      "passed": true
+    },
+    {
+      "example": "municipalities",
+      "expected": "answered",
+      "actual": "answered",
+      "passed": true
+    },
+    {
+      "example": "purchase",
+      "expected": "answered",
+      "actual": "answered",
+      "passed": true
+    },
+    {
+      "example": "refusal",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "example": "not-found",
+      "expected": "not_found_in_scope",
+      "actual": "not_found_in_scope",
+      "passed": true
+    },
+    {
+      "example": "fallback",
+      "expected": "answered",
+      "actual": "answered",
+      "passed": true
+    }
+  ],
+  "code_sha256": {
+    "asktrace/web.py": "cea6fa72db9117f23ada733e6f533ca594c2e5ab94b87f8037bc535edf15be26",
+    "web/index.html": "a4c3f0e2d71443bd484ecf8c9f6f2a3db0886bc988fa475ab8c41ff668f43dbb",
+    "web/app.css": "82279805760a61709c680c11698af577da52ae71700d6b28a219f1f70f3fa24a",
+    "web/app.js": "45c68119647a44f2e306c7c3f55235c82a6f982a06f3e6f7eb29c03938f27f45"
+  }
+}

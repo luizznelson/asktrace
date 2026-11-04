@@ -86,3 +86,7 @@ O código atual passou em **79 testes locais**, incluindo PostgreSQL. A avaliaç
 ## Interface local
 
 Suíte atual: **86 testes locais passaram**, incluindo PostgreSQL. Sete testes novos cobrem fronteiras HTTP, sessão e limites. Seis fluxos HTTP reais passaram; sintaxe JS verificada. Inspeção visual e interação no navegador pendentes: prévia local desativada no ambiente. [Detalhes](interface.md).
+
+## Experiência de assistente
+
+86 testes Python passaram novamente. Contrato DOM em Node verifica descoberta, envio, resposta, sugestões, histórico, idioma, reinício e sessão com elementos simulados; não é inspeção de layout. Seis fluxos HTTP reais passaram após o redesenho. Checks de Node adicionados ao CI, execução remota não verificada. [Evidências](interface.md).

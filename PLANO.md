@@ -75,3 +75,7 @@ Pool revisado: Qwen/GPT-OSS na Groq, Xing gratuito no OpenRouter, Gemini após q
 ## Interface local implementada
 
 Fluxo PT-BR/EN: contexto → pergunta → resposta → cobertura/fontes → rastro. Seis exemplos HTTP reais e 86 testes de software aprovados. Revisão visual de navegador pendente por prévia desativada. Próximo passo: verificar desktop/celular, ajustar o necessário e preparar hospedagem. [Comandos](docs/interface.md).
+
+## Interface revisada como assistente
+
+Aplicação com navegação lateral, histórico da aba, sugestões por assunto e próximas perguntas, observações de cobertura e evidências expansíveis. Padrão IA com contingência. Perguntas independentes, sem memória no modelo. Seis fluxos HTTP e contrato DOM passaram; inspeção visual ainda pendente por navegador desativado. [Detalhes](docs/interface.md).

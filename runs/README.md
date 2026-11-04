@@ -88,3 +88,7 @@ O lote `agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9` aprovou os casos 7–14
 ## Interface local
 
 [web-verification-2179defe-b152-4eaa-b1f6-85f8b39ba5c5/verification.json](web-verification-2179defe-b152-4eaa-b1f6-85f8b39ba5c5/verification.json): seis fluxos HTTP reais, incluindo uma pergunta com contingência; hashes do servidor/assets preservados. Não houve inspeção visual: navegador local desativado no ambiente. [Método e limites](../docs/interface.md).
+
+## Redesenho do assistente
+
+[web-verification-ce1eb0aa-e3a5-4888-9af2-984c20385ec2/verification.json](web-verification-ce1eb0aa-e3a5-4888-9af2-984c20385ec2/verification.json): seis exemplos HTTP da versão atual, com hashes de assets. `web-verification-8029bb61-a6e2-4df6-9f9d-624c4795be14` registra uma etapa intermediária. Não houve inspeção visual por navegador; contrato DOM foi testado separadamente. [Método](../docs/interface.md).

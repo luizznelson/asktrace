@@ -117,9 +117,9 @@ model's score. All 79 local software tests passed, including PostgreSQL integrat
 
 ## Local interface
 
-The PT-BR/EN interface connects the project story, questions, answers, coverage, sources and trace.
+The PT-BR/EN assistant workspace connects discovery cards, tab-only history, contextual suggestions, answers and evidence, with an expandable engineering overview for portfolio visitors.
 Run `python -m asktrace.web` in the project environment and open `http://127.0.0.1:8010`.
-Choose local rules or AI contingency; business questions are currently supported in Portuguese.
+AI contingency is the default; local rules remain available; business questions are currently supported in Portuguese.
 All six real HTTP flows passed, alongside 86 local software tests. Browser visual inspection remains
 pending because browser preview is disabled in this environment. [Usage and limitations](docs/interface.md) (Portuguese).
 
