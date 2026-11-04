@@ -5,10 +5,11 @@ import json
 import os
 import re
 from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+from urllib.request import Request
 
 from dotenv import load_dotenv
 
+from asktrace.http_transport import urlopen
 from asktrace.planning import current_prompt
 
 SCHEMA = {
@@ -98,6 +99,8 @@ def plan(root, question, model=None, timeout=30):
             limits = quota_details(error.read(65537)) if error.code == 429 else {}
         except OSError, AttributeError, TypeError:
             limits = {}
+        finally:
+            error.close()
         raise ProviderFailure(error.code, limits) from None
     except URLError, TimeoutError:
         raise ProviderFailure(0) from None

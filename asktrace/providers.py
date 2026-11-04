@@ -53,17 +53,30 @@ def configuration(root):
         raise ValueError("provider_config_too_large")
     config = json.loads(body)
     if (
-        config.get("version") != 1
+        not isinstance(config, dict)
+        or config.get("version") != 1
         or config.get("free_only") is not True
         or type(config.get("max_attempts")) is not int
         or not 1 <= config["max_attempts"] <= 3
+        or type(config.get("request_timeout_seconds")) not in (int, float)
         or not 1 <= config["request_timeout_seconds"] <= 20
+        or type(config.get("planning_budget_seconds")) not in (int, float)
         or not 1 <= config["planning_budget_seconds"] <= 60
+        or not isinstance(config.get("candidates"), list)
     ):
         raise ValueError("invalid_provider_budget")
     seen = set()
     for candidate in config["candidates"]:
+        if not isinstance(candidate, dict) or set(candidate) != {
+            "id",
+            "provider",
+            "model",
+            "enabled",
+        }:
+            raise ValueError("invalid_provider_candidate")
         identifier = candidate["id"]
+        if not isinstance(identifier, str):
+            raise ValueError("invalid_provider_identifier")
         if (
             identifier in seen
             or identifier not in REGISTRY
@@ -84,7 +97,28 @@ def health_path(root):
 
 def health(root):
     path = health_path(root)
-    state = json.loads(path.read_bytes()) if path.exists() else {}
+    if path.exists():
+        with path.open("rb") as stream:
+            body = stream.read(65537)
+        if len(body) > 65536:
+            raise ValueError("provider_health_too_large")
+        state = json.loads(body)
+    else:
+        state = {}
+    valid_keys = {"candidate:" + identifier for identifier in REGISTRY} | {
+        "provider:" + provider for provider, _ in REGISTRY.values()
+    }
+    if not isinstance(state, dict):
+        raise ValueError("invalid_provider_health")
+    for key, record in state.items():
+        if (
+            key not in valid_keys
+            or not isinstance(record, dict)
+            or type(record.get("not_before")) not in (int, float)
+            or not math.isfinite(record["not_before"])
+            or record["not_before"] < 0
+        ):
+            raise ValueError("invalid_provider_health")
     # Bootstrap the already observed Gemini daily cooldown, without making another API call.
     for report in (root / "runs").glob("agent-eval-*/evaluation.json"):
         data = json.loads(report.read_bytes())

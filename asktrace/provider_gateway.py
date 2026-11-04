@@ -4,10 +4,11 @@ import hashlib
 import json
 import os
 from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+from urllib.request import Request
 
 from asktrace.gemini import ProviderFailure
 from asktrace.gemini import plan as gemini_plan
+from asktrace.http_transport import urlopen
 from asktrace.planning import current_prompt
 from asktrace.rate_limits import hints
 
@@ -87,6 +88,8 @@ def call(root, candidate, question, timeout):
             limits = hints(error.headers, error.read(65537)) if error.code == 429 else {}
         except OSError, AttributeError, TypeError:
             limits = {}
+        finally:
+            error.close()
         raise ProviderFailure(error.code, limits) from None
     except URLError, TimeoutError, ConnectionError:
         raise ProviderFailure(0) from None

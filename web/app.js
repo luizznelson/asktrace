@@ -1,57 +1,1125 @@
 "use strict";
 const $ = (id) => document.getElementById(id);
 const text = {
-  pt: {skip:"Ir para a consulta",local:"PRÉVIA LOCAL",navMethod:"Como funciona",navAsk:"Consultar",eyebrow:"ENGENHARIA DE IA · DADOS PÚBLICOS · POR LUIZ",title:"Uma pergunta.\nUm caminho até a fonte.",lede:"Investigue compras públicas sem perder de vista de onde vieram os números — e o que eles permitem concluir.",start:"Explorar o recorte ↗",scope:"Pregões eletrônicos · Piauí · Publicação de ago–out/2026",snapshot:"RECORTE VERIFICADO",purchases:"compras na base original",queried:"Compras consultadas para contratos",contracts:"Contratos vinculados",excluded:"Exclusão por ano inválido na fonte",scopeNote:"Este é um recorte de pregões. Não representa todos os contratos do Piauí.",manifest:"Ver evidência do recorte ↗",methodLabel:"01 / ENTENDER ANTES DE PERGUNTAR",methodTitle:"O número sozinho não conta a história.",step1:"Um recorte declarado",step1Text:"Modalidade, local e período acompanham a resposta. Assim, uma amostra não vira uma conclusão sobre o estado inteiro.",step2:"Uma consulta de leitura",step2Text:"O planejador escolhe uma consulta permitida. Os valores vêm do PostgreSQL, sem SQL livre gerado pelo modelo.",step3:"Uma trilha para conferir",step3Text:"Cobertura, identificadores, hashes e tentativas de modelo ajudam a verificar a resposta e seus limites.",askLabel:"02 / EXPLORAR COM EVIDÊNCIAS",askTitle:"O que você quer entender?",askIntro:"Consulte o resumo, compare municípios ou rastreie uma compra pelo identificador PNCP.",questionLabel:"Sua pergunta",mode:"Modo de consulta",baseline:"Regras locais · sem API externa",fallback:"IA com contingência · usa suas quotas",privacy:"No modo IA, a pergunta e o catálogo de consultas são enviados aos provedores configurados. A chave e os resultados do banco ficam no servidor local.",submit:"Consultar ↗",limitsLabel:"LEIA O RESULTADO COM CONTEXTO",limitTitle:"Publicado não significa pago.",limitText:"Um contrato publicado não comprova pagamento ou execução financeira. O AskTrace não classifica fraude nem calcula economia entre um contrato e o orçamento inteiro da compra.",unknown:"compras sem valor homologado informado. Ausência não vira zero.",availability:"As quotas gratuitas podem limitar o modo IA. O modo por regras continua disponível enquanto o banco local estiver ativo.",download:"Baixar resposta JSON ↓",responseTitle:"Resposta com contexto",sources:"Fontes e recorte",trace:"Como a resposta foi construída",technical:"Registro técnico completo",endLabel:"03 / O QUE ESTE PROJETO DEMONSTRA",endTitle:"Da integração à resposta verificável.",endText:"Coleta paginada, precisão decimal, carga transacional, acesso somente leitura, avaliação de perguntas e contingência explícita. A interface conecta essas decisões ao resultado que você pode conferir.",repo:"Explorar código, método e evidências no GitHub ↗",footer:"Projeto independente · Fonte: PNCP · Execução local",placeholder:"Ex.: Quantas compras e contratos estão na cobertura?",waiting:"Consultando e verificando as evidências… O modo IA pode levar mais tempo.",ready:"Resposta pronta. Confira abaixo as fontes e os limites.",sessionError:"Não foi possível iniciar a sessão local. Recarregue a página.",busy:"Já há uma consulta em andamento. Aguarde e tente novamente.",error:"Não foi possível concluir. Confira se o banco está ativo e tente novamente.",answered:"Consulta concluída",refused:"Fora das consultas disponíveis",not_found_in_scope:"Não encontrado neste recorte",refusal:"Esta pergunta está fora das consultas disponíveis ou pede uma conclusão que o recorte não sustenta. Tente resumo, municípios ou uma compra com ID PNCP.",notFound:"A compra não foi encontrada neste recorte. Isso não comprova ausência no PNCP.",queryError:"A consulta não pôde ser concluída. O rastro informa o ponto de falha sem expor credenciais.",coverageLabels:["Compras na base","Consultas confirmadas","Contratos vinculados","Sem publicação retornada"],scopeLabel:"Recorte",reportLabel:"Relatório de cobertura",hashLabel:"Hash do relatório",plan:"Plano validado",policy:"Filtro de escopo",tool:"Consulta somente leitura",attempt:"Tentativa de provedor",failure:"Falha",unavailable:"Não informado",summaryText:(c)=>`A base tem ${c.purchases} compras. Há ${c.covered_purchases} consultas de contratos confirmadas e ${c.contracts} contratos vinculados a ${c.purchases_with_contracts} compras. Em ${c.none_returned} compras, não retornou publicação. ${c.unknown_awarded_values} compras têm valor homologado desconhecido.`,municipalityText:"A tabela mostra até 20 grupos de municípios por quantidade de compras. Valores estimados são somados uma vez por compra; valores desconhecidos permanecem nulos.",purchaseText:(r)=>`A compra ${r.control_id} tem ${(r.contracts||[]).length} contratos neste snapshot. Situação da consulta: ${r.outcome||"não coberta"}. Os dados de origem estão disponíveis abaixo.`,caution:"Publicação não comprova pagamento; ausência no portal não comprova ausência de contrato.",examples:["Resumo da cobertura","Compras por município","Rastrear uma compra"],questions:["Qual é o resumo da cobertura?","Quais municípios têm mais compras no recorte?","Rastreie a compra 01612601000118-1-000044/2026."]},
-  en: {skip:"Skip to query",local:"LOCAL PREVIEW",navMethod:"How it works",navAsk:"Ask a question",eyebrow:"AI ENGINEERING · PUBLIC DATA · BY LUIZ",title:"One question.\nA path to the source.",lede:"Explore public procurement while keeping the origin of every number — and the limits of every conclusion — in view.",start:"Explore the dataset ↗",scope:"Electronic auctions · Piauí, Brazil · Published Aug–Oct 2026",snapshot:"VERIFIED SCOPE",purchases:"purchases in the original dataset",queried:"Purchases queried for contracts",contracts:"Linked contracts",excluded:"Excluded due to invalid source year",scopeNote:"This is a selected auction dataset. It does not cover every contract in Piauí.",manifest:"View scope evidence ↗",methodLabel:"01 / UNDERSTAND BEFORE ASKING",methodTitle:"A number alone does not tell the story.",step1:"An explicit scope",step1Text:"Procurement method, location and period accompany the answer. A sample does not become a claim about an entire state.",step2:"A read-only query",step2Text:"The planner selects an allowed query. Values come from PostgreSQL, without unrestricted model-generated SQL.",step3:"A verifiable trail",step3Text:"Coverage, identifiers, hashes and model attempts help you verify the answer and understand its limits.",askLabel:"02 / EXPLORE WITH EVIDENCE",askTitle:"What would you like to understand?",askIntro:"View the summary, compare municipalities or trace a purchase by its PNCP identifier. Questions currently support Portuguese.",questionLabel:"Your question (Portuguese)",mode:"Query mode",baseline:"Local rules · no external API",fallback:"AI with contingency · uses your quotas",privacy:"In AI mode, the question and query catalog are sent to configured providers. Keys and database results stay on the local server.",submit:"Run query ↗",limitsLabel:"READ THE RESULT IN CONTEXT",limitTitle:"Published does not mean paid.",limitText:"A published contract does not establish payment or financial execution. AskTrace does not classify fraud or calculate savings by subtracting one contract from a purchase's full budget.",unknown:"purchases with no awarded amount reported. Unknown is not zero.",availability:"Free quotas may limit AI mode. Rule-based queries remain available while the local database is running.",download:"Download response JSON ↓",responseTitle:"An answer in context",sources:"Sources and scope",trace:"How this answer was built",technical:"Complete technical record",endLabel:"03 / WHAT THIS PROJECT DEMONSTRATES",endTitle:"From integration to a verifiable answer.",endText:"Paginated ingestion, decimal precision, transactional loading, read-only access, question evaluation and explicit contingency. This interface connects engineering decisions to results you can inspect.",repo:"Explore code, methodology and evidence on GitHub ↗",footer:"Independent project · Source: PNCP · Local execution",placeholder:"Example: Qual é o resumo da cobertura?",waiting:"Querying and verifying evidence… AI mode may take longer.",ready:"Answer ready. Review the sources and limitations below.",sessionError:"Could not initialize the local session. Reload the page.",busy:"Another query is running. Wait and try again.",error:"Could not finish the query. Check that the database is running and try again.",answered:"Query completed",refused:"Outside available queries",not_found_in_scope:"Not found in this scope",refusal:"This question is outside the available queries or asks for a conclusion the dataset cannot support. Try a summary, municipality breakdown or explicit PNCP purchase ID.",notFound:"The purchase was not found in this dataset. This does not establish that it is absent from PNCP.",queryError:"The query could not finish. The trace identifies the failure point without exposing credentials.",coverageLabels:["Dataset purchases","Confirmed queries","Linked contracts","No publication returned"],scopeLabel:"Scope",reportLabel:"Coverage report",hashLabel:"Report hash",plan:"Validated plan",policy:"Scope filter",tool:"Read-only query",attempt:"Provider attempt",failure:"Failure",unavailable:"Not reported",summaryText:(c)=>`The dataset contains ${c.purchases} purchases, ${c.covered_purchases} confirmed contract queries and ${c.contracts} contracts linked to ${c.purchases_with_contracts} purchases. No publication was returned for ${c.none_returned} purchases. ${c.unknown_awarded_values} purchases have an unknown awarded amount.`,municipalityText:"The table shows up to 20 municipality groups by purchase count. Estimates are summed once per purchase; unknown amounts remain null.",purchaseText:(r)=>`Purchase ${r.control_id} has ${(r.contracts||[]).length} contracts in this snapshot. Query outcome: ${r.outcome||"not covered"}. Source data is shown below.`,caution:"Publication does not establish payment; no publication returned does not establish absence of a contract.",examples:["Coverage summary","Purchases by municipality","Trace a purchase"],questions:["Qual é o resumo da cobertura?","Quais municípios têm mais compras no recorte?","Rastreie a compra 01612601000118-1-000044/2026."]}
+    pt: {
+        skip: "Ir para a consulta",
+        local: "PRÉVIA LOCAL",
+        navMethod: "Como funciona",
+        navAsk: "Consultar",
+        eyebrow: "ENGENHARIA DE IA · DADOS PÚBLICOS · POR LUIZ",
+        title: "Uma pergunta.\nUm caminho até a fonte.",
+        lede: "Investigue compras públicas sem perder de vista de onde vieram os números — e o que eles permitem concluir.",
+        start: "Explorar o recorte ↗",
+        scope: "Pregões eletrônicos · Piauí · Publicação de ago–out/2026",
+        snapshot: "RECORTE VERIFICADO",
+        purchases: "compras na base original",
+        queried: "Compras consultadas para contratos",
+        contracts: "Contratos vinculados",
+        excluded: "Exclusão por ano inválido na fonte",
+        scopeNote:
+            "Este é um recorte de pregões. Não representa todos os contratos do Piauí.",
+        manifest: "Ver evidência do recorte ↗",
+        methodLabel: "01 / ENTENDER ANTES DE PERGUNTAR",
+        methodTitle: "O número sozinho não conta a história.",
+        step1: "Um recorte declarado",
+        step1Text:
+            "Modalidade, local e período acompanham a resposta. Assim, uma amostra não vira uma conclusão sobre o estado inteiro.",
+        step2: "Uma consulta de leitura",
+        step2Text:
+            "O planejador escolhe uma consulta permitida. Os valores vêm do PostgreSQL, sem SQL livre gerado pelo modelo.",
+        step3: "Uma trilha para conferir",
+        step3Text:
+            "Cobertura, identificadores, hashes e tentativas de modelo ajudam a verificar a resposta e seus limites.",
+        askLabel: "02 / EXPLORAR COM EVIDÊNCIAS",
+        askTitle: "O que você quer entender?",
+        askIntro:
+            "Consulte o resumo, compare municípios ou rastreie uma compra pelo identificador PNCP.",
+        questionLabel: "Sua pergunta",
+        mode: "Modo de consulta",
+        baseline: "Regras locais · sem API externa",
+        fallback: "Assistente IA · com contingência",
+        privacy:
+            "No modo IA, a pergunta e o catálogo de consultas são enviados aos provedores configurados. A chave e os resultados do banco ficam no servidor local.",
+        submit: "Consultar ↗",
+        limitsLabel: "LEIA O RESULTADO COM CONTEXTO",
+        limitTitle: "Publicado não significa pago.",
+        limitText:
+            "Um contrato publicado não comprova pagamento ou execução financeira. O AskTrace não classifica fraude nem calcula economia entre um contrato e o orçamento inteiro da compra.",
+        unknown:
+            "compras sem valor homologado informado. Ausência não vira zero.",
+        availability:
+            "As quotas gratuitas podem limitar o modo IA. O modo por regras continua disponível enquanto o banco local estiver ativo.",
+        download: "Baixar evidências ↓",
+        responseTitle: "Resposta com contexto",
+        sources: "Fontes e cobertura",
+        trace: "Rastro da consulta",
+        technical: "Registro técnico completo",
+        endLabel: "03 / O QUE ESTE PROJETO DEMONSTRA",
+        endTitle: "Da integração à resposta verificável.",
+        endText:
+            "Coleta paginada, precisão decimal, carga transacional, acesso somente leitura, avaliação de perguntas e contingência explícita. A interface conecta essas decisões ao resultado que você pode conferir.",
+        repo: "Explorar código, método e evidências no GitHub ↗",
+        footer: "Projeto independente · Fonte: PNCP · Execução local",
+        placeholder: "Pergunte sobre as compras deste recorte…",
+        waiting:
+            "Consultando e verificando as evidências… O modo IA pode levar mais tempo.",
+        ready: "Resposta pronta. Confira abaixo as fontes e os limites.",
+        sessionError:
+            "Não foi possível iniciar a sessão local. Recarregue a página.",
+        busy: "Já há uma consulta em andamento. Aguarde e tente novamente.",
+        error: "Não foi possível concluir a solicitação. Confira a conexão com a aplicação e tente novamente.",
+        answered: "Consulta concluída",
+        refused: "Fora das consultas disponíveis",
+        not_found_in_scope: "Não encontrado neste recorte",
+        refusal:
+            "Esta pergunta está fora das consultas disponíveis ou pede uma conclusão que o recorte não sustenta. Tente resumo, municípios ou uma compra com ID PNCP.",
+        notFound:
+            "A compra não foi encontrada neste recorte. Isso não comprova ausência no PNCP.",
+        queryError:
+            "A consulta não pôde ser concluída. O rastro informa o ponto de falha sem expor credenciais.",
+        coverageLabels: [
+            "Compras na base",
+            "Consultas confirmadas",
+            "Contratos vinculados",
+            "Sem publicação retornada",
+        ],
+        scopeLabel: "Recorte",
+        reportLabel: "Relatório de cobertura",
+        hashLabel: "Hash do relatório",
+        plan: "Plano validado",
+        policy: "Filtro de escopo",
+        tool: "Consulta somente leitura",
+        attempt: "Tentativa de provedor",
+        failure: "Falha",
+        unavailable: "Não informado",
+        summaryText: (c) =>
+            `A base tem ${c.purchases} compras. Há ${c.covered_purchases} consultas de contratos confirmadas e ${c.contracts} contratos vinculados a ${c.purchases_with_contracts} compras. Em ${c.none_returned} compras, não retornou publicação. ${c.unknown_awarded_values} compras têm valor homologado desconhecido.`,
+        municipalityText:
+            "A tabela mostra até 20 grupos de municípios por quantidade de compras. Valores estimados são somados uma vez por compra; valores desconhecidos permanecem nulos.",
+        purchaseText: (r) =>
+            `A compra ${r.control_id} tem ${(r.contracts || []).length} contratos neste snapshot. Situação da consulta: ${r.outcome || "não coberta"}. Os dados de origem estão disponíveis abaixo.`,
+        caution:
+            "Publicação não comprova pagamento; ausência no portal não comprova ausência de contrato.",
+        examples: [
+            "Resumo da cobertura",
+            "Compras por município",
+            "Rastrear uma compra",
+        ],
+        questions: [
+            "Qual é o resumo da cobertura?",
+            "Quais municípios têm mais compras no recorte?",
+            "Rastreie a compra 01612601000118-1-000044/2026.",
+        ],
+        assistantBrand: "ASSISTENTE DE DADOS PÚBLICOS",
+        newSession: "Nova exploração",
+        sessionLabel: "NESTA SESSÃO",
+        historyEmpty: "Suas perguntas aparecem aqui.",
+        projectCode: "Código e decisões de engenharia",
+        portfolio: "Portfólio · Engenharia de IA",
+        workspaceName: "Área de investigação",
+        workspaceData: "Compras públicas",
+        scopeShort: "Piauí · Pregões eletrônicos",
+        dateShort: "Ago — Out 2026",
+        scopeMore: "O que há nesta base? ⓘ",
+        scopeTitle: "Dados públicos com um recorte explícito.",
+        scopeDetail:
+            "Publicação de ago–out/2026, modalidade 6, unidades do Piauí. Uma compra tem ano inválido na fonte e foi excluída apenas da consulta de contratos.",
+        welcomeLabel: "DADOS PÚBLICOS. PERGUNTAS MELHORES.",
+        assistantTitle: "O que vamos descobrir\nnos dados de compras?",
+        assistantLede:
+            "O AskTrace transforma registros do Portal Nacional de Contratações Públicas (PNCP) em respostas que você pode conferir. Descubra o volume de compras, compare municípios ou encontre os contratos ligados a uma compra.",
+        statPurchases: "compras na base",
+        statContracts: "contratos vinculados",
+        statCoverage: "compras com consulta confirmada",
+        exploreLabel: "COMECE POR UMA PERGUNTA",
+        suggestionHint: "Selecione, personalize e envie ↘",
+        welcomeLimit:
+            "Use para explorar publicações e conferir fontes. Contratos não comprovam pagamentos; valores ausentes não viram zero.",
+        yourQuestion: "SUA PERGUNTA",
+        thinking: "Conferindo sua pergunta e as evidências",
+        composerHint:
+            "Enter para enviar · Shift + Enter para nova linha · Histórico mantido nesta sessão da aba",
+        privacyLabel: "Como sua pergunta é usada",
+        englishNote:
+            "Interface em português e inglês. As perguntas são suportadas em português.",
+        independentNote:
+            "O histórico sobrevive à atualização da página nesta aba. Cada pergunta é consultada de forma independente; escreva o assunto e o identificador quando necessário.",
+        portfolioStory: "A engenharia por trás da resposta",
+        portfolioStorySub: "Para quem está conhecendo meu portfólio",
+        story1: "A fonte antes da resposta",
+        story1text:
+            "Coleta paginada e hashes preservam a origem. Valores ausentes continuam desconhecidos, sem virar zero.",
+        story2: "IA com limites claros",
+        story2text:
+            "O modelo seleciona uma consulta permitida. Credencial somente leitura, contingência e rastro mantêm o fluxo verificável.",
+        story3: "Resultados que você confere",
+        story3text:
+            "Recorte, cobertura e evidências acompanham cada resposta. As avaliações e suas limitações estão no repositório.",
+        storyRepo: "Ver código e evidências no GitHub ↗",
+        footerShort: "Fonte: PNCP · Projeto independente",
+        footerLocal: "Ambiente local · Sem dados em tempo real",
+        cardTitles: [
+            "Entender o panorama",
+            "Explorar os municípios",
+            "Seguir uma compra",
+        ],
+        cardDescriptions: [
+            "Quantas compras e contratos estão na base?",
+            "Onde se concentram as compras do recorte?",
+            "Veja contratos, valores e origem de um registro.",
+        ],
+        followupLabel: "Continue explorando",
+        localExecution: "Regras locais",
+        localInsight:
+            "Os números vêm do recorte consultado. Abra as fontes para conferir origem e cobertura.",
+        refusalInsight:
+            "Posso ajudar com contagens, municípios ou uma compra com identificador. Escolha uma sugestão para reformular sua pergunta.",
+        guideLabel: "EM TRÊS PASSOS",
+        guide1: "1. Escolha a base",
+        guide1text:
+            "Confira o período e a cobertura de contratos antes de interpretar os números.",
+        guide2: "2. Faça uma pergunta concreta",
+        guide2text:
+            "Comece pelo panorama. Depois explore municípios ou use um ID de compra para rastrear a origem.",
+        guide3: "3. Confira a resposta",
+        guide3text:
+            "Abra as fontes e o rastro. Você vê o que foi consultado e o que ainda é desconhecido.",
+        datasetLabel: "Base consultada",
+        coverageWarning:
+            "A cobertura de contratos pode ser parcial. Compras não consultadas não significam compras sem contrato.",
+        historyPrivacy:
+            "Perguntas e respostas ficam no sessionStorage desta aba, sem ir ao servidor de histórico. Nova exploração limpa esses registros. Evite inserir dados pessoais.",
+        storageWarning:
+            "O navegador não permitiu guardar o histórico. Ele ficará apenas em memória enquanto a página estiver aberta.",
+        pendingLabel: "Compras ainda sem consulta de contratos",
+        errorBadge: "Consulta indisponível",
+        aiUnavailable: "A IA está temporariamente indisponível",
+        aiExplanation:
+            "Nenhum modelo de IA pôde planejar esta pergunta agora. Os provedores estão em espera ou indisponíveis. Esta tentativa não consultou o banco, portanto não indica uma falha nos dados.",
+        localRetry: "Consultar esta pergunta por regras locais →",
+        localRetryHint:
+            "Você pode tentar a mesma pergunta sem usar API externa. Esse modo atende resumo, municípios e rastreio por ID; o banco local precisa estar ativo.",
+        nextRetry: "Próxima tentativa de candidato após",
+        retryExpired:
+            "O período de espera registrado já passou. Você pode tentar a IA novamente, sujeito à disponibilidade da API.",
+        retryDisclaimer:
+            "Esse horário é uma espera registrada, não garantia de retorno do serviço.",
+        sourcesMissing: "Nenhuma fonte foi consultada nesta tentativa.",
+        notCompleted:
+            "A consulta não foi concluída. Veja abaixo as opções para continuar.",
+    },
+    en: {
+        skip: "Skip to query",
+        local: "LOCAL PREVIEW",
+        navMethod: "How it works",
+        navAsk: "Ask a question",
+        eyebrow: "AI ENGINEERING · PUBLIC DATA · BY LUIZ",
+        title: "One question.\nA path to the source.",
+        lede: "Explore public procurement while keeping the origin of every number — and the limits of every conclusion — in view.",
+        start: "Explore the dataset ↗",
+        scope: "Electronic auctions · Piauí, Brazil · Published Aug–Oct 2026",
+        snapshot: "VERIFIED SCOPE",
+        purchases: "purchases in the original dataset",
+        queried: "Purchases queried for contracts",
+        contracts: "Linked contracts",
+        excluded: "Excluded due to invalid source year",
+        scopeNote:
+            "This is a selected auction dataset. It does not cover every contract in Piauí.",
+        manifest: "View scope evidence ↗",
+        methodLabel: "01 / UNDERSTAND BEFORE ASKING",
+        methodTitle: "A number alone does not tell the story.",
+        step1: "An explicit scope",
+        step1Text:
+            "Procurement method, location and period accompany the answer. A sample does not become a claim about an entire state.",
+        step2: "A read-only query",
+        step2Text:
+            "The planner selects an allowed query. Values come from PostgreSQL, without unrestricted model-generated SQL.",
+        step3: "A verifiable trail",
+        step3Text:
+            "Coverage, identifiers, hashes and model attempts help you verify the answer and understand its limits.",
+        askLabel: "02 / EXPLORE WITH EVIDENCE",
+        askTitle: "What would you like to understand?",
+        askIntro:
+            "View the summary, compare municipalities or trace a purchase by its PNCP identifier. Questions currently support Portuguese.",
+        questionLabel: "Your question (Portuguese)",
+        mode: "Query mode",
+        baseline: "Local rules · no external API",
+        fallback: "AI assistant · with contingency",
+        privacy:
+            "In AI mode, the question and query catalog are sent to configured providers. Keys and database results stay on the local server.",
+        submit: "Run query ↗",
+        limitsLabel: "READ THE RESULT IN CONTEXT",
+        limitTitle: "Published does not mean paid.",
+        limitText:
+            "A published contract does not establish payment or financial execution. AskTrace does not classify fraud or calculate savings by subtracting one contract from a purchase's full budget.",
+        unknown:
+            "purchases with no awarded amount reported. Unknown is not zero.",
+        availability:
+            "Free quotas may limit AI mode. Rule-based queries remain available while the local database is running.",
+        download: "Download evidence ↓",
+        responseTitle: "An answer in context",
+        sources: "Sources and coverage",
+        trace: "Query trace",
+        technical: "Complete technical record",
+        endLabel: "03 / WHAT THIS PROJECT DEMONSTRATES",
+        endTitle: "From integration to a verifiable answer.",
+        endText:
+            "Paginated ingestion, decimal precision, transactional loading, read-only access, question evaluation and explicit contingency. This interface connects engineering decisions to results you can inspect.",
+        repo: "Explore code, methodology and evidence on GitHub ↗",
+        footer: "Independent project · Source: PNCP · Local execution",
+        placeholder: "Ask about purchases in this dataset (Portuguese)…",
+        waiting: "Querying and verifying evidence… AI mode may take longer.",
+        ready: "Answer ready. Review the sources and limitations below.",
+        sessionError:
+            "Could not initialize the local session. Reload the page.",
+        busy: "Another query is running. Wait and try again.",
+        error: "Could not complete the request. Check the application connection and try again.",
+        answered: "Query completed",
+        refused: "Outside available queries",
+        not_found_in_scope: "Not found in this scope",
+        refusal:
+            "This question is outside the available queries or asks for a conclusion the dataset cannot support. Try a summary, municipality breakdown or explicit PNCP purchase ID.",
+        notFound:
+            "The purchase was not found in this dataset. This does not establish that it is absent from PNCP.",
+        queryError:
+            "The query could not finish. The trace identifies the failure point without exposing credentials.",
+        coverageLabels: [
+            "Dataset purchases",
+            "Confirmed queries",
+            "Linked contracts",
+            "No publication returned",
+        ],
+        scopeLabel: "Scope",
+        reportLabel: "Coverage report",
+        hashLabel: "Report hash",
+        plan: "Validated plan",
+        policy: "Scope filter",
+        tool: "Read-only query",
+        attempt: "Provider attempt",
+        failure: "Failure",
+        unavailable: "Not reported",
+        summaryText: (c) =>
+            `The dataset contains ${c.purchases} purchases, ${c.covered_purchases} confirmed contract queries and ${c.contracts} contracts linked to ${c.purchases_with_contracts} purchases. No publication was returned for ${c.none_returned} purchases. ${c.unknown_awarded_values} purchases have an unknown awarded amount.`,
+        municipalityText:
+            "The table shows up to 20 municipality groups by purchase count. Estimates are summed once per purchase; unknown amounts remain null.",
+        purchaseText: (r) =>
+            `Purchase ${r.control_id} has ${(r.contracts || []).length} contracts in this snapshot. Query outcome: ${r.outcome || "not covered"}. Source data is shown below.`,
+        caution:
+            "Publication does not establish payment; no publication returned does not establish absence of a contract.",
+        examples: [
+            "Coverage summary",
+            "Purchases by municipality",
+            "Trace a purchase",
+        ],
+        questions: [
+            "Qual é o resumo da cobertura?",
+            "Quais municípios têm mais compras no recorte?",
+            "Rastreie a compra 01612601000118-1-000044/2026.",
+        ],
+        assistantBrand: "PUBLIC DATA ASSISTANT",
+        newSession: "New exploration",
+        sessionLabel: "THIS SESSION",
+        historyEmpty: "Your questions will appear here.",
+        projectCode: "Code and engineering decisions",
+        portfolio: "Portfolio · AI Engineering",
+        workspaceName: "Investigation workspace",
+        workspaceData: "Public procurement",
+        scopeShort: "Piauí · Electronic auctions",
+        dateShort: "Aug — Oct 2026",
+        scopeMore: "What is in this dataset? ⓘ",
+        scopeTitle: "Public data with an explicit scope.",
+        scopeDetail:
+            "Published Aug–Oct 2026, method 6, units in Piauí. One purchase has an invalid source year and was excluded only from contract queries.",
+        welcomeLabel: "PUBLIC DATA. BETTER QUESTIONS.",
+        assistantTitle: "What will we discover\nin procurement data?",
+        assistantLede:
+            "AskTrace turns records from Brazil’s National Public Procurement Portal (PNCP) into answers you can verify. Explore purchase volumes, compare municipalities or find contracts linked to a purchase.",
+        statPurchases: "dataset purchases",
+        statContracts: "linked contracts",
+        statCoverage: "purchases with confirmed queries",
+        exploreLabel: "START WITH A QUESTION",
+        suggestionHint: "Select, customize and send ↘",
+        welcomeLimit:
+            "Explore publications and verify sources. Contracts do not establish payment; missing amounts are not zero.",
+        yourQuestion: "YOUR QUESTION",
+        thinking: "Checking your question and the evidence",
+        composerHint:
+            "Enter to send · Shift + Enter for a new line · History retained for this tab session",
+        privacyLabel: "How your question is used",
+        englishNote:
+            "Portuguese and English interface. Business questions are supported in Portuguese.",
+        independentNote:
+            "History survives a reload in this tab. Each question is queried independently; include the subject and purchase identifier when needed.",
+        portfolioStory: "The engineering behind the answer",
+        portfolioStorySub: "For visitors exploring my portfolio",
+        story1: "The source before the answer",
+        story1text:
+            "Paginated ingestion and hashes preserve provenance. Missing amounts remain unknown instead of becoming zero.",
+        story2: "AI with clear boundaries",
+        story2text:
+            "The model selects an allowed query. Read-only access, contingency and traces keep the flow verifiable.",
+        story3: "Results you can check",
+        story3text:
+            "Scope, coverage and evidence accompany every answer. Evaluations and their limitations live in the repository.",
+        storyRepo: "View code and evidence on GitHub ↗",
+        footerShort: "Source: PNCP · Independent project",
+        footerLocal: "Local environment · No real-time data",
+        cardTitles: [
+            "Understand the overview",
+            "Explore municipalities",
+            "Follow a purchase",
+        ],
+        cardDescriptions: [
+            "How many purchases and contracts are in the dataset?",
+            "Where are purchases concentrated in this scope?",
+            "See contracts, amounts and a record's provenance.",
+        ],
+        followupLabel: "Keep exploring",
+        localExecution: "Local rules",
+        localInsight:
+            "These numbers come from the queried dataset. Open the sources to verify provenance and coverage.",
+        refusalInsight:
+            "I can help with counts, municipality groups or a purchase identifier. Choose a suggestion to rephrase your question.",
+        guideLabel: "THREE STEPS",
+        guide1: "1. Choose a dataset",
+        guide1text:
+            "Check the period and contract coverage before interpreting the numbers.",
+        guide2: "2. Ask a concrete question",
+        guide2text:
+            "Start with the overview. Then explore municipalities or use a purchase ID to trace provenance.",
+        guide3: "3. Check the answer",
+        guide3text:
+            "Open sources and trace. You see what was queried and what remains unknown.",
+        datasetLabel: "Selected dataset",
+        coverageWarning:
+            "Contract coverage may be partial. Unqueried purchases are not purchases without contracts.",
+        historyPrivacy:
+            "Questions and answers are stored in this tab’s sessionStorage, without a server-side history. New exploration clears them. Avoid personal information.",
+        storageWarning:
+            "The browser could not save history. It will remain in memory while this page is open.",
+        pendingLabel: "Purchases not yet queried for contracts",
+        errorBadge: "Query unavailable",
+        aiUnavailable: "AI is temporarily unavailable",
+        aiExplanation:
+            "No AI model could plan this question right now. Providers are cooling down or unavailable. This attempt did not query the database, so it does not indicate a data failure.",
+        localRetry: "Try this question with local rules →",
+        localRetryHint:
+            "You can try the same question without an external API. This mode supports summaries, municipalities and tracing an explicit ID; the local database must be running.",
+        nextRetry: "Next candidate attempt after",
+        retryExpired:
+            "The recorded cooldown has elapsed. You may try AI again, subject to API availability.",
+        retryDisclaimer:
+            "This is a recorded wait, not a guaranteed service recovery time.",
+        sourcesMissing: "No sources were queried in this attempt.",
+        notCompleted:
+            "The query did not complete. See the options below to continue.",
+    },
 };
-const columns = {municipality_ibge:["Código IBGE","IBGE code"],municipality_name:["Município","Municipality"],purchases:["Compras","Purchases"],unknown_estimates:["Estimativas ausentes","Unknown estimates"],estimated_value:["Valor estimado (R$)","Estimated value (BRL)"],unknown_awarded_values:["Homologados ausentes","Unknown awarded amounts"],control_id:["ID da compra","Purchase ID"],org_name:["Órgão","Organization"],publication_date:["Publicação","Publication"],awarded_value:["Valor homologado (R$)","Awarded value (BRL)"],outcome:["Resultado da consulta","Query outcome"],contracts:["Contratos vinculados","Linked contracts"],source_body_sha256:["Hash da página original","Original page hash"],source_record_index:["Índice na fonte","Source index"],contract_run_id:["Execução de contratos","Contract snapshot"],contract_pages_sha256:["Hash composto das páginas","Composite page hash"]};
-let lang = "pt", token = null, latest = null, working = false;
-function node(tag,value,cls){const el=document.createElement(tag);if(value!==undefined)el.textContent=value;if(cls)el.className=cls;return el;}
-function language(){const t=text[lang];document.documentElement.lang=lang==="pt"?"pt-BR":"en";document.querySelectorAll("[data-i]").forEach(el=>{el.textContent=t[el.dataset.i]||el.dataset.i;});document.querySelector("h1").style.whiteSpace="pre-line";$("language").textContent=lang==="pt"?"EN":"PT";$("language").setAttribute("aria-label",lang==="pt"?"Switch to English":"Mudar para português");$("question").placeholder=t.placeholder;$("examples").replaceChildren();t.examples.forEach((label,i)=>{const button=node("button",label);button.type="button";button.addEventListener("click",()=>{$("question").value=t.questions[i];count();$("question").focus();});$("examples").append(button);});if(latest)render(latest);if(working)$("status").textContent=t.waiting;}
-function count(){$("count").textContent=`${$("question").value.length} / 1000`;}
-function value(v){if(v===null||v===undefined)return text[lang].unavailable;if(typeof v==="object")return JSON.stringify(v,null,2);return String(v);}
-function render(data){const t=text[lang];$("response").hidden=false;$("badge").textContent=t[data.status]||data.status;const e=data.evidence;let content=t.queryError;if(data.status==="refused")content=t.refusal;else if(data.status==="not_found_in_scope")content=t.notFound;else if(e){if(e.question==="summary")content=t.summaryText(e.coverage);else if(e.question==="municipalities")content=t.municipalityText;else content=t.purchaseText(e.result[0]);content+=" "+t.caution;}$("answer").textContent=content;$("coverage").replaceChildren();$("sources").replaceChildren();$("result-table").replaceChildren();if(e){const c=e.coverage;[c.purchases,c.covered_purchases,c.contracts,c.none_returned].forEach((n,i)=>{const item=node("div");item.append(node("strong",Number(n).toLocaleString(lang==="pt"?"pt-BR":"en")),node("span",t.coverageLabels[i]));$("coverage").append(item);});const s=e.scope;const scope=node("p");scope.append(node("strong",t.scopeLabel+": "),document.createTextNode(`${s.uf} · ${s.modality} · ${s.date_start} → ${s.date_end}`));$("sources").append(scope);for(const [label,v] of [[t.reportLabel,e.sources.coverage_report],[t.hashLabel,e.coverage_report_sha256]]){const p=node("p");p.append(node("strong",label+": "),node("span",v));$("sources").append(p);}const link=node("a",t.manifest);link.href="/api/evidence";link.target="_blank";link.rel="noopener";$("sources").append(link);if(e.result.length&&e.question!=="summary"){const table=node("table");if(e.question==="municipalities"){const head=node("tr");Object.keys(e.result[0]).forEach(key=>head.append(node("th",columns[key]?.[lang==="pt"?0:1]||key)));const thead=node("thead");thead.append(head);table.append(thead);const body=node("tbody");e.result.forEach(row=>{const tr=node("tr");Object.values(row).forEach(v=>tr.append(node("td",value(v))));body.append(tr);});table.append(body);}else{const body=node("tbody");Object.entries(e.result[0]).forEach(([key,v])=>{const row=node("tr");row.append(node("th",columns[key]?.[lang==="pt"?0:1]||key),node("td",value(v)));body.append(row);});table.append(body);}$("result-table").append(table);}}
-$("trace").replaceChildren();(data.trace||[]).forEach(step=>{const names={plan:t.plan,policy:t.policy,read_only_query:t.tool,provider_attempt:t.attempt,failure:t.failure};const li=node("li");li.append(node("strong",(names[step.step]||step.step)+": "));let detail=step.plan?`${step.plan.action}${step.plan.purchase_id?" · "+step.plan.purchase_id:""}`:[step.candidate,step.model,step.outcome,step.reason,step.http_status,step.error_type,step.provider_http_status].filter(v=>v!==undefined&&v!==null).join(" · ");li.append(document.createTextNode(detail));$("trace").append(li);});$("technical").textContent=JSON.stringify(data,null,2);}
-Object.assign(text.pt,{assistantBrand:"ASSISTENTE DE DADOS PÚBLICOS",newSession:"Nova exploração",sessionLabel:"NESTA SESSÃO",historyEmpty:"Suas perguntas aparecem aqui.",projectCode:"Código e decisões de engenharia",portfolio:"Portfólio · Engenharia de IA",workspaceName:"Área de investigação",workspaceData:"Compras públicas",scopeShort:"Piauí · Pregões eletrônicos",dateShort:"Ago — Out 2026",scopeMore:"Sobre esta base ⓘ",scopeTitle:"Um recorte definido, não o estado inteiro.",scopeDetail:"Publicação de ago–out/2026, modalidade 6, unidades do Piauí. Uma compra tem ano inválido na fonte e foi excluída apenas da consulta de contratos.",welcomeLabel:"DADOS PÚBLICOS. PERGUNTAS MELHORES.",assistantTitle:"O que vamos descobrir\nnos dados de compras?",assistantLede:"Eu ajudo você a explorar o recorte, comparar municípios e seguir o caminho de uma compra até os contratos publicados.",statPurchases:"compras na base",statContracts:"contratos vinculados",statCoverage:"compras com consulta confirmada",exploreLabel:"COMECE POR UMA PERGUNTA",suggestionHint:"Selecione, personalize e envie ↘",welcomeLimit:"Eu consulto dados publicados. Não comprovo pagamentos nem classifico irregularidades.",yourQuestion:"SUA PERGUNTA",thinking:"Conferindo sua pergunta e as evidências",composerHint:"Enter para enviar · Shift + Enter para nova linha · Histórico apenas nesta aba",privacyLabel:"Como sua pergunta é usada",englishNote:"Interface em português e inglês. As perguntas são suportadas em português.",independentNote:"Cada pergunta é independente; o histórico organiza a sessão, sem memória de contexto no modelo.",portfolioStory:"A engenharia por trás da resposta",portfolioStorySub:"Para quem está conhecendo meu portfólio",story1:"A fonte antes da resposta",story1text:"Coleta paginada e hashes preservam a origem. Valores ausentes continuam desconhecidos, sem virar zero.",story2:"IA com limites claros",story2text:"O modelo seleciona uma consulta permitida. Credencial somente leitura, contingência e rastro mantêm o fluxo verificável.",story3:"Resultados que você confere",story3text:"Recorte, cobertura e evidências acompanham cada resposta. As avaliações e suas limitações estão no repositório.",storyRepo:"Ver código e evidências no GitHub ↗",footerShort:"Fonte: PNCP · Projeto independente",footerLocal:"Ambiente local · Sem dados em tempo real",placeholder:"Pergunte sobre as compras deste recorte…",fallback:"Assistente IA · com contingência",download:"Baixar evidências ↓",trace:"Rastro da consulta",sources:"Fontes e cobertura",cardTitles:["Entender o panorama","Explorar os municípios","Seguir uma compra"],cardDescriptions:["Quantas compras e contratos estão na base?","Onde se concentram as compras do recorte?","Veja contratos, valores e origem de um registro."],followupLabel:"Continue explorando",localExecution:"Regras locais",localInsight:"Os números vêm do recorte consultado. Abra as fontes para conferir origem e cobertura.",refusalInsight:"Posso ajudar com contagens, municípios ou uma compra com identificador. Escolha uma sugestão para reformular sua pergunta."});
-Object.assign(text.en,{assistantBrand:"PUBLIC DATA ASSISTANT",newSession:"New exploration",sessionLabel:"THIS SESSION",historyEmpty:"Your questions will appear here.",projectCode:"Code and engineering decisions",portfolio:"Portfolio · AI Engineering",workspaceName:"Investigation workspace",workspaceData:"Public procurement",scopeShort:"Piauí · Electronic auctions",dateShort:"Aug — Oct 2026",scopeMore:"About this dataset ⓘ",scopeTitle:"A defined scope, not the entire state.",scopeDetail:"Published Aug–Oct 2026, method 6, units in Piauí. One purchase has an invalid source year and was excluded only from contract queries.",welcomeLabel:"PUBLIC DATA. BETTER QUESTIONS.",assistantTitle:"What will we discover\nin procurement data?",assistantLede:"I help you explore the dataset, compare municipalities and follow a purchase through to its published contracts.",statPurchases:"dataset purchases",statContracts:"linked contracts",statCoverage:"purchases with confirmed queries",exploreLabel:"START WITH A QUESTION",suggestionHint:"Select, customize and send ↘",welcomeLimit:"I query published records. I do not establish payments or classify irregularities.",yourQuestion:"YOUR QUESTION",thinking:"Checking your question and the evidence",composerHint:"Enter to send · Shift + Enter for a new line · History in this tab only",privacyLabel:"How your question is used",englishNote:"Portuguese and English interface. Business questions are supported in Portuguese.",independentNote:"Each question is independent; history organizes the session without model conversation memory.",portfolioStory:"The engineering behind the answer",portfolioStorySub:"For visitors exploring my portfolio",story1:"The source before the answer",story1text:"Paginated ingestion and hashes preserve provenance. Missing amounts remain unknown instead of becoming zero.",story2:"AI with clear boundaries",story2text:"The model selects an allowed query. Read-only access, contingency and traces keep the flow verifiable.",story3:"Results you can check",story3text:"Scope, coverage and evidence accompany every answer. Evaluations and their limitations live in the repository.",storyRepo:"View code and evidence on GitHub ↗",footerShort:"Source: PNCP · Independent project",footerLocal:"Local environment · No real-time data",placeholder:"Ask about purchases in this dataset (Portuguese)…",fallback:"AI assistant · with contingency",download:"Download evidence ↓",trace:"Query trace",sources:"Sources and coverage",cardTitles:["Understand the overview","Explore municipalities","Follow a purchase"],cardDescriptions:["How many purchases and contracts are in the dataset?","Where are purchases concentrated in this scope?","See contracts, amounts and a record's provenance."],followupLabel:"Keep exploring",localExecution:"Local rules",localInsight:"These numbers come from the queried dataset. Open the sources to verify provenance and coverage.",refusalInsight:"I can help with counts, municipality groups or a purchase identifier. Choose a suggestion to rephrase your question."});
-let sessionHistory=[],activeHistory=null;
-const originalLanguage=language,originalRender=render;
-function fillQuestion(question){$("question").value=question;count();$("question").focus();$("question").scrollIntoView({block:"center",behavior:"smooth"});}
-function discovery(){const t=text[lang];$("discovery").replaceChildren();["▤","⌁","◎"].forEach((icon,i)=>{const button=node("button");button.type="button";button.append(node("span",icon,"card-icon"),node("strong",t.cardTitles[i]),node("span",t.cardDescriptions[i],"card-description"),node("span","↗","card-arrow"));button.addEventListener("click",()=>fillQuestion(t.questions[i]));$("discovery").append(button);});}
-function historyView(){$("history").replaceChildren();if(!sessionHistory.some(item=>item.dataset===selectedDataset)){$("history").append(node("p",text[lang].historyEmpty));return;}sessionHistory.filter(item=>item.dataset===selectedDataset).slice().reverse().forEach(item=>{const button=node("button",item.data.question);button.type="button";button.title=item.data.question;if(item.id===activeHistory)button.classList.add("active");button.addEventListener("click",()=>{if(working)return;activeHistory=item.id;latest=item.data;render(latest);historyView();});$("history").append(button);});}
-language=function(){originalLanguage();discovery();historyView();$("submit").setAttribute("aria-label",lang==="pt"?"Enviar pergunta":"Send question");$("mobile-reset").setAttribute("aria-label",text[lang].newSession);};
-render=function(data){originalRender(data);document.body.classList.add("has-result");$("conversation").hidden=false;$("thinking").hidden=true;$("asked-question").textContent=data.question;const selected=data.selected_provider;$("execution-meta").textContent=selected?selected.model:(data.provider==="baseline"?text[lang].localExecution:data.provider);$("insight").hidden=false;let insight=data.status==="refused"?text[lang].refusalInsight:text[lang].localInsight;const coverage=data.evidence?.coverage;if(data.status==="error")insight=text[lang].queryError;else if(coverage){const pending=coverage.purchases-coverage.covered_purchases;if(lang==="pt")insight=`${coverage.covered_purchases} de ${coverage.purchases} compras têm consulta de contratos confirmada. ${pending} compra(s) não estão nessa cobertura; confira a exclusão por ano inválido no manifesto. ${coverage.unknown_awarded_values} valores homologados continuam desconhecidos.`;else insight=`${coverage.covered_purchases} of ${coverage.purchases} purchases have confirmed contract queries. ${pending} purchase(s) are outside this coverage; check the invalid-year exclusion in the manifest. ${coverage.unknown_awarded_values} awarded amounts remain unknown.`;}$("insight").textContent=insight;$("next-questions").replaceChildren();const t=text[lang];const action=data.evidence?.question;const indices=action==="summary"?[1,2]:action==="municipalities"?[2,0]:[0,1];indices.forEach(i=>{const button=node("button",t.examples[i]+" ↗");button.type="button";button.addEventListener("click",()=>fillQuestion(t.questions[i]));$("next-questions").append(button);});};
-$("question").addEventListener("keydown",event=>{if(event.key==="Enter"&&!event.shiftKey&&!event.isComposing){event.preventDefault();if(!working&&token&&$("question").value.trim())$("ask-form").requestSubmit();}});
-$("new-session").addEventListener("click",()=>{if(working)return;sessionHistory=[];activeHistory=null;latest=null;$("question").value="";count();$("status").textContent="";$("response").hidden=true;$("conversation").hidden=true;document.body.classList.remove("has-result");historyView();$("question").focus();});
+const columns = {
+    municipality_ibge: ["Código IBGE", "IBGE code"],
+    municipality_name: ["Município", "Municipality"],
+    purchases: ["Compras", "Purchases"],
+    unknown_estimates: ["Estimativas ausentes", "Unknown estimates"],
+    estimated_value: ["Valor estimado (R$)", "Estimated value (BRL)"],
+    unknown_awarded_values: ["Homologados ausentes", "Unknown awarded amounts"],
+    control_id: ["ID da compra", "Purchase ID"],
+    org_name: ["Órgão", "Organization"],
+    publication_date: ["Publicação", "Publication"],
+    awarded_value: ["Valor homologado (R$)", "Awarded value (BRL)"],
+    outcome: ["Resultado da consulta", "Query outcome"],
+    contracts: ["Contratos vinculados", "Linked contracts"],
+    source_body_sha256: ["Hash da página original", "Original page hash"],
+    source_record_index: ["Índice na fonte", "Source index"],
+    contract_run_id: ["Execução de contratos", "Contract snapshot"],
+    contract_pages_sha256: ["Hash composto das páginas", "Composite page hash"],
+};
+let lang = "pt",
+    token = null,
+    latest = null,
+    working = false;
+function node(tag, value, cls) {
+    const el = document.createElement(tag);
+    if (value !== undefined) el.textContent = value;
+    if (cls) el.className = cls;
+    return el;
+}
+function languageBase() {
+    const t = text[lang];
+    document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
+    document.querySelectorAll("[data-i]").forEach((el) => {
+        el.textContent = t[el.dataset.i] || el.dataset.i;
+    });
+    document.querySelector("h1").style.whiteSpace = "pre-line";
+    $("language").textContent = lang === "pt" ? "EN" : "PT";
+    $("language").setAttribute(
+        "aria-label",
+        lang === "pt" ? "Switch to English" : "Mudar para português",
+    );
+    $("question").placeholder = t.placeholder;
+    $("examples").replaceChildren();
+    t.examples.forEach((label, i) => {
+        const button = node("button", label);
+        button.type = "button";
+        button.addEventListener("click", () => {
+            $("question").value = t.questions[i];
+            count();
+            $("question").focus();
+        });
+        $("examples").append(button);
+    });
+    if (latest) render(latest);
+    if (working) $("status").textContent = t.waiting;
+}
+function count() {
+    $("count").textContent = `${$("question").value.length} / 1000`;
+}
+function value(v) {
+    if (v === null || v === undefined) return text[lang].unavailable;
+    if (typeof v === "object") return JSON.stringify(v, null, 2);
+    return String(v);
+}
+function renderBase(data) {
+    const t = text[lang];
+    $("response").hidden = false;
+    $("badge").textContent = t[data.status] || data.status;
+    const e = data.evidence;
+    let content = t.queryError;
+    if (data.status === "refused") content = t.refusal;
+    else if (data.status === "not_found_in_scope") content = t.notFound;
+    else if (e) {
+        if (e.question === "summary") content = t.summaryText(e.coverage);
+        else if (e.question === "municipalities") content = t.municipalityText;
+        else content = t.purchaseText(e.result[0]);
+        content += " " + t.caution;
+    }
+    $("answer").textContent = content;
+    $("coverage").replaceChildren();
+    $("sources").replaceChildren();
+    $("result-table").replaceChildren();
+    if (e) {
+        const c = e.coverage;
+        [
+            c.purchases,
+            c.covered_purchases,
+            c.contracts,
+            c.none_returned,
+        ].forEach((n, i) => {
+            const item = node("div");
+            item.append(
+                node(
+                    "strong",
+                    Number(n).toLocaleString(lang === "pt" ? "pt-BR" : "en"),
+                ),
+                node("span", t.coverageLabels[i]),
+            );
+            $("coverage").append(item);
+        });
+        const s = e.scope;
+        const scope = node("p");
+        scope.append(
+            node("strong", t.scopeLabel + ": "),
+            document.createTextNode(
+                `${s.uf} · ${s.modality} · ${s.date_start} → ${s.date_end}`,
+            ),
+        );
+        $("sources").append(scope);
+        for (const [label, v] of [
+            [t.reportLabel, e.sources.coverage_report],
+            [t.hashLabel, e.coverage_report_sha256],
+        ]) {
+            const p = node("p");
+            p.append(node("strong", label + ": "), node("span", v));
+            $("sources").append(p);
+        }
+        const link = node("a", t.manifest);
+        link.href =
+            "/api/evidence?dataset=" + encodeURIComponent(selectedDataset);
+        link.target = "_blank";
+        link.rel = "noopener";
+        $("sources").append(link);
+        if (e.result.length && e.question !== "summary") {
+            const table = node("table");
+            if (e.question === "municipalities") {
+                const head = node("tr");
+                Object.keys(e.result[0]).forEach((key) =>
+                    head.append(
+                        node(
+                            "th",
+                            columns[key]?.[lang === "pt" ? 0 : 1] || key,
+                        ),
+                    ),
+                );
+                const thead = node("thead");
+                thead.append(head);
+                table.append(thead);
+                const body = node("tbody");
+                e.result.forEach((row) => {
+                    const tr = node("tr");
+                    Object.values(row).forEach((v) =>
+                        tr.append(node("td", value(v))),
+                    );
+                    body.append(tr);
+                });
+                table.append(body);
+            } else {
+                const body = node("tbody");
+                Object.entries(e.result[0]).forEach(([key, v]) => {
+                    const row = node("tr");
+                    row.append(
+                        node(
+                            "th",
+                            columns[key]?.[lang === "pt" ? 0 : 1] || key,
+                        ),
+                        node("td", value(v)),
+                    );
+                    body.append(row);
+                });
+                table.append(body);
+            }
+            $("result-table").append(table);
+        }
+    }
+    $("technical").textContent = JSON.stringify(data, null, 2);
+}
 
-Object.assign(text.pt,{assistantLede:"O AskTrace transforma registros do Portal Nacional de Contratações Públicas (PNCP) em respostas que você pode conferir. Descubra o volume de compras, compare municípios ou encontre os contratos ligados a uma compra.",scopeMore:"O que há nesta base? ⓘ",scopeTitle:"Dados públicos com um recorte explícito.",welcomeLimit:"Use para explorar publicações e conferir fontes. Contratos não comprovam pagamentos; valores ausentes não viram zero.",composerHint:"Enter para enviar · Shift + Enter para nova linha · Histórico mantido nesta sessão da aba",independentNote:"O histórico sobrevive à atualização da página nesta aba. Cada pergunta é consultada de forma independente; escreva o assunto e o identificador quando necessário.",guideLabel:"EM TRÊS PASSOS",guide1:"1. Escolha a base",guide1text:"Confira o período e a cobertura de contratos antes de interpretar os números.",guide2:"2. Faça uma pergunta concreta",guide2text:"Comece pelo panorama. Depois explore municípios ou use um ID de compra para rastrear a origem.",guide3:"3. Confira a resposta",guide3text:"Abra as fontes e o rastro. Você vê o que foi consultado e o que ainda é desconhecido.",datasetLabel:"Base consultada",coverageWarning:"A cobertura de contratos pode ser parcial. Compras não consultadas não significam compras sem contrato.",historyPrivacy:"Perguntas e respostas ficam no sessionStorage desta aba, sem ir ao servidor de histórico. Nova exploração limpa esses registros. Evite inserir dados pessoais.",storageWarning:"O navegador não permitiu guardar o histórico. Ele ficará apenas em memória enquanto a página estiver aberta.",pendingLabel:"Compras ainda sem consulta de contratos"});
-Object.assign(text.en,{assistantLede:"AskTrace turns records from Brazil’s National Public Procurement Portal (PNCP) into answers you can verify. Explore purchase volumes, compare municipalities or find contracts linked to a purchase.",scopeMore:"What is in this dataset? ⓘ",scopeTitle:"Public data with an explicit scope.",welcomeLimit:"Explore publications and verify sources. Contracts do not establish payment; missing amounts are not zero.",composerHint:"Enter to send · Shift + Enter for a new line · History retained for this tab session",independentNote:"History survives a reload in this tab. Each question is queried independently; include the subject and purchase identifier when needed.",guideLabel:"THREE STEPS",guide1:"1. Choose a dataset",guide1text:"Check the period and contract coverage before interpreting the numbers.",guide2:"2. Ask a concrete question",guide2text:"Start with the overview. Then explore municipalities or use a purchase ID to trace provenance.",guide3:"3. Check the answer",guide3text:"Open sources and trace. You see what was queried and what remains unknown.",datasetLabel:"Selected dataset",coverageWarning:"Contract coverage may be partial. Unqueried purchases are not purchases without contracts.",historyPrivacy:"Questions and answers are stored in this tab’s sessionStorage, without a server-side history. New exploration clears them. Avoid personal information.",storageWarning:"The browser could not save history. It will remain in memory while this page is open.",pendingLabel:"Purchases not yet queried for contracts"});
-let datasetCatalog=[],selectedDataset="original",sessionRestored=false;
-const SESSION_KEY="asktrace.session.v1";
-function persistSession(){try{sessionStorage.setItem(SESSION_KEY,JSON.stringify({version:1,dataset:selectedDataset,language:lang,entries:sessionHistory.slice(-20)}));$("storage-note").textContent="";}catch(_){$("storage-note").textContent=text[lang].storageWarning;}}
-function readSession(){try{const raw=sessionStorage.getItem(SESSION_KEY);if(!raw||raw.length>1500000)return null;const saved=JSON.parse(raw);if(saved.version!==1||!Array.isArray(saved.entries))return null;saved.entries=saved.entries.filter(item=>item&&typeof item.id==="string"&&typeof item.dataset==="string"&&item.data&&typeof item.data.question==="string"&&item.data.question.length<=1000&&["answered","refused","error","not_found_in_scope"].includes(item.data.status)).slice(-20);return saved;}catch(_){return null;}}
-function applyDataset(){const d=datasetCatalog.find(item=>item.id===selectedDataset);if(!d)return;const nf=new Intl.NumberFormat(lang==="pt"?"pt-BR":"en");$("stat-purchases").textContent=nf.format(d.purchases);$("stat-contracts").textContent=nf.format(d.contracts);$("stat-covered").textContent=nf.format(d.covered);const dates=`${d.start} → ${d.end}`;document.querySelectorAll("[data-i='dateShort']").forEach(el=>el.textContent=dates);$("scope-detail-live").textContent=lang==="pt"?`Pregões eletrônicos de unidades do Piauí. Publicação: ${dates}. ${d.purchases} compras; ${d.covered} com consulta de contratos confirmada, ${d.purchases-d.covered-d.excluded} ainda não consultadas e ${d.excluded} exclusão(ões) por localizador inválido.`:`Electronic auctions from units in Piauí. Published: ${dates}. ${d.purchases} purchases; ${d.covered} with confirmed contract queries, ${d.purchases-d.covered-d.excluded} still unqueried and ${d.excluded} exclusion(s) due to invalid source locators.`;$("base-evidence").href="/api/evidence?dataset="+encodeURIComponent(selectedDataset);}
-function initializeDatasets(session){datasetCatalog=session.datasets||[];const saved=readSession();selectedDataset=(saved&&datasetCatalog.some(d=>d.id===saved.dataset))?saved.dataset:(session.default_dataset||"original");if(saved){lang=saved.language==="en"?"en":"pt";sessionHistory=saved.entries;sessionRestored=true;}$("dataset").replaceChildren();datasetCatalog.forEach(item=>{const option=node("option",`${item.start} → ${item.end}`);option.value=item.id;$("dataset").append(option);});$("dataset").value=selectedDataset;language();const last=sessionHistory.filter(item=>item.dataset===selectedDataset).at(-1);if(last){try{activeHistory=last.id;latest=last.data;render(latest);historyView();}catch(_){latest=null;$("response").hidden=true;}}applyDataset();}
-const beforeDatasetLanguage=language,beforeDatasetRender=render;
-language=function(){beforeDatasetLanguage();applyDataset();};
-render=function(data){beforeDatasetRender(data);if(data.evidence){const c=data.evidence.coverage;$("insight").textContent=lang==="pt"?`${c.covered_purchases} de ${c.purchases} compras têm consulta de contratos confirmada; ${c.purchases-c.covered_purchases} não estão nessa cobertura. Compras não consultadas e localizadores inválidos são distintos de uma resposta sem publicação. ${c.unknown_awarded_values} valores homologados continuam desconhecidos.`:`${c.covered_purchases} of ${c.purchases} purchases have confirmed contract queries; ${c.purchases-c.covered_purchases} are outside that coverage. Unqueried purchases and invalid locators differ from a query returning no publication. ${c.unknown_awarded_values} awarded amounts remain unknown.`;document.querySelectorAll("#sources a").forEach(link=>link.href="/api/evidence?dataset="+encodeURIComponent(selectedDataset));}};
-$("dataset").addEventListener("change",()=>{if(working){$("dataset").value=selectedDataset;return;}selectedDataset=$("dataset").value;latest=null;activeHistory=null;$("response").hidden=true;$("conversation").hidden=true;document.body.classList.remove("has-result");$("status").textContent="";historyView();applyDataset();persistSession();});
+let sessionHistory = [],
+    activeHistory = null;
+function fillQuestion(question) {
+    $("question").value = question;
+    count();
+    $("question").focus();
+    $("question").scrollIntoView({ block: "center", behavior: "smooth" });
+}
+function discovery() {
+    const t = text[lang];
+    $("discovery").replaceChildren();
+    ["▤", "⌁", "◎"].forEach((icon, i) => {
+        const button = node("button");
+        button.type = "button";
+        button.append(
+            node("span", icon, "card-icon"),
+            node("strong", t.cardTitles[i]),
+            node("span", t.cardDescriptions[i], "card-description"),
+            node("span", "↗", "card-arrow"),
+        );
+        button.addEventListener("click", () => fillQuestion(t.questions[i]));
+        $("discovery").append(button);
+    });
+}
+function historyView() {
+    $("history").replaceChildren();
+    if (!sessionHistory.some((item) => item.dataset === selectedDataset)) {
+        $("history").append(node("p", text[lang].historyEmpty));
+        return;
+    }
+    sessionHistory
+        .filter((item) => item.dataset === selectedDataset)
+        .slice()
+        .reverse()
+        .forEach((item) => {
+            const button = node("button", item.data.question);
+            button.type = "button";
+            button.title = item.data.question;
+            if (item.id === activeHistory) button.classList.add("active");
+            button.addEventListener("click", () => {
+                if (working) return;
+                activeHistory = item.id;
+                latest = item.data;
+                render(latest);
+                historyView();
+            });
+            $("history").append(button);
+        });
+}
+function languageAssistant() {
+    languageBase();
+    discovery();
+    historyView();
+    $("submit").setAttribute(
+        "aria-label",
+        lang === "pt" ? "Enviar pergunta" : "Send question",
+    );
+    $("mobile-reset").setAttribute("aria-label", text[lang].newSession);
+}
+function renderAssistant(data) {
+    renderBase(data);
+    document.body.classList.add("has-result");
+    $("conversation").hidden = false;
+    $("thinking").hidden = true;
+    $("asked-question").textContent = data.question;
+    const selected = data.selected_provider;
+    $("execution-meta").textContent = selected
+        ? selected.model
+        : data.provider === "baseline"
+          ? text[lang].localExecution
+          : data.provider;
+    $("insight").hidden = false;
+    let insight =
+        data.status === "refused"
+            ? text[lang].refusalInsight
+            : text[lang].localInsight;
+    if (data.status === "error") insight = text[lang].queryError;
+    $("insight").textContent = insight;
+    $("next-questions").replaceChildren();
+    const t = text[lang];
+    const action = data.evidence?.question;
+    const indices =
+        action === "summary"
+            ? [1, 2]
+            : action === "municipalities"
+              ? [2, 0]
+              : [0, 1];
+    indices.forEach((i) => {
+        const button = node("button", t.examples[i] + " ↗");
+        button.type = "button";
+        button.addEventListener("click", () => fillQuestion(t.questions[i]));
+        $("next-questions").append(button);
+    });
+}
+$("question").addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey && !event.isComposing) {
+        event.preventDefault();
+        if (!working && token && $("question").value.trim())
+            $("ask-form").requestSubmit();
+    }
+});
+$("new-session").addEventListener("click", () => {
+    if (working) return;
+    sessionHistory = [];
+    activeHistory = null;
+    latest = null;
+    $("question").value = "";
+    count();
+    $("status").textContent = "";
+    $("response").hidden = true;
+    $("conversation").hidden = true;
+    document.body.classList.remove("has-result");
+    historyView();
+    $("question").focus();
+    showAvailability(serviceAvailability);
+    persistSession();
+});
 
-$("new-session").addEventListener("click",()=>{if(!working){try{sessionStorage.removeItem(SESSION_KEY);}catch(_){}persistSession();}});
+let datasetCatalog = [],
+    selectedDataset = "original";
+const SESSION_KEY = "asktrace.session.v1";
+function persistSession() {
+    try {
+        sessionStorage.setItem(
+            SESSION_KEY,
+            JSON.stringify({
+                version: 1,
+                dataset: selectedDataset,
+                language: lang,
+                entries: sessionHistory.slice(-20),
+            }),
+        );
+        $("storage-note").textContent = "";
+    } catch (_) {
+        $("storage-note").textContent = text[lang].storageWarning;
+    }
+}
+function validStoredResult(data) {
+    if (
+        !data ||
+        typeof data.question !== "string" ||
+        data.question.length > 1000 ||
+        !["answered", "refused", "error", "not_found_in_scope"].includes(
+            data.status,
+        ) ||
+        !Array.isArray(data.trace) ||
+        !data.trace.every(
+            (step) =>
+                step &&
+                typeof step === "object" &&
+                (step.step !== "plan" || typeof step.plan?.action === "string"),
+        )
+    )
+        return false;
+    const e = data.evidence;
+    if (!e) return data.status !== "answered";
+    return (
+        ["summary", "municipalities", "purchase"].includes(e.question) &&
+        e.coverage &&
+        [
+            "purchases",
+            "covered_purchases",
+            "contracts",
+            "none_returned",
+            "unknown_awarded_values",
+        ].every((key) => Number.isFinite(e.coverage[key])) &&
+        e.scope &&
+        ["uf", "date_start", "date_end"].every(
+            (key) => typeof e.scope[key] === "string",
+        ) &&
+        typeof e.sources?.coverage_report === "string" &&
+        Array.isArray(e.result) &&
+        e.result.every(
+            (row) => row && typeof row === "object" && !Array.isArray(row),
+        ) &&
+        (e.question !== "purchase" ||
+            data.status !== "answered" ||
+            e.result.length > 0)
+    );
+}
+function readSession() {
+    try {
+        const raw = sessionStorage.getItem(SESSION_KEY);
+        if (!raw || raw.length > 1500000) return null;
+        const saved = JSON.parse(raw);
+        if (!saved || saved.version !== 1 || !Array.isArray(saved.entries))
+            return null;
+        saved.entries = saved.entries
+            .filter(
+                (item) =>
+                    item &&
+                    typeof item.id === "string" &&
+                    typeof item.dataset === "string" &&
+                    validStoredResult(item.data),
+            )
+            .slice(-20);
+        return saved;
+    } catch (_) {
+        return null;
+    }
+}
+function applyDataset() {
+    const d = datasetCatalog.find((item) => item.id === selectedDataset);
+    if (!d) return;
+    const nf = new Intl.NumberFormat(lang === "pt" ? "pt-BR" : "en");
+    $("stat-purchases").textContent = nf.format(d.purchases);
+    $("stat-contracts").textContent = nf.format(d.contracts);
+    $("stat-covered").textContent = nf.format(d.covered);
+    const dates = `${d.start} → ${d.end}`;
+    document
+        .querySelectorAll("[data-i='dateShort']")
+        .forEach((el) => (el.textContent = dates));
+    $("scope-detail-live").textContent =
+        lang === "pt"
+            ? `Pregões eletrônicos de unidades do Piauí. Publicação: ${dates}. ${d.purchases} compras; ${d.covered} com consulta de contratos confirmada, ${d.purchases - d.covered - d.excluded} ainda não consultadas e ${d.excluded} exclusão(ões) por localizador inválido.`
+            : `Electronic auctions from units in Piauí. Published: ${dates}. ${d.purchases} purchases; ${d.covered} with confirmed contract queries, ${d.purchases - d.covered - d.excluded} still unqueried and ${d.excluded} exclusion(s) due to invalid source locators.`;
+    $("base-evidence").href =
+        "/api/evidence?dataset=" + encodeURIComponent(selectedDataset);
+}
+function initializeDatasets(session) {
+    datasetCatalog = session.datasets || [];
+    const saved = readSession();
+    selectedDataset =
+        saved && datasetCatalog.some((d) => d.id === saved.dataset)
+            ? saved.dataset
+            : session.default_dataset || "original";
+    if (saved) {
+        lang = saved.language === "en" ? "en" : "pt";
+        sessionHistory = saved.entries;
+    }
+    $("dataset").replaceChildren();
+    datasetCatalog.forEach((item) => {
+        const option = node("option", `${item.start} → ${item.end}`);
+        option.value = item.id;
+        $("dataset").append(option);
+    });
+    $("dataset").value = selectedDataset;
+    language();
+    const last = sessionHistory
+        .filter((item) => item.dataset === selectedDataset)
+        .at(-1);
+    if (last) {
+        try {
+            activeHistory = last.id;
+            latest = last.data;
+            render(latest);
+            historyView();
+        } catch (_) {
+            latest = null;
+            $("response").hidden = true;
+        }
+    }
+    applyDataset();
+}
+function renderDataset(data) {
+    renderAssistant(data);
+    if (data.evidence) {
+        const c = data.evidence.coverage;
+        $("insight").textContent =
+            lang === "pt"
+                ? `${c.covered_purchases} de ${c.purchases} compras têm consulta de contratos confirmada; ${c.purchases - c.covered_purchases} não estão nessa cobertura. Compras não consultadas e localizadores inválidos são distintos de uma resposta sem publicação. ${c.unknown_awarded_values} valores homologados continuam desconhecidos.`
+                : `${c.covered_purchases} of ${c.purchases} purchases have confirmed contract queries; ${c.purchases - c.covered_purchases} are outside that coverage. Unqueried purchases and invalid locators differ from a query returning no publication. ${c.unknown_awarded_values} awarded amounts remain unknown.`;
+    }
+}
+$("dataset").addEventListener("change", () => {
+    if (working) {
+        $("dataset").value = selectedDataset;
+        return;
+    }
+    selectedDataset = $("dataset").value;
+    latest = null;
+    activeHistory = null;
+    $("response").hidden = true;
+    $("conversation").hidden = true;
+    document.body.classList.remove("has-result");
+    $("status").textContent = "";
+    historyView();
+    applyDataset();
+    showAvailability(serviceAvailability);
+    persistSession();
+});
 
-Object.assign(text.pt,{errorBadge:"Consulta indisponível",aiUnavailable:"A IA está temporariamente indisponível",aiExplanation:"Nenhum modelo de IA pôde planejar esta pergunta agora. Os provedores estão em espera ou indisponíveis. Esta tentativa não consultou o banco, portanto não indica uma falha nos dados.",localRetry:"Consultar esta pergunta por regras locais →",localRetryHint:"Você pode tentar a mesma pergunta sem usar API externa. Esse modo atende resumo, municípios e rastreio por ID; o banco local precisa estar ativo.",nextRetry:"Próxima tentativa de candidato após",retryExpired:"O período de espera registrado já passou. Você pode tentar a IA novamente, sujeito à disponibilidade da API.",retryDisclaimer:"Esse horário é uma espera registrada, não garantia de retorno do serviço.",sourcesMissing:"Nenhuma fonte foi consultada nesta tentativa.",notCompleted:"A consulta não foi concluída. Veja abaixo as opções para continuar."});
-Object.assign(text.en,{errorBadge:"Query unavailable",aiUnavailable:"AI is temporarily unavailable",aiExplanation:"No AI model could plan this question right now. Providers are cooling down or unavailable. This attempt did not query the database, so it does not indicate a data failure.",localRetry:"Try this question with local rules →",localRetryHint:"You can try the same question without an external API. This mode supports summaries, municipalities and tracing an explicit ID; the local database must be running.",nextRetry:"Next candidate attempt after",retryExpired:"The recorded cooldown has elapsed. You may try AI again, subject to API availability.",retryDisclaimer:"This is a recorded wait, not a guaranteed service recovery time.",sourcesMissing:"No sources were queried in this attempt.",notCompleted:"The query did not complete. See the options below to continue."});
-function readableTrace(data){const t=text[lang];$("trace").replaceChildren();for(const step of data.trace||[]){if(step.step==="provider_attempt"&&step.reason==="disabled")continue;let line="";const name=step.provider||step.candidate||"IA";if(step.step==="provider_attempt"){if(step.reason==="cooldown")line=lang==="pt"?`${name}: aguardando o período de espera registrado pela aplicação.`:`${name}: waiting for the recorded cooldown.`;else if(step.reason==="missing_key")line=lang==="pt"?`${name}: chave não configurada neste ambiente.`:`${name}: key not configured in this environment.`;else if(step.outcome==="selected")line=lang==="pt"?`${name}: modelo selecionado para planejar a consulta.`:`${name}: model selected to plan the query.`;else line=lang==="pt"?`${name}: tentativa indisponível${step.http_status?" (HTTP "+step.http_status+")":""}.`:`${name}: attempt unavailable${step.http_status?" (HTTP "+step.http_status+")":""}.`;}else if(step.step==="plan")line=lang==="pt"?`Plano validado: ${step.plan.action}.`:`Validated plan: ${step.plan.action}.`;else if(step.step==="policy")line=lang==="pt"?"A pergunta não passou pelo filtro de escopo; nenhum modelo foi chamado.":"The question was stopped by the scope filter; no model was called.";else if(step.step==="read_only_query")line=lang==="pt"?"Consulta somente leitura executada com as fontes do recorte selecionado.":"Read-only query executed against the selected dataset.";else if(step.step==="failure")line=lang==="pt"?"A execução foi encerrada sem produzir uma resposta de dados.":"Execution ended without producing a data answer.";if(line)$("trace").append(node("li",line));}}
-const beforeAvailabilityRender=render;
-render=function(data){beforeAvailabilityRender(data);readableTrace(data);const t=text[lang];const events=(data.trace||[]).filter(step=>step.step==="provider_attempt");const providerError=data.status==="error"&&data.tool_calls===0&&(data.availability?.component==="ai_planner"||events.length>0);$("source-panel").hidden=!data.evidence;$("coverage").hidden=!data.evidence;$("recovery-actions").hidden=!providerError;$("recovery-actions").replaceChildren();if(data.status==="error")$("badge").textContent=t.errorBadge;if(providerError){$("badge").textContent=t.aiUnavailable;$("answer").textContent=t.aiExplanation;$("execution-meta").textContent="";$("insight").textContent=t.localRetryHint;$("next-questions").replaceChildren();const retry=node("button",t.localRetry);retry.type="button";retry.addEventListener("click",()=>{if(working)return;$("provider").value="baseline";$("question").value=data.question;count();$("ask-form").requestSubmit();});$("recovery-actions").append(retry);const waits=events.filter(event=>event.reason==="cooldown"&&Number.isFinite(event.not_before_epoch)).map(event=>event.not_before_epoch);const at=data.availability?.next_candidate_retry_epoch||Math.min(...waits);if(Number.isFinite(at)){const message=at*1000>Date.now()?t.nextRetry+" "+new Date(at*1000).toLocaleString(lang==="pt"?"pt-BR":"en")+". "+t.retryDisclaimer:t.retryExpired;$("recovery-actions").append(node("p",message));}}};
+function readableTrace(data) {
+    const t = text[lang];
+    $("trace").replaceChildren();
+    for (const step of data.trace || []) {
+        if (step.step === "provider_attempt" && step.reason === "disabled")
+            continue;
+        let line = "";
+        const name = step.provider || step.candidate || "IA";
+        if (step.step === "provider_attempt") {
+            if (step.reason === "cooldown")
+                line =
+                    lang === "pt"
+                        ? `${name}: aguardando o período de espera registrado pela aplicação.`
+                        : `${name}: waiting for the recorded cooldown.`;
+            else if (step.reason === "missing_key")
+                line =
+                    lang === "pt"
+                        ? `${name}: chave não configurada neste ambiente.`
+                        : `${name}: key not configured in this environment.`;
+            else if (step.outcome === "selected")
+                line =
+                    lang === "pt"
+                        ? `${name}: modelo selecionado para planejar a consulta.`
+                        : `${name}: model selected to plan the query.`;
+            else
+                line =
+                    lang === "pt"
+                        ? `${name}: tentativa indisponível${step.http_status ? " (HTTP " + step.http_status + ")" : ""}.`
+                        : `${name}: attempt unavailable${step.http_status ? " (HTTP " + step.http_status + ")" : ""}.`;
+        } else if (step.step === "plan")
+            line =
+                lang === "pt"
+                    ? `Plano validado: ${step.plan.action}.`
+                    : `Validated plan: ${step.plan.action}.`;
+        else if (step.step === "policy")
+            line =
+                lang === "pt"
+                    ? "A pergunta não passou pelo filtro de escopo; nenhum modelo foi chamado."
+                    : "The question was stopped by the scope filter; no model was called.";
+        else if (step.step === "read_only_query")
+            line =
+                lang === "pt"
+                    ? "Consulta somente leitura executada com as fontes do recorte selecionado."
+                    : "Read-only query executed against the selected dataset.";
+        else if (step.step === "failure")
+            line =
+                lang === "pt"
+                    ? "A execução foi encerrada sem produzir uma resposta de dados."
+                    : "Execution ended without producing a data answer.";
+        if (line) $("trace").append(node("li", line));
+    }
+}
+function render(data) {
+    renderDataset(data);
+    showAvailability(serviceAvailability);
+    readableTrace(data);
+    const t = text[lang];
+    const events = (data.trace || []).filter(
+        (step) => step.step === "provider_attempt",
+    );
+    const providerError =
+        data.status === "error" &&
+        data.tool_calls === 0 &&
+        (data.availability?.component === "ai_planner" || events.length > 0);
+    $("source-panel").hidden = !data.evidence;
+    $("coverage").hidden = !data.evidence;
+    $("recovery-actions").hidden = !providerError;
+    $("recovery-actions").replaceChildren();
+    if (data.status === "error") $("badge").textContent = t.errorBadge;
+    if (providerError) {
+        $("badge").textContent = t.aiUnavailable;
+        $("answer").textContent = t.aiExplanation;
+        $("execution-meta").textContent = "";
+        $("insight").textContent = t.localRetryHint;
+        $("next-questions").replaceChildren();
+        const retry = node("button", t.localRetry);
+        retry.type = "button";
+        retry.addEventListener("click", () => {
+            if (working) return;
+            $("provider").value = "baseline";
+            $("question").value = data.question;
+            count();
+            $("ask-form").requestSubmit();
+        });
+        $("recovery-actions").append(retry);
+        const waits = events
+            .filter(
+                (event) =>
+                    event.reason === "cooldown" &&
+                    Number.isFinite(event.not_before_epoch),
+            )
+            .map((event) => event.not_before_epoch);
+        const at =
+            data.availability?.next_candidate_retry_epoch || Math.min(...waits);
+        if (Number.isFinite(at)) {
+            const message =
+                at * 1000 > Date.now()
+                    ? t.nextRetry +
+                      " " +
+                      new Date(at * 1000).toLocaleString(
+                          lang === "pt" ? "pt-BR" : "en",
+                      ) +
+                      ". " +
+                      t.retryDisclaimer
+                    : t.retryExpired;
+            $("recovery-actions").append(node("p", message));
+        }
+    }
+}
 
-let serviceAvailability=null;
-function showAvailability(info){serviceAvailability=info;if(!info)return;$("availability-notice").hidden=info.can_attempt_ai;$("availability-text").textContent=lang==="pt"?"Os serviços de IA estão em espera ou sem configuração. Você pode explorar a base por regras locais, sem gastar quota de API. O banco precisa estar ativo.":"AI services are cooling down or unconfigured. You can explore this dataset with local rules, without API quota. The database must be running.";$("choose-local").textContent=lang==="pt"?"Usar regras locais":"Use local rules";$("refresh-availability").textContent=lang==="pt"?"Atualizar disponibilidade":"Refresh availability";}
-const beforeAvailabilityLanguage=language;language=function(){beforeAvailabilityLanguage();showAvailability(serviceAvailability);};
-$("choose-local").addEventListener("click",()=>{if(working)return;$("provider").value="baseline";$("question").focus();});
-$("refresh-availability").addEventListener("click",async()=>{const button=$("refresh-availability");button.disabled=true;try{const response=await fetch("/api/availability");if(response.ok)showAvailability(await response.json());}finally{button.disabled=false;}});
-$("language").addEventListener("click",()=>{lang=lang==="pt"?"en":"pt";language();persistSession();});$("question").addEventListener("input",count);
-$("download").addEventListener("click",()=>{if(!latest)return;const url=URL.createObjectURL(new Blob([JSON.stringify(latest,null,2)],{type:"application/json"}));const a=node("a");a.href=url;a.download="asktrace-response.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
-$("ask-form").addEventListener("submit",async(event)=>{event.preventDefault();if(working||!token)return;working=true;latest=null;document.body.classList.add("has-result");$("conversation").hidden=false;$("asked-question").textContent=$("question").value;$("thinking").hidden=false;$("response").hidden=true;$("submit").disabled=true;$("status").textContent=text[lang].waiting;try{const response=await fetch("/api/ask",{method:"POST",headers:{"Content-Type":"application/json","X-AskTrace-Token":token},body:JSON.stringify({question:$("question").value,provider:$("provider").value,dataset:selectedDataset})});if(!response.ok)throw new Error(response.status===429?"busy":"error");latest=await response.json();activeHistory=Date.now()+"-"+sessionHistory.length;sessionHistory.push({id:activeHistory,dataset:selectedDataset,data:latest});if(sessionHistory.length>20)sessionHistory.shift();render(latest);historyView();persistSession();$("status").textContent=latest.status==="error"?text[lang].notCompleted:text[lang].ready;$("response").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});}catch(error){$("status").textContent=text[lang][error.message]||text[lang].error;}finally{working=false;$("thinking").hidden=true;$("submit").disabled=false;}});
-$("mobile-reset").addEventListener("click",()=>$("new-session").click());
-language();$("submit").disabled=true;fetch("/api/session").then(r=>{if(!r.ok)throw new Error();return r.json();}).then(data=>{token=data.token;initializeDatasets(data);showAvailability(data.availability);$("submit").disabled=false;}).catch(()=>{$("status").textContent=text[lang].sessionError;});
+let serviceAvailability = null;
+function showAvailability(info) {
+    serviceAvailability = info;
+    // Shared server state is not a failed question in this tab. Show the notice only
+    // beside a failed AI attempt, never on the welcome screen or in local mode.
+    const failed =
+        latest?.status === "error" &&
+        latest?.availability?.component === "ai_planner";
+    $("availability-notice").hidden = !(
+        failed &&
+        $("provider").value === "fallback" &&
+        info?.can_attempt_ai === false
+    );
+    $("availability-text").textContent =
+        lang === "pt"
+            ? "A aplicação registra esperas de tentativas anteriores, compartilhadas entre sessões. Isso não significa que você tenha feito uma pergunta agora. Você pode tentar regras locais; o banco precisa estar ativo."
+            : "The application retains cooldowns from previous attempts, shared across sessions. This does not mean you just asked a question. You can try local rules; the database must be running.";
+    $("choose-local").textContent =
+        lang === "pt" ? "Usar regras locais" : "Use local rules";
+    $("refresh-availability").textContent =
+        lang === "pt" ? "Atualizar disponibilidade" : "Refresh availability";
+}
+function language() {
+    languageAssistant();
+    applyDataset();
+    showAvailability(serviceAvailability);
+}
+$("provider").addEventListener("change", () =>
+    showAvailability(serviceAvailability),
+);
+$("choose-local").addEventListener("click", () => {
+    if (working) return;
+    $("provider").value = "baseline";
+    showAvailability(serviceAvailability);
+    $("question").focus();
+});
+$("refresh-availability").addEventListener("click", async () => {
+    const button = $("refresh-availability");
+    button.disabled = true;
+    try {
+        const response = await fetch("/api/availability");
+        if (!response.ok) throw new Error("availability_unavailable");
+        showAvailability(await response.json());
+        $("status").textContent =
+            lang === "pt"
+                ? "Estado local atualizado. Nenhuma pergunta foi enviada."
+                : "Local status refreshed. No question was sent.";
+    } catch (_) {
+        $("status").textContent =
+            lang === "pt"
+                ? "Não foi possível atualizar a disponibilidade. Sua pergunta não foi enviada. Tente novamente."
+                : "Could not refresh availability. Your question was not sent. Please try again.";
+    } finally {
+        button.disabled = false;
+    }
+});
+$("language").addEventListener("click", () => {
+    lang = lang === "pt" ? "en" : "pt";
+    language();
+    persistSession();
+});
+$("question").addEventListener("input", count);
+$("download").addEventListener("click", () => {
+    if (!latest) return;
+    const url = URL.createObjectURL(
+        new Blob([JSON.stringify(latest, null, 2)], {
+            type: "application/json",
+        }),
+    );
+    const a = node("a");
+    a.href = url;
+    a.download = "asktrace-response.json";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+$("ask-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (working || !token) return;
+    working = true;
+    latest = null;
+    showAvailability(serviceAvailability);
+    document.body.classList.add("has-result");
+    $("conversation").hidden = false;
+    $("asked-question").textContent = $("question").value;
+    $("thinking").hidden = false;
+    $("response").hidden = true;
+    $("submit").disabled = true;
+    $("status").textContent = text[lang].waiting;
+    try {
+        const response = await fetch("/api/ask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-AskTrace-Token": token,
+            },
+            body: JSON.stringify({
+                question: $("question").value,
+                provider: $("provider").value,
+                dataset: selectedDataset,
+            }),
+        });
+        if (!response.ok)
+            throw new Error(response.status === 429 ? "busy" : "error");
+        latest = await response.json();
+        activeHistory = Date.now() + "-" + sessionHistory.length;
+        sessionHistory.push({
+            id: activeHistory,
+            dataset: selectedDataset,
+            data: latest,
+        });
+        if (sessionHistory.length > 20) sessionHistory.shift();
+        render(latest);
+        historyView();
+        persistSession();
+        $("status").textContent =
+            latest.status === "error"
+                ? text[lang].notCompleted
+                : text[lang].ready;
+        $("response").scrollIntoView({
+            behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+                ? "instant"
+                : "smooth",
+            block: "start",
+        });
+    } catch (error) {
+        $("status").textContent = text[lang][error.message] || text[lang].error;
+    } finally {
+        working = false;
+        $("thinking").hidden = true;
+        $("submit").disabled = false;
+    }
+});
+$("mobile-reset").addEventListener("click", () => $("new-session").click());
+language();
+$("submit").disabled = true;
+fetch("/api/session")
+    .then((r) => {
+        if (!r.ok) throw new Error();
+        return r.json();
+    })
+    .then((data) => {
+        token = data.token;
+        initializeDatasets(data);
+        showAvailability(data.availability);
+        $("submit").disabled = false;
+    })
+    .catch(() => {
+        $("status").textContent = text[lang].sessionError;
+    });

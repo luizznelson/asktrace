@@ -228,3 +228,34 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(result["llm_attempts"], 2)
         self.assertEqual(result["tool_calls"], 1)
         tool.assert_called_once()
+
+    def test_corrupt_health_fails_closed_without_api_or_reset(self):
+        folder = self.root / "data/runtime"
+        folder.mkdir(parents=True)
+        path = folder / "provider-health.json"
+        for body in (
+            "[]",
+            '{"provider:groq":{"not_before":NaN}}',
+            '{"provider:groq":{"not_before":"tomorrow"}}',
+            "x" * 65537,
+        ):
+            path.write_text(body)
+            transport = Mock()
+            with self.assertRaises(ValueError):
+                select(self.root, "Resumo", validate_plan, transport=transport)
+            transport.assert_not_called()
+            self.assertEqual(path.read_text(), body)
+
+    def test_invalid_catalog_types_are_rejected(self):
+        path = self.root / "config/providers.json"
+        original = path.read_bytes()
+        for updates in (
+            {"request_timeout_seconds": True},
+            {"planning_budget_seconds": None},
+            {"candidates": None},
+            {"candidates": [{"id": []}]},
+        ):
+            path.write_bytes(original)
+            self.config(**updates)
+            with self.assertRaises(ValueError):
+                configuration(self.root)

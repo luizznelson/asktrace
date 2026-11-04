@@ -5,7 +5,7 @@ import json
 import threading
 import unittest
 from pathlib import Path
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 from asktrace.web import COVERAGE, Server
 
@@ -119,6 +119,44 @@ class WebTests(unittest.TestCase):
         self.assertIn("can_attempt_ai", data)
         self.assertFalse(data["database_checked"])
         self.runner.assert_not_called()
+
+    def test_non_ascii_token_is_rejected_without_crashing(self):
+        self.assertEqual(self.ask(**{"X-AskTrace-Token": "é"})[0], 403)
+        self.runner.assert_not_called()
+
+    def test_ambiguous_framing_and_nested_json_are_rejected(self):
+        self.assertEqual(self.ask(**{"Transfer-Encoding": "chunked"})[0], 400)
+        connection = http.client.HTTPConnection("127.0.0.1", self.server.server_port, timeout=5)
+        connection.request(
+            "POST",
+            "/api/ask",
+            body="[" * 1100 + "]" * 1100,
+            headers={
+                "Content-Type": "application/json",
+                "Origin": self.server.origin,
+                "X-AskTrace-Token": self.server.token,
+            },
+        )
+        response = connection.getresponse()
+        self.assertEqual(response.status, 400)
+        response.read()
+        connection.close()
+        self.runner.assert_not_called()
+
+    def test_corrupt_provider_state_does_not_block_local_session(self):
+        with patch("asktrace.web.availability", side_effect=ValueError("private-path-secret")):
+            status, _, body = self.request("GET", "/api/session")
+            self.assertEqual(status, 200)
+            self.assertEqual(json.loads(body)["availability"]["status"], "unknown")
+            self.assertNotIn(b"secret", body)
+            self.assertEqual(self.request("GET", "/api/availability")[0], 503)
+            self.assertEqual(self.ask()[0], 200)
+
+    def test_missing_asset_returns_safe_error(self):
+        with patch("pathlib.Path.read_bytes", side_effect=OSError("private-path-secret")):
+            status, _, body = self.request("GET", "/app.js")
+        self.assertEqual(status, 503)
+        self.assertNotIn(b"secret", body)
 
     def test_content_type_and_body_size_checked(self):
         self.assertEqual(self.ask(**{"Content-Type": "text/plain"})[0], 415)

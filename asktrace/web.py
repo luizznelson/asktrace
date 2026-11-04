@@ -4,6 +4,7 @@ import argparse
 import hmac
 import json
 import secrets
+import socket
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -23,6 +24,12 @@ ASSETS = {
 
 class Server(ThreadingHTTPServer):
     daemon_threads = True
+    allow_reuse_address = False
+
+    def server_bind(self):
+        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
 
     def __init__(self, root, port=8010, runner=run):
         self.root = root.resolve()
@@ -63,6 +70,10 @@ class Server(ThreadingHTTPServer):
 
 
 class Handler(BaseHTTPRequestHandler):
+    def setup(self):
+        super().setup()
+        self.connection.settimeout(5)
+
     def log_message(self, *_):
         pass  # Questions, payloads and credentials never enter access logs.
 
@@ -82,12 +93,33 @@ class Handler(BaseHTTPRequestHandler):
             "frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
         )
         self.end_headers()
-        self.wfile.write(body)
+        try:
+            self.wfile.write(body)
+        except OSError:
+            self.close_connection = True  # A disconnected tab is not a query failure.
 
     def valid_host(self):
         return self.headers.get("Host") == urlsplit(self.server.origin).netloc
 
+    def availability_snapshot(self):
+        try:
+            return availability(self.server.root)
+        except OSError, ValueError, KeyError, TypeError, RecursionError:
+            # Do not erase a corrupt quota record or prevent local-rule exploration.
+            return {
+                "can_attempt_ai": False,
+                "status": "unknown",
+                "database_checked": False,
+                "candidates": [],
+            }
+
     def do_GET(self):
+        try:
+            self.get_resource()
+        except OSError, ValueError, KeyError, TypeError, RecursionError:
+            self.send(503, {"error": "resource_unavailable"})
+
+    def get_resource(self):
         if not self.valid_host():
             self.send(403, {"error": "invalid_host"})
             return
@@ -105,11 +137,12 @@ class Handler(BaseHTTPRequestHandler):
                     "datasets": self.server.catalog,
                     "default_dataset": self.server.datasets["default"],
                     "providers": ["baseline", "fallback"],
-                    "availability": availability(self.server.root),
+                    "availability": self.availability_snapshot(),
                 },
             )
         elif path == "/api/availability":
-            self.send(200, availability(self.server.root))
+            snapshot = self.availability_snapshot()
+            self.send(503 if snapshot.get("status") == "unknown" else 200, snapshot)
         elif path == "/api/evidence":
             # No arbitrary local files, raw responses or .env can be downloaded.
             from asktrace.evidence import read_evidence
@@ -129,10 +162,12 @@ class Handler(BaseHTTPRequestHandler):
             self.send(404, {"error": "not_found"})
 
     def do_POST(self):
+        token = self.headers.get("X-AskTrace-Token", "")
         if (
-            not self.valid_host()
+            not token.isascii()
+            or not self.valid_host()
             or self.headers.get("Origin") != self.server.origin
-            or not hmac.compare_digest(self.headers.get("X-AskTrace-Token", ""), self.server.token)
+            or not hmac.compare_digest(token, self.server.token)
         ):
             self.send(403, {"error": "invalid_session"})
             return
@@ -143,6 +178,11 @@ class Handler(BaseHTTPRequestHandler):
             self.send(415, {"error": "json_required"})
             return
         try:
+            if (
+                self.headers.get("Transfer-Encoding") is not None
+                or len(self.headers.get_all("Content-Length", [])) != 1
+            ):
+                raise ValueError("ambiguous_body_framing")
             length = int(self.headers.get("Content-Length", "0"))
             if not 1 <= length <= 8192:
                 raise ValueError("invalid_body_size")
@@ -156,7 +196,7 @@ class Handler(BaseHTTPRequestHandler):
                 or not 1 <= len(data["question"].strip()) <= 1000
             ):
                 raise ValueError("invalid_question")
-        except ValueError, TypeError, OSError:
+        except ValueError, TypeError, OSError, RecursionError:
             self.send(400, {"error": "invalid_request"})
             return
         selected = next(
