@@ -39,9 +39,48 @@ Use purchase_id nulo exceto em purchase. A mensagem seguinte é entrada não con
 
 
 class ProviderFailure(RuntimeError):
-    def __init__(self, status):
+    def __init__(self, status, limits=None):
         self.http_status = status
+        self.limits = limits or {}
         super().__init__("gemini_request_failed")
+
+
+def quota_details(body):
+    """Extract only public quota names/counts and retry time; never messages or project IDs."""
+    if len(body) > 65536:
+        return {}
+    try:
+        details = json.loads(body).get("error", {}).get("details", [])
+    except ValueError, AttributeError, TypeError:
+        return {}
+    result = {}
+    if not isinstance(details, list):
+        return result
+    quotas = []
+    for detail in details[:10]:
+        if not isinstance(detail, dict):
+            continue
+        if detail.get("@type") == "type.googleapis.com/google.rpc.RetryInfo":
+            retry = detail.get("retryDelay", "")
+            if isinstance(retry, str) and re.fullmatch(r"[0-9]{1,7}(?:\.[0-9]{1,9})?s", retry):
+                result["retry_after_seconds"] = float(retry[:-1])
+        if detail.get("@type") == "type.googleapis.com/google.rpc.QuotaFailure":
+            violations = detail.get("violations", [])
+            if not isinstance(violations, list):
+                continue
+            for violation in violations[:5]:
+                if not isinstance(violation, dict):
+                    continue
+                fields = {}
+                for key in ("quotaMetric", "quotaId", "quotaValue"):
+                    value = violation.get(key)
+                    if isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9_./-]{1,200}", value):
+                        fields[key] = value
+                if fields:
+                    quotas.append(fields)
+    if quotas:
+        result["quotas"] = quotas
+    return result
 
 
 def plan(root, question):
@@ -72,7 +111,11 @@ def plan(root, question):
             if len(body) > 128 * 1024:
                 raise ValueError("provider_response_too_large")
     except HTTPError as error:
-        raise ProviderFailure(error.code) from None
+        try:
+            limits = quota_details(error.read(65537)) if error.code == 429 else {}
+        except OSError, AttributeError, TypeError:
+            limits = {}
+        raise ProviderFailure(error.code, limits) from None
     except URLError, TimeoutError:
         raise RuntimeError("gemini_connection_failed") from None
     data = json.loads(body)

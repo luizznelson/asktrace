@@ -131,6 +131,33 @@ class AgentTests(unittest.TestCase):
                     self.assertEqual(caught.exception.http_status, 429)
                     self.assertNotIn("test-key", str(caught.exception))
 
+    def test_quota_diagnostics_omit_messages_and_project_dimensions(self):
+        payload = {
+            "error": {
+                "message": "secret-value",
+                "details": [
+                    {
+                        "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+                        "violations": [
+                            {
+                                "quotaMetric": "generate_content_requests",
+                                "quotaId": "RequestsPerMinute",
+                                "quotaValue": "5",
+                                "quotaDimensions": {"project": "secret-project"},
+                            }
+                        ],
+                    },
+                    {"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "12.5s"},
+                ],
+            }
+        }
+        result = gemini.quota_details(json.dumps(payload).encode())
+        self.assertEqual(result["retry_after_seconds"], 12.5)
+        self.assertEqual(result["quotas"][0]["quotaValue"], "5")
+        self.assertNotIn("secret", json.dumps(result))
+        for invalid in (b"not-json", b"[]", b"x" * 65537):
+            self.assertEqual(gemini.quota_details(invalid), {})
+
     def test_evaluation_start_case_skips_prior_cases_and_journals_results(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

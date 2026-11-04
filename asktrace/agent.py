@@ -206,6 +206,7 @@ def run(root, report, question, provider="baseline", planner=None, tool=answer):
                     "step": "failure",
                     "error_type": type(error).__name__,
                     "provider_http_status": getattr(error, "http_status", None),
+                    "provider_limits": getattr(error, "limits", None),
                 }
             )
     result["latency_ms"] = round((time.perf_counter() - started) * 1000, 2)
