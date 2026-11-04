@@ -116,3 +116,7 @@ produto e separação entre compras pesquisadas, pendentes e excluídas; 102 tes
 contratos Node e consultas HTTP locais. Sem nova coleta ou chamadas externas de IA.
 
 [Validação das análises](application-review-70417ac8-3c13-466e-a51f-ba200dbabc60/verification.json): 108 testes Python e consultas reais mensais/órgãos/qualidade. [Corpus local ampliado](agent-eval-cb312a08-6b4d-4353-ae57-274123b3de97/evaluation.json): 12/12. [Testes iniciais com IA](analytics-verification-79a6ac7f-7923-4e9c-8fc8-17ce9c8560e9/verification.json): três rotas novas, sem equivaler à avaliação ampla do modelo.
+
+## Conclusão dos contratos da base ampliada
+
+[Diário](contracts-completion-d5e1399d-480d-4b8e-b388-388fcdb67f9a/progress.json) · [Cobertura final](contracts-resume-9a175343-9dde-49dc-b1e5-dcf5e760d139/coverage.json) · [Publicação/idempotência](contracts-publication-10f50cf9-aedd-47ba-a17c-1e56f36391d4/verification.json) · [112 testes e HTTP](application-review-fbea3361-f186-4701-97a3-74c4a8af80c8/verification.json). São 2.536 compras aptas pesquisadas, 679 contratos, zero pendências aptas e uma exclusão. Todos os 26 snapshots foram verificados; não somar com o recorte original.

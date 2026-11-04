@@ -1,0 +1,108 @@
+{
+  "case_id": "expanded-03",
+  "category": "monthly",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Quantas compras há em cada mês?",
+    "provider": "baseline",
+    "status": "answered",
+    "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Evolução por mês de publicação; não representa execução ou pagamentos. Confira a tabela, o recorte e as fontes.",
+    "trace": [
+      {
+        "step": "plan",
+        "plan": {
+          "action": "monthly",
+          "purchase_id": null
+        },
+        "usage": null
+      },
+      {
+        "step": "read_only_query",
+        "action": "monthly",
+        "outcome": "answered",
+        "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8"
+      }
+    ],
+    "llm_attempts": 0,
+    "tool_calls": 1,
+    "evidence": {
+      "question": "monthly",
+      "purchase_id": null,
+      "status": "answered",
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "coverage": {
+        "purchases": 2537,
+        "covered_purchases": 2536,
+        "purchases_with_contracts": 370,
+        "none_returned": 2166,
+        "contracts": 679,
+        "unknown_awarded_values": 1354
+      },
+      "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8",
+      "sources": {
+        "coverage_report": "runs/contracts-resume-9a175343-9dde-49dc-b1e5-dcf5e760d139/coverage.json",
+        "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+      },
+      "limitations": [
+        "Publication is not payment or financial execution.",
+        "No returned publication does not establish absence of a contract.",
+        "Unknown amounts are not zero; snapshots may have different dates."
+      ],
+      "result": [
+        {
+          "publication_month": "2026-05",
+          "purchases": 505,
+          "estimated_value": "740308791.24000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 221
+        },
+        {
+          "publication_month": "2026-06",
+          "purchases": 527,
+          "estimated_value": "850816965.71000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 217
+        },
+        {
+          "publication_month": "2026-07",
+          "purchases": 424,
+          "estimated_value": "747983762.10000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 181
+        },
+        {
+          "publication_month": "2026-08",
+          "purchases": 412,
+          "estimated_value": "446909705.49000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 232
+        },
+        {
+          "publication_month": "2026-09",
+          "purchases": 373,
+          "estimated_value": "661240498.41000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 241
+        },
+        {
+          "publication_month": "2026-10",
+          "purchases": 296,
+          "estimated_value": "383103990.61000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 262
+        }
+      ]
+    },
+    "latency_ms": 0.42
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "case_id": "expanded-11",
+  "category": "refuse",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Compras por mês e órgão.",
+    "provider": "baseline",
+    "status": "refused",
+    "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+    "trace": [
+      {
+        "step": "plan",
+        "plan": {
+          "action": "refuse",
+          "purchase_id": null
+        },
+        "usage": null
+      }
+    ],
+    "llm_attempts": 0,
+    "tool_calls": 0,
+    "latency_ms": 0.21
+  }
+}

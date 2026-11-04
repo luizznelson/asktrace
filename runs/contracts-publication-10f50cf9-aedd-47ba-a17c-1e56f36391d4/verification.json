@@ -1,0 +1,145 @@
+{
+  "verified_at": "2026-11-04T23:51:11.419051+00:00",
+  "coverage_report": "runs/contracts-resume-9a175343-9dde-49dc-b1e5-dcf5e760d139/coverage.json",
+  "coverage_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8",
+  "database_counts": {
+    "purchases": 2537,
+    "covered_purchases": 2536,
+    "purchases_with_contracts": 370,
+    "none_returned": 2166,
+    "contracts": 679,
+    "unknown_awarded_values": 1354
+  },
+  "eligible": 2536,
+  "remaining_eligible": 0,
+  "excluded_purchases": [
+    {
+      "purchase_id": "01612569000170-1-000001/20226",
+      "reason": "invalid_purchase_locator",
+      "source_body_sha256": "8012175bdece57ce0b07537ea268ec25071ca709d426e6199705e7f3d5dcd99f",
+      "source_record_index": 21
+    }
+  ],
+  "idempotent_loads": [
+    {
+      "path": "runs/contracts-2a0d1e37-dc0e-4006-85bd-f4596efe74dc/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-81373ad4-b9c0-485d-b05e-4aa8b4c3f3d9/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-b3f4b79b-e150-4950-8052-dfe7965c0265/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-0f8b609d-eda8-44cd-b8e6-dbe63ead3539/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-b72db837-7c33-4cf7-9bbf-92cdb60aafca/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-c807de5a-af97-4da6-ade3-f9b6f48204e0/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-400058da-8639-4e24-91ae-0f4cd88ec35f/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-4337c6df-eb35-4cdf-9c5b-9f5a05708a98/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-89e726b1-e834-4822-afc1-6c957758853f/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-d835f174-f257-4c3d-bf96-3c38152ca150/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-8daf0b0e-ae44-4be4-82e2-9380e367a327/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-0cd87855-8c42-4211-a684-20cc1ee4f075/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-b3783e00-6cc6-4a77-ac1c-717d1562fe4a/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-8ef04141-540f-4f8a-83eb-8995a6c5e1ff/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-95e131ea-3ac2-4350-960f-58ca4335873e/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-df2309c6-cff0-4a77-92ed-c66d9710a6c7/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-82b3b702-07aa-48b1-a5a3-80a4a41d3aac/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-101a6e81-e103-4e69-a010-ec0d11f58877/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-30d22db4-ae5d-4346-a0c2-941f512d1b83/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-f3ba3ee5-74fd-4773-ba72-dbc19929214b/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-ef22d722-465a-42a2-8b4e-5b8453c1cb02/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-f261ffdc-3a4c-41e0-a57d-ab048f94bbdc/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-5d569f9c-661d-4d0f-9a11-5ec51c9d912a/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-04f49a9e-7b29-4f52-90df-0856cfbfc678/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-cac6ee21-1fc8-4218-a55d-804e0c0469fb/manifest.json",
+      "load_result": "already_loaded"
+    },
+    {
+      "path": "runs/contracts-5877bdf4-9476-4ce3-ad6f-36e3de6fbdcd/manifest.json",
+      "load_result": "already_loaded"
+    }
+  ],
+  "purchase_checks": [
+    {
+      "purchase_id": "00394452000103-1-011584/2026",
+      "outcome": "with_contracts",
+      "contracts": 1
+    },
+    {
+      "purchase_id": "00348003000110-1-000197/2026",
+      "outcome": "none_returned",
+      "contracts": 0
+    }
+  ],
+  "previous_coverage": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+  "config_before_sha256": "13a27dad33fc34b7b1c60e152c22a33e39492d84143a27550c4e8970d8fef3ed",
+  "config_after_sha256": "ff479c201c0172bc99cf30769ef3c56c7bb01cbf5b1c3f67a7718c20782377f4",
+  "external_api_calls": 0
+}

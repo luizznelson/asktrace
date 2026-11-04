@@ -488,6 +488,40 @@ vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
     assert.equal(get("download-csv").hidden, true);
     get("discovery").children[4].click();
     assert.match(get("question").value, /órgãos/);
+    datasets[0].coverage_sha256 = "b".repeat(64);
+    context.updatedDatasets = datasets;
+    context.savedResult = result;
+    store.set(
+        "asktrace.session.v1",
+        JSON.stringify({
+            version: 1,
+            dataset: "original",
+            language: "pt",
+            entries: [{ id: "old-result", dataset: "original", data: result }],
+        }),
+    );
+    vm.runInContext(
+        'latest=null;initializeDatasets({datasets:updatedDatasets,default_dataset:"original"})',
+        context,
+    );
+    assert.equal(
+        vm.runInContext("latest===null", context),
+        true,
+        "Outdated answers must not auto-restore as current",
+    );
+    get("history").children[0].click();
+    assert.equal(get("result-freshness").hidden, false);
+    assert.match(get("result-freshness").textContent, /versão anterior/);
+    assert.equal(
+        JSON.stringify(result.evidence.coverage_report_sha256),
+        JSON.stringify("a".repeat(64)),
+        "History stays immutable",
+    );
+    vm.runInContext('lang="en";render(savedResult)', context);
+    assert.match(
+        get("result-freshness").textContent,
+        /earlier dataset version/,
+    );
     console.log(
         "Assistant session persistence and DOM contract passed: discovery, submit, response, suggestions, history, language, reset, session.",
     );

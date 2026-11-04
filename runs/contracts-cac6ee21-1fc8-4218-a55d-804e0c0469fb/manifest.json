@@ -1,0 +1,2383 @@
+{
+  "schema_version": 2,
+  "selection_offset": 2400,
+  "run_id": "cac6ee21-1fc8-4218-a55d-804e0c0469fb",
+  "parent_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+  "parent_manifest_sha256": "1b65abd11c13bd9d2782d4dc519fc35c25fe32fa2cda0319ab3909d4e4f5558a",
+  "started_at": "2026-11-04T22:24:33.550164+00:00",
+  "status": "pilot_complete",
+  "selection": "round_robin_valid_locators_month_then_control_id_v2",
+  "excluded_purchases": [
+    {
+      "purchase_id": "01612569000170-1-000001/20226",
+      "reason": "invalid_purchase_locator",
+      "source_body_sha256": "8012175bdece57ce0b07537ea268ec25071ca709d426e6199705e7f3d5dcd99f",
+      "source_record_index": 21
+    }
+  ],
+  "population": 2537,
+  "selected": [
+    {
+      "purchase_id": "41263856000137-1-000008/2026",
+      "cnpj": "41263856000137",
+      "year": 2026,
+      "sequence": 8
+    },
+    {
+      "purchase_id": "06981344000105-1-000084/2026",
+      "cnpj": "06981344000105",
+      "year": 2026,
+      "sequence": 84
+    },
+    {
+      "purchase_id": "41263856000137-1-000009/2026",
+      "cnpj": "41263856000137",
+      "year": 2026,
+      "sequence": 9
+    },
+    {
+      "purchase_id": "06981344000105-1-000085/2026",
+      "cnpj": "06981344000105",
+      "year": 2026,
+      "sequence": 85
+    },
+    {
+      "purchase_id": "41263856000137-1-000011/2026",
+      "cnpj": "41263856000137",
+      "year": 2026,
+      "sequence": 11
+    },
+    {
+      "purchase_id": "06985832000190-1-000025/2026",
+      "cnpj": "06985832000190",
+      "year": 2026,
+      "sequence": 25
+    },
+    {
+      "purchase_id": "41522111000145-1-000027/2026",
+      "cnpj": "41522111000145",
+      "year": 2026,
+      "sequence": 27
+    },
+    {
+      "purchase_id": "06985832000190-1-000026/2026",
+      "cnpj": "06985832000190",
+      "year": 2026,
+      "sequence": 26
+    },
+    {
+      "purchase_id": "41522111000145-1-000030/2026",
+      "cnpj": "41522111000145",
+      "year": 2026,
+      "sequence": 30
+    },
+    {
+      "purchase_id": "06985832000190-1-000027/2026",
+      "cnpj": "06985832000190",
+      "year": 2026,
+      "sequence": 27
+    },
+    {
+      "purchase_id": "41522137000193-1-000021/2026",
+      "cnpj": "41522137000193",
+      "year": 2026,
+      "sequence": 21
+    },
+    {
+      "purchase_id": "07165549000185-1-000009/2026",
+      "cnpj": "07165549000185",
+      "year": 2026,
+      "sequence": 9
+    },
+    {
+      "purchase_id": "41522137000193-1-000022/2026",
+      "cnpj": "41522137000193",
+      "year": 2026,
+      "sequence": 22
+    },
+    {
+      "purchase_id": "07165549000185-1-000010/2026",
+      "cnpj": "07165549000185",
+      "year": 2026,
+      "sequence": 10
+    },
+    {
+      "purchase_id": "41522137000193-1-000025/2026",
+      "cnpj": "41522137000193",
+      "year": 2026,
+      "sequence": 25
+    },
+    {
+      "purchase_id": "07217342000107-1-000012/2026",
+      "cnpj": "07217342000107",
+      "year": 2026,
+      "sequence": 12
+    },
+    {
+      "purchase_id": "41522145000130-1-000002/2026",
+      "cnpj": "41522145000130",
+      "year": 2026,
+      "sequence": 2
+    },
+    {
+      "purchase_id": "07217342000107-1-000013/2026",
+      "cnpj": "07217342000107",
+      "year": 2026,
+      "sequence": 13
+    },
+    {
+      "purchase_id": "41522145000130-1-000003/2026",
+      "cnpj": "41522145000130",
+      "year": 2026,
+      "sequence": 3
+    },
+    {
+      "purchase_id": "07217342000107-1-000014/2026",
+      "cnpj": "07217342000107",
+      "year": 2026,
+      "sequence": 14
+    },
+    {
+      "purchase_id": "41522145000130-1-000004/2026",
+      "cnpj": "41522145000130",
+      "year": 2026,
+      "sequence": 4
+    },
+    {
+      "purchase_id": "07217342000107-1-000015/2026",
+      "cnpj": "07217342000107",
+      "year": 2026,
+      "sequence": 15
+    },
+    {
+      "purchase_id": "41522145000130-1-000027/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 27
+    },
+    {
+      "purchase_id": "08789777000199-1-000059/2026",
+      "cnpj": "08789777000199",
+      "year": 2026,
+      "sequence": 59
+    },
+    {
+      "purchase_id": "41522145000130-1-000028/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 28
+    },
+    {
+      "purchase_id": "08839135000157-1-000004/2026",
+      "cnpj": "08839135000157",
+      "year": 2026,
+      "sequence": 4
+    },
+    {
+      "purchase_id": "41522145000130-1-000029/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 29
+    },
+    {
+      "purchase_id": "09579079000121-1-000002/2026",
+      "cnpj": "09579079000121",
+      "year": 2026,
+      "sequence": 2
+    },
+    {
+      "purchase_id": "41522145000130-1-000030/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 30
+    },
+    {
+      "purchase_id": "10560403000149-1-000039/2026",
+      "cnpj": "10560403000149",
+      "year": 2026,
+      "sequence": 39
+    },
+    {
+      "purchase_id": "41522145000130-1-000031/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 31
+    },
+    {
+      "purchase_id": "10640637000104-1-000003/2026",
+      "cnpj": "10640637000104",
+      "year": 2026,
+      "sequence": 3
+    },
+    {
+      "purchase_id": "41522145000130-1-000032/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 32
+    },
+    {
+      "purchase_id": "10806496000149-1-000052/2026",
+      "cnpj": "10806496000149",
+      "year": 2026,
+      "sequence": 52
+    },
+    {
+      "purchase_id": "41522145000130-1-000033/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 33
+    },
+    {
+      "purchase_id": "10806496000149-1-000053/2026",
+      "cnpj": "10806496000149",
+      "year": 2026,
+      "sequence": 53
+    },
+    {
+      "purchase_id": "41522145000130-1-000034/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 34
+    },
+    {
+      "purchase_id": "10806496000149-1-000054/2026",
+      "cnpj": "10806496000149",
+      "year": 2026,
+      "sequence": 54
+    },
+    {
+      "purchase_id": "41522145000130-1-000035/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 35
+    },
+    {
+      "purchase_id": "10806496000149-1-000057/2026",
+      "cnpj": "10806496000149",
+      "year": 2026,
+      "sequence": 57
+    },
+    {
+      "purchase_id": "41522145000130-1-000036/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 36
+    },
+    {
+      "purchase_id": "10806496000149-1-000061/2026",
+      "cnpj": "10806496000149",
+      "year": 2026,
+      "sequence": 61
+    },
+    {
+      "purchase_id": "41522145000130-1-000037/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 37
+    },
+    {
+      "purchase_id": "12066973000102-1-000041/2026",
+      "cnpj": "12066973000102",
+      "year": 2026,
+      "sequence": 41
+    },
+    {
+      "purchase_id": "41522145000130-1-000038/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 38
+    },
+    {
+      "purchase_id": "12066973000102-1-000043/2026",
+      "cnpj": "12066973000102",
+      "year": 2026,
+      "sequence": 43
+    },
+    {
+      "purchase_id": "41522145000130-1-000039/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 39
+    },
+    {
+      "purchase_id": "12066973000102-1-000045/2026",
+      "cnpj": "12066973000102",
+      "year": 2026,
+      "sequence": 45
+    },
+    {
+      "purchase_id": "41522145000130-1-000040/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 40
+    },
+    {
+      "purchase_id": "15126437000305-1-002194/2026",
+      "cnpj": "15126437000305",
+      "year": 2026,
+      "sequence": 2194
+    },
+    {
+      "purchase_id": "41522145000130-1-000041/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 41
+    },
+    {
+      "purchase_id": "15126437000305-1-002197/2026",
+      "cnpj": "15126437000305",
+      "year": 2026,
+      "sequence": 2197
+    },
+    {
+      "purchase_id": "41522145000130-1-000042/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 42
+    },
+    {
+      "purchase_id": "15126437000305-1-002204/2026",
+      "cnpj": "15126437000305",
+      "year": 2026,
+      "sequence": 2204
+    },
+    {
+      "purchase_id": "41522145000130-1-000043/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 43
+    },
+    {
+      "purchase_id": "15126437000305-1-002205/2026",
+      "cnpj": "15126437000305",
+      "year": 2026,
+      "sequence": 2205
+    },
+    {
+      "purchase_id": "41522145000130-1-000044/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 44
+    },
+    {
+      "purchase_id": "15126437000305-1-002258/2026",
+      "cnpj": "15126437000305",
+      "year": 2026,
+      "sequence": 2258
+    },
+    {
+      "purchase_id": "41522145000130-1-000045/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 45
+    },
+    {
+      "purchase_id": "15126437000305-1-002349/2026",
+      "cnpj": "15126437000305",
+      "year": 2026,
+      "sequence": 2349
+    },
+    {
+      "purchase_id": "41522145000130-1-000046/2025",
+      "cnpj": "41522145000130",
+      "year": 2025,
+      "sequence": 46
+    },
+    {
+      "purchase_id": "23518426000137-1-000002/2026",
+      "cnpj": "23518426000137",
+      "year": 2026,
+      "sequence": 2
+    },
+    {
+      "purchase_id": "41522152000131-1-000016/2026",
+      "cnpj": "41522152000131",
+      "year": 2026,
+      "sequence": 16
+    },
+    {
+      "purchase_id": "23584127000109-1-000025/2026",
+      "cnpj": "23584127000109",
+      "year": 2026,
+      "sequence": 25
+    },
+    {
+      "purchase_id": "41522178000180-1-000046/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 46
+    },
+    {
+      "purchase_id": "26989715000102-1-000837/2026",
+      "cnpj": "26989715000102",
+      "year": 2026,
+      "sequence": 837
+    },
+    {
+      "purchase_id": "41522178000180-1-000047/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 47
+    },
+    {
+      "purchase_id": "33519114000100-1-000012/2026",
+      "cnpj": "33519114000100",
+      "year": 2026,
+      "sequence": 12
+    },
+    {
+      "purchase_id": "41522178000180-1-000049/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 49
+    },
+    {
+      "purchase_id": "41263856000137-1-000013/2026",
+      "cnpj": "41263856000137",
+      "year": 2026,
+      "sequence": 13
+    },
+    {
+      "purchase_id": "41522178000180-1-000051/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 51
+    },
+    {
+      "purchase_id": "41522111000145-1-000032/2026",
+      "cnpj": "41522111000145",
+      "year": 2026,
+      "sequence": 32
+    },
+    {
+      "purchase_id": "41522178000180-1-000052/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 52
+    },
+    {
+      "purchase_id": "41522111000145-1-000033/2026",
+      "cnpj": "41522111000145",
+      "year": 2026,
+      "sequence": 33
+    },
+    {
+      "purchase_id": "41522178000180-1-000053/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 53
+    },
+    {
+      "purchase_id": "41522129000147-1-000009/2026",
+      "cnpj": "41522129000147",
+      "year": 2026,
+      "sequence": 9
+    },
+    {
+      "purchase_id": "41522228000129-1-000011/2026",
+      "cnpj": "41522228000129",
+      "year": 2026,
+      "sequence": 11
+    },
+    {
+      "purchase_id": "41522137000193-1-000026/2026",
+      "cnpj": "41522137000193",
+      "year": 2026,
+      "sequence": 26
+    },
+    {
+      "purchase_id": "41522236000175-1-000033/2026",
+      "cnpj": "41522236000175",
+      "year": 2026,
+      "sequence": 33
+    },
+    {
+      "purchase_id": "41522145000130-1-000005/2026",
+      "cnpj": "41522145000130",
+      "year": 2026,
+      "sequence": 5
+    },
+    {
+      "purchase_id": "41522236000175-1-000037/2026",
+      "cnpj": "41522236000175",
+      "year": 2026,
+      "sequence": 37
+    },
+    {
+      "purchase_id": "41522152000131-1-000017/2026",
+      "cnpj": "41522152000131",
+      "year": 2026,
+      "sequence": 17
+    },
+    {
+      "purchase_id": "41522236000175-1-000038/2026",
+      "cnpj": "41522236000175",
+      "year": 2026,
+      "sequence": 38
+    },
+    {
+      "purchase_id": "41522152000131-1-000018/2026",
+      "cnpj": "41522152000131",
+      "year": 2026,
+      "sequence": 18
+    },
+    {
+      "purchase_id": "41522251000113-1-000012/2026",
+      "cnpj": "41522251000113",
+      "year": 2026,
+      "sequence": 12
+    },
+    {
+      "purchase_id": "41522152000131-1-000019/2026",
+      "cnpj": "41522152000131",
+      "year": 2026,
+      "sequence": 19
+    },
+    {
+      "purchase_id": "41522277000161-1-000014/2026",
+      "cnpj": "41522277000161",
+      "year": 2026,
+      "sequence": 14
+    },
+    {
+      "purchase_id": "41522152000131-1-000020/2026",
+      "cnpj": "41522152000131",
+      "year": 2026,
+      "sequence": 20
+    },
+    {
+      "purchase_id": "41522301000162-1-000009/2026",
+      "cnpj": "41522301000162",
+      "year": 2026,
+      "sequence": 9
+    },
+    {
+      "purchase_id": "41522152000131-1-000021/2026",
+      "cnpj": "41522152000131",
+      "year": 2026,
+      "sequence": 21
+    },
+    {
+      "purchase_id": "41522319000164-1-000013/2026",
+      "cnpj": "41522319000164",
+      "year": 2026,
+      "sequence": 13
+    },
+    {
+      "purchase_id": "41522160000188-1-000004/2026",
+      "cnpj": "41522160000188",
+      "year": 2026,
+      "sequence": 4
+    },
+    {
+      "purchase_id": "41522319000164-1-000014/2026",
+      "cnpj": "41522319000164",
+      "year": 2026,
+      "sequence": 14
+    },
+    {
+      "purchase_id": "41522178000180-1-000054/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 54
+    },
+    {
+      "purchase_id": "41522327000100-1-000010/2026",
+      "cnpj": "41522327000100",
+      "year": 2026,
+      "sequence": 10
+    },
+    {
+      "purchase_id": "41522178000180-1-000055/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 55
+    },
+    {
+      "purchase_id": "41522327000100-1-000011/2026",
+      "cnpj": "41522327000100",
+      "year": 2026,
+      "sequence": 11
+    },
+    {
+      "purchase_id": "41522178000180-1-000056/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 56
+    },
+    {
+      "purchase_id": "41522350000103-1-000015/2026",
+      "cnpj": "41522350000103",
+      "year": 2026,
+      "sequence": 15
+    },
+    {
+      "purchase_id": "41522178000180-1-000057/2026",
+      "cnpj": "41522178000180",
+      "year": 2026,
+      "sequence": 57
+    }
+  ],
+  "requests": [
+    {
+      "purchase_id": "41263856000137-1-000008/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41263856000137/contratos/contratacao/2026/8?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:33.765270+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0000-page-0001.json",
+          "body_sha256": "a3493ca7ebda777ae71d974e131ac87ae3d64174360eeed469d6e86a61fa7c3f"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "06981344000105-1-000084/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/06981344000105/contratos/contratacao/2026/84?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:24:35.045889+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0001-page-0001.json",
+          "body_sha256": "cdab835ffea3e183a9344a4ef15d455593834966507119f64f6b6e5a967b488d"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 1
+    },
+    {
+      "purchase_id": "41263856000137-1-000009/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41263856000137/contratos/contratacao/2026/9?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:24:36.287639+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0002-page-0001.json",
+          "body_sha256": "0280f7bf34886e391a51818061eadca0502808d39561e01943ffd663df846d8e"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 1
+    },
+    {
+      "purchase_id": "06981344000105-1-000085/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/06981344000105/contratos/contratacao/2026/85?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:24:37.516276+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0003-page-0001.json",
+          "body_sha256": "5f332e0769978d3b392d2ac9357e14c032a220a509befe148faa369abbada8e2"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 2
+    },
+    {
+      "purchase_id": "41263856000137-1-000011/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41263856000137/contratos/contratacao/2026/11?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:24:38.854264+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0004-page-0001.json",
+          "body_sha256": "a699dcabf778c22c56fe1a6d0fbef372f7e8cd71ab7270b1ade5aabe37c9062d"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 7
+    },
+    {
+      "purchase_id": "06985832000190-1-000025/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/06985832000190/contratos/contratacao/2026/25?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:40.081938+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0005-page-0001.json",
+          "body_sha256": "1c7b8d8a0388d08ca96ac0d517114f8af2dd83ec09a498001dd3205234ac5b99"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522111000145-1-000027/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522111000145/contratos/contratacao/2026/27?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:41.319513+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0006-page-0001.json",
+          "body_sha256": "782280810b65171af67e2f63475553cd67d2f4bb5855df4e5692edd2e083b359"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "06985832000190-1-000026/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/06985832000190/contratos/contratacao/2026/26?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:42.559045+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0007-page-0001.json",
+          "body_sha256": "2f8e8ef4dfeaeed14b1c05c7734f4e9123af9615224816a33f271e86b6917078"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522111000145-1-000030/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522111000145/contratos/contratacao/2026/30?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:43.810109+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0008-page-0001.json",
+          "body_sha256": "cb65204ea9e5ac0fee9df9c6ba8585d417749c011365d4999b96a2a5c6081cce"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "06985832000190-1-000027/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/06985832000190/contratos/contratacao/2026/27?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:45.026999+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0009-page-0001.json",
+          "body_sha256": "f4f88426718be8e0708e9b21af40df795df1172f27962f8986b07f58c09f3e25"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522137000193-1-000021/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522137000193/contratos/contratacao/2026/21?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:46.264919+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0010-page-0001.json",
+          "body_sha256": "18cd18aeac963075cb195cbb2184a44cb34e72b2b7bdc7c1efb6d30b262c34e4"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "07165549000185-1-000009/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/07165549000185/contratos/contratacao/2026/9?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:47.502978+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0011-page-0001.json",
+          "body_sha256": "0593a8c1bcaf23262c146a775b7e5a6153ea9a113a5dcc12b58b7a3e3e664ff1"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522137000193-1-000022/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522137000193/contratos/contratacao/2026/22?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:48.748372+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0012-page-0001.json",
+          "body_sha256": "00139cdb4ce59a5988dd0db21052d7abd04b4b7f9e9aea7323d8c4a64f20a0a4"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "07165549000185-1-000010/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/07165549000185/contratos/contratacao/2026/10?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:49.984204+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0013-page-0001.json",
+          "body_sha256": "82bf3b8055caf3af6f5569661f4b355f4da513480758ceb6bc49edb07c7b39dd"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522137000193-1-000025/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522137000193/contratos/contratacao/2026/25?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:51.240999+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0014-page-0001.json",
+          "body_sha256": "79912e91d165e7fd918a0a6afcc305401f7ed8bbf6e6e07e39c75b5cf5ff21d2"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "07217342000107-1-000012/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/07217342000107/contratos/contratacao/2026/12?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:52.484728+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0015-page-0001.json",
+          "body_sha256": "b6c479b6112def34edeaf366b92f3932f530cbbdf64c9561b1d2558eb2950296"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000002/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2026/2?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:53.733281+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0016-page-0001.json",
+          "body_sha256": "f6cac1a080f52adced8b459c5e2e34fdf55bec0fdb143e95b8605bbde6ff95cd"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "07217342000107-1-000013/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/07217342000107/contratos/contratacao/2026/13?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:24:55.017286+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0017-page-0001.json",
+          "body_sha256": "7c4b071e9eb75e8018c892426c1c1c257e3a2851559f1fa93cb7816cc40c3374"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 2
+    },
+    {
+      "purchase_id": "41522145000130-1-000003/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2026/3?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:56.259742+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0018-page-0001.json",
+          "body_sha256": "056dd1dd8deee47b52fb8d652460d2955285ca5bb039d29b2003e6ee3b0ac67e"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "07217342000107-1-000014/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/07217342000107/contratos/contratacao/2026/14?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:57.509839+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0019-page-0001.json",
+          "body_sha256": "5c206226a47dc664466c0d6f83a0c38da773b819f3fc6aaed60a05298a86d36e"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000004/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2026/4?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:58.754651+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0020-page-0001.json",
+          "body_sha256": "46c7e7f9b08e0c2b30b0c5c210a79f63878456ce4e8f3527335a8ff66e97d838"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "07217342000107-1-000015/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/07217342000107/contratos/contratacao/2026/15?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:24:59.965699+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0021-page-0001.json",
+          "body_sha256": "c3c6462083afd1954963651ddefc8cbd5b7aad65d6eba7518ba32c498b55d450"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000027/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/27?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:01.248144+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0022-page-0001.json",
+          "body_sha256": "346fce202281c989817cfcd2d29f44aee7745435892bc3d86f19d3ec915fbf91"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "08789777000199-1-000059/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/08789777000199/contratos/contratacao/2026/59?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:02.493135+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0023-page-0001.json",
+          "body_sha256": "12004bd1b83a6b6d0ef1f5761c5937f79cb509320a290ce2609cfb9844eecd49"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000028/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/28?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:03.748107+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0024-page-0001.json",
+          "body_sha256": "03c54ec860ea65ecb7142f8c4609db10331db4dc02b05c856d97c8bb8f0cdd70"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "08839135000157-1-000004/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/08839135000157/contratos/contratacao/2026/4?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:05.000665+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0025-page-0001.json",
+          "body_sha256": "6724bd9cb1096c9ff21d5d3b67c703bc9df6744e0afff169470cab64a25e0fe2"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000029/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/29?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:06.243877+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0026-page-0001.json",
+          "body_sha256": "d32a3a4d22d83f510386f5c4dda7af21927519ab338c6c7db8e31b9ebd3cf01f"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "09579079000121-1-000002/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/09579079000121/contratos/contratacao/2026/2?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:07.465214+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0027-page-0001.json",
+          "body_sha256": "0725667c67a35dcb930a646fc4c04b509e9019b2ec127fc2483bf7c4ac00eacd"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000030/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/30?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:08.700096+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0028-page-0001.json",
+          "body_sha256": "db164cad3d6e726cc87ea8650830bb3b06de3a210b7f8bf3faf598a9cccc7962"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "10560403000149-1-000039/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/10560403000149/contratos/contratacao/2026/39?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:09.924140+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0029-page-0001.json",
+          "body_sha256": "e9132a5b45a7fce5487ac2a09c629cb2348d0380ec284faefa3c84b9be1e853c"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000031/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/31?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:11.172583+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0030-page-0001.json",
+          "body_sha256": "40c880a51b3e9f51724510e151795353bce34e9f6e64021cc4e29667246eab2f"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "10640637000104-1-000003/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/10640637000104/contratos/contratacao/2026/3?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:25:12.442471+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0031-page-0001.json",
+          "body_sha256": "ca341ed92b52ef7a7aa0f900bb6c81db1e03bd01f2ddea7817ff727147b07448"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 1
+    },
+    {
+      "purchase_id": "41522145000130-1-000032/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/32?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:13.677181+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0032-page-0001.json",
+          "body_sha256": "ed5e0ae6fd23b426e0a83c09b9767679bd2c9a7f502fdcd089340030682f93c6"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "10806496000149-1-000052/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/10806496000149/contratos/contratacao/2026/52?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:14.923121+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0033-page-0001.json",
+          "body_sha256": "1600bcf0159d43713d7c77223a0e335e9507b961b1de8172f50d0557492df9c8"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000033/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/33?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:16.133364+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0034-page-0001.json",
+          "body_sha256": "226b0963f0cd59bc245612f8bb605745866c5338931cdc4a43fe07febfd9e027"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "10806496000149-1-000053/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/10806496000149/contratos/contratacao/2026/53?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:25:17.421410+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0035-page-0001.json",
+          "body_sha256": "cec1097e2d7c2fccfb9bcc9e57afd4b6fa92d1c1ce8ea6364053ed7048a02aa4"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 1
+    },
+    {
+      "purchase_id": "41522145000130-1-000034/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/34?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:18.674005+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0036-page-0001.json",
+          "body_sha256": "db0c54ff31e89c35eebd7114824ce99ab24887803938d7d7ff4cc1c74dba6ff5"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "10806496000149-1-000054/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/10806496000149/contratos/contratacao/2026/54?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:25:20.134486+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0037-page-0001.json",
+          "body_sha256": "840fd9a34a85f21fd64f5a4914f4cee4c4370357f66499a8f9773bc712de607b"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 31
+    },
+    {
+      "purchase_id": "41522145000130-1-000035/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/35?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:21.375581+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0038-page-0001.json",
+          "body_sha256": "38321e4f4a3d2cc7b4c8947f53d8ab0bc53f79e5e6689d066e84e69ded002a74"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "10806496000149-1-000057/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/10806496000149/contratos/contratacao/2026/57?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:22.621225+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0039-page-0001.json",
+          "body_sha256": "ba31aeb1b02a23df052e7827eb5a0675c1f3970ec6e12bbc95af9da531def190"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000036/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/36?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:23.865562+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0040-page-0001.json",
+          "body_sha256": "70ffc5835021459692d039b65ce623e229dda073c3a815363e14061da2fb3ea7"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "10806496000149-1-000061/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/10806496000149/contratos/contratacao/2026/61?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:25:25.189901+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0041-page-0001.json",
+          "body_sha256": "8233418061835ca3186c69154e47a08c2bea08e9697ac3110f481dec0aab748d"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 1
+    },
+    {
+      "purchase_id": "41522145000130-1-000037/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/37?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:26.429952+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0042-page-0001.json",
+          "body_sha256": "d78b429aef27dde4f9038971edf1f4e87d6981ed997afb88a26f76dc6a627ee7"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "12066973000102-1-000041/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/12066973000102/contratos/contratacao/2026/41?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:27.676580+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0043-page-0001.json",
+          "body_sha256": "c718fa12a1c9e900ee9f674330c729d1fa8bf335cdacbf83f79491b7e3702303"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000038/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/38?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:28.958846+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0044-page-0001.json",
+          "body_sha256": "8073c0c27c90cb9431f464548a79bb02e276b1186b24123a82a0e7116ef771d5"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "12066973000102-1-000043/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/12066973000102/contratos/contratacao/2026/43?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:30.185808+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0045-page-0001.json",
+          "body_sha256": "9172da3d26b5429836bed1b00a74974ef2c2ac9ae00c5317c5523f9d3477b404"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000039/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/39?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:31.408811+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0046-page-0001.json",
+          "body_sha256": "5c4ab700d9b9204330c9269cd7503b3ba62ed76328e9dc6312fd76b59451f279"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "12066973000102-1-000045/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/12066973000102/contratos/contratacao/2026/45?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:32.647085+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0047-page-0001.json",
+          "body_sha256": "ba91c7205e2b0c2f54c6659e3f3724d84f9e7c17ab08c88cc3944f65f6b136d5"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000040/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/40?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:33.894844+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0048-page-0001.json",
+          "body_sha256": "add404c4f39d8e99af7f919505195cff46ee4d8ec77a24066250bedfcfcd722e"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "15126437000305-1-002194/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/15126437000305/contratos/contratacao/2026/2194?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:35.157541+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0049-page-0001.json",
+          "body_sha256": "92e3d85c4b3f34f5e3b958c938b6645ee3fca5bab6a3825254e07567c9c66af6"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000041/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/41?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:36.391589+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0050-page-0001.json",
+          "body_sha256": "672f272cc77941d63de777f0c8762abfa1394d02204d7fa1f865af80b4594394"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "15126437000305-1-002197/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/15126437000305/contratos/contratacao/2026/2197?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:37.645319+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0051-page-0001.json",
+          "body_sha256": "5ab94941c3042fb25f74a1c4a96512f75b12a9c14e22ebfbee461d936f23868e"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000042/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/42?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:38.885400+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0052-page-0001.json",
+          "body_sha256": "2d241c7455238a58d54daf74ecf0ba3427e185a712c8cd6bfd8a76dd471144d1"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "15126437000305-1-002204/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/15126437000305/contratos/contratacao/2026/2204?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:40.111627+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0053-page-0001.json",
+          "body_sha256": "65ad3326b5d5d0dff22c01fa324c2772a69f7da649fac0b5625e129c26937758"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000043/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/43?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:41.351114+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0054-page-0001.json",
+          "body_sha256": "2715d1cd29da9411c6467526ead287d65e2ecb87379d67b1d7ea2ac76124be30"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "15126437000305-1-002205/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/15126437000305/contratos/contratacao/2026/2205?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:42.599628+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0055-page-0001.json",
+          "body_sha256": "0cfd33d7fa55911db258b79985635d6a9bb628fb91d30b6a3a9e91fa0dabbdd1"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000044/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/44?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:43.885877+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0056-page-0001.json",
+          "body_sha256": "4121ffa7ff20716201a79ee607cccf0858901b22a9e2983b5b95a53b7f349568"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "15126437000305-1-002258/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/15126437000305/contratos/contratacao/2026/2258?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:25:45.134810+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0057-page-0001.json",
+          "body_sha256": "b6352b7b595b1cebbeb03b51f468fb2df1f0ab463e05486c13953be87c121bf3"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 1
+    },
+    {
+      "purchase_id": "41522145000130-1-000045/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/45?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:46.349215+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0058-page-0001.json",
+          "body_sha256": "dc8b5c4c4067cb90da62c7552043d343a9b4509a4292fa1ea20f5fdac5f38af5"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "15126437000305-1-002349/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/15126437000305/contratos/contratacao/2026/2349?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:47.607539+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0059-page-0001.json",
+          "body_sha256": "ae92365eb2021b7412f9bf5e0e9922e1851d993101e3a8144ef3bd7298b07b78"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000046/2025",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2025/46?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:48.852530+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0060-page-0001.json",
+          "body_sha256": "588f5ba53eb666efcfc83c989d0804d4b174f01043bdcf1ed0b5d16f404adb6d"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "23518426000137-1-000002/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/23518426000137/contratos/contratacao/2026/2?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:50.073466+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0061-page-0001.json",
+          "body_sha256": "b7f759c2db7c4f75d004976fd4177eba60b04e2d091f7118a49fc5fed7813a21"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522152000131-1-000016/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522152000131/contratos/contratacao/2026/16?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:51.301688+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0062-page-0001.json",
+          "body_sha256": "cacf5b5173916c5bb50d146074da72b796fbd31da6c6abec4060bc2e6d4f41a4"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "23584127000109-1-000025/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/23584127000109/contratos/contratacao/2026/25?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:25:52.517885+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0063-page-0001.json",
+          "body_sha256": "913520320da2f1cf9f62abb90c328b28df475da432113a9f907ea7f42192b425"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 1
+    },
+    {
+      "purchase_id": "41522178000180-1-000046/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/46?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:53.736404+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0064-page-0001.json",
+          "body_sha256": "05aec097d0e9deec4db821a5ed89cd6e73b5cc8db961db9aaffa0e1d3499fa35"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "26989715000102-1-000837/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/26989715000102/contratos/contratacao/2026/837?pagina=1&tamanhoPagina=50",
+          "http_status": 200,
+          "fetched_at": "2026-11-04T22:25:55.005126+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0065-page-0001.json",
+          "body_sha256": "d87ff0f42d4deb30d205533c78278606b7cc3aafb227d970bcbe9db90e85be38"
+        }
+      ],
+      "outcome": "with_contracts",
+      "contracts_count": 1
+    },
+    {
+      "purchase_id": "41522178000180-1-000047/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/47?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:56.231874+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0066-page-0001.json",
+          "body_sha256": "bc21d2be4e25f9bc70ffc5da157bb37ac379fc50fe5b7d8ee6809fd9c314ba4b"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "33519114000100-1-000012/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/33519114000100/contratos/contratacao/2026/12?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:57.444073+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0067-page-0001.json",
+          "body_sha256": "8ded16cf1362556f591e2cb6f9cb4d7c783d44be0441c99bf54bada287b71730"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522178000180-1-000049/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/49?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:58.689196+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0068-page-0001.json",
+          "body_sha256": "f8d69ecbb619bbafbf5f0f1ffd1c973caf9e960d7d38c1babcaf573dbcc621d0"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41263856000137-1-000013/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41263856000137/contratos/contratacao/2026/13?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:25:59.916513+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0069-page-0001.json",
+          "body_sha256": "5a88a9c618a1ab4360baad2611007a7788787daf38b1d85920b40cdabc750cc0"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522178000180-1-000051/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/51?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:01.179881+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0070-page-0001.json",
+          "body_sha256": "84b5529ad43bb710a3a519e3b00a557076c93f39ca00564df6951f18879d55c6"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522111000145-1-000032/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522111000145/contratos/contratacao/2026/32?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:02.418222+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0071-page-0001.json",
+          "body_sha256": "727c2e8a1ceb8f68a04a0ce2f24321b3c6fc7435dd8b0d9813e4bf6a20853d9d"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522178000180-1-000052/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/52?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:03.659536+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0072-page-0001.json",
+          "body_sha256": "232b649cab0ba1b4de6488cc0a807af472c1b9a8be355d5f62662c99f667e6c8"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522111000145-1-000033/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522111000145/contratos/contratacao/2026/33?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:04.908169+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0073-page-0001.json",
+          "body_sha256": "b92e2488a23d3753784f26f8664a48f74dffc55e4103162b33c96df010424979"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522178000180-1-000053/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/53?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:06.130063+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0074-page-0001.json",
+          "body_sha256": "aa9fbd9adaae2de4a70d289541fb6346abb8ca68508d68935a21fecb1e39d6f1"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522129000147-1-000009/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522129000147/contratos/contratacao/2026/9?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:07.362296+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0075-page-0001.json",
+          "body_sha256": "2de0d173a82dbfd27fc389f26ebd7639b4a7959717fdc784dc3a452c2658f2cc"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522228000129-1-000011/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522228000129/contratos/contratacao/2026/11?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:08.596173+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0076-page-0001.json",
+          "body_sha256": "cd2ee362a0ff00714fd2fe05e4794275ec9b181e902f7d68492cadf78132cd80"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522137000193-1-000026/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522137000193/contratos/contratacao/2026/26?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:09.847743+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0077-page-0001.json",
+          "body_sha256": "ad5236bfa01f18ee1039a8f2c0ea45c7f0807db9d5429f58c2bb2f1ca7d133fc"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522236000175-1-000033/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522236000175/contratos/contratacao/2026/33?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:11.076162+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0078-page-0001.json",
+          "body_sha256": "39f2547ca722f8de025458c166491efe7e8a322f5c8162db479b15f8321583c8"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522145000130-1-000005/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522145000130/contratos/contratacao/2026/5?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:12.347754+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0079-page-0001.json",
+          "body_sha256": "eb4c904d164d5b170dfec94fe3198b4281af5722c24f7d5d013f524a07146c62"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522236000175-1-000037/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522236000175/contratos/contratacao/2026/37?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:13.638597+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0080-page-0001.json",
+          "body_sha256": "42261d433640c0805ac99c216ba97d2bf15dfdbdc3e17b3dbeb140af169337dd"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522152000131-1-000017/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522152000131/contratos/contratacao/2026/17?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:14.892326+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0081-page-0001.json",
+          "body_sha256": "29316b76d27f1c2caa64caace45b31edad648252974beae47cda6c56b7d346f9"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522236000175-1-000038/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522236000175/contratos/contratacao/2026/38?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:16.132588+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0082-page-0001.json",
+          "body_sha256": "e1554d8654a9cec80331023cc029b2236afec4924cfb841b1c8bd6f38923907b"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522152000131-1-000018/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522152000131/contratos/contratacao/2026/18?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:17.363301+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0083-page-0001.json",
+          "body_sha256": "33bb7cf44e3a2c28895b2b33ca15a0ea1e51089ae7742a7f7468f8e552365460"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522251000113-1-000012/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522251000113/contratos/contratacao/2026/12?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:18.610639+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0084-page-0001.json",
+          "body_sha256": "ee76a6937daf68cd87916855c7d9a62f22ffb38e419b7e3e5be2bbb93e176c73"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522152000131-1-000019/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522152000131/contratos/contratacao/2026/19?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:19.843138+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0085-page-0001.json",
+          "body_sha256": "4260fe2cb0ef5e11b04d8c6aae544adcf452fe4e802ac668a977d369e3dbea43"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522277000161-1-000014/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522277000161/contratos/contratacao/2026/14?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:21.063266+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0086-page-0001.json",
+          "body_sha256": "69891cf107c5b291b2f3b26526209e19540bd11bd4dd680feb312e3e6a7545b0"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522152000131-1-000020/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522152000131/contratos/contratacao/2026/20?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:22.308271+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0087-page-0001.json",
+          "body_sha256": "21cb45d696e456688ee5dd9f68bc51e836ff6641c683fcb0ec647d48393e6025"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522301000162-1-000009/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522301000162/contratos/contratacao/2026/9?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:23.553975+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0088-page-0001.json",
+          "body_sha256": "15b4ce9bed27481256928aa58344ea36165290d4fc6841d253ca855ba88a7210"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522152000131-1-000021/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522152000131/contratos/contratacao/2026/21?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:24.806347+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0089-page-0001.json",
+          "body_sha256": "675d37079b1d9083fa1eeea318fcd36f226eabebb4a4a64eeaec0ad65c59dd27"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522319000164-1-000013/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522319000164/contratos/contratacao/2026/13?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:26.053973+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0090-page-0001.json",
+          "body_sha256": "39a57edb91dbaf7fe37ad36504bd3de36ec290e2d43dcaab99c3eb3f7c9b5fec"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522160000188-1-000004/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522160000188/contratos/contratacao/2026/4?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:27.285646+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0091-page-0001.json",
+          "body_sha256": "89ec6d230cba8690d30b7fa8278ef87ad6d7b770ce994c041f83b56d162999da"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522319000164-1-000014/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522319000164/contratos/contratacao/2026/14?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:28.553233+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0092-page-0001.json",
+          "body_sha256": "7fd168e544154c47f7903d6f276b44cb65d44d7f7a1916e3f0ca6db86f50d6e0"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522178000180-1-000054/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/54?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:29.785922+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0093-page-0001.json",
+          "body_sha256": "d4836527fc641d33fabb5fafc6eed3d29e2325951f7de0821375581a422266f7"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522327000100-1-000010/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522327000100/contratos/contratacao/2026/10?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:31.050058+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0094-page-0001.json",
+          "body_sha256": "37ccf0fe311ffa760239994080b1386cbed2bb5764277a3b135e6e05e6267960"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522178000180-1-000055/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/55?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:32.283780+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0095-page-0001.json",
+          "body_sha256": "baae94d03e46578bfe2553be051ae48ffca82f03d2238a0f48dc820f347c7c51"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522327000100-1-000011/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522327000100/contratos/contratacao/2026/11?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:33.532806+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0096-page-0001.json",
+          "body_sha256": "0d895011204e724e96229af3ef0517c374e5aef6c7a2823d9a1990b0ec3efdbc"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522178000180-1-000056/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/56?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:34.763266+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0097-page-0001.json",
+          "body_sha256": "10f0fdf86e80559173ed41dd5bd1910810633b5ab06e32c9d003710493d1e635"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522350000103-1-000015/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522350000103/contratos/contratacao/2026/15?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:35.991585+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0098-page-0001.json",
+          "body_sha256": "f50c4912b6e7ff97e03d3b5fbf6f645f182f7618b9c7d21b280e8e37ea4fa7a1"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    },
+    {
+      "purchase_id": "41522178000180-1-000057/2026",
+      "pages": [
+        {
+          "url": "https://pncp.gov.br/api/pncp/v1/orgaos/41522178000180/contratos/contratacao/2026/57?pagina=1&tamanhoPagina=50",
+          "http_status": 404,
+          "fetched_at": "2026-11-04T22:26:37.248516+00:00",
+          "relative_path": "data/raw/cac6ee21-1fc8-4218-a55d-804e0c0469fb/request-0099-page-0001.json",
+          "body_sha256": "d0c4543147c09878092aab5695817c25b07f71c35dad914cc13c4c2cc7a9dbc6"
+        }
+      ],
+      "outcome": "none_returned",
+      "contracts_count": 0
+    }
+  ],
+  "contracts": [
+    {
+      "contract_id": "06981344000105-2-000503/2026",
+      "purchase_id": "06981344000105-1-000084/2026",
+      "source_record_index": 0,
+      "initial_value": "302860.0000",
+      "global_value": "302860.0000"
+    },
+    {
+      "contract_id": "41263856000137-2-000023/2026",
+      "purchase_id": "41263856000137-1-000009/2026",
+      "source_record_index": 0,
+      "initial_value": "61706.4000",
+      "global_value": "61706.4000"
+    },
+    {
+      "contract_id": "06981344000105-2-000519/2026",
+      "purchase_id": "06981344000105-1-000085/2026",
+      "source_record_index": 0,
+      "initial_value": "21600.0000",
+      "global_value": "21600.0000"
+    },
+    {
+      "contract_id": "06981344000105-2-000520/2026",
+      "purchase_id": "06981344000105-1-000085/2026",
+      "source_record_index": 1,
+      "initial_value": "2910.0000",
+      "global_value": "2910.0000"
+    },
+    {
+      "contract_id": "41263856000137-2-000027/2026",
+      "purchase_id": "41263856000137-1-000011/2026",
+      "source_record_index": 0,
+      "initial_value": "10382.0000",
+      "global_value": "10382.0000"
+    },
+    {
+      "contract_id": "41263856000137-2-000028/2026",
+      "purchase_id": "41263856000137-1-000011/2026",
+      "source_record_index": 1,
+      "initial_value": "2900.0000",
+      "global_value": "2900.0000"
+    },
+    {
+      "contract_id": "41263856000137-2-000029/2026",
+      "purchase_id": "41263856000137-1-000011/2026",
+      "source_record_index": 2,
+      "initial_value": "2627.5000",
+      "global_value": "2627.5000"
+    },
+    {
+      "contract_id": "41263856000137-2-000030/2026",
+      "purchase_id": "41263856000137-1-000011/2026",
+      "source_record_index": 3,
+      "initial_value": "25797.0000",
+      "global_value": "25797.0000"
+    },
+    {
+      "contract_id": "41263856000137-2-000031/2026",
+      "purchase_id": "41263856000137-1-000011/2026",
+      "source_record_index": 4,
+      "initial_value": "29326.3800",
+      "global_value": "29326.3800"
+    },
+    {
+      "contract_id": "41263856000137-2-000025/2026",
+      "purchase_id": "41263856000137-1-000011/2026",
+      "source_record_index": 5,
+      "initial_value": "88910.0000",
+      "global_value": "88910.0000"
+    },
+    {
+      "contract_id": "41263856000137-2-000036/2026",
+      "purchase_id": "41263856000137-1-000011/2026",
+      "source_record_index": 6,
+      "initial_value": "52048.0000",
+      "global_value": "52048.0000"
+    },
+    {
+      "contract_id": "07217342000107-2-000021/2026",
+      "purchase_id": "07217342000107-1-000013/2026",
+      "source_record_index": 0,
+      "initial_value": "651960.0000",
+      "global_value": "651960.0000"
+    },
+    {
+      "contract_id": "07217342000107-2-000022/2026",
+      "purchase_id": "07217342000107-1-000013/2026",
+      "source_record_index": 1,
+      "initial_value": "285000.0000",
+      "global_value": "285000.0000"
+    },
+    {
+      "contract_id": "10640637000104-2-000006/2026",
+      "purchase_id": "10640637000104-1-000003/2026",
+      "source_record_index": 0,
+      "initial_value": "505750.0000",
+      "global_value": "505750.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000356/2026",
+      "purchase_id": "10806496000149-1-000053/2026",
+      "source_record_index": 0,
+      "initial_value": "58420.0000",
+      "global_value": "58420.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000353/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 0,
+      "initial_value": "998.0000",
+      "global_value": "998.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000340/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 1,
+      "initial_value": "1996.0000",
+      "global_value": "1996.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000341/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 2,
+      "initial_value": "10879.8800",
+      "global_value": "10879.8800"
+    },
+    {
+      "contract_id": "10806496000149-2-000343/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 3,
+      "initial_value": "3680.0000",
+      "global_value": "3680.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000344/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 4,
+      "initial_value": "16350.0000",
+      "global_value": "16350.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000342/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 5,
+      "initial_value": "2826.4000",
+      "global_value": "2826.4000"
+    },
+    {
+      "contract_id": "10806496000149-2-000575/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 6,
+      "initial_value": "2457.7300",
+      "global_value": "2457.7300"
+    },
+    {
+      "contract_id": "10806496000149-2-000576/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 7,
+      "initial_value": "6878.0000",
+      "global_value": "6878.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000577/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 8,
+      "initial_value": "16350.0000",
+      "global_value": "16350.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000578/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 9,
+      "initial_value": "12087.0000",
+      "global_value": "12087.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000579/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 10,
+      "initial_value": "4239.6000",
+      "global_value": "4239.6000"
+    },
+    {
+      "contract_id": "10806496000149-2-000348/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 11,
+      "initial_value": "4991.0000",
+      "global_value": "4991.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000369/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 12,
+      "initial_value": "6880.4600",
+      "global_value": "6880.4600"
+    },
+    {
+      "contract_id": "10806496000149-2-000370/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 13,
+      "initial_value": "10024.0000",
+      "global_value": "10024.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000371/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 14,
+      "initial_value": "1840.0000",
+      "global_value": "1840.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000372/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 15,
+      "initial_value": "12087.0000",
+      "global_value": "12087.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000373/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 16,
+      "initial_value": "2826.4000",
+      "global_value": "2826.4000"
+    },
+    {
+      "contract_id": "10806496000149-2-000376/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 17,
+      "initial_value": "6846.9800",
+      "global_value": "6846.9800"
+    },
+    {
+      "contract_id": "10806496000149-2-000377/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 18,
+      "initial_value": "11216.0000",
+      "global_value": "11216.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000378/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 19,
+      "initial_value": "4239.6000",
+      "global_value": "4239.6000"
+    },
+    {
+      "contract_id": "10806496000149-2-000379/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 20,
+      "initial_value": "16350.0000",
+      "global_value": "16350.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000380/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 21,
+      "initial_value": "12087.0000",
+      "global_value": "12087.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000381/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 22,
+      "initial_value": "1840.0000",
+      "global_value": "1840.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000382/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 23,
+      "initial_value": "75989.0000",
+      "global_value": "75989.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000432/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 24,
+      "initial_value": "12087.0000",
+      "global_value": "12087.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000433/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 25,
+      "initial_value": "981.9700",
+      "global_value": "981.9700"
+    },
+    {
+      "contract_id": "10806496000149-2-000434/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 26,
+      "initial_value": "6945.0000",
+      "global_value": "6945.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000435/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 27,
+      "initial_value": "2826.4000",
+      "global_value": "2826.4000"
+    },
+    {
+      "contract_id": "10806496000149-2-000723/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 28,
+      "initial_value": "2826.4000",
+      "global_value": "2826.4000"
+    },
+    {
+      "contract_id": "10806496000149-2-000725/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 29,
+      "initial_value": "6945.0000",
+      "global_value": "6945.0000"
+    },
+    {
+      "contract_id": "10806496000149-2-000727/2026",
+      "purchase_id": "10806496000149-1-000054/2026",
+      "source_record_index": 30,
+      "initial_value": "981.9700",
+      "global_value": "981.9700"
+    },
+    {
+      "contract_id": "10806496000149-2-000483/2026",
+      "purchase_id": "10806496000149-1-000061/2026",
+      "source_record_index": 0,
+      "initial_value": "661123.0800",
+      "global_value": "661123.0800"
+    },
+    {
+      "contract_id": "15126437000305-2-000678/2026",
+      "purchase_id": "15126437000305-1-002258/2026",
+      "source_record_index": 0,
+      "initial_value": "50400.0000",
+      "global_value": "50400.0000"
+    },
+    {
+      "contract_id": "23584127000109-2-000009/2026",
+      "purchase_id": "23584127000109-1-000025/2026",
+      "source_record_index": 0,
+      "initial_value": "57700.0000",
+      "global_value": "0.0000"
+    },
+    {
+      "contract_id": "26989715000102-2-001610/2026",
+      "purchase_id": "26989715000102-1-000837/2026",
+      "source_record_index": 0,
+      "initial_value": "2285213.0400",
+      "global_value": "2285213.0400"
+    }
+  ],
+  "quality": {
+    "selected": 100,
+    "attempted": 100,
+    "none_returned": 88,
+    "with_contracts": 12,
+    "contracts": 50
+  },
+  "finished_at": "2026-11-04T22:26:38.256118+00:00"
+}

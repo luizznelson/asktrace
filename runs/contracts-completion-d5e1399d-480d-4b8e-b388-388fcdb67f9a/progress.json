@@ -1,0 +1,24 @@
+{
+  "started_at": "2026-11-04T21:32:11.777360+00:00",
+  "parent": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json",
+  "status": "complete",
+  "interval_seconds": 1,
+  "max_consecutive_failed_batches": 3,
+  "reports": [
+    {
+      "path": "runs/contracts-resume-88022bc7-c3dd-4c90-9ce4-f32cf3340378/coverage.json",
+      "status": "bounded_run_complete",
+      "covered": 2100,
+      "remaining": 436,
+      "contracts": 469
+    },
+    {
+      "path": "runs/contracts-resume-9a175343-9dde-49dc-b1e5-dcf5e760d139/coverage.json",
+      "status": "bounded_run_complete",
+      "covered": 2536,
+      "remaining": 0,
+      "contracts": 679
+    }
+  ],
+  "finished_at": "2026-11-04T22:27:55.512457+00:00"
+}

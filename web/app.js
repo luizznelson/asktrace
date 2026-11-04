@@ -749,6 +749,15 @@ function discovery() {
         $("discovery").append(button);
     });
 }
+function isHistoricalResult(data, datasetId = selectedDataset) {
+    const selected = datasetCatalog.find((item) => item.id === datasetId);
+    const recorded = data.evidence?.coverage_report_sha256;
+    return (
+        typeof selected?.coverage_sha256 === "string" &&
+        typeof recorded === "string" &&
+        selected.coverage_sha256 !== recorded
+    );
+}
 function historyView() {
     $("history").replaceChildren();
     if (!sessionHistory.some((item) => item.dataset === selectedDataset)) {
@@ -763,6 +772,14 @@ function historyView() {
             const button = node("button", item.data.question);
             button.type = "button";
             button.title = item.data.question;
+            if (isHistoricalResult(item.data, item.dataset)) {
+                button.textContent +=
+                    lang === "pt" ? " · base anterior" : " · earlier dataset";
+                button.title +=
+                    lang === "pt"
+                        ? " — Resultado salvo antes da atualização da base"
+                        : " — Result saved before the dataset update";
+            }
             if (item.id === activeHistory) button.classList.add("active");
             button.addEventListener("click", () => {
                 if (working) return;
@@ -985,7 +1002,12 @@ function initializeDatasets(session) {
     $("dataset").value = selectedDataset;
     language();
     const last = sessionHistory
-        .filter((item) => item.dataset === selectedDataset)
+        .filter(
+            (item) =>
+                item.dataset === selectedDataset &&
+                item.data.status !== "error" &&
+                !isHistoricalResult(item.data, item.dataset),
+        )
         .at(-1);
     if (last) {
         try {
@@ -1210,6 +1232,13 @@ function readableTrace(data) {
     }
 }
 function render(data) {
+    const historical = isHistoricalResult(data);
+    $("result-freshness").hidden = !historical;
+    $("result-freshness").textContent = historical
+        ? lang === "pt"
+            ? "Resultado salvo de uma versão anterior da base. Os números abaixo preservam aquela consulta. Envie uma nova pergunta para consultar a cobertura atual."
+            : "Saved result from an earlier dataset version. The numbers below preserve that query. Ask a new question to use the current coverage."
+        : "";
     $("download-csv").hidden =
         data.status !== "answered" || !data.evidence?.result?.length;
     renderDataset(data);

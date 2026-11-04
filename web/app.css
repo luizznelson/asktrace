@@ -824,7 +824,8 @@ td {
     align-items: flex-start;
     margin-top: 18px;
 }
-#download {
+#download,
+#download-csv {
     background: none;
     border: 0;
     color: #7c8ea4;
@@ -1373,4 +1374,14 @@ body.has-result .welcome {
     .coverage {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
+
+.result-freshness {
+    background: #fff7e9;
+    color: #72552f;
+    border: 1px solid #e8d7b6;
+    border-radius: 7px;
+    padding: 12px 14px;
+    font-size: 12px;
+    line-height: 1.7;
 }
