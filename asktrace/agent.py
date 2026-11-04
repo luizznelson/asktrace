@@ -229,6 +229,22 @@ def run(root, report, question, provider="baseline", planner=None, tool=answer):
                     {"step": "provider_attempt", **event} for event in error.provider_events
                 )
             result.update(status="error", answer="A consulta não pôde ser concluída com segurança.")
+            if hasattr(error, "provider_events") and result["tool_calls"] == 0:
+                cooldowns = [
+                    event["not_before_epoch"]
+                    for event in error.provider_events
+                    if event.get("reason") == "cooldown"
+                    and isinstance(event.get("not_before_epoch"), (int, float))
+                ]
+                result["availability"] = {
+                    "component": "ai_planner",
+                    "reason": "cooldown"
+                    if cooldowns and error.attempt_count == 0
+                    else "provider_unavailable",
+                    "next_candidate_retry_epoch": min(cooldowns) if cooldowns else None,
+                    "local_rules_available_to_try": True,
+                    "database_checked": False,
+                }
             trace.append(
                 {
                     "step": "failure",
