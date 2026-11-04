@@ -129,3 +129,7 @@ sem chamadas externas de IA. Não houve inspeção visual em navegador.
 ## Análises ampliadas
 
 108 testes Python passaram. A regressão cobre nome variante de órgão sem divisão de CNPJ, soma de compra sem multiplicação por contratos e zero versus ausência. Contratos Node validam CSV e novos resultados; HTTP real confere meses, órgãos e qualidade. O corpus local novo passou 12/12; três testes iniciais reais da IA v3 passaram. [Escopo das verificações](analytics.md).
+
+## Conclusão da cobertura ampliada
+
+112 testes Python, contratos Node, Ruff e verificações HTTP passaram. Os 26 snapshots consolidados foram conferidos no PostgreSQL e suas cargas repetidas retornaram `already_loaded`. Quatro novos testes impedem publicação sem integridade, contagens corretas e idempotência. O corpus local permaneceu 12/12. [Evidências e limites](contracts-expanded-coverage.md).

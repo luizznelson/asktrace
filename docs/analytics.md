@@ -32,9 +32,9 @@ de IA; nenhuma delas depende de gerar SQL livre ou de enviar os resultados ao mo
   O prompt v3 delimita esse catálogo; o roteador local recusa combinações de dimensões.
   A validação do plano garante a estrutura e as ações permitidas, sem ser uma prova de
   interpretação correta para toda pergunta em linguagem natural.
-- A coleta de contratos não foi ampliada nesta entrega: o recorte padrão continua com
-  100 compras pesquisadas, 2.436 pendentes e uma exclusão. Novas análises de compras não
-  tornam a cobertura de contratos completa.
+- A cobertura de contratos foi concluída posteriormente: 2.536 compras aptas pesquisadas,
+  679 contratos e zero pendências aptas; uma exclusão por ano inválido permanece.
+  [Cobertura e interpretação](contracts-expanded-coverage.md).
 
 ## Exportação sem perder o contexto
 

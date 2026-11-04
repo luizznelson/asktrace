@@ -18,7 +18,7 @@ Overview, municipalities, publication-month trends, top purchasing organizations
 | --- | --- |
 | **Problem** | An answer about procurement can omit pages, treat unknown values as zero or mix periods and procurement methods. |
 | **What I built** | A paginated PNCP collector, exact decimal normalization, transactional PostgreSQL loading and reports linking records to original pages. |
-| **Verified result** | Default scope May–October 2026: 2,537 purchases across 54 pages. Contract coverage: 100 confirmed queries, 21 contracts, 2,436 eligible queries pending and one exclusion. The original scope remains selectable with 1,081 purchases and 125 contracts. [Current coverage](docs/dataset-expansion.md). |
+| **Verified result** | Default May–October 2026 scope: 2,537 purchases across 54 pages. All 2,536 eligible purchases searched: 679 contracts linked to 370 purchases; 2,166 no-publication responses and no eligible searches pending. One invalid-year exclusion. The original scope remains separate. [Completed coverage](docs/contracts-expanded-coverage.md) (Portuguese). |
 | **Skills demonstrated** | Python 3.14, public API integration, data quality, SQL, PostgreSQL with Docker, provenance, failure testing and configured CI. |
 | **Current stage** | Purchases, linked contracts and read-only business queries verified locally. Evaluated bounded routing with explicit provider contingency; a local PT-BR/EN interface, with no hosted demo yet. |
 | **Start here** | [Method and results](docs/ingestion.md) · [Database verification](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Quality checks](docs/quality.md) |

@@ -1,5 +1,9 @@
 # Base de seis meses e orientação do assistente
 
+## Cobertura de contratos concluída
+
+O estado parcial de 100 compras descrito nesta etapa foi superado. Agora são 2.536 compras aptas pesquisadas, 679 contratos e nenhuma pendência apta; uma exclusão por ano inválido permanece. [Consolidação e validação atual](contracts-expanded-coverage.md).
+
 ## Para que serve
 
 AskTrace ajuda a explorar registros publicados no PNCP: entender volumes de compras, comparar

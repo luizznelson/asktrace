@@ -218,3 +218,7 @@ nesta alteração; os estados apresentados refletem os registros já existentes.
 ## Seis caminhos e exportação
 
 A descoberta passou a seis cartões. Evolução mensal, órgãos e qualidade têm respostas e tabelas próprias, com sugestões para continuar a exploração. O CSV preserva contexto, precisão original e trata fórmulas de planilha; JSON continua disponível. [Detalhes e limites](analytics.md).
+
+## Atualização da cobertura e histórico anterior
+
+O padrão passou a usar a cobertura concluída de 2.536 compras aptas e 679 contratos. Respostas salvas de outra versão recebem aviso e marca no histórico, sem restauração automática como resultado atual. O botão CSV segue o estilo do JSON. [Dados e testes](contracts-expanded-coverage.md).

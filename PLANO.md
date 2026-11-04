@@ -87,3 +87,7 @@ Nova base maio–outubro/2026 com 2.537 compras carregadas e 54 páginas; histó
 ## Análises de publicação, órgãos e qualidade
 
 Três consultas fixas adicionais e exportação CSV implementadas. Interface com seis caminhos, corpus local v3 e testes iniciais reais de IA. Próximas etapas: ampliar a cobertura de contratos, avaliar o planejador v3 em conjunto maior e realizar validação visual antes de hospedagem. [Entrega e limites](docs/analytics.md).
+
+## Cobertura ampliada concluída
+
+Todas as 2.536 compras aptas foram pesquisadas. Resultado: 679 contratos vinculados a 370 compras; 2.166 sem publicação retornada, nenhuma pendência apta e uma exclusão por ano inválido. Configuração atualizada após verificação e aplicação local reiniciada. Próximas etapas: validação visual e preparação da hospedagem. [Relatório](docs/contracts-expanded-coverage.md).

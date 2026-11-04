@@ -1,5 +1,9 @@
 # Como explorar o AskTrace
 
+## Cobertura atual da base padrão
+
+[Todas as compras aptas pesquisadas](contracts-expanded-coverage.md): 2.536 pesquisas, 679 contratos e zero pendências aptas. O relatório de agosto–outubro e as etapas de 100 compras abaixo são históricos ou do recorte original.
+
 ## Se você tem 5 minutos
 
 1. Leia “Em 1 minuto” e “O que os dados permitem afirmar” no [README](../README.md).

@@ -18,7 +18,7 @@ Panorama, municípios, evolução por mês de publicação, órgãos com mais co
 | --- | --- |
 | **Problema** | Uma resposta sobre compras públicas pode ignorar páginas, tratar um valor ausente como zero ou misturar períodos e modalidades. |
 | **O que construí** | Coletor paginado do PNCP, normalização com precisão decimal, carga transacional no PostgreSQL e relatórios que ligam cada registro à página original. |
-| **Resultado verificado** | Base padrão maio–outubro/2026: 2.537 compras em 54 páginas. Contratos: 100 consultas confirmadas, 21 contratos, 2.436 consultas elegíveis pendentes e uma exclusão. O recorte original segue selecionável com 1.081 compras e 125 contratos. [Cobertura atual](docs/dataset-expansion.md). |
+| **Resultado verificado** | Base padrão maio–outubro/2026: 2.537 compras em 54 páginas. Todas as 2.536 compras aptas tiveram contratos pesquisados: 679 contratos em 370 compras; 2.166 respostas sem publicação e nenhuma pendência apta. Uma exclusão por ano inválido. O recorte original continua separado. [Cobertura concluída](docs/contracts-expanded-coverage.md). |
 | **Habilidades demonstradas** | Python 3.14, integração com API pública, qualidade de dados, SQL, PostgreSQL com Docker, rastreabilidade, testes de falhas e CI configurada. |
 | **Estágio atual** | Compras, contratos vinculados e consultas de negócio somente leitura verificados localmente. Roteador com contingência e avaliação local; interface local PT-BR/EN, sem demonstração online. |
 | **Onde começar** | [Resultado e método](docs/ingestion.md) · [Evidência no banco](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Como verificar](docs/quality.md) |
