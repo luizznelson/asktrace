@@ -110,3 +110,7 @@ O lote `agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9` aprovou os casos 7–14
 [application-review-348a9663-dda0-42ca-bd0b-bf32bb2d84cb](application-review-348a9663-dda0-42ca-bd0b-bf32bb2d84cb/verification.json): validação de formatação PT/EN,
 contratos em tabela, preservação do JSON, 102 testes Python e consultas locais nos dois
 recortes. Inclui testes Node de valores grandes, centavos e datas; sem chamadas de IA.
+
+[application-review-8ae90c1e-92fe-4782-855c-9c8d76817734](application-review-8ae90c1e-92fe-4782-855c-9c8d76817734/verification.json): validação da interface de
+produto e separação entre compras pesquisadas, pendentes e excluídas; 102 testes Python,
+contratos Node e consultas HTTP locais. Sem nova coleta ou chamadas externas de IA.

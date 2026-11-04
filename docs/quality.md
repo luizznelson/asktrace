@@ -116,3 +116,12 @@ Valores acima de 2^53 e arredondamento nos limites de centavos têm casos explí
 As evidências originais não são alteradas para produzir os textos da tela.
 [Registro final](../runs/application-review-348a9663-dda0-42ca-bd0b-bf32bb2d84cb/verification.json); consultas reais por regras locais nos dois recortes,
 sem chamadas externas de IA e sem inspeção visual.
+
+## Cobertura compreensível e interface de produto
+
+102 testes Python e os contratos Node passaram. Os novos cenários DOM conferem
+2.436 pendências e uma exclusão na base ampliada, zero pendências na base original,
+troca PT/EN e ausência de mistura entre relatórios históricos e metadados atuais.
+Uma verificação textual impede regressões de menções a portfólio na aplicação.
+[Evidência](../runs/application-review-8ae90c1e-92fe-4782-855c-9c8d76817734/verification.json): consultas HTTP reais por regras locais nos dois recortes,
+sem chamadas externas de IA. Não houve inspeção visual em navegador.

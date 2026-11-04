@@ -2,8 +2,7 @@
 
 ## Experiência de assistente
 
-A tela principal é uma área de exploração, com barra lateral, perguntas e respostas. A apresentação
-do projeto fica em uma área expansível para visitantes do portfólio, sem interromper a consulta.
+A tela principal é uma área de exploração, com barra lateral, perguntas e respostas. Uma área expansível explica como interpretar compras, contratos e valores, sem interromper a consulta.
 
 1. O assistente apresenta o recorte e três caminhos: panorama, municípios e rastreio de uma compra.
 2. Os cartões preenchem uma pergunta que o visitante pode editar antes de enviar.
@@ -190,3 +189,28 @@ transporte de centavos, quantias acima do limite de inteiros seguros de Number, 
 bissextos e preservação de identificadores. O contrato DOM confere células renderizadas,
 troca de idioma, contratos e ausência de mutação das evidências.
 [Verificação completa desta etapa](../runs/application-review-348a9663-dda0-42ca-bd0b-bf32bb2d84cb/verification.json). Não houve inspeção visual em navegador.
+
+## Linguagem de produto e andamento da coleta
+
+A interface deixou de apresentar o aplicativo como portfólio ou exibir uma identificação
+pessoal na barra lateral. A área “Como interpretar os dados” explica compras, contratos
+e valores; documentação e código continuam acessíveis. O HTML inicial usa os mesmos
+textos da interface em português, e estatísticas aguardam a leitura da sessão antes de
+exibir quantidades, evitando mostrar números antigos no carregamento.
+
+Na base ampliada, os cartões agora distinguem 2.537 compras, 100 com busca de contratos
+concluída, 2.436 pendentes e 1 excluída por ano inválido na fonte. Os 21 contratos e as
+83 buscas sem publicação retornada continuam explícitos. A explicação abaixo separa
+essas situações em itens e esclarece que buscas da coleta não são perguntas do usuário.
+Os 1.354 valores homologados não informados são uma lacuna dos dados publicados.
+
+Pendências e exclusões só são separadas quando os metadados do catálogo coincidem com
+o relatório de origem, período e contagens da resposta. Um resultado histórico sem
+correspondência recebe uma explicação de cobertura incompleta, sem herdar exclusões
+da base atual. No recorte original, todas as 1.080 compras aptas foram pesquisadas e
+a pendência exibida é zero; a compra excluída permanece separada.
+
+Os testes DOM cobrem as duas bases, ambos os idiomas, metadados incompatíveis e ausência
+de menções a portfólio nos arquivos da aplicação. A formatação de HTML e CSS também
+facilita a manutenção. [Registro de validação](../runs/application-review-8ae90c1e-92fe-4782-855c-9c8d76817734/verification.json). A coleta não foi ampliada
+nesta alteração; os estados apresentados refletem os registros já existentes.
