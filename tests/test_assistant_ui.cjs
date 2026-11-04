@@ -135,6 +135,7 @@ const context = {
     Intl,
 };
 vm.createContext(context);
+vm.runInContext(fs.readFileSync("web/formatters.js", "utf8"), context);
 vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
 (async () => {
     await new Promise((resolve) => setImmediate(resolve));
@@ -300,6 +301,74 @@ vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
         true,
         "Fresh welcome must not display shared cooldown as an error",
     );
+    const formattedResult = structuredClone(result);
+    formattedResult.evidence.question = "municipalities";
+    formattedResult.evidence.result = [
+        {
+            municipality_ibge: "2211001",
+            municipality_name: "Teresina",
+            purchases: 2537,
+            unknown_estimates: 0,
+            estimated_value: "1571718049.25000000",
+            unknown_awarded_values: 187,
+        },
+        {
+            municipality_ibge: "2209104",
+            municipality_name: "Santa Cruz do Piauí",
+            purchases: 55,
+            unknown_estimates: 1,
+            estimated_value: null,
+            unknown_awarded_values: 4,
+        },
+    ];
+    context.formattedResult = formattedResult;
+    const originalJSON = JSON.stringify(formattedResult);
+    vm.runInContext('lang="pt";latest=formattedResult;render(latest)', context);
+    let rows = get("result-table").children[0].children[1].children;
+    assert.equal(rows[0].children[0].textContent, "2211001");
+    assert.equal(rows[0].children[2].textContent, "2.537");
+    assert.equal(
+        rows[0].children[4].textContent.replaceAll("\u00a0", " "),
+        "R$ 1.571.718.049,25",
+    );
+    assert.equal(rows[0].children[4].className, "numeric-cell");
+    assert.equal(rows[1].children[4].textContent, "Não informado");
+    get("language").click();
+    assert.match(get("dataset").children[0].textContent, /08\/01\/2026/);
+    rows = get("result-table").children[0].children[1].children;
+    assert.equal(rows[0].children[4].textContent, "R$1,571,718,049.25");
+    assert.equal(rows[1].children[4].textContent, "Not reported");
+    assert.equal(
+        JSON.stringify(formattedResult),
+        originalJSON,
+        "Formatting never changes evidence or downloadable data",
+    );
+    formattedResult.evidence.question = "purchase";
+    formattedResult.evidence.result = [
+        {
+            control_id: "01612601000118-1-000044/2026",
+            publication_date: "2026-11-04",
+            contracts: [
+                {
+                    contract_id: "original-contract-id",
+                    initial_value: "1234.50",
+                    global_value: null,
+                    source_record_index: 0,
+                },
+            ],
+        },
+    ];
+    vm.runInContext("render(formattedResult)", context);
+    const purchaseRows = get("result-table").children[0].children[0].children;
+    assert.equal(purchaseRows[1].children[1].textContent, "11/04/2026");
+    const contractRows =
+        purchaseRows[2].children[1].children[0].children[1].children;
+    assert.equal(
+        contractRows[0].children[0].textContent,
+        "original-contract-id",
+    );
+    assert.equal(contractRows[0].children[1].textContent, "R$1,234.50");
+    assert.equal(contractRows[0].children[2].textContent, "Not reported");
     console.log(
         "Assistant session persistence and DOM contract passed: discovery, submit, response, suggestions, history, language, reset, session.",
     );

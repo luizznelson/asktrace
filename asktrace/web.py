@@ -18,6 +18,7 @@ COVERAGE = "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.
 ASSETS = {
     "/": ("index.html", "text/html; charset=utf-8"),
     "/app.css": ("app.css", "text/css; charset=utf-8"),
+    "/formatters.js": ("formatters.js", "text/javascript; charset=utf-8"),
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
 }
 

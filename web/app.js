@@ -93,9 +93,9 @@ const text = {
         failure: "Falha",
         unavailable: "Não informado",
         summaryText: (c) =>
-            `A base tem ${c.purchases} compras. Há ${c.covered_purchases} consultas de contratos confirmadas e ${c.contracts} contratos vinculados a ${c.purchases_with_contracts} compras. Em ${c.none_returned} compras, não retornou publicação. ${c.unknown_awarded_values} compras têm valor homologado desconhecido.`,
+            `A base tem ${displayFormat.integer(c.purchases, lang)} compras. Há ${displayFormat.integer(c.covered_purchases, lang)} consultas de contratos confirmadas e ${displayFormat.integer(c.contracts, lang)} contratos vinculados a ${displayFormat.integer(c.purchases_with_contracts, lang)} compras. Em ${displayFormat.integer(c.none_returned, lang)} compras, não retornou publicação. ${displayFormat.integer(c.unknown_awarded_values, lang)} compras têm valor homologado desconhecido.`,
         municipalityText:
-            "A tabela mostra até 20 grupos de municípios por quantidade de compras. Valores estimados são somados uma vez por compra; valores desconhecidos permanecem nulos.",
+            "A tabela mostra até 20 grupos de municípios por quantidade de compras. Valores estimados são somados uma vez por compra; as somas consideram apenas valores informados. Confira também as compras sem estimativa.",
         purchaseText: (r) =>
             `A compra ${r.control_id} tem ${(r.contracts || []).length} contratos neste snapshot. Situação da consulta: ${r.outcome || "não coberta"}. Os dados de origem estão disponíveis abaixo.`,
         caution:
@@ -299,9 +299,9 @@ const text = {
         failure: "Failure",
         unavailable: "Not reported",
         summaryText: (c) =>
-            `The dataset contains ${c.purchases} purchases, ${c.covered_purchases} confirmed contract queries and ${c.contracts} contracts linked to ${c.purchases_with_contracts} purchases. No publication was returned for ${c.none_returned} purchases. ${c.unknown_awarded_values} purchases have an unknown awarded amount.`,
+            `The dataset contains ${displayFormat.integer(c.purchases, lang)} purchases, ${displayFormat.integer(c.covered_purchases, lang)} confirmed contract queries and ${displayFormat.integer(c.contracts, lang)} contracts linked to ${displayFormat.integer(c.purchases_with_contracts, lang)} purchases. No publication was returned for ${displayFormat.integer(c.none_returned, lang)} purchases. ${displayFormat.integer(c.unknown_awarded_values, lang)} purchases have an unknown awarded amount.`,
         municipalityText:
-            "The table shows up to 20 municipality groups by purchase count. Estimates are summed once per purchase; unknown amounts remain null.",
+            "The table shows up to 20 municipality groups by purchase count. Estimates are summed once per purchase; sums use reported amounts only. Also check purchases without estimates.",
         purchaseText: (r) =>
             `Purchase ${r.control_id} has ${(r.contracts || []).length} contracts in this snapshot. Query outcome: ${r.outcome || "not covered"}. Source data is shown below.`,
         caution:
@@ -419,15 +419,24 @@ const columns = {
     municipality_ibge: ["Código IBGE", "IBGE code"],
     municipality_name: ["Município", "Municipality"],
     purchases: ["Compras", "Purchases"],
-    unknown_estimates: ["Estimativas ausentes", "Unknown estimates"],
+    unknown_estimates: [
+        "Compras sem estimativa",
+        "Purchases without estimates",
+    ],
     estimated_value: ["Valor estimado (R$)", "Estimated value (BRL)"],
-    unknown_awarded_values: ["Homologados ausentes", "Unknown awarded amounts"],
+    unknown_awarded_values: [
+        "Compras sem valor homologado",
+        "Purchases without awarded amounts",
+    ],
     control_id: ["ID da compra", "Purchase ID"],
     org_name: ["Órgão", "Organization"],
     publication_date: ["Publicação", "Publication"],
     awarded_value: ["Valor homologado (R$)", "Awarded value (BRL)"],
     outcome: ["Resultado da consulta", "Query outcome"],
     contracts: ["Contratos vinculados", "Linked contracts"],
+    contract_id: ["ID do contrato", "Contract ID"],
+    initial_value: ["Valor inicial", "Initial amount"],
+    global_value: ["Valor global", "Global amount"],
     source_body_sha256: ["Hash da página original", "Original page hash"],
     source_record_index: ["Índice na fonte", "Source index"],
     contract_run_id: ["Execução de contratos", "Contract snapshot"],
@@ -473,10 +482,46 @@ function languageBase() {
 function count() {
     $("count").textContent = `${$("question").value.length} / 1000`;
 }
-function value(v) {
-    if (v === null || v === undefined) return text[lang].unavailable;
-    if (typeof v === "object") return JSON.stringify(v, null, 2);
-    return String(v);
+function resultCell(key, value) {
+    const cell = node("td");
+    if (displayFormat.numeric(key)) cell.className = "numeric-cell";
+    if (key.includes("sha256") || key.endsWith("_id"))
+        cell.className = "identifier-cell";
+    if (key === "contracts") {
+        if (!Array.isArray(value) || !value.length) {
+            cell.textContent =
+                lang === "pt"
+                    ? "Nenhum contrato vinculado neste recorte."
+                    : "No linked contracts in this dataset.";
+            return cell;
+        }
+        const table = node("table");
+        table.className = "contracts-table";
+        const keys = [
+            "contract_id",
+            "initial_value",
+            "global_value",
+            "source_record_index",
+        ];
+        const head = node("thead"),
+            header = node("tr"),
+            body = node("tbody");
+        keys.forEach((key) => {
+            const th = node("th", columns[key][lang === "pt" ? 0 : 1]);
+            th.setAttribute("scope", "col");
+            if (displayFormat.numeric(key)) th.className = "numeric-cell";
+            header.append(th);
+        });
+        head.append(header);
+        value.forEach((contract) => {
+            const row = node("tr");
+            keys.forEach((key) => row.append(resultCell(key, contract[key])));
+            body.append(row);
+        });
+        table.append(head, body);
+        cell.append(table);
+    } else cell.textContent = displayFormat.field(key, value, lang);
+    return cell;
 }
 function renderBase(data) {
     const t = text[lang];
@@ -519,7 +564,7 @@ function renderBase(data) {
         scope.append(
             node("strong", t.scopeLabel + ": "),
             document.createTextNode(
-                `${s.uf} · ${s.modality} · ${s.date_start} → ${s.date_end}`,
+                `${s.uf} · ${s.modality} · ${displayFormat.date(s.date_start, lang)} → ${displayFormat.date(s.date_end, lang)}`,
             ),
         );
         $("sources").append(scope);
@@ -541,23 +586,24 @@ function renderBase(data) {
             const table = node("table");
             if (e.question === "municipalities") {
                 const head = node("tr");
-                Object.keys(e.result[0]).forEach((key) =>
-                    head.append(
-                        node(
-                            "th",
-                            columns[key]?.[lang === "pt" ? 0 : 1] || key,
-                        ),
-                    ),
-                );
+                const keys = Object.keys(e.result[0]);
+                keys.forEach((key) => {
+                    const th = node(
+                        "th",
+                        columns[key]?.[lang === "pt" ? 0 : 1] || key,
+                    );
+                    th.setAttribute("scope", "col");
+                    if (displayFormat.numeric(key))
+                        th.className = "numeric-cell";
+                    head.append(th);
+                });
                 const thead = node("thead");
                 thead.append(head);
                 table.append(thead);
                 const body = node("tbody");
                 e.result.forEach((row) => {
                     const tr = node("tr");
-                    Object.values(row).forEach((v) =>
-                        tr.append(node("td", value(v))),
-                    );
+                    keys.forEach((key) => tr.append(resultCell(key, row[key])));
                     body.append(tr);
                 });
                 table.append(body);
@@ -570,13 +616,40 @@ function renderBase(data) {
                             "th",
                             columns[key]?.[lang === "pt" ? 0 : 1] || key,
                         ),
-                        node("td", value(v)),
+                        resultCell(key, v),
                     );
                     body.append(row);
                 });
                 table.append(body);
             }
-            $("result-table").append(table);
+            table.setAttribute(
+                "aria-label",
+                e.question === "municipalities"
+                    ? lang === "pt"
+                        ? "Compras por município"
+                        : "Purchases by municipality"
+                    : lang === "pt"
+                      ? "Detalhes da compra"
+                      : "Purchase details",
+            );
+            $("result-table").setAttribute("tabindex", "0");
+            $("result-table").setAttribute("role", "region");
+            $("result-table").setAttribute(
+                "aria-label",
+                lang === "pt"
+                    ? "Resultados da consulta; role para ver todas as colunas e linhas"
+                    : "Query results; scroll to see all rows and columns",
+            );
+            $("result-table").append(
+                table,
+                node(
+                    "p",
+                    lang === "pt"
+                        ? "Valores em reais, exibidos com duas casas decimais. O JSON preserva a precisão original. Não informado é diferente de zero."
+                        : "Amounts are in Brazilian reais, displayed to two decimal places. JSON retains original precision. Not reported is different from zero.",
+                    "display-note",
+                ),
+            );
         }
     }
     $("technical").textContent = JSON.stringify(data, null, 2);
@@ -790,14 +863,19 @@ function applyDataset() {
     $("stat-purchases").textContent = nf.format(d.purchases);
     $("stat-contracts").textContent = nf.format(d.contracts);
     $("stat-covered").textContent = nf.format(d.covered);
-    const dates = `${d.start} → ${d.end}`;
+    Array.from($("dataset").children).forEach((option, index) => {
+        const item = datasetCatalog[index];
+        if (item)
+            option.textContent = `${displayFormat.date(item.start, lang)} → ${displayFormat.date(item.end, lang)}`;
+    });
+    const dates = `${displayFormat.date(d.start, lang)} → ${displayFormat.date(d.end, lang)}`;
     document
         .querySelectorAll("[data-i='dateShort']")
         .forEach((el) => (el.textContent = dates));
     $("scope-detail-live").textContent =
         lang === "pt"
-            ? `Pregões eletrônicos de unidades do Piauí. Publicação: ${dates}. ${d.purchases} compras; ${d.covered} com consulta de contratos confirmada, ${d.purchases - d.covered - d.excluded} ainda não consultadas e ${d.excluded} exclusão(ões) por localizador inválido.`
-            : `Electronic auctions from units in Piauí. Published: ${dates}. ${d.purchases} purchases; ${d.covered} with confirmed contract queries, ${d.purchases - d.covered - d.excluded} still unqueried and ${d.excluded} exclusion(s) due to invalid source locators.`;
+            ? `Pregões eletrônicos de unidades do Piauí. Publicação: ${dates}. ${displayFormat.integer(d.purchases, lang)} compras; ${displayFormat.integer(d.covered, lang)} com consulta de contratos confirmada, ${displayFormat.integer(d.purchases - d.covered - d.excluded, lang)} ainda não consultadas e ${displayFormat.integer(d.excluded, lang)} exclusão(ões) por localizador inválido.`
+            : `Electronic auctions from units in Piauí. Published: ${dates}. ${displayFormat.integer(d.purchases, lang)} purchases; ${displayFormat.integer(d.covered, lang)} with confirmed contract queries, ${displayFormat.integer(d.purchases - d.covered - d.excluded, lang)} still unqueried and ${displayFormat.integer(d.excluded, lang)} exclusion(s) due to invalid source locators.`;
     $("base-evidence").href =
         "/api/evidence?dataset=" + encodeURIComponent(selectedDataset);
 }
@@ -814,7 +892,10 @@ function initializeDatasets(session) {
     }
     $("dataset").replaceChildren();
     datasetCatalog.forEach((item) => {
-        const option = node("option", `${item.start} → ${item.end}`);
+        const option = node(
+            "option",
+            `${displayFormat.date(item.start, lang)} → ${displayFormat.date(item.end, lang)}`,
+        );
         option.value = item.id;
         $("dataset").append(option);
     });
@@ -842,8 +923,8 @@ function renderDataset(data) {
         const c = data.evidence.coverage;
         $("insight").textContent =
             lang === "pt"
-                ? `${c.covered_purchases} de ${c.purchases} compras têm consulta de contratos confirmada; ${c.purchases - c.covered_purchases} não estão nessa cobertura. Compras não consultadas e localizadores inválidos são distintos de uma resposta sem publicação. ${c.unknown_awarded_values} valores homologados continuam desconhecidos.`
-                : `${c.covered_purchases} of ${c.purchases} purchases have confirmed contract queries; ${c.purchases - c.covered_purchases} are outside that coverage. Unqueried purchases and invalid locators differ from a query returning no publication. ${c.unknown_awarded_values} awarded amounts remain unknown.`;
+                ? `${displayFormat.integer(c.covered_purchases, lang)} de ${displayFormat.integer(c.purchases, lang)} compras têm consulta de contratos confirmada; ${displayFormat.integer(c.purchases - c.covered_purchases, lang)} não estão nessa cobertura. Compras não consultadas e localizadores inválidos são distintos de uma resposta sem publicação. ${displayFormat.integer(c.unknown_awarded_values, lang)} valores homologados continuam desconhecidos.`
+                : `${displayFormat.integer(c.covered_purchases, lang)} of ${displayFormat.integer(c.purchases, lang)} purchases have confirmed contract queries; ${displayFormat.integer(c.purchases - c.covered_purchases, lang)} are outside that coverage. Unqueried purchases and invalid locators differ from a query returning no publication. ${displayFormat.integer(c.unknown_awarded_values, lang)} awarded amounts remain unknown.`;
     }
 }
 $("dataset").addEventListener("change", () => {

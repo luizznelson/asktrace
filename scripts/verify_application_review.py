@@ -30,6 +30,8 @@ commands = [
     [".venv/Scripts/ruff.exe", "check", "."],
     [".venv/Scripts/ruff.exe", "format", "--check", "."],
     ["node", "--check", "web/app.js"],
+    ["node", "--check", "web/formatters.js"],
+    ["node", "tests/test_display_formatters.cjs"],
     ["node", "tests/test_assistant_ui.cjs"],
     ["git", "diff", "--check"],
 ]
