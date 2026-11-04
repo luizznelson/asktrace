@@ -100,3 +100,7 @@ O lote `agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9` aprovou os casos 7–14
 ## Recuperação sem API externa
 
 [recovery-verification-da469824-8e8f-43dd-b8ec-f0f220c19af1/verification.json](recovery-verification-da469824-8e8f-43dd-b8ec-f0f220c19af1/verification.json): cooldown injetado antes da rede, nenhuma consulta ao banco nessa tentativa, seguido de baseline com PostgreSQL real. O cenário é simulado e explicitamente identificado; não é ocorrência real de falha do provedor. [Interface](../docs/interface.md).
+
+## Diagnóstico de indisponibilidade
+
+[availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json](availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json): esperas locais observadas, nenhuma chamada externa e consulta real por municípios com 2.537 compras no recorte. Registros antigos não permitem inferir o tipo de quota de Groq/OpenRouter. [Interface](../docs/interface.md).

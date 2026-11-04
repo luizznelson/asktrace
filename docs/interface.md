@@ -151,3 +151,7 @@ A introdução explica PNCP, propósito e os três passos de uso. O padrão pass
 +com zero chamadas externas. Não comprova a liberação da quota nem uma indisponibilidade real do
 +provedor. Não houve inspeção visual de navegador nesta etapa.
 +
+
+## Disponibilidade antes de perguntar
+
+A página consulta o estado local ao abrir e pode atualizá-lo pelo botão de disponibilidade, sem chamadas externas. Quando todos os candidatos estão em espera ou sem chave, mostra um aviso e a opção de regras locais antes da pergunta. A seleção é explícita. HTTP 429 passa a preservar prazos numéricos/fracionários, datas, resets de tokens/requisições e vocabulário de quota minimizado; mensagens completas e IDs não são publicados. Esperas antigas sem diagnóstico continuam desconhecidas, sem reinício forçado. [Verificação sem chamadas externas](../runs/availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json): consulta real por municípios funcionou no PostgreSQL de 2.537 compras. 95 testes Python e contrato DOM passaram. O funcionamento atual da IA não foi afirmado nem testado contra uma espera ativa.

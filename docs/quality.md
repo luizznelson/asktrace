@@ -98,3 +98,7 @@ Passaram **89 testes Python locais**, incluindo PostgreSQL. Três novos testes c
 ## Indisponibilidade do planejador
 
 91 testes Python passaram; dois testes novos distinguem cooldown de falha do banco e garantem que nenhuma ferramenta roda antes do plano. Contrato DOM verifica fontes vazias ocultas e recuperação por clique, sem fallback silencioso. [Cenário controlado com banco real](../runs/recovery-verification-da469824-8e8f-43dd-b8ec-f0f220c19af1/verification.json).
+
+## Diagnóstico e aviso prévio de limites
+
+95 testes Python locais passaram. Quatro novos testes cobrem prazos de quota minimizados, entrada inválida e disponibilidade sem executar pergunta. O contrato DOM verifica aviso e escolha local sem chamada oculta. [Verificação real dos municípios por regras locais](../runs/availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json), sem chamada de provedor.
