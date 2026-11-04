@@ -7,11 +7,11 @@ import time
 import unicodedata
 from pathlib import Path
 
-from asktrace.planning import ACTIVE_SCOPE
+from asktrace.planning import ACTIVE_SCOPE, PLAN_ACTIONS
 from asktrace.providers import MODES, select
 from asktrace.query import answer, serialize
 
-ACTIONS = {"summary", "municipalities", "purchase", "refuse"}
+ACTIONS = set(PLAN_ACTIONS)
 ID = re.compile(r"\b\d{14}-1-\d{6}/\d{4,5}\b")
 
 
@@ -78,8 +78,19 @@ def baseline(question):
     identifier = ID.search(question)
     if identifier:
         return {"action": "purchase", "purchase_id": identifier.group()}
-    if "municip" in text or "cidade" in text:
+    monthly = bool(re.search(r"\bmes(?:es)?\b|\bmensal\b|\bevolucao\b", text))
+    organization = "orgao" in text or "entidade" in text
+    municipality = "municip" in text or "cidade" in text
+    if sum((monthly, organization, municipality)) > 1:
+        return {"action": "refuse", "purchase_id": None}
+    if monthly:
+        return {"action": "monthly", "purchase_id": None}
+    if organization:
+        return {"action": "organizations", "purchase_id": None}
+    if municipality:
         return {"action": "municipalities", "purchase_id": None}
+    if any(term in text for term in ("qualidade", "lacuna", "completude", "preenchimento")):
+        return {"action": "quality", "purchase_id": None}
     if any(
         term in text
         for term in (
@@ -133,6 +144,18 @@ def render(result):
             "ordenados por quantidade de compras. Estimativas são somadas uma vez por compra; "
             "valores desconhecidos permanecem nulos. A tabela não representa pagamentos."
         )
+    if result["question"] in {"monthly", "organizations", "quality"}:
+        descriptions = {
+            "monthly": "Evolução por mês de publicação; não representa execução ou pagamentos.",
+            "organizations": (
+                "Até 20 órgãos por quantidade de compras; somas usam apenas valores informados."
+            ),
+            "quality": (
+                "Preenchimento: valores ausentes são distintos de zero. "
+                "Não é classificação de irregularidades."
+            ),
+        }
+        return descriptions[result["question"]] + " Confira a tabela, o recorte e as fontes."
     row = result["result"][0]
     count = len(row["contracts"] or [])
     return (

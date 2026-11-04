@@ -16,6 +16,10 @@ const displayFormat = (() => {
         "unknown_estimates",
         "unknown_awarded_values",
         "source_record_index",
+        "zero_estimates",
+        "zero_awarded_values",
+        "unknown_municipalities",
+        "unknown_org_names",
     ]);
 
     function integer(value, language) {
@@ -75,6 +79,18 @@ const displayFormat = (() => {
         if (value === null || value === undefined) return missing(language);
         if (moneyFields.has(key)) return money(value, language);
         if (countFields.has(key)) return integer(value, language);
+        if (key === "publication_month") {
+            if (
+                typeof value !== "string" ||
+                !/^\d{4}-(0[1-9]|1[0-2])$/.test(value)
+            )
+                return missing(language);
+            return new Intl.DateTimeFormat(locale(language), {
+                month: "short",
+                year: "numeric",
+                timeZone: "UTC",
+            }).format(new Date(value + "-01T00:00:00Z"));
+        }
         if (key === "publication_date") return date(value, language);
         if (key === "outcome") {
             const labels =
@@ -94,7 +110,33 @@ const displayFormat = (() => {
             : String(value);
     }
 
+    function csv(rows) {
+        if (!Array.isArray(rows) || !rows.length) return "";
+        const keys = [...new Set(rows.flatMap((row) => Object.keys(row)))];
+        const cell = (value) => {
+            let raw =
+                value === null || value === undefined
+                    ? ""
+                    : typeof value === "object"
+                      ? JSON.stringify(value)
+                      : String(value);
+            // Quoting alone does not prevent spreadsheet formula execution.
+            if (/^[\s\u0000-\u001f]*[=+@-]/.test(raw)) raw = "'" + raw;
+            return '"' + raw.replaceAll('"', '""') + '"';
+        };
+        return (
+            "\ufeff" +
+            [
+                keys.map(cell).join(","),
+                ...rows.map((row) =>
+                    keys.map((key) => cell(row[key])).join(","),
+                ),
+            ].join("\r\n") +
+            "\r\n"
+        );
+    }
     return {
+        csv,
         money,
         integer,
         date,

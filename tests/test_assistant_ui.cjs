@@ -139,7 +139,7 @@ vm.runInContext(fs.readFileSync("web/formatters.js", "utf8"), context);
 vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
 (async () => {
     await new Promise((resolve) => setImmediate(resolve));
-    assert.equal(get("discovery").children.length, 3);
+    assert.equal(get("discovery").children.length, 6);
     assert.equal(get("submit").disabled, false);
     assert.equal(
         localized.filter((el) => el.textContent === el.dataset.i).length,
@@ -434,6 +434,60 @@ vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
             "Application must use product-facing language",
         );
     }
+    const analyticsResult = structuredClone(result);
+    analyticsResult.evidence.question = "monthly";
+    analyticsResult.evidence.result = [
+        {
+            publication_month: "2026-05",
+            purchases: 505,
+            estimated_value: "1234.50000000",
+            unknown_estimates: 0,
+            unknown_awarded_values: 123,
+        },
+    ];
+    context.analyticsResult = analyticsResult;
+    vm.runInContext('lang="pt";latest=analyticsResult;render(latest)', context);
+    let analyticsRows = get("result-table").children[0].children[1].children;
+    assert.match(analyticsRows[0].children[0].textContent, /2026/);
+    assert.equal(
+        analyticsRows[0].children[2].textContent.replaceAll("\u00a0", " "),
+        "R$ 1.234,50",
+    );
+    assert.equal(get("download-csv").hidden, false);
+    let exported;
+    context.URL.createObjectURL = (blob) => {
+        exported = blob;
+        return "blob:test";
+    };
+    get("download-csv").click();
+    const exportText = await exported.text();
+    assert.match(exportText, /coverage_report_sha256/);
+    assert.match(exportText, /1234\.50000000/);
+    assert.equal(
+        exportText.includes("R$ 1.234,50"),
+        false,
+        "CSV uses original monetary precision",
+    );
+    analyticsResult.evidence.question = "quality";
+    analyticsResult.evidence.result = [
+        {
+            purchases: 1081,
+            unknown_estimates: 0,
+            zero_estimates: 4,
+            unknown_awarded_values: 749,
+        },
+    ];
+    vm.runInContext("render(analyticsResult)", context);
+    assert.match(get("answer").textContent, /podem se sobrepor/);
+    assert.equal(
+        get("result-table").children[0].children[0].children.length,
+        4,
+    );
+    analyticsResult.status = "error";
+    vm.runInContext("render(analyticsResult)", context);
+    assert.equal(get("download-csv").hidden, true);
+    get("discovery").children[4].click();
+    assert.match(get("question").value, /órgãos/);
     console.log(
         "Assistant session persistence and DOM contract passed: discovery, submit, response, suggestions, history, language, reset, session.",
     );

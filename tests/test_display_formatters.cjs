@@ -62,3 +62,24 @@ for (const date of ["2026-02-29", "2026-11-31", "2026-11-04T00:00:00Z", null]) {
 console.log(
     "Display formatting passed: PT/EN, exact decimals, rounding, zero/null, IDs, counts and UTC dates.",
 );
+
+const csv = display.csv([
+    {
+        org_name: ' =HYPERLINK("https://example.invalid")',
+        estimated_value: "1234.50000000",
+        count: 0,
+        unknown: null,
+        note: 'line 1\nline "2"',
+    },
+]);
+assert.equal(csv.charCodeAt(0), 0xfeff);
+assert.ok(csv.includes("' =HYPERLINK"));
+assert.ok(csv.includes('"1234.50000000"'));
+assert.ok(csv.includes('"0",""'));
+assert.ok(csv.includes('line ""2""'));
+assert.equal(display.field("publication_month", "2026-05", "en"), "May 2026");
+assert.equal(
+    display.field("publication_month", "2026-13", "pt"),
+    "Não informado",
+);
+console.log("CSV safety and publication-month formatting passed.");

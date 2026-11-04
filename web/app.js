@@ -49,7 +49,14 @@ const text = {
             "compras sem valor homologado informado. Ausência não vira zero.",
         availability:
             "As quotas gratuitas podem limitar o modo IA. O modo por regras continua disponível enquanto o banco local estiver ativo.",
-        download: "Baixar evidências ↓",
+        download: "Baixar evidências JSON ↓",
+        csvExport: "Exportar tabela CSV ↓",
+        monthlyText:
+            "A tabela acompanha as compras por mês de publicação no PNCP. Não é uma linha do tempo de execução ou pagamento. Somas usam apenas valores informados.",
+        organizationsText:
+            "A tabela mostra até 20 órgãos com mais compras. Os valores estimados são somados uma vez por compra e não representam pagamentos.",
+        qualityText:
+            "Este diagnóstico mostra o preenchimento dos campos da base inteira. Valores zero são contados separadamente dos campos não informados; as contagens podem se sobrepor e não devem ser somadas.",
         responseTitle: "Resposta com contexto",
         sources: "Fontes e cobertura",
         trace: "Rastro da consulta",
@@ -68,7 +75,7 @@ const text = {
         refused: "Fora das consultas disponíveis",
         not_found_in_scope: "Não encontrado neste recorte",
         refusal:
-            "Esta pergunta está fora das consultas disponíveis ou pede uma conclusão que o recorte não sustenta. Tente resumo, municípios ou uma compra com ID PNCP.",
+            "Esta pergunta está fora das consultas disponíveis ou pede uma conclusão que o recorte não sustenta. Tente panorama, municípios, meses, órgãos, qualidade dos dados ou uma compra com ID PNCP.",
         notFound:
             "A compra não foi encontrada neste recorte. Isso não comprova ausência no PNCP.",
         queryError:
@@ -100,11 +107,17 @@ const text = {
             "Resumo da cobertura",
             "Compras por município",
             "Rastrear uma compra",
+            "Evolução mensal",
+            "Órgãos com mais compras",
+            "Qualidade dos dados",
         ],
         questions: [
             "Qual é o resumo da cobertura?",
             "Quais municípios têm mais compras no recorte?",
             "Rastreie a compra 01612601000118-1-000044/2026.",
+            "Como evoluíram as compras por mês de publicação?",
+            "Quais órgãos têm mais compras na base?",
+            "Como está a qualidade e o preenchimento dos dados?",
         ],
         assistantBrand: "ASSISTENTE DE DADOS PÚBLICOS",
         newSession: "Nova exploração",
@@ -123,7 +136,7 @@ const text = {
         welcomeLabel: "DADOS PÚBLICOS. PERGUNTAS MELHORES.",
         assistantTitle: "O que vamos descobrir\nnos dados de compras?",
         assistantLede:
-            "O AskTrace transforma registros do Portal Nacional de Contratações Públicas (PNCP) em respostas que você pode conferir. Descubra o volume de compras, compare municípios ou encontre os contratos ligados a uma compra.",
+            "O AskTrace transforma registros do Portal Nacional de Contratações Públicas (PNCP) em respostas que você pode conferir. Explore municípios, órgãos e meses de publicação, confira lacunas e encontre contratos ligados a uma compra.",
         statPurchases: "compras na base",
         statContracts: "contratos vinculados",
         statCoverage: "compras com contratos pesquisados",
@@ -158,11 +171,17 @@ const text = {
             "Entender o panorama",
             "Explorar os municípios",
             "Seguir uma compra",
+            "Acompanhar os meses",
+            "Conhecer os órgãos",
+            "Conferir lacunas",
         ],
         cardDescriptions: [
             "Quantas compras e contratos estão na base?",
             "Onde se concentram as compras do recorte?",
             "Veja contratos, valores e origem de um registro.",
+            "Veja o volume por mês de publicação.",
+            "Compare até 20 órgãos por quantidade de compras.",
+            "Diferencie campos ausentes de valores zero.",
         ],
         followupLabel: "Continue explorando",
         localExecution: "Regras locais",
@@ -194,7 +213,7 @@ const text = {
             "Nenhum modelo de IA pôde planejar esta pergunta agora. Os provedores estão em espera ou indisponíveis. Esta tentativa não consultou o banco, portanto não indica uma falha nos dados.",
         localRetry: "Consultar esta pergunta por regras locais →",
         localRetryHint:
-            "Você pode tentar a mesma pergunta sem usar API externa. Esse modo atende resumo, municípios e rastreio por ID; o banco local precisa estar ativo.",
+            "Você pode tentar a mesma pergunta sem usar API externa. Esse modo atende panorama, municípios, meses, órgãos, qualidade e rastreio por ID; o banco local precisa estar ativo.",
         nextRetry: "Próxima tentativa de candidato após",
         retryExpired:
             "O período de espera registrado já passou. Você pode tentar a IA novamente, sujeito à disponibilidade da API.",
@@ -252,7 +271,14 @@ const text = {
             "purchases with no awarded amount reported. Unknown is not zero.",
         availability:
             "Free quotas may limit AI mode. Rule-based queries remain available while the local database is running.",
-        download: "Download evidence ↓",
+        download: "Download JSON evidence ↓",
+        csvExport: "Export table as CSV ↓",
+        monthlyText:
+            "This table groups purchases by their PNCP publication month. It is not a timeline of execution or payment. Sums use reported values only.",
+        organizationsText:
+            "This table shows up to 20 organizations with the most purchases. Estimates are summed once per purchase and do not represent payments.",
+        qualityText:
+            "This diagnostic describes field completeness across the entire dataset. Zeros are counted separately from missing amounts; counts can overlap and must not be added together.",
         responseTitle: "An answer in context",
         sources: "Sources and coverage",
         trace: "Query trace",
@@ -270,7 +296,7 @@ const text = {
         refused: "Outside available queries",
         not_found_in_scope: "Not found in this scope",
         refusal:
-            "This question is outside the available queries or asks for a conclusion the dataset cannot support. Try a summary, municipality breakdown or explicit PNCP purchase ID.",
+            "This question is outside the available queries or asks for a conclusion the dataset cannot support. Try a summary, municipalities, months, organizations, data completeness or an explicit purchase ID.",
         notFound:
             "The purchase was not found in this dataset. This does not establish that it is absent from PNCP.",
         queryError:
@@ -302,11 +328,17 @@ const text = {
             "Coverage summary",
             "Purchases by municipality",
             "Trace a purchase",
+            "Monthly trend",
+            "Top purchasing organizations",
+            "Data completeness",
         ],
         questions: [
             "Qual é o resumo da cobertura?",
             "Quais municípios têm mais compras no recorte?",
             "Rastreie a compra 01612601000118-1-000044/2026.",
+            "Como evoluíram as compras por mês de publicação?",
+            "Quais órgãos têm mais compras na base?",
+            "Como está a qualidade e o preenchimento dos dados?",
         ],
         assistantBrand: "PUBLIC DATA ASSISTANT",
         newSession: "New exploration",
@@ -325,7 +357,7 @@ const text = {
         welcomeLabel: "PUBLIC DATA. BETTER QUESTIONS.",
         assistantTitle: "What will we discover\nin procurement data?",
         assistantLede:
-            "AskTrace turns records from Brazil’s National Public Procurement Portal (PNCP) into answers you can verify. Explore purchase volumes, compare municipalities or find contracts linked to a purchase.",
+            "AskTrace turns records from Brazil’s National Public Procurement Portal (PNCP) into answers you can verify. Explore municipalities, organizations and publication months, check missing data and find contracts linked to a purchase.",
         statPurchases: "dataset purchases",
         statContracts: "linked contracts",
         statCoverage: "purchases with contracts searched",
@@ -360,11 +392,17 @@ const text = {
             "Understand the overview",
             "Explore municipalities",
             "Follow a purchase",
+            "Follow monthly trends",
+            "Explore organizations",
+            "Check missing data",
         ],
         cardDescriptions: [
             "How many purchases and contracts are in the dataset?",
             "Where are purchases concentrated in this scope?",
             "See contracts, amounts and a record's provenance.",
+            "See purchase volumes by publication month.",
+            "Compare up to 20 organizations by purchase count.",
+            "Distinguish missing fields from zero amounts.",
         ],
         followupLabel: "Keep exploring",
         localExecution: "Local rules",
@@ -396,7 +434,7 @@ const text = {
             "No AI model could plan this question right now. Providers are cooling down or unavailable. This attempt did not query the database, so it does not indicate a data failure.",
         localRetry: "Try this question with local rules →",
         localRetryHint:
-            "You can try the same question without an external API. This mode supports summaries, municipalities and tracing an explicit ID; the local database must be running.",
+            "You can try the same question without an external API. This mode supports summaries, municipalities, months, organizations, completeness and explicit ID tracing; the local database must be running.",
         nextRetry: "Next candidate attempt after",
         retryExpired:
             "The recorded cooldown has elapsed. You may try AI again, subject to API availability.",
@@ -408,6 +446,24 @@ const text = {
     },
 };
 const columns = {
+    publication_month: ["Mês da publicação", "Publication month"],
+    org_cnpj: ["CNPJ do órgão", "Organization CNPJ"],
+    zero_estimates: [
+        "Compras com estimativa zero",
+        "Purchases with zero estimate",
+    ],
+    zero_awarded_values: [
+        "Compras com valor homologado zero",
+        "Purchases with zero awarded amount",
+    ],
+    unknown_municipalities: [
+        "Compras com município incompleto",
+        "Purchases with incomplete municipality",
+    ],
+    unknown_org_names: [
+        "Compras sem nome de órgão",
+        "Purchases without an organization name",
+    ],
     municipality_ibge: ["Código IBGE", "IBGE code"],
     municipality_name: ["Município", "Municipality"],
     purchases: ["Compras", "Purchases"],
@@ -525,6 +581,9 @@ function renderBase(data) {
     else if (data.status === "not_found_in_scope") content = t.notFound;
     else if (e) {
         if (e.question === "summary") content = t.summaryText(e.coverage);
+        else if (e.question === "monthly") content = t.monthlyText;
+        else if (e.question === "organizations") content = t.organizationsText;
+        else if (e.question === "quality") content = t.qualityText;
         else if (e.question === "municipalities") content = t.municipalityText;
         else content = t.purchaseText(e.result[0]);
         content += " " + t.caution;
@@ -576,7 +635,11 @@ function renderBase(data) {
         $("sources").append(link);
         if (e.result.length && e.question !== "summary") {
             const table = node("table");
-            if (e.question === "municipalities") {
+            if (
+                ["municipalities", "monthly", "organizations"].includes(
+                    e.question,
+                )
+            ) {
                 const head = node("tr");
                 const keys = Object.keys(e.result[0]);
                 keys.forEach((key) => {
@@ -614,15 +677,26 @@ function renderBase(data) {
                 });
                 table.append(body);
             }
+            const tableNames = {
+                municipalities: [
+                    "Compras por município",
+                    "Purchases by municipality",
+                ],
+                monthly: [
+                    "Compras por mês de publicação",
+                    "Purchases by publication month",
+                ],
+                organizations: [
+                    "Compras por órgão",
+                    "Purchases by organization",
+                ],
+                quality: ["Qualidade dos dados", "Data completeness"],
+                purchase: ["Detalhes da compra", "Purchase details"],
+            };
             table.setAttribute(
                 "aria-label",
-                e.question === "municipalities"
-                    ? lang === "pt"
-                        ? "Compras por município"
-                        : "Purchases by municipality"
-                    : lang === "pt"
-                      ? "Detalhes da compra"
-                      : "Purchase details",
+                tableNames[e.question]?.[lang === "pt" ? 0 : 1] ||
+                    text[lang].responseTitle,
             );
             $("result-table").setAttribute("tabindex", "0");
             $("result-table").setAttribute("role", "region");
@@ -636,9 +710,13 @@ function renderBase(data) {
                 table,
                 node(
                     "p",
-                    lang === "pt"
-                        ? "Valores em reais, exibidos com duas casas decimais. O JSON preserva a precisão original. Não informado é diferente de zero."
-                        : "Amounts are in Brazilian reais, displayed to two decimal places. JSON retains original precision. Not reported is different from zero.",
+                    e.question === "quality"
+                        ? lang === "pt"
+                            ? "Contagens da base selecionada. A mesma compra pode ter mais de um campo ausente. Zero e ausência são situações diferentes."
+                            : "Counts for the selected dataset. One purchase may have multiple missing fields. Zero and missing values are distinct."
+                        : lang === "pt"
+                          ? "Valores em reais, exibidos com duas casas decimais. O JSON preserva a precisão original. Não informado é diferente de zero."
+                          : "Amounts are in Brazilian reais, displayed to two decimal places. JSON retains original precision. Not reported is different from zero.",
                     "display-note",
                 ),
             );
@@ -658,7 +736,7 @@ function fillQuestion(question) {
 function discovery() {
     const t = text[lang];
     $("discovery").replaceChildren();
-    ["▤", "⌁", "◎"].forEach((icon, i) => {
+    ["▤", "⌁", "◎", "↗", "▦", "◉"].forEach((icon, i) => {
         const button = node("button");
         button.type = "button";
         button.append(
@@ -733,7 +811,13 @@ function renderAssistant(data) {
             ? [1, 2]
             : action === "municipalities"
               ? [2, 0]
-              : [0, 1];
+              : action === "monthly"
+                ? [4, 5]
+                : action === "organizations"
+                  ? [3, 5]
+                  : action === "quality"
+                    ? [3, 1]
+                    : [0, 1];
     indices.forEach((i) => {
         const button = node("button", t.examples[i] + " ↗");
         button.type = "button";
@@ -804,7 +888,14 @@ function validStoredResult(data) {
     const e = data.evidence;
     if (!e) return data.status !== "answered";
     return (
-        ["summary", "municipalities", "purchase"].includes(e.question) &&
+        [
+            "summary",
+            "municipalities",
+            "monthly",
+            "organizations",
+            "quality",
+            "purchase",
+        ].includes(e.question) &&
         e.coverage &&
         [
             "purchases",
@@ -1119,6 +1210,8 @@ function readableTrace(data) {
     }
 }
 function render(data) {
+    $("download-csv").hidden =
+        data.status !== "answered" || !data.evidence?.result?.length;
     renderDataset(data);
     showAvailability(serviceAvailability);
     readableTrace(data);
@@ -1325,3 +1418,25 @@ fetch("/api/session")
     .catch(() => {
         $("status").textContent = text[lang].sessionError;
     });
+
+$("download-csv").addEventListener("click", () => {
+    if (!latest?.evidence?.result?.length || latest.status !== "answered")
+        return;
+    const e = latest.evidence;
+    const rows = e.result.map((row) => ({
+        query: e.question,
+        scope_uf: e.scope.uf,
+        scope_start: e.scope.date_start,
+        scope_end: e.scope.date_end,
+        coverage_report_sha256: e.coverage_report_sha256,
+        ...row,
+    }));
+    const url = URL.createObjectURL(
+        new Blob([displayFormat.csv(rows)], { type: "text/csv;charset=utf-8" }),
+    );
+    const link = node("a");
+    link.href = url;
+    link.download = `asktrace-${e.question}.csv`;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+});

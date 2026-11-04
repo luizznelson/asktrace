@@ -95,3 +95,41 @@ class BusinessQueryTests(unittest.TestCase):
         self.report.write_text(json.dumps(report))
         with self.assertRaisesRegex(ValueError, "coverage_evidence_mismatch"):
             query.answer(self.root, self.report, "summary")
+
+    def test_new_aggregations_do_not_multiply_purchase_values(self):
+        for action in ("monthly", "organizations"):
+            result = query.answer(self.root, self.report, action)
+            self.assertEqual(len(result["result"]), 1)
+            self.assertEqual(result["result"][0]["purchases"], 1)
+            self.assertEqual(result["result"][0]["estimated_value"], Decimal(10))
+        self.assertEqual(
+            query.answer(self.root, self.report, "monthly")["result"][0]["publication_month"],
+            "2026-08",
+        )
+
+    def test_quality_distinguishes_missing_zero_and_incomplete_names(self):
+        missing = query.answer(self.root, self.report, "quality")["result"][0]
+        self.assertEqual(missing["unknown_awarded_values"], 1)
+        self.assertEqual(missing["zero_awarded_values"], 0)
+        self.assertEqual(missing["unknown_municipalities"], 1)
+        self.assertEqual(missing["unknown_org_names"], 1)
+        parent = snapshot(self.root, estimated=0, awarded=0)
+        load(self.root, parent)
+        path = contracts.collect(self.root, parent, 1, lambda url: (response(), 200), 0)
+        contracts.load(self.root, path)
+        report = contract_batches.resume(self.root, parent)
+        zeros = query.answer(self.root, report, "quality")["result"][0]
+        self.assertEqual(zeros["zero_estimates"], 1)
+        self.assertEqual(zeros["zero_awarded_values"], 1)
+        self.assertEqual(zeros["unknown_estimates"], 0)
+        self.assertEqual(zeros["unknown_awarded_values"], 0)
+
+    def test_organization_aliases_do_not_split_a_single_organization(self):
+        statement = """WITH p(org_cnpj,org_name,estimated_value,awarded_value) AS (
+          VALUES ('00000000000000','Name B',10.0,NULL::numeric),
+                 ('00000000000000','Name A',20.0,NULL::numeric)) """
+        with query.connect(self.root) as db:
+            rows = db.execute(statement + query.QUERIES["organizations"]).fetchall()
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["purchases"], 2)
+        self.assertEqual(rows[0]["estimated_value"], Decimal(30))

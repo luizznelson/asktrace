@@ -13,7 +13,16 @@ from asktrace.web import COVERAGE, Server
 class WebTests(unittest.TestCase):
     def setUp(self):
         self.runner = Mock(return_value={"status": "refused", "trace": []})
-        self.server = Server(Path(__file__).parents[1], 0, self.runner)
+        # HTTP boundary tests do not depend on ignored local downloads.
+        # Real snapshot/database behavior is checked by integration tests and the verifier.
+        metadata = (
+            {"date_start": "2026-08-01", "date_end": "2026-10-31"},
+            [{"awarded_value": None}, {"awarded_value": None}],
+            {},
+            "a" * 64,
+        )
+        with patch("asktrace.web.dataset", return_value=metadata):
+            self.server = Server(Path(__file__).parents[1], 0, self.runner)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
         self.addCleanup(self.close)

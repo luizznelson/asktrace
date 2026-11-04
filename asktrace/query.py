@@ -108,6 +108,26 @@ QUERIES = {
       count(*) FILTER (WHERE awarded_value IS NULL) AS unknown_awarded_values
       FROM p GROUP BY municipality_ibge,municipality_name
       ORDER BY purchases DESC,municipality_ibge NULLS LAST,municipality_name NULLS LAST LIMIT 20""",
+    "monthly": """SELECT to_char(publication_date, 'YYYY-MM') AS publication_month,
+      count(*) AS purchases, sum(estimated_value) AS estimated_value,
+      count(*) FILTER (WHERE estimated_value IS NULL) AS unknown_estimates,
+      count(*) FILTER (WHERE awarded_value IS NULL) AS unknown_awarded_values
+      FROM p GROUP BY to_char(publication_date, 'YYYY-MM') ORDER BY publication_month""",
+    "organizations": """SELECT org_cnpj, min(nullif(trim(org_name), '')) AS org_name,
+      count(*) AS purchases,
+      sum(estimated_value) AS estimated_value,
+      count(*) FILTER (WHERE estimated_value IS NULL) AS unknown_estimates,
+      count(*) FILTER (WHERE awarded_value IS NULL) AS unknown_awarded_values
+      FROM p GROUP BY org_cnpj
+      ORDER BY purchases DESC, org_cnpj, org_name NULLS LAST LIMIT 20""",
+    "quality": """SELECT count(*) AS purchases,
+      count(*) FILTER (WHERE estimated_value IS NULL) AS unknown_estimates,
+      count(*) FILTER (WHERE estimated_value = 0) AS zero_estimates,
+      count(*) FILTER (WHERE awarded_value IS NULL) AS unknown_awarded_values,
+      count(*) FILTER (WHERE awarded_value = 0) AS zero_awarded_values,
+      count(*) FILTER (WHERE nullif(trim(municipality_ibge),'') IS NULL
+        OR nullif(trim(municipality_name),'') IS NULL) AS unknown_municipalities,
+      count(*) FILTER (WHERE nullif(trim(org_name),'') IS NULL) AS unknown_org_names FROM p""",
     "purchase": """SELECT p.control_id,p.org_name,p.municipality_name,p.publication_date,
       p.object_text,p.estimated_value,p.awarded_value,p.source_body_sha256,p.source_record_index,
       c.outcome,c.run_id AS contract_run_id,c.body_sha256 AS contract_pages_sha256,

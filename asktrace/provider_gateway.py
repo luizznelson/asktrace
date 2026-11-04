@@ -9,7 +9,7 @@ from urllib.request import Request
 from asktrace.gemini import ProviderFailure
 from asktrace.gemini import plan as gemini_plan
 from asktrace.http_transport import urlopen
-from asktrace.planning import current_prompt
+from asktrace.planning import PLAN_ACTIONS, current_prompt
 from asktrace.rate_limits import hints
 
 KEYS = {"groq": "GROQ_API_KEY", "openrouter": "OPENROUTER_API_KEY", "gemini": "GEMINI_API_KEY"}
@@ -21,7 +21,7 @@ URLS = {
 SCHEMA = {
     "type": "object",
     "properties": {
-        "action": {"type": "string", "enum": ["summary", "municipalities", "purchase", "refuse"]},
+        "action": {"type": "string", "enum": list(PLAN_ACTIONS)},
         "purchase_id": {"type": ["string", "null"]},
     },
     "required": ["action", "purchase_id"],

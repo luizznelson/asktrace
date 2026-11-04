@@ -14,7 +14,7 @@ from asktrace.database import load as load_purchases
 from asktrace.ingest import collect as collect_purchases
 
 
-def snapshot(root, year=2026):
+def snapshot(root, year=2026, estimated=10, awarded=None):
     raw = {
         "numeroControlePNCP": "synthetic-purchase",
         "anoCompra": year,
@@ -24,8 +24,8 @@ def snapshot(root, year=2026):
         "modalidadeId": 6,
         "dataPublicacaoPncp": "2026-08-01T00:00:00",
         "objetoCompra": "synthetic",
-        "valorTotalEstimado": 10,
-        "valorTotalHomologado": None,
+        "valorTotalEstimado": estimated,
+        "valorTotalHomologado": awarded,
     }
     body = json.dumps(
         {"data": [raw], "totalRegistros": 1, "totalPaginas": 1, "numeroPagina": 1}

@@ -10,12 +10,12 @@ from urllib.request import Request
 from dotenv import load_dotenv
 
 from asktrace.http_transport import urlopen
-from asktrace.planning import current_prompt
+from asktrace.planning import PLAN_ACTIONS, current_prompt
 
 SCHEMA = {
     "type": "OBJECT",
     "properties": {
-        "action": {"type": "STRING", "enum": ["summary", "municipalities", "purchase", "refuse"]},
+        "action": {"type": "STRING", "enum": list(PLAN_ACTIONS)},
         "purchase_id": {"type": "STRING", "nullable": True},
     },
     "required": ["action", "purchase_id"],

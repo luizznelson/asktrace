@@ -118,9 +118,12 @@ try:
     status, body = request("GET", "/api/session")
     assert status == 200 and json.loads(body)["default_dataset"] == "expanded"
     report["http_queries"] = []
-    for dataset, expected, question in [
-        ("original", 1081, "Qual é o resumo da cobertura?"),
-        ("expanded", 2537, "Quais municípios têm mais compras no recorte?"),
+    for dataset, expected, action, question in [
+        ("original", 1081, "summary", "Qual é o resumo da cobertura?"),
+        ("expanded", 2537, "municipalities", "Quais municípios têm mais compras no recorte?"),
+        ("expanded", 2537, "monthly", "Como evoluíram as compras por mês de publicação?"),
+        ("expanded", 2537, "organizations", "Quais órgãos têm mais compras na base?"),
+        ("expanded", 2537, "quality", "Como está a qualidade e o preenchimento dos dados?"),
     ]:
         status, body = request(
             "POST", "/api/ask", {"question": question, "provider": "baseline", "dataset": dataset}
@@ -128,9 +131,23 @@ try:
         result = json.loads(body)
         assert status == 200 and result["status"] == "answered" and result["llm_attempts"] == 0
         assert result["evidence"]["coverage"]["purchases"] == expected
+        assert result["evidence"]["question"] == action
+        rows = result["evidence"]["result"]
+        if action == "monthly":
+            assert [row["purchases"] for row in rows] == [505, 527, 424, 412, 373, 296]
+            assert sum(row["purchases"] for row in rows) == expected
+        if action == "organizations":
+            assert len(rows) <= 20 and len({row["org_cnpj"] for row in rows}) == len(rows)
+            assert all(
+                rows[i]["purchases"] >= rows[i + 1]["purchases"] for i in range(len(rows) - 1)
+            )
+        if action == "quality":
+            assert rows[0]["purchases"] == expected and rows[0]["unknown_awarded_values"] == 1354
         report["http_queries"].append(
             {
                 "dataset": dataset,
+                "action": action,
+                "row_count": len(rows),
                 "status": result["status"],
                 "purchases": expected,
                 "tool_calls": result["tool_calls"],
