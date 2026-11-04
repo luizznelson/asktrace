@@ -94,3 +94,7 @@ Suíte atual: **86 testes locais passaram**, incluindo PostgreSQL. Sete testes n
 ## Recortes e sessão restaurável
 
 Passaram **89 testes Python locais**, incluindo PostgreSQL. Três novos testes cobrem IDs de base permitidos, caminho correto do recorte e isolamento do período no planejador. Contrato DOM cobre restauração sem nova API e histórico inválido. HTTP real validou resumo original, ampliado e ampliado com IA. Não transfere a pontuação do corpus antigo ao novo recorte. [Evidências](dataset-expansion.md).
+
+## Indisponibilidade do planejador
+
+91 testes Python passaram; dois testes novos distinguem cooldown de falha do banco e garantem que nenhuma ferramenta roda antes do plano. Contrato DOM verifica fontes vazias ocultas e recuperação por clique, sem fallback silencioso. [Cenário controlado com banco real](../runs/recovery-verification-da469824-8e8f-43dd-b8ec-f0f220c19af1/verification.json).

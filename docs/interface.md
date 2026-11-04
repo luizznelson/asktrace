@@ -131,3 +131,23 @@ O portfólio deve apresentar os resultados medidos e as limitações reais de ca
 ## Base ampliada e orientação de uso
 
 A introdução explica PNCP, propósito e os três passos de uso. O padrão passou a maio–outubro/2026, com 2.537 compras e cobertura parcial de contratos explícita. O recorte anterior permanece disponível. O histórico é restaurado do sessionStorage sem chamadas externas. [Método e evidências atuais](dataset-expansion.md).
+
+## Quando a IA está em espera
++
++Falhas de contingência antes da ferramenta retornam `availability.component=ai_planner` e
++`database_checked=false`. A tela explica que o banco não foi consultado, não sugere que uma quota
++seja falha dos dados, esconde fontes/cobertura vazias e oferece uma consulta explícita por regras
++locais. O botão preserva pergunta e recorte, muda o modo visível e só então envia outra consulta.
++Não há fallback silencioso. Regras locais precisam do banco ativo e respeitam seu catálogo.
++
++Horários de espera são apresentados quando registrados, como possibilidade de nova tentativa,
++sem garantia de recuperação. O rastro principal usa linguagem simples; os detalhes e candidatos
++desativados continuam no registro técnico completo. Resultados antigos de sessão também recebem
++essa apresentação a partir do rastro preservado, sem editar seus dados históricos.
++
++Passaram 91 testes Python e o contrato DOM de recuperação: não há nova chamada ao renderizar erro,
++somente após clique; o pedido usa baseline e fontes reaparecem após resposta válida. A
++[verificação controlada](../runs/recovery-verification-da469824-8e8f-43dd-b8ec-f0f220c19af1/verification.json) usa falha de IA simulada e PostgreSQL real,
++com zero chamadas externas. Não comprova a liberação da quota nem uma indisponibilidade real do
++provedor. Não houve inspeção visual de navegador nesta etapa.
++

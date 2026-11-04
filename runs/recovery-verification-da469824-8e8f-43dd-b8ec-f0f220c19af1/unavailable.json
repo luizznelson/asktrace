@@ -1,0 +1,32 @@
+{
+  "question": "Qual é o resumo da cobertura?",
+  "provider": "fallback",
+  "status": "error",
+  "answer": "A consulta não pôde ser concluída com segurança.",
+  "trace": [
+    {
+      "step": "provider_attempt",
+      "candidate": "groq-qwen",
+      "provider": "groq",
+      "outcome": "skipped",
+      "reason": "cooldown",
+      "not_before_epoch": 2100000000
+    },
+    {
+      "step": "failure",
+      "error_type": "ContingencyFailure",
+      "provider_http_status": null,
+      "provider_limits": null
+    }
+  ],
+  "llm_attempts": 0,
+  "tool_calls": 0,
+  "availability": {
+    "component": "ai_planner",
+    "reason": "cooldown",
+    "next_candidate_retry_epoch": 2100000000,
+    "local_rules_available_to_try": true,
+    "database_checked": false
+  },
+  "latency_ms": 228.36
+}

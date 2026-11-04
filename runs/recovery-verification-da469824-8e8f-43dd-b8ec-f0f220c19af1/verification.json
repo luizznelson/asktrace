@@ -1,0 +1,15 @@
+{
+  "verified_at": "2026-11-04T18:53:28.391472+00:00",
+  "scenario": "Planner cooldown injected; local retry uses real PostgreSQL. Not an observed outage.",
+  "external_api_calls": 0,
+  "unavailable_database_calls": 0,
+  "explicit_local_retry_passed": true,
+  "python_tests_passed": 91,
+  "dom_recovery_contract_passed": true,
+  "code_sha256": {
+    "asktrace/agent.py": "5c4b67f98294d8b580a0087106b1ec8fa1303e92bea3d2ba56050d43c18006dc",
+    "web/app.js": "ab81df04092c1c35033f19ff73c0fa358f4220bc3be1ced1be6cce65711da274",
+    "web/index.html": "503fc236ef1cdbae57af38ae9d0502865202a2b122bc2b4a7ad0b46f2fdf4727",
+    "web/app.css": "322d691bb916d6d20cc119f23b302c472e12c506e700e5cf0e48a77d9e6d7541"
+  }
+}
