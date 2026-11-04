@@ -1,0 +1,75 @@
+{
+  "scope": "local samples, not full ingestion",
+  "files": [
+    {
+      "file": "diarios-picos.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "invalid_page",
+      "complete_dataset": false
+    },
+    {
+      "file": "pncp-contratacoes-pi.json",
+      "sha256": "6c14568d8dfcb5015f8ffc8ae1cf23af6a98d43eba79321d1771fe1833dfa01b",
+      "status": "valid_page",
+      "downloaded_records": 50,
+      "reported_total": 454,
+      "reported_pages": 10,
+      "page": 1,
+      "complete_dataset": false,
+      "missing_ids": 0,
+      "duplicate_ids": 0,
+      "states": [
+        "PI"
+      ]
+    },
+    {
+      "file": "pncp-contratacoes.json",
+      "sha256": "150405629c5095c4d673a379f34d5eeff02c4a32287976b7c0d01790f58e0cfb",
+      "status": "valid_page",
+      "downloaded_records": 50,
+      "reported_total": 38545,
+      "reported_pages": 771,
+      "page": 1,
+      "complete_dataset": false,
+      "missing_ids": 0,
+      "duplicate_ids": 0,
+      "states": [
+        "BA",
+        "CE",
+        "DF",
+        "ES",
+        "GO",
+        "PB",
+        "PE",
+        "PR",
+        "RJ",
+        "RN",
+        "RS",
+        "SC",
+        "SE",
+        "SP"
+      ]
+    },
+    {
+      "file": "pncp-contratos.json",
+      "sha256": "cf4d05136dc0218389bd1b38e68ee36c24cbc9b3fe64d1475c1e6820d19226a0",
+      "status": "valid_page",
+      "downloaded_records": 50,
+      "reported_total": 201691,
+      "reported_pages": 4034,
+      "page": 1,
+      "complete_dataset": false,
+      "missing_ids": 0,
+      "duplicate_ids": 0,
+      "states": [
+        "CE",
+        "MS",
+        "PE",
+        "PR",
+        "RJ",
+        "RS",
+        "SC"
+      ]
+    }
+  ]
+}

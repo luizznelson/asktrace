@@ -1,254 +1,74 @@
-# Perguntas, roteamento e avaliação
+# Avaliação de perguntas de negócio
 
-## Problema resolvido
+## Estado atual
 
-Uma pergunta em texto precisa selecionar a consulta correta, respeitar o recorte e preservar a origem
-dos números. Dar liberdade para gerar SQL ou inferir pagamentos e economia não ajuda esse objetivo.
-Esta entrega acrescenta um **roteador de uma etapa**, com dois modos explícitos:
+O roteador seleciona uma consulta somente leitura; as respostas são produzidas por templates com
+dados verificados. Há modos individuais e um modo de contingência com até três tentativas de
+planejador, mantendo no máximo uma ferramenta de negócio.
 
-| Modo | Seleção da ferramenta | Estado validado |
+| Medição | Resultado | O que permite afirmar |
 | --- | --- | --- |
-| `baseline` | Regras locais determinísticas | 60 de 60 casos de desenvolvimento passaram com consultas reais |
-| `gemini` | Modelo propõe plano JSON validado | Integração 3/3; avaliação completa iniciada e interrompida por HTTP 429 |
+| Baseline por regras | 60/60 no corpus original | Caminhos locais de desenvolvimento; não usa LLM |
+| Qwen / contrato anterior | 52/60 | Oito recusas indevidas motivaram esclarecimentos do catálogo |
+| Qwen / contrato v2, individual | 10 aprovados e um erro de rede; restante não executado | Medição parcial, preservada |
+| Contingência / contrato v2 | 60/60 em dois trechos sem sobreposição | Mesmo código/configuração/corpus/cobertura; 40 planos LLM e 20 recusas locais |
+| Oito perguntas adicionais | 8/8 | Congeladas antes de executar; autoria interna, não teste cego independente |
+| GPT-OSS / contrato v2 | 3/3 reais | Teste de integração, não suíte completa do modelo |
+| Xing / OpenRouter | 2/3 reais; um 429 | Reserva integrada, disponibilidade variável; rastreio pendente nessa rodada |
+| Gemini / contrato anterior | Integração 3/3; depois 28 aprovados, um erro e 31 não executados em segmentos | Avaliação individual ainda incompleta por quota; não herda o resultado de outro modelo |
 
-Não é um agente autônomo com pesquisa, memória ou várias iterações. O modo baseline não usa LLM.
-O teste inicial com Gemini foi executado com a chave configurada localmente. O resultado abaixo
-é separado do baseline e dos testes com mocks do provedor.
+[Método de contingência, comandos e evidências](provider-contingency.md).
 
-## Fluxo e limites
+## Corpus, acerto e limites
 
-```mermaid
-flowchart LR
-    Q[Pergunta] --> V[Validação e filtro de política]
-    V --> P[Plano por regras ou Gemini]
-    P --> C[Validação do catálogo e do ID]
-    C --> T[Uma consulta somente leitura]
-    T --> R[Resposta por template e evidências]
-    V --> N[Recusa sem ferramenta]
-    C --> E[Erro explícito sem fallback]
-```
+[`business-v1.json`](../evals/business-v1.json) tem 60 perguntas curadas: 20 de resumo, 12 de
+municípios, oito rastreios da mesma compra e 20 recusas. A aprovação exige ação e status esperados,
+contagens globais previstas e ID correto no rastreio. Não valida toda frase possível ou toda soma
+municipal; as consultas têm testes de software próprios. Os casos são de desenvolvimento e foram
+usados para ajustar o catálogo: 60/60 não é estimativa de qualidade em perguntas abertas.
 
-Há no máximo uma tentativa de LLM e uma chamada de ferramenta por pergunta. O planejador só pode
-escolher `summary`, `municipalities`, `purchase` ou `refuse`. Não recebe conexão com o banco,
-registros de compras, valores, SQL ou ferramentas de escrita. Um ID deve estar literalmente presente
-na pergunta; o modelo não pode inventá-lo. Campos extras, planos incompletos ou fora do catálogo falham.
+[`business-additional-v1.json`](../evals/business-additional-v1.json) traz oito perguntas distintas,
+incluindo sinônimos, compra ausente, pagamento e outro estado/período. Uma recusa é do filtro local;
+a recusa de Bahia/2024 depende do modelo. Não chamar as oito de benchmark externo independente.
 
-O template final usa os números retornados pelas consultas verificadas. O modelo não redige valores
-ou conclusões. A resposta mostra UF, modalidade, período de publicação, cobertura, fontes e limites.
-O texto livre do objeto da compra não é enviado ao modelo e é omitido da evidência do agente.
-Isso reduz a superfície de instruções maliciosas em documentos; não prova resistência universal a ataques.
+Os resultados do modo `fallback` registram cada modelo escolhido. Avaliações individuais não
+trocam de modelo. Não somar modelos, versões de prompt ou casos sobrepostos como uma nota única.
+A consolidação atual verifica dois intervalos distintos, 1–10 e 11–60, com hashes compatíveis.
+Os erros e a pontuação anterior foram preservados; os valores esperados não foram alterados.
 
-O filtro de política recusa alguns termos de pagamentos, fraude, economia, dados de fornecedor,
-segredos e alterações antes do planejador. É um filtro conservador por termos, sujeito a falsos positivos
-e lacunas semânticas, não um classificador completo. O baseline também pode selecionar uma tabela
-genérica quando a pergunta pede filtros não suportados. O recorte explícito e o catálogo de ferramentas
-continuam obrigatórios. Perguntas fora da amostra exigem revisão, não promessa de acerto.
-
-## Executar sem API
+## Executar
 
 ```powershell
-.venv/Scripts/python.exe -m asktrace.agent "Qual é o resumo da cobertura?" --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
-.venv/Scripts/python.exe -m asktrace.agent "Quais municípios têm mais compras?" --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
-.venv/Scripts/python.exe -m asktrace.agent "Qual foi a economia obtida?" --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
+.venv/Scripts/python.exe -m asktrace.evaluate --provider fallback --interval 12 --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
+.venv/Scripts/python.exe -m asktrace.evaluate --provider groq-gpt-oss --limit 3 --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
+.venv/Scripts/python.exe -m asktrace.evaluate --provider fallback --cases evals/business-additional-v1.json --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
 ```
 
-As respostas incluem `status`, texto, evidências, rastro, tentativas e latência. As recusas não chamam
-o banco. Erros de provedor ou validação retornam `error`, sem expor mensagens, senhas ou payloads.
-Não há fallback silencioso do Gemini para regras. `llm_attempts` é tentativa de usar o planejador LLM,
-inclusive se faltar configuração, não uma contagem de chamadas faturadas pelo provedor.
+O padrão da CLI é baseline. `--start-case N` usa posição começando em 1; `--limit N` limita o trecho.
+O avaliador para em erro técnico de qualquer modo externo e registra não executados. `case-NNN.json`
+preserva cada caso concluído; `corpus.source.json` captura os bytes exatos nas novas execuções.
+Os relatórios mantêm hashes do código, corpus, configuração e cobertura. Há cache de consultas,
+sem cache do plano externo; as latências não incluem a espera configurada entre casos e não são
+medição de produção sem cache. Tentativas e tokens não comprovam custo monetário ou custo zero.
 
-## Configurar Gemini em arquivo
+## Histórico e proveniência
 
-Adicione ao `.env` local, sem apagar as configurações do banco:
+- [Conferência atual](../runs/provider-verification-6f377e0f-a72c-4fc3-92ab-e225d79a95e1/verification.json).
+- [Contingência 1–10](../runs/agent-eval-00419514-804c-44b4-a62b-fa32633e4094/evaluation.json)
+  e [11–60](../runs/agent-eval-b53dbffa-b055-40f8-8b72-77aef201835f/evaluation.json).
+- [Adicionais](../runs/agent-eval-69298927-ccd7-4016-99d9-8816a7c91833/evaluation.json).
+- [Qwen antes do ajuste](../runs/agent-eval-5b9d5ff9-57ca-4dfc-bb7d-c7fdeac23004/evaluation.json).
+- [Gemini parcial histórico](../runs/agent-consolidated-cbf07cd7-7961-4f6d-9b94-b0db226a64d1/verification.json).
+- [Baseline histórico](../runs/agent-eval-3ad8ae41-4327-4033-ae56-2c59a60e451d/evaluation.json).
 
-```dotenv
-GEMINI_API_KEY=cole_sua_chave_localmente
-GEMINI_MODEL=gemini-2.5-flash
-```
+Os registros históricos podem usar hashes de bytes CRLF executados antes da conversão para LF pelo
+Git. A [proveniência dos bytes](provider-contingency.md#bytes-de-execução-e-git-no-windows) guarda
+cópias exatas e distingue hash de execução do hash publicado. Nenhum relatório antigo foi reescrito.
+O resolvedor verifica essa correspondência antes de usar a evidência; não aceita dados alterados.
 
-O `.env.example` mostra somente os nomes e valores de exemplo. Nunca commitar `.env` ou a chave.
-O modelo é configurável; sua disponibilidade e quota precisam ser confirmadas com uma chamada real.
-O adaptador usa HTTPS, chave em cabeçalho, timeout de 30 segundos, limite de resposta e saída
-estruturada. Não repete pedidos automaticamente para evitar multiplicar consumo. O status HTTP de
-erro, quando disponível, aparece no rastro, sem o corpo da resposta do provedor.
-Somente a pergunta e o catálogo de intenção são enviados ao Gemini; a resposta do banco não é enviada.
+## Próxima etapa
 
-```powershell
-.venv/Scripts/python.exe -m asktrace.agent "Qual é o resumo da cobertura?" --provider gemini --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
-```
-
-Referência do formato: [saída estruturada da API Gemini](https://ai.google.dev/gemini-api/docs/generate-content/structured-output).
-O uso real depende da conta, quota e modelo; não afirmamos que o custo será zero.
-
-## Avaliação reproduzível
-
-O [corpus v1](../evals/business-v1.json) tem 60 perguntas: 20 de resumo, 12 de municípios,
-oito de rastreio de uma compra e 20 recusas. Os valores esperados são explícitos e vinculados ao
-snapshot de 1.081 compras. Os casos são de desenvolvimento, elaborados para este catálogo;
-não constituem um teste cego, uma amostra de usuários ou uma comparação geral entre modelos.
-As recusas do corpus são barradas pelo filtro antes do LLM, portanto não medem recusa do modelo.
-
-```powershell
-.venv/Scripts/python.exe -m asktrace.evaluate --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
-.venv/Scripts/python.exe -m asktrace.evaluate --provider gemini --limit 3 --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
-```
-
-O segundo comando é um teste inicial pequeno: as três primeiras perguntas representam resumo,
-municípios e rastreio. Executar a suíte completa com Gemini exige remover `--limit 3`.
-O avaliador para no primeiro erro de provedor, registra a falha e retorna código diferente de zero.
-Não troca de modelo e não apresenta perguntas não executadas como aprovadas.
-
-A aprovação exige a ação e o status esperados, os valores globais de cobertura previstos e,
-no rastreio, o ID esperado. Isso não valida toda frase possível, toda agregação municipal nem
-respostas abertas. A correção das consultas tem testes de software próprios.
-O relatório guarda cada caso, resultado, rastro, hash do corpus, relatório de cobertura e código.
-Há cache local das consultas verificadas na avaliação, sem cache do plano Gemini. Por isso a latência
-medida não é latência de produção sem cache. Tokens e modelo aparecem se o provedor retornar
-metadados; valor monetário fica desconhecido sem dados de cobrança.
-
-## Evidências desta entrega
-
-- [Avaliação final do baseline](../runs/agent-eval-3ad8ae41-4327-4033-ae56-2c59a60e451d/evaluation.json): 60 executados, 60 aprovados,
-  zero erros, zero tentativas de LLM. Quarenta chamadas lógicas de ferramenta, com cache de consultas.
-- [Primeira execução local](../runs/agent-eval-56477761-a3a6-41de-bfb1-49f5a8a9a6e6/evaluation.json).
-- [Execução intermediária](../runs/agent-eval-eb123db5-c11b-4efa-8926-752a0e39af4f/evaluation.json).
-
-Os relatórios anteriores são históricos, com a nomenclatura de métricas usada naquele momento.
-O primeiro usava `llm_calls`; o formato final usa `llm_attempts` para não sugerir cobrança comprovada.
-Todos são baseline; nenhum comprova integração real com Gemini.
-
-Os **59 testes locais de software passaram**, incluindo PostgreSQL. Oito testes novos verificam
-recusa antes do provedor, plano inválido, orçamento de uma ferramenta, template com dados verificados,
-erros sem vazamento, texto não confiável, entrada inválida, payload do adaptador e falhas do avaliador.
-São testes com mocks para o provedor; não são métricas de qualidade de um modelo real. Ruff e
-formatação passaram; CI remoto não verificado nesta entrega.
-
-## Teste real Gemini em 03/11/2026
-
-O teste inicial executou três perguntas com **Gemini 2.5 Flash**: resumo, municípios e rastreio de uma
-compra. **Três executadas, três aprovadas, zero erros**, uma tentativa de LLM e uma chamada lógica
-de ferramenta em cada pergunta. Os planos escolheram as três ações esperadas; as contagens de
-cobertura e o identificador do rastreio corresponderam aos valores esperados. Não houve fallback.
-
-[Execução real](../runs/agent-eval-e1b0aef5-858d-4a16-8f52-bb881fc16585/evaluation.json) · [Conferência dos hashes e uso](../runs/agent-eval-e1b0aef5-858d-4a16-8f52-bb881fc16585/verification.json).
-
-O provedor informou **840 tokens totais** nas três chamadas: 613 de entrada, 68 de saída candidata
-e 159 de raciocínio. A mediana observada foi 2.80 segundos por pergunta,
-incluindo roteamento e consulta local; é uma amostra de três casos, não uma estimativa de produção.
-O avaliador tem cache local habilitado, mas as três ações desta execução usam chaves de consulta
-diferentes. O custo monetário não foi verificado e não é apresentado como zero.
-
-Esta execução comprova a integração real com o provedor para três caminhos suportados. Ela **não
-aprova automaticamente os 60 casos com Gemini**, não mede generalização e não testa recusas do
-modelo. O resultado baseline 60/60 continua separado. A chave permanece apenas no `.env` local,
-ignorado pelo Git; os relatórios não contêm a chave nem os corpos HTTP do provedor.
-
-## Tentativas da suíte completa e limite do provedor
-
-As tentativas completas pediram os 60 casos, mas **a suíte Gemini continua incompleta**:
-
-| Execução | Executados | Aprovados | Erro de roteamento sem falha técnica | Erro técnico | Não executados |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| [Primeira tentativa](../runs/agent-eval-6908e93c-b894-4638-8ddf-96d21200a3c8/evaluation.json) | 11 | 9 | 1 | 1 | 49 |
-| [Prompt esclarecido e intervalo de 6 s](../runs/agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/evaluation.json) | 7 | 6 | 0 | 1 | 53 |
-
-Na primeira tentativa, “Quantas consultas de contratos foram confirmadas?” foi recusada indevidamente.
-O catálogo foi esclarecido para definir `covered_purchases` como consultas de compra concluídas e
-carregadas, inclusive sem contratos retornados. Isso não confirma assinatura ou execução contratual.
-Não foram alteradas perguntas, valores esperados, modelo ou permissões para melhorar a nota.
-
-O tratamento HTTP anterior capturava erros genericamente, apesar de já existir uma classe para
-registrar status. A correção liga essa classe ao erro HTTP e tem teste de regressão. A primeira falha
-técnica não pode ser diagnosticada retrospectivamente com os dados preservados. A segunda tentativa
-registrou **HTTP 429**, sem corpo do provedor ou credencial. Não afirmamos qual limite específico foi
-atingido nem quando será liberado. Os limites dependem da conta e podem ser conferidos no painel do
-provedor; veja a [documentação oficial de limites](https://ai.google.dev/gemini-api/docs/rate-limits).
-
-Um reteste avulso da pergunta de cobertura retornou `summary` depois da explicação do catálogo.
-Ele não compõe a pontuação da suíte: na tentativa formal seguinte, o caso sete foi interrompido por
-429. As seis perguntas anteriores passaram nessa versão do prompt. As duas tentativas não são
-somadas, pois há sobreposição e os prompts diferem. O resultado baseline 60/60 permanece separado.
-
-[Conferência da tentativa parcial](../runs/agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/verification.json) registra os hashes,
-53 casos não executados, o erro 429 e a posição para continuar. Uma falha técnica não foi classificada
-como recusa correta, e perguntas não executadas não foram aprovadas. Nenhuma chamada adicional foi
-feita após o segundo bloqueio. O custo monetário continua desconhecido.
-
-## Continuação inicial em 03/11: histórico
-
-O avaliador ganhou `--start-case` (posição começando em 1), `--interval` (segundos) e arquivos
-`case-NNN.json` por caso concluído. O relatório final distingue casos solicitados, executados e não
-executados; o rastro preserva status de erro. Um processo interrompido antes de `evaluation.json`
-não equivale a uma avaliação completa, mesmo que existam arquivos de casos.
-
-Quando o limite do provedor permitir novas chamadas, continuar a partir do caso sete:
-
-```powershell
-.venv/Scripts/python.exe -m asktrace.evaluate --provider gemini --start-case 7 --interval 6 --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
-```
-
-Esse comando solicita os **54 casos** da posição 7 à 60, incluindo a pergunta interrompida, sem
-repetir as seis aprovadas. Cria outro relatório; não altera os anteriores. Não há soma automática de
-pontuações entre execuções. Para uma medição única dos 60 casos, executar desde o início quando
-a quota permitir. Conferir hashes do corpus, cobertura e prompt antes de comparar segmentos.
-
-O intervalo padrão da CLI Gemini é seis segundos após a tentativa anterior; não garante evitar
-limites diários ou outros limites da conta. As latências por pergunta não incluem essa espera entre
-casos. Não há repetição automática da chamada que falhou nem troca de modelo para contornar o limite.
-
-Nesta entrega passaram **61 testes locais de software**, incluindo PostgreSQL. Os dois testes novos
-verificam status HTTP 429 sem vazamento e continuação com journal sem repetir casos anteriores.
-Ruff, formatação e links foram conferidos. CI remoto não verificado. Este resultado é separado da
-avaliação do LLM, que não foi concluída. Interface e deploy permanecem pendentes.
-
-## Continuação e consolidação em 04/11/2026
-
-A retomada começou no caso sete. O banco local precisou ser iniciado; os primeiros resultados
-confirmaram respostas com PostgreSQL saudável. Os casos 7 a 14 passaram; o caso 15 recebeu HTTP 429.
-Depois de uma pausa e da melhoria do diagnóstico, o caso 15 passou em uma tentativa isolada.
-A continuação a partir do caso 16 usou 30 segundos entre tentativas de LLM.
-
-Os quatro segmentos consolidados cobrem **29 casos distintos, com 28
-aprovados, um erro técnico e 31 casos ainda não executados**.
-Há 29 tentativas de LLM e 28
-chamadas lógicas de consulta nos casos selecionados. As recusas por política local não chamam Gemini.
-
-[Conferência consolidada](../runs/agent-consolidated-cbf07cd7-7961-4f6d-9b94-b0db226a64d1/verification.json) lista os intervalos, hashes e a
-origem de cada resultado. Os valores esperados foram conferidos novamente, sem confiar somente no
-campo `passed` dos relatórios. Os intervalos solicitados são 1–6, 7–14, 15 e 16–60; neste último, apenas os casos 16–29 foram executados. Não há sobreposição.
-Cada plano observado usa o mesmo modelo, prompt, corpus e relatório de cobertura. O código de
-diagnóstico do adaptador/rastro mudou entre os segmentos; não apresentamos isso como uma rodada
-única nem como teste cego de uma versão imutável. Os relatórios antigos, inclusive erros, permanecem.
-
-O erro 429 agora pode registrar somente nomes/valores de quota e tempo sugerido de espera quando
-presentes no JSON do provedor. Mensagens completas, dimensões com projeto e credenciais ficam fora
-do rastro. O teste cobre também entradas inválidas, corpo excessivo e exclusão de campos sensíveis.
-O caso 29 retornou um diagnóstico explícito: `GenerateRequestsPerDayPerProjectPerModel-FreeTier`,
-valor 20, métrica `generate_content_free_tier_requests`. É um limite diário da faixa gratuita informado
-pelo provedor, não uma dedução a partir do status HTTP. A resposta sugeriu esperar 55.052 segundos
-(aproximadamente 15 horas e 17 minutos) no momento observado. Não garantimos um horário de liberação.
-[Observação da quota](../runs/agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7/quota-observation.json) preserva apenas esses campos seguros.
-Não fizemos novas chamadas depois desse erro diário. O custo monetário permanece desconhecido.
-
-Passaram **62 testes locais de software**, incluindo PostgreSQL. O novo teste verifica minimização
-dos diagnósticos de quota. Ruff e formatação foram verificados; CI remoto não verificado.
-Nenhuma chave foi impressa ou publicada, e `.env` continua ignorado pelo Git.
-
-O corpus planejado contém 60 perguntas curadas de desenvolvimento: 20 de resumo, 12 de
-municípios, oito rastreios da mesma compra e 20 recusas pelo filtro. Não mede generalização ampla,
-conversas abertas ou recusas do modelo em ataques que não passam pelo filtro local.
-
-## Próximo passo
-
-A avaliação continua incompleta: 28 casos aprovados, um erro de provedor e 31 não executados.
-Os casos de recusa por filtro local ainda não foram percorridos nestes segmentos Gemini.
-Depois da liberação da quota, continuar com os 32 casos restantes, incluindo o caso 29 interrompido:
-
-```powershell
-.venv/Scripts/python.exe -m asktrace.evaluate --provider gemini --start-case 29 --interval 30 --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
-```
-
-Não repetir os 28 casos aprovados. A quota é por projeto/modelo: esperar 30 segundos entre chamadas
-não aumenta o limite diário. Confirmar a disponibilidade no painel do provedor antes de retomar.
-Depois da conclusão, revisar erros, separar perguntas novas das usadas em desenvolvimento e construir
-a interface. Não há implantação ou demonstração pública nesta etapa.
+Construir a interface para pergunta, resposta, recorte, fonte, rastro e motivo de recusa; depois medir
+perguntas externas de usuários separadas do corpus de desenvolvimento. A integração local está
+implementada. Interface, deploy e demonstração pública continuam pendentes. O software passou em
+79 testes locais, incluindo PostgreSQL; CI remoto não verificado nesta entrega.

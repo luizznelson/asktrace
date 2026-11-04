@@ -1,0 +1,21 @@
+{
+  "source_evaluation": "runs/agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7/evaluation.json",
+  "observed_in_run_finished_at": "2026-11-04T16:42:27.531536+00:00",
+  "failed_case": "business-v1-029",
+  "provider_http_status": 429,
+  "provider_limits": {
+    "retry_after_seconds": 55052.0,
+    "quotas": [
+      {
+        "quotaMetric": "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+        "quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier",
+        "quotaValue": "20"
+      }
+    ]
+  },
+  "approved_distinct_cases_before_failure": 28,
+  "not_executed_after_failure": 31,
+  "pending_including_failed_case": 32,
+  "next_start_case": 29,
+  "note": "Provider suggestion is not a guaranteed reset time; no calls made after this daily-limit error."
+}

@@ -1,0 +1,30 @@
+{
+  "run_id": "287e5086-3ed6-47ae-95b8-c965cb13502d",
+  "mode": "sample",
+  "status": "sample_only",
+  "scope": {
+    "uf": "PI",
+    "modality": 6,
+    "date_basis": "publication",
+    "resource": "purchases"
+  },
+  "counts": {
+    "source_records": 50,
+    "awarded_missing": 17,
+    "normalized_records": 50
+  },
+  "windows": [
+    {
+      "start": "2025-10-01",
+      "end": "2025-10-31",
+      "reported_total": 454,
+      "downloaded_records": 50,
+      "pagination_complete": false
+    }
+  ],
+  "limitations": [
+    "Not all procurement modalities",
+    "Publication period, not signature or payment period",
+    "Counts do not prove source completeness or absence of later corrections"
+  ]
+}

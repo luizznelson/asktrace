@@ -1,0 +1,32 @@
+{
+  "case_id": "business-v1-002",
+  "category": "municipalities",
+  "routing_passed": false,
+  "grounding_passed": false,
+  "passed": false,
+  "actual": {
+    "question": "Mostre as compras por município.",
+    "provider": "openrouter-nemotron",
+    "status": "error",
+    "answer": "A consulta não pôde ser concluída com segurança.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "openrouter-nemotron",
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "outcome": "terminal_error",
+        "error_type": "ValueError"
+      },
+      {
+        "step": "failure",
+        "error_type": "ContingencyFailure",
+        "provider_http_status": null,
+        "provider_limits": null
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 0,
+    "latency_ms": 28253.88
+  }
+}

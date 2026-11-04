@@ -4,7 +4,7 @@
 
 **Investigate public procurement with source data and a verifiable path to the answer.**
 
-An applied AI engineering portfolio project developed by Luiz. The first delivery builds an auditable database of electronic procurement auctions in Piauí, Brazil. A bounded question router is implemented; the baseline is evaluated and Gemini integration passed three live questions.
+An applied AI engineering portfolio project developed by Luiz. The first delivery builds an auditable database of electronic procurement auctions in Piauí, Brazil. A bounded question router is implemented; the baseline is evaluated and explicit multi-provider contingency is implemented and evaluated with recorded limitations.
 
 [Português](README.md) · [Case study](docs/case-study.md) · [Engineering decisions](docs/architecture.md) · [Documentation](docs/README.md)
 
@@ -16,7 +16,7 @@ An applied AI engineering portfolio project developed by Luiz. The first deliver
 | **What I built** | A paginated PNCP collector, exact decimal normalization, transactional PostgreSQL loading and reports linking records to original pages. |
 | **Verified result** | 1,081 auctions published August–October 2026, across 23 pages, checked in PostgreSQL. Missing awarded amounts in 749 records remain NULL. Contract acquisition covered all 1,080 eligible purchases: 125 contracts, with one purchase excluded due to an invalid year. [Coverage](docs/contract-coverage.md). |
 | **Skills demonstrated** | Python 3.14, public API integration, data quality, SQL, PostgreSQL with Docker, provenance, failure testing and configured CI. |
-| **Current stage** | Purchases, linked contracts and read-only business queries verified locally. Evaluated baseline, Gemini integration validated on three live questions; no interface or hosted demo yet. |
+| **Current stage** | Purchases, linked contracts and read-only business queries verified locally. Evaluated bounded routing with explicit provider contingency; no interface or hosted demo yet. |
 | **Start here** | [Method and results](docs/ingestion.md) · [Database verification](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Quality checks](docs/quality.md) |
 
 ## 1. The problem: a page is not a dataset
@@ -103,16 +103,21 @@ See [evidence and limitations (Portuguese)](docs/contract-coverage.md). The boun
 
 Fixed queries provide a coverage summary, municipality breakdown and purchase-level provenance. They use a separate read-only login and never accept arbitrary SQL. Real examples are published and all 51 local tests passed. [Commands and evidence (Portuguese)](docs/business-queries.md). The bounded router and its evaluation are described below.
 
-## Text questions and evaluation
+## Text questions, contingency and evaluation
 
-A one-step router selects at most one read-only query and returns a grounded template with sources,
-coverage and a trace. The **baseline uses no LLM** and passed all 60 curated development cases.
-Gemini 2.5 Flash passed three live integration questions; continuation consolidated 28/60 curated cases across segments using the same prompt. There were 29 observed cases: 28 passed and one failed at the API daily limit (20 requests per project/model). The following 31 cases were not executed, and local-policy refusal cases were not reached. Evaluation remains incomplete. All 62 software tests passed, including PostgreSQL integration. These are separate
-measurements. See [commands, evidence and limitations (Portuguese)](docs/agent-evaluation.md).
+Contingency uses Qwen and GPT-OSS on Groq, free Xing on OpenRouter and Gemini when quota permits.
+It attempts at most three planners and executes at most one business query. Shared quota is not
+multiplied by rotating models on the same account; a valid refusal ends the request.
+
+All 60 development cases passed across two compatible segments, plus eight additional questions.
+The main corpus used 40 LLM plans and 20 local-policy refusals. GPT-OSS passed three live smoke
+tests; OpenRouter passed two and returned 429 on the third. Backup models do not inherit the primary
+model's score. All 79 local software tests passed, including PostgreSQL integration.
+[Configuration and limits](docs/provider-contingency.md) · [Evaluation method](docs/agent-evaluation.md) (Portuguese).
 
 ## 7. Next steps and attribution
 
-Next, resume evaluation at case 29 after quota resets, before reviewing new questions and building the interface. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
+Next, build the interface with scope, answer, sources and trace, and evaluate external questions separately. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
 
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 

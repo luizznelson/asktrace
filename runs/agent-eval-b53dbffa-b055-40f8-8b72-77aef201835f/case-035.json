@@ -1,0 +1,124 @@
+{
+  "case_id": "business-v1-035",
+  "category": "purchase",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Quais contratos estão vinculados a 01612601000118-1-000044/2026?",
+    "provider": "fallback",
+    "status": "answered",
+    "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. A compra 01612601000118-1-000044/2026 tem 2 contratos neste snapshot. Situação da consulta: with_contracts. Os identificadores e hashes abaixo permitem conferir a origem. Não são pagamentos.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b",
+        "outcome": "selected"
+      },
+      {
+        "step": "plan",
+        "plan": {
+          "action": "purchase",
+          "purchase_id": "01612601000118-1-000044/2026"
+        },
+        "usage": {
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b",
+          "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+          "prompt_tokens": 616,
+          "completion_tokens": 42,
+          "total_tokens": 658,
+          "candidate": "groq-qwen",
+          "attempt_count": 1,
+          "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+          "provider_events": [
+            {
+              "candidate": "groq-qwen",
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "outcome": "selected"
+            }
+          ],
+          "fallback_used": false
+        }
+      },
+      {
+        "step": "read_only_query",
+        "action": "purchase",
+        "outcome": "answered",
+        "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 1,
+    "selected_provider": {
+      "candidate": "groq-qwen",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b"
+    },
+    "evidence": {
+      "question": "purchase",
+      "purchase_id": "01612601000118-1-000044/2026",
+      "status": "answered",
+      "scope": {
+        "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+        "date_start": "2026-08-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "coverage": {
+        "purchases": 1081,
+        "covered_purchases": 1080,
+        "purchases_with_contracts": 85,
+        "none_returned": 995,
+        "contracts": 125,
+        "unknown_awarded_values": 749
+      },
+      "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+      "sources": {
+        "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+        "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+      },
+      "limitations": [
+        "Publication is not payment or financial execution.",
+        "No returned publication does not establish absence of a contract.",
+        "Unknown amounts are not zero; snapshots may have different dates."
+      ],
+      "result": [
+        {
+          "control_id": "01612601000118-1-000044/2026",
+          "org_name": "MUNICIPIO DE PAQUETA",
+          "municipality_name": "Paquetá",
+          "publication_date": "2026-09-04",
+          "estimated_value": "150875.63000000",
+          "awarded_value": "150113.51000000",
+          "source_body_sha256": "2b9c6a7929c6a69a8faa90205ef5e459932ad97dacd8544ed08ac657039a3589",
+          "source_record_index": 41,
+          "outcome": "with_contracts",
+          "contract_run_id": "1fcfbf8d-5c33-4ed5-b95c-8041f94da1d4",
+          "contract_pages_sha256": "dc2f634cb7989a54c4138ef77f3452fbb2767a1a26bb6128bb20b58894a3cfa8",
+          "contracts": [
+            {
+              "contract_id": "01612601000118-2-000007/2026",
+              "global_value": "115611.81000000",
+              "initial_value": "115611.81000000",
+              "source_record_index": 1
+            },
+            {
+              "contract_id": "01612601000118-2-000008/2026",
+              "global_value": "34501.70000000",
+              "initial_value": "34501.70000000",
+              "source_record_index": 0
+            }
+          ]
+        }
+      ]
+    },
+    "latency_ms": 818.67
+  }
+}

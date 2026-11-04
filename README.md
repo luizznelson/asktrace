@@ -4,7 +4,7 @@
 
 **Investigar compras públicas com dados de origem e um caminho verificável até a resposta.**
 
-Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A primeira entrega constrói a base auditável de pregões eletrônicos do Piauí. Um roteador limitado de perguntas está implementado; o baseline foi avaliado e a integração Gemini passou em três perguntas reais.
+Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A primeira entrega constrói a base auditável de pregões eletrônicos do Piauí. Um roteador limitado de perguntas está implementado; o baseline foi avaliado e há contingência explícita entre provedores, com avaliações e limites registrados.
 
 [English](README.en.md) · [Estudo de caso](docs/case-study.md) · [Decisões de engenharia](docs/architecture.md) · [Documentação](docs/README.md)
 
@@ -16,7 +16,7 @@ Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A pri
 | **O que construí** | Coletor paginado do PNCP, normalização com precisão decimal, carga transacional no PostgreSQL e relatórios que ligam cada registro à página original. |
 | **Resultado verificado** | 1.081 pregões publicados de agosto a outubro de 2026, em 23 páginas, conferidos no banco. São 749 registros sem valor homologado informado, mantidos como NULL. Consulta de contratos concluída para 1.080 compras elegíveis: 125 contratos; uma compra excluída por ano inválido. [Cobertura](docs/contract-coverage.md). |
 | **Habilidades demonstradas** | Python 3.14, integração com API pública, qualidade de dados, SQL, PostgreSQL com Docker, rastreabilidade, testes de falhas e CI configurada. |
-| **Estágio atual** | Compras, contratos vinculados e consultas de negócio somente leitura verificados localmente. Baseline avaliado, Gemini validado em três perguntas reais; sem interface ou demonstração online. |
+| **Estágio atual** | Compras, contratos vinculados e consultas de negócio somente leitura verificados localmente. Roteador com contingência e avaliação local; sem interface ou demonstração online. |
 | **Onde começar** | [Resultado e método](docs/ingestion.md) · [Evidência no banco](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Como verificar](docs/quality.md) |
 
 ## 1. O problema: contar registros não basta
@@ -102,17 +102,21 @@ Veja [método, evidências e limites](docs/contract-coverage.md). O roteador lim
 
 Consultas fixas respondem o resumo da cobertura, a distribuição por município e o rastreio de uma compra. Usam credencial separada somente leitura, sem receber SQL livre. Há exemplos reais e 51 testes locais aprovados. [Como consultar e verificar](docs/business-queries.md). Roteamento em texto e avaliação estão descritos a seguir.
 
-## Perguntas em texto e avaliação
+## Perguntas em texto, contingência e avaliação
 
-Um roteador de uma etapa seleciona no máximo uma consulta somente leitura e apresenta resposta,
-fonte, cobertura e rastro. O modo **baseline não usa LLM**: passou nos 60 casos curados de
-desenvolvimento. O Gemini 2.5 Flash passou em três perguntas reais de integração; a continuação consolidou 28/60 casos curados aprovados em segmentos com o mesmo prompt. Foram observados 29 casos: 28 aprovados e um erro no limite diário da API (20 requisições por projeto/modelo). Os 31 seguintes ainda não foram executados; as recusas locais não foram percorridas nessa continuação. A avaliação permanece parcial.
-Os 62 testes de software passaram, incluindo PostgreSQL. Esses dois resultados medem coisas diferentes.
-Veja [comandos, evidências e limites](docs/agent-evaluation.md).
+O modo de contingência usa Qwen e GPT-OSS pela Groq, Xing gratuito pelo OpenRouter e Gemini
+quando sua quota permitir. Pode tentar até três planejadores e executar uma única consulta de negócio.
+Quota compartilhada não é multiplicada trocando modelos da mesma conta; recusas válidas encerram o fluxo.
+
+Foram aprovados os 60 casos de desenvolvimento em dois trechos compatíveis e oito perguntas
+adicionais. No corpus principal foram 40 planos LLM e 20 recusas locais. O GPT-OSS passou em três
+testes reais; o OpenRouter passou em dois e encontrou 429 no terceiro. Os modelos de reserva não
+herdam a nota do principal. O código atual passou em 79 testes locais, incluindo PostgreSQL.
+[Modelos, configuração e limites](docs/provider-contingency.md) · [Método de avaliação](docs/agent-evaluation.md).
 
 ## 7. O que vem depois
 
-O próximo passo é continuar a avaliação do caso 29 após a liberação da quota, antes de revisar perguntas novas e construir a interface. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
+O próximo passo é construir a interface com recorte, resposta, fonte e rastro, e medir perguntas externas separadamente. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
 
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 

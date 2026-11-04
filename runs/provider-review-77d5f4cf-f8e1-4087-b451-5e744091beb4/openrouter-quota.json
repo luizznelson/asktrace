@@ -1,0 +1,11 @@
+{
+  "retrieved_at": "2026-11-04T17:17:42.687957+00:00",
+  "source": "https://openrouter.ai/api/v1/key",
+  "is_free_tier": true,
+  "daily_requests": {
+    "used": 5,
+    "limit": 50,
+    "remaining": 45
+  },
+  "note": "Account/key identifiers, labels, balances and token values are omitted."
+}

@@ -1,0 +1,48 @@
+{
+  "verified_at": "2026-11-04T17:47:57.896186+00:00",
+  "software_tests_passed": 75,
+  "configuration_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+  "same_configuration_code_suite_and_coverage_for_main_segments": true,
+  "main_corpus": {
+    "distinct_cases": 60,
+    "passed": 60,
+    "segments": [
+      "agent-eval-00419514-804c-44b4-a62b-fa32633e4094",
+      "agent-eval-b53dbffa-b055-40f8-8b72-77aef201835f"
+    ],
+    "llm_attempts": 40,
+    "tool_calls": 40,
+    "selected_candidates": {
+      "groq-qwen": 40
+    },
+    "local_policy_refusals": 20,
+    "note": "Two disjoint segments; curated development corpus, not a blind benchmark."
+  },
+  "additional_corpus": {
+    "run": "agent-eval-69298927-ccd7-4016-99d9-8816a7c91833",
+    "executed": 8,
+    "passed": 8,
+    "note": "Frozen before first run; same author, not an independent benchmark."
+  },
+  "controlled_failover": {
+    "run": "provider-failover-21f263db-11d8-49eb-8d85-1d57c72afd33",
+    "passed": true,
+    "first_failure_simulated": true,
+    "real_network_calls": 1,
+    "selected_candidate": "groq-gpt-oss"
+  },
+  "smoke_tests": {
+    "groq-gpt-oss": {
+      "run": "agent-eval-da4ee542-8145-4ad2-babf-90d70b187da0",
+      "passed": 3,
+      "executed": 3
+    },
+    "openrouter-xing": {
+      "run": "agent-eval-083cd9fe-502f-41e8-bec3-41513bfaee5b",
+      "passed": 2,
+      "executed": 3,
+      "last_error": 429
+    }
+  },
+  "billing_verified": false
+}

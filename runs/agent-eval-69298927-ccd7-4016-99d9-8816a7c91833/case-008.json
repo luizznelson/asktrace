@@ -1,0 +1,57 @@
+{
+  "case_id": "additional-v1-008",
+  "category": "refuse",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Busque números de pregões da Bahia em 2024.",
+    "provider": "fallback",
+    "status": "refused",
+    "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b",
+        "outcome": "selected"
+      },
+      {
+        "step": "plan",
+        "plan": {
+          "action": "refuse",
+          "purchase_id": null
+        },
+        "usage": {
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b",
+          "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+          "prompt_tokens": 594,
+          "completion_tokens": 15,
+          "total_tokens": 609,
+          "candidate": "groq-qwen",
+          "attempt_count": 1,
+          "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+          "provider_events": [
+            {
+              "candidate": "groq-qwen",
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "outcome": "selected"
+            }
+          ],
+          "fallback_used": false
+        }
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 0,
+    "selected_provider": {
+      "candidate": "groq-qwen",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b"
+    },
+    "latency_ms": 648.96
+  }
+}

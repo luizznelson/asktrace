@@ -1,0 +1,96 @@
+{
+  "case_id": "additional-v1-006",
+  "category": "purchase",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Consulte 00000000000000-1-999999/2026.",
+    "provider": "fallback",
+    "status": "not_found_in_scope",
+    "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. Compra não encontrada neste recorte. Isso não afirma ausência no PNCP.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b",
+        "outcome": "selected"
+      },
+      {
+        "step": "plan",
+        "plan": {
+          "action": "purchase",
+          "purchase_id": "00000000000000-1-999999/2026"
+        },
+        "usage": {
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b",
+          "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+          "prompt_tokens": 611,
+          "completion_tokens": 42,
+          "total_tokens": 653,
+          "candidate": "groq-qwen",
+          "attempt_count": 1,
+          "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+          "provider_events": [
+            {
+              "candidate": "groq-qwen",
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "outcome": "selected"
+            }
+          ],
+          "fallback_used": false
+        }
+      },
+      {
+        "step": "read_only_query",
+        "action": "purchase",
+        "outcome": "not_found_in_scope",
+        "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 1,
+    "selected_provider": {
+      "candidate": "groq-qwen",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b"
+    },
+    "evidence": {
+      "question": "purchase",
+      "purchase_id": "00000000000000-1-999999/2026",
+      "status": "not_found_in_scope",
+      "scope": {
+        "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+        "date_start": "2026-08-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "coverage": {
+        "purchases": 1081,
+        "covered_purchases": 1080,
+        "purchases_with_contracts": 85,
+        "none_returned": 995,
+        "contracts": 125,
+        "unknown_awarded_values": 749
+      },
+      "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+      "sources": {
+        "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+        "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+      },
+      "limitations": [
+        "Publication is not payment or financial execution.",
+        "No returned publication does not establish absence of a contract.",
+        "Unknown amounts are not zero; snapshots may have different dates."
+      ],
+      "result": []
+    },
+    "latency_ms": 1640.69
+  }
+}

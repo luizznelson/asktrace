@@ -1,0 +1,257 @@
+{
+  "case_id": "business-v1-029",
+  "category": "municipalities",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Mostre o valor estimado agregado por município.",
+    "provider": "fallback",
+    "status": "answered",
+    "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. A tabela apresenta 20 grupos de município, no máximo 20, ordenados por quantidade de compras. Estimativas são somadas uma vez por compra; valores desconhecidos permanecem nulos. A tabela não representa pagamentos.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b",
+        "outcome": "selected"
+      },
+      {
+        "step": "plan",
+        "plan": {
+          "action": "municipalities",
+          "purchase_id": null
+        },
+        "usage": {
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b",
+          "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+          "prompt_tokens": 589,
+          "completion_tokens": 17,
+          "total_tokens": 606,
+          "candidate": "groq-qwen",
+          "attempt_count": 1,
+          "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+          "provider_events": [
+            {
+              "candidate": "groq-qwen",
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "outcome": "selected"
+            }
+          ],
+          "fallback_used": false
+        }
+      },
+      {
+        "step": "read_only_query",
+        "action": "municipalities",
+        "outcome": "answered",
+        "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 1,
+    "selected_provider": {
+      "candidate": "groq-qwen",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b"
+    },
+    "evidence": {
+      "question": "municipalities",
+      "purchase_id": null,
+      "status": "answered",
+      "scope": {
+        "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+        "date_start": "2026-08-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "coverage": {
+        "purchases": 1081,
+        "covered_purchases": 1080,
+        "purchases_with_contracts": 85,
+        "none_returned": 995,
+        "contracts": 125,
+        "unknown_awarded_values": 749
+      },
+      "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+      "sources": {
+        "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+        "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+      },
+      "limitations": [
+        "Publication is not payment or financial execution.",
+        "No returned publication does not establish absence of a contract.",
+        "Unknown amounts are not zero; snapshots may have different dates."
+      ],
+      "result": [
+        {
+          "municipality_ibge": "2211001",
+          "municipality_name": "Teresina",
+          "purchases": 202,
+          "unknown_estimates": 0,
+          "estimated_value": "674877111.05000000",
+          "unknown_awarded_values": 133
+        },
+        {
+          "municipality_ibge": "2211100",
+          "municipality_name": "União",
+          "purchases": 25,
+          "unknown_estimates": 0,
+          "estimated_value": "24449074.66000000",
+          "unknown_awarded_values": 25
+        },
+        {
+          "municipality_ibge": "2208403",
+          "municipality_name": "Piripiri",
+          "purchases": 18,
+          "unknown_estimates": 0,
+          "estimated_value": "8965365.40000000",
+          "unknown_awarded_values": 8
+        },
+        {
+          "municipality_ibge": "2201150",
+          "municipality_name": "Baixa Grande do Ribeiro",
+          "purchases": 16,
+          "unknown_estimates": 0,
+          "estimated_value": "4404177.70000000",
+          "unknown_awarded_values": 16
+        },
+        {
+          "municipality_ibge": "2204204",
+          "municipality_name": "Francisco Santos",
+          "purchases": 16,
+          "unknown_estimates": 0,
+          "estimated_value": "8425996.44000000",
+          "unknown_awarded_values": 10
+        },
+        {
+          "municipality_ibge": "2208908",
+          "municipality_name": "Ribeiro Gonçalves",
+          "purchases": 15,
+          "unknown_estimates": 0,
+          "estimated_value": "11068391.23000000",
+          "unknown_awarded_values": 12
+        },
+        {
+          "municipality_ibge": "2210805",
+          "municipality_name": "Simplício Mendes",
+          "purchases": 14,
+          "unknown_estimates": 0,
+          "estimated_value": "5940804.13000000",
+          "unknown_awarded_values": 10
+        },
+        {
+          "municipality_ibge": "2201903",
+          "municipality_name": "Bom Jesus",
+          "purchases": 13,
+          "unknown_estimates": 0,
+          "estimated_value": "5854585.17000000",
+          "unknown_awarded_values": 5
+        },
+        {
+          "municipality_ibge": "2207702",
+          "municipality_name": "Parnaíba",
+          "purchases": 13,
+          "unknown_estimates": 0,
+          "estimated_value": "58827059.77000000",
+          "unknown_awarded_values": 12
+        },
+        {
+          "municipality_ibge": "2208007",
+          "municipality_name": "Picos",
+          "purchases": 13,
+          "unknown_estimates": 0,
+          "estimated_value": "14359677.13000000",
+          "unknown_awarded_values": 4
+        },
+        {
+          "municipality_ibge": "2210904",
+          "municipality_name": "Socorro do Piauí",
+          "purchases": 13,
+          "unknown_estimates": 0,
+          "estimated_value": "6889677.14000000",
+          "unknown_awarded_values": 4
+        },
+        {
+          "municipality_ibge": "2201101",
+          "municipality_name": "Avelino Lopes",
+          "purchases": 12,
+          "unknown_estimates": 0,
+          "estimated_value": "10940721.85000000",
+          "unknown_awarded_values": 12
+        },
+        {
+          "municipality_ibge": "2201739",
+          "municipality_name": "Betânia do Piauí",
+          "purchases": 12,
+          "unknown_estimates": 0,
+          "estimated_value": "3937282.77000000",
+          "unknown_awarded_values": 3
+        },
+        {
+          "municipality_ibge": "2207009",
+          "municipality_name": "Oeiras",
+          "purchases": 12,
+          "unknown_estimates": 0,
+          "estimated_value": "9270172.96000000",
+          "unknown_awarded_values": 9
+        },
+        {
+          "municipality_ibge": "2207777",
+          "municipality_name": "Patos do Piauí",
+          "purchases": 12,
+          "unknown_estimates": 0,
+          "estimated_value": "2190060.71000000",
+          "unknown_awarded_values": 12
+        },
+        {
+          "municipality_ibge": "2208304",
+          "municipality_name": "Piracuruca",
+          "purchases": 12,
+          "unknown_estimates": 0,
+          "estimated_value": "44977092.17000000",
+          "unknown_awarded_values": 8
+        },
+        {
+          "municipality_ibge": "2201200",
+          "municipality_name": "Barras",
+          "purchases": 11,
+          "unknown_estimates": 0,
+          "estimated_value": "17966748.22000000",
+          "unknown_awarded_values": 9
+        },
+        {
+          "municipality_ibge": "2202208",
+          "municipality_name": "Campo Maior",
+          "purchases": 10,
+          "unknown_estimates": 0,
+          "estimated_value": "0E-8",
+          "unknown_awarded_values": 9
+        },
+        {
+          "municipality_ibge": "2203107",
+          "municipality_name": "Cristino Castro",
+          "purchases": 10,
+          "unknown_estimates": 0,
+          "estimated_value": "6776946.79000000",
+          "unknown_awarded_values": 5
+        },
+        {
+          "municipality_ibge": "2207900",
+          "municipality_name": "Pedro II",
+          "purchases": 10,
+          "unknown_estimates": 0,
+          "estimated_value": "8558868.43000000",
+          "unknown_awarded_values": 6
+        }
+      ]
+    },
+    "latency_ms": 536.92
+  }
+}

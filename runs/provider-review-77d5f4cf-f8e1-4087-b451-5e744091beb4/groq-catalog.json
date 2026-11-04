@@ -1,0 +1,36 @@
+{
+  "retrieved_at": "2026-11-04T17:17:42.288879+00:00",
+  "source": "https://api.groq.com/openai/v1/models",
+  "source_body_sha256": "2e6c552302eabb80636fc1d5e8f044e5241c9f05967b03412ecfe124f5e06b37",
+  "note": "Minimized derivative: reviewed model IDs and public capabilities only; full source body not published.",
+  "models": [
+    {
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b",
+      "listed": true,
+      "pricing": {
+        "prompt": "0.0000008",
+        "completion": "0.000004",
+        "image": "0",
+        "request": "0",
+        "input_cache_read": "0.0000004"
+      },
+      "supported_parameters": null,
+      "reasoning": null
+    },
+    {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b",
+      "listed": true,
+      "pricing": {
+        "prompt": "0.000000075",
+        "completion": "0.0000003",
+        "image": "0",
+        "request": "0",
+        "input_cache_read": "0.0000000375"
+      },
+      "supported_parameters": null,
+      "reasoning": null
+    }
+  ]
+}

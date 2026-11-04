@@ -1,0 +1,1060 @@
+{
+  "started_scope": "Same fixed PNCP PI modality 6 publication 2026-08 through 2026-10 snapshot",
+  "provider": "fallback",
+  "request_interval_seconds": 12.0,
+  "code_sha256": {
+    "agent.py": "7d6ebe9337acdeac8004566c8bc40fe1de2938ecf600af2f7948a95cce180756",
+    "gemini.py": "ef8376957fda2565c16b034d977b893554c580fbc4fa2f348efa685346d0b8f9",
+    "query.py": "73bbf7ce844e2bdd1fbe93e3e2a7e12872c48dfcfdfaa81124d63b67d424bb4d",
+    "evaluate.py": "334702c012e2762eab1471379f45441d3216216715b50398e2e8d7a33b557119",
+    "providers.py": "75a7b8d343390fa9f70041eaef79a0ff73ad285bd069c595754d4401ef517b33",
+    "provider_gateway.py": "3d1ca87708d8857665cce01871e15789a94e594c57bc105c1577029457719efb",
+    "planning.py": "fefcf6fcdd9259585d68dbd94cbeb94efaff253804302c967a1eeae1b8b8365b"
+  },
+  "finished_at": "2026-11-04T17:42:33.714873+00:00",
+  "suite_sha256": "9d3c486c767381461919fde8670debbaf3c98aa6519bc2f16f31630e8ad3c249",
+  "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+  "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+  "suite_size": 8,
+  "requested_cases": 8,
+  "start_case": 1,
+  "unexecuted_requested_cases": 0,
+  "completion": "complete",
+  "routing_failures_without_errors": 0,
+  "executed": 8,
+  "passed": 8,
+  "errors": 0,
+  "llm_attempts": 7,
+  "tool_calls": 6,
+  "median_latency_ms": 1127.78,
+  "latency_note": "Local verified-query cache enabled; not uncached production latency.",
+  "cost_currency": null,
+  "cost_note": "No billing data available; not assumed zero.",
+  "generalization_note": "Curated development suite, not a blind employment benchmark.",
+  "results": [
+    {
+      "case_id": "additional-v1-001",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Preciso contar as licitações contidas nesta base.",
+        "provider": "fallback",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "provider_attempt",
+            "candidate": "groq-qwen",
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "outcome": "selected"
+          },
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+              "prompt_tokens": 590,
+              "completion_tokens": 14,
+              "total_tokens": 604,
+              "candidate": "groq-qwen",
+              "attempt_count": 1,
+              "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+              "provider_events": [
+                {
+                  "candidate": "groq-qwen",
+                  "provider": "groq",
+                  "model": "qwen/qwen3.8-27b",
+                  "outcome": "selected"
+                }
+              ],
+              "fallback_used": false
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "selected_provider": {
+          "candidate": "groq-qwen",
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b"
+        },
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 1805.44
+      }
+    },
+    {
+      "case_id": "additional-v1-002",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Há muitos registros sem valor homologado preenchido?",
+        "provider": "fallback",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "provider_attempt",
+            "candidate": "groq-qwen",
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "outcome": "selected"
+          },
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+              "prompt_tokens": 590,
+              "completion_tokens": 14,
+              "total_tokens": 604,
+              "candidate": "groq-qwen",
+              "attempt_count": 1,
+              "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+              "provider_events": [
+                {
+                  "candidate": "groq-qwen",
+                  "provider": "groq",
+                  "model": "qwen/qwen3.8-27b",
+                  "outcome": "selected"
+                }
+              ],
+              "fallback_used": false
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "selected_provider": {
+          "candidate": "groq-qwen",
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b"
+        },
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 520.96
+      }
+    },
+    {
+      "case_id": "additional-v1-003",
+      "category": "municipalities",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Compare o volume de compras entre as cidades do recorte.",
+        "provider": "fallback",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. A tabela apresenta 20 grupos de município, no máximo 20, ordenados por quantidade de compras. Estimativas são somadas uma vez por compra; valores desconhecidos permanecem nulos. A tabela não representa pagamentos.",
+        "trace": [
+          {
+            "step": "provider_attempt",
+            "candidate": "groq-qwen",
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "outcome": "selected"
+          },
+          {
+            "step": "plan",
+            "plan": {
+              "action": "municipalities",
+              "purchase_id": null
+            },
+            "usage": {
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+              "prompt_tokens": 591,
+              "completion_tokens": 17,
+              "total_tokens": 608,
+              "candidate": "groq-qwen",
+              "attempt_count": 1,
+              "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+              "provider_events": [
+                {
+                  "candidate": "groq-qwen",
+                  "provider": "groq",
+                  "model": "qwen/qwen3.8-27b",
+                  "outcome": "selected"
+                }
+              ],
+              "fallback_used": false
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "municipalities",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "selected_provider": {
+          "candidate": "groq-qwen",
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b"
+        },
+        "evidence": {
+          "question": "municipalities",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "municipality_ibge": "2211001",
+              "municipality_name": "Teresina",
+              "purchases": 202,
+              "unknown_estimates": 0,
+              "estimated_value": "674877111.05000000",
+              "unknown_awarded_values": 133
+            },
+            {
+              "municipality_ibge": "2211100",
+              "municipality_name": "União",
+              "purchases": 25,
+              "unknown_estimates": 0,
+              "estimated_value": "24449074.66000000",
+              "unknown_awarded_values": 25
+            },
+            {
+              "municipality_ibge": "2208403",
+              "municipality_name": "Piripiri",
+              "purchases": 18,
+              "unknown_estimates": 0,
+              "estimated_value": "8965365.40000000",
+              "unknown_awarded_values": 8
+            },
+            {
+              "municipality_ibge": "2201150",
+              "municipality_name": "Baixa Grande do Ribeiro",
+              "purchases": 16,
+              "unknown_estimates": 0,
+              "estimated_value": "4404177.70000000",
+              "unknown_awarded_values": 16
+            },
+            {
+              "municipality_ibge": "2204204",
+              "municipality_name": "Francisco Santos",
+              "purchases": 16,
+              "unknown_estimates": 0,
+              "estimated_value": "8425996.44000000",
+              "unknown_awarded_values": 10
+            },
+            {
+              "municipality_ibge": "2208908",
+              "municipality_name": "Ribeiro Gonçalves",
+              "purchases": 15,
+              "unknown_estimates": 0,
+              "estimated_value": "11068391.23000000",
+              "unknown_awarded_values": 12
+            },
+            {
+              "municipality_ibge": "2210805",
+              "municipality_name": "Simplício Mendes",
+              "purchases": 14,
+              "unknown_estimates": 0,
+              "estimated_value": "5940804.13000000",
+              "unknown_awarded_values": 10
+            },
+            {
+              "municipality_ibge": "2201903",
+              "municipality_name": "Bom Jesus",
+              "purchases": 13,
+              "unknown_estimates": 0,
+              "estimated_value": "5854585.17000000",
+              "unknown_awarded_values": 5
+            },
+            {
+              "municipality_ibge": "2207702",
+              "municipality_name": "Parnaíba",
+              "purchases": 13,
+              "unknown_estimates": 0,
+              "estimated_value": "58827059.77000000",
+              "unknown_awarded_values": 12
+            },
+            {
+              "municipality_ibge": "2208007",
+              "municipality_name": "Picos",
+              "purchases": 13,
+              "unknown_estimates": 0,
+              "estimated_value": "14359677.13000000",
+              "unknown_awarded_values": 4
+            },
+            {
+              "municipality_ibge": "2210904",
+              "municipality_name": "Socorro do Piauí",
+              "purchases": 13,
+              "unknown_estimates": 0,
+              "estimated_value": "6889677.14000000",
+              "unknown_awarded_values": 4
+            },
+            {
+              "municipality_ibge": "2201101",
+              "municipality_name": "Avelino Lopes",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "10940721.85000000",
+              "unknown_awarded_values": 12
+            },
+            {
+              "municipality_ibge": "2201739",
+              "municipality_name": "Betânia do Piauí",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "3937282.77000000",
+              "unknown_awarded_values": 3
+            },
+            {
+              "municipality_ibge": "2207009",
+              "municipality_name": "Oeiras",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "9270172.96000000",
+              "unknown_awarded_values": 9
+            },
+            {
+              "municipality_ibge": "2207777",
+              "municipality_name": "Patos do Piauí",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "2190060.71000000",
+              "unknown_awarded_values": 12
+            },
+            {
+              "municipality_ibge": "2208304",
+              "municipality_name": "Piracuruca",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "44977092.17000000",
+              "unknown_awarded_values": 8
+            },
+            {
+              "municipality_ibge": "2201200",
+              "municipality_name": "Barras",
+              "purchases": 11,
+              "unknown_estimates": 0,
+              "estimated_value": "17966748.22000000",
+              "unknown_awarded_values": 9
+            },
+            {
+              "municipality_ibge": "2202208",
+              "municipality_name": "Campo Maior",
+              "purchases": 10,
+              "unknown_estimates": 0,
+              "estimated_value": "0E-8",
+              "unknown_awarded_values": 9
+            },
+            {
+              "municipality_ibge": "2203107",
+              "municipality_name": "Cristino Castro",
+              "purchases": 10,
+              "unknown_estimates": 0,
+              "estimated_value": "6776946.79000000",
+              "unknown_awarded_values": 5
+            },
+            {
+              "municipality_ibge": "2207900",
+              "municipality_name": "Pedro II",
+              "purchases": 10,
+              "unknown_estimates": 0,
+              "estimated_value": "8558868.43000000",
+              "unknown_awarded_values": 6
+            }
+          ]
+        },
+        "latency_ms": 1606.6
+      }
+    },
+    {
+      "case_id": "additional-v1-004",
+      "category": "municipalities",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Compare a quantidade de estimativas ausentes por cidade.",
+        "provider": "fallback",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. A tabela apresenta 20 grupos de município, no máximo 20, ordenados por quantidade de compras. Estimativas são somadas uma vez por compra; valores desconhecidos permanecem nulos. A tabela não representa pagamentos.",
+        "trace": [
+          {
+            "step": "provider_attempt",
+            "candidate": "groq-qwen",
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "outcome": "selected"
+          },
+          {
+            "step": "plan",
+            "plan": {
+              "action": "municipalities",
+              "purchase_id": null
+            },
+            "usage": {
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+              "prompt_tokens": 590,
+              "completion_tokens": 17,
+              "total_tokens": 607,
+              "candidate": "groq-qwen",
+              "attempt_count": 1,
+              "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+              "provider_events": [
+                {
+                  "candidate": "groq-qwen",
+                  "provider": "groq",
+                  "model": "qwen/qwen3.8-27b",
+                  "outcome": "selected"
+                }
+              ],
+              "fallback_used": false
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "municipalities",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "selected_provider": {
+          "candidate": "groq-qwen",
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b"
+        },
+        "evidence": {
+          "question": "municipalities",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "municipality_ibge": "2211001",
+              "municipality_name": "Teresina",
+              "purchases": 202,
+              "unknown_estimates": 0,
+              "estimated_value": "674877111.05000000",
+              "unknown_awarded_values": 133
+            },
+            {
+              "municipality_ibge": "2211100",
+              "municipality_name": "União",
+              "purchases": 25,
+              "unknown_estimates": 0,
+              "estimated_value": "24449074.66000000",
+              "unknown_awarded_values": 25
+            },
+            {
+              "municipality_ibge": "2208403",
+              "municipality_name": "Piripiri",
+              "purchases": 18,
+              "unknown_estimates": 0,
+              "estimated_value": "8965365.40000000",
+              "unknown_awarded_values": 8
+            },
+            {
+              "municipality_ibge": "2201150",
+              "municipality_name": "Baixa Grande do Ribeiro",
+              "purchases": 16,
+              "unknown_estimates": 0,
+              "estimated_value": "4404177.70000000",
+              "unknown_awarded_values": 16
+            },
+            {
+              "municipality_ibge": "2204204",
+              "municipality_name": "Francisco Santos",
+              "purchases": 16,
+              "unknown_estimates": 0,
+              "estimated_value": "8425996.44000000",
+              "unknown_awarded_values": 10
+            },
+            {
+              "municipality_ibge": "2208908",
+              "municipality_name": "Ribeiro Gonçalves",
+              "purchases": 15,
+              "unknown_estimates": 0,
+              "estimated_value": "11068391.23000000",
+              "unknown_awarded_values": 12
+            },
+            {
+              "municipality_ibge": "2210805",
+              "municipality_name": "Simplício Mendes",
+              "purchases": 14,
+              "unknown_estimates": 0,
+              "estimated_value": "5940804.13000000",
+              "unknown_awarded_values": 10
+            },
+            {
+              "municipality_ibge": "2201903",
+              "municipality_name": "Bom Jesus",
+              "purchases": 13,
+              "unknown_estimates": 0,
+              "estimated_value": "5854585.17000000",
+              "unknown_awarded_values": 5
+            },
+            {
+              "municipality_ibge": "2207702",
+              "municipality_name": "Parnaíba",
+              "purchases": 13,
+              "unknown_estimates": 0,
+              "estimated_value": "58827059.77000000",
+              "unknown_awarded_values": 12
+            },
+            {
+              "municipality_ibge": "2208007",
+              "municipality_name": "Picos",
+              "purchases": 13,
+              "unknown_estimates": 0,
+              "estimated_value": "14359677.13000000",
+              "unknown_awarded_values": 4
+            },
+            {
+              "municipality_ibge": "2210904",
+              "municipality_name": "Socorro do Piauí",
+              "purchases": 13,
+              "unknown_estimates": 0,
+              "estimated_value": "6889677.14000000",
+              "unknown_awarded_values": 4
+            },
+            {
+              "municipality_ibge": "2201101",
+              "municipality_name": "Avelino Lopes",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "10940721.85000000",
+              "unknown_awarded_values": 12
+            },
+            {
+              "municipality_ibge": "2201739",
+              "municipality_name": "Betânia do Piauí",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "3937282.77000000",
+              "unknown_awarded_values": 3
+            },
+            {
+              "municipality_ibge": "2207009",
+              "municipality_name": "Oeiras",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "9270172.96000000",
+              "unknown_awarded_values": 9
+            },
+            {
+              "municipality_ibge": "2207777",
+              "municipality_name": "Patos do Piauí",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "2190060.71000000",
+              "unknown_awarded_values": 12
+            },
+            {
+              "municipality_ibge": "2208304",
+              "municipality_name": "Piracuruca",
+              "purchases": 12,
+              "unknown_estimates": 0,
+              "estimated_value": "44977092.17000000",
+              "unknown_awarded_values": 8
+            },
+            {
+              "municipality_ibge": "2201200",
+              "municipality_name": "Barras",
+              "purchases": 11,
+              "unknown_estimates": 0,
+              "estimated_value": "17966748.22000000",
+              "unknown_awarded_values": 9
+            },
+            {
+              "municipality_ibge": "2202208",
+              "municipality_name": "Campo Maior",
+              "purchases": 10,
+              "unknown_estimates": 0,
+              "estimated_value": "0E-8",
+              "unknown_awarded_values": 9
+            },
+            {
+              "municipality_ibge": "2203107",
+              "municipality_name": "Cristino Castro",
+              "purchases": 10,
+              "unknown_estimates": 0,
+              "estimated_value": "6776946.79000000",
+              "unknown_awarded_values": 5
+            },
+            {
+              "municipality_ibge": "2207900",
+              "municipality_name": "Pedro II",
+              "purchases": 10,
+              "unknown_estimates": 0,
+              "estimated_value": "8558868.43000000",
+              "unknown_awarded_values": 6
+            }
+          ]
+        },
+        "latency_ms": 527.55
+      }
+    },
+    {
+      "case_id": "additional-v1-005",
+      "category": "purchase",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Abra a ficha de 01612601000118-1-000044/2026.",
+        "provider": "fallback",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. A compra 01612601000118-1-000044/2026 tem 2 contratos neste snapshot. Situação da consulta: with_contracts. Os identificadores e hashes abaixo permitem conferir a origem. Não são pagamentos.",
+        "trace": [
+          {
+            "step": "provider_attempt",
+            "candidate": "groq-qwen",
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "outcome": "selected"
+          },
+          {
+            "step": "plan",
+            "plan": {
+              "action": "purchase",
+              "purchase_id": "01612601000118-1-000044/2026"
+            },
+            "usage": {
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+              "prompt_tokens": 614,
+              "completion_tokens": 42,
+              "total_tokens": 656,
+              "candidate": "groq-qwen",
+              "attempt_count": 1,
+              "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+              "provider_events": [
+                {
+                  "candidate": "groq-qwen",
+                  "provider": "groq",
+                  "model": "qwen/qwen3.8-27b",
+                  "outcome": "selected"
+                }
+              ],
+              "fallback_used": false
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "purchase",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "selected_provider": {
+          "candidate": "groq-qwen",
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b"
+        },
+        "evidence": {
+          "question": "purchase",
+          "purchase_id": "01612601000118-1-000044/2026",
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "control_id": "01612601000118-1-000044/2026",
+              "org_name": "MUNICIPIO DE PAQUETA",
+              "municipality_name": "Paquetá",
+              "publication_date": "2026-09-04",
+              "estimated_value": "150875.63000000",
+              "awarded_value": "150113.51000000",
+              "source_body_sha256": "2b9c6a7929c6a69a8faa90205ef5e459932ad97dacd8544ed08ac657039a3589",
+              "source_record_index": 41,
+              "outcome": "with_contracts",
+              "contract_run_id": "1fcfbf8d-5c33-4ed5-b95c-8041f94da1d4",
+              "contract_pages_sha256": "dc2f634cb7989a54c4138ef77f3452fbb2767a1a26bb6128bb20b58894a3cfa8",
+              "contracts": [
+                {
+                  "contract_id": "01612601000118-2-000007/2026",
+                  "global_value": "115611.81000000",
+                  "initial_value": "115611.81000000",
+                  "source_record_index": 1
+                },
+                {
+                  "contract_id": "01612601000118-2-000008/2026",
+                  "global_value": "34501.70000000",
+                  "initial_value": "34501.70000000",
+                  "source_record_index": 0
+                }
+              ]
+            }
+          ]
+        },
+        "latency_ms": 1705.78
+      }
+    },
+    {
+      "case_id": "additional-v1-006",
+      "category": "purchase",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Consulte 00000000000000-1-999999/2026.",
+        "provider": "fallback",
+        "status": "not_found_in_scope",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. Compra não encontrada neste recorte. Isso não afirma ausência no PNCP.",
+        "trace": [
+          {
+            "step": "provider_attempt",
+            "candidate": "groq-qwen",
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "outcome": "selected"
+          },
+          {
+            "step": "plan",
+            "plan": {
+              "action": "purchase",
+              "purchase_id": "00000000000000-1-999999/2026"
+            },
+            "usage": {
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+              "prompt_tokens": 611,
+              "completion_tokens": 42,
+              "total_tokens": 653,
+              "candidate": "groq-qwen",
+              "attempt_count": 1,
+              "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+              "provider_events": [
+                {
+                  "candidate": "groq-qwen",
+                  "provider": "groq",
+                  "model": "qwen/qwen3.8-27b",
+                  "outcome": "selected"
+                }
+              ],
+              "fallback_used": false
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "purchase",
+            "outcome": "not_found_in_scope",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "selected_provider": {
+          "candidate": "groq-qwen",
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b"
+        },
+        "evidence": {
+          "question": "purchase",
+          "purchase_id": "00000000000000-1-999999/2026",
+          "status": "not_found_in_scope",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": []
+        },
+        "latency_ms": 1640.69
+      }
+    },
+    {
+      "case_id": "additional-v1-007",
+      "category": "refuse",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Pode comprovar se isso foi pago?",
+        "provider": "fallback",
+        "status": "refused",
+        "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+        "trace": [
+          {
+            "step": "policy",
+            "outcome": "refused",
+            "reason": "unsupported_or_unsafe_request"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 0,
+        "latency_ms": 0.05
+      }
+    },
+    {
+      "case_id": "additional-v1-008",
+      "category": "refuse",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Busque números de pregões da Bahia em 2024.",
+        "provider": "fallback",
+        "status": "refused",
+        "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+        "trace": [
+          {
+            "step": "provider_attempt",
+            "candidate": "groq-qwen",
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "outcome": "selected"
+          },
+          {
+            "step": "plan",
+            "plan": {
+              "action": "refuse",
+              "purchase_id": null
+            },
+            "usage": {
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "prompt_sha256": "c7efb1669fe8a15b5fb0da75ea36d8d53063f8c317b40ccd12483c2e7f54742b",
+              "prompt_tokens": 594,
+              "completion_tokens": 15,
+              "total_tokens": 609,
+              "candidate": "groq-qwen",
+              "attempt_count": 1,
+              "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+              "provider_events": [
+                {
+                  "candidate": "groq-qwen",
+                  "provider": "groq",
+                  "model": "qwen/qwen3.8-27b",
+                  "outcome": "selected"
+                }
+              ],
+              "fallback_used": false
+            }
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 0,
+        "selected_provider": {
+          "candidate": "groq-qwen",
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b"
+        },
+        "latency_ms": 648.96
+      }
+    }
+  ]
+}

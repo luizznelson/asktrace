@@ -34,3 +34,5 @@ A cobertura mais recente de contratos está na [ampliação para 100 compras](co
 [Perguntas de negócio com acesso somente leitura](business-queries.md): comandos, permissões e exemplos reais.
 
 [Roteador limitado e avaliação de perguntas](agent-evaluation.md): baseline medido e estado da integração Gemini.
+
+[Contingência de provedores](provider-contingency.md): configuração em arquivo, modelos ativos, limites e evidências.

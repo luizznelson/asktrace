@@ -1,0 +1,57 @@
+{
+  "case_id": "business-v1-002",
+  "category": "municipalities",
+  "routing_passed": false,
+  "grounding_passed": false,
+  "passed": false,
+  "actual": {
+    "question": "Mostre as compras por município.",
+    "provider": "openrouter-nemotron",
+    "status": "refused",
+    "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "openrouter-nemotron",
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "outcome": "selected"
+      },
+      {
+        "step": "plan",
+        "plan": {
+          "action": "refuse",
+          "purchase_id": null
+        },
+        "usage": {
+          "provider": "openrouter",
+          "model": "nvidia/nemotron-3.5-super-vl:free",
+          "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+          "prompt_tokens": 343,
+          "completion_tokens": 15,
+          "total_tokens": 358,
+          "candidate": "openrouter-nemotron",
+          "attempt_count": 1,
+          "provider_config_sha256": "f360675f5c62f210aa5aa57944edf1de0a899d7f069a5490f28bafc916a241e6",
+          "provider_events": [
+            {
+              "candidate": "openrouter-nemotron",
+              "provider": "openrouter",
+              "model": "nvidia/nemotron-3.5-super-vl:free",
+              "outcome": "selected"
+            }
+          ],
+          "fallback_used": false
+        }
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 0,
+    "selected_provider": {
+      "candidate": "openrouter-nemotron",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3.5-super-vl:free"
+    },
+    "latency_ms": 852.08
+  }
+}

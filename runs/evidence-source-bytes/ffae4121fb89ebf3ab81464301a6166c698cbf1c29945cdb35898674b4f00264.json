@@ -1,0 +1,26 @@
+{
+  "run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+  "mode": "live",
+  "source_records": 1081,
+  "normalized_records": 1081,
+  "organizations": 235,
+  "municipalities_with_code": 179,
+  "missing_estimated_value": 0,
+  "missing_awarded_value": 749,
+  "monthly_counts": {
+    "2026-08": 412,
+    "2026-09": 373,
+    "2026-10": 296
+  },
+  "postgres_version": "17.11 (Debian 17.11-1.pgdg13+2)",
+  "load_verified": true,
+  "second_load_result": "already_loaded",
+  "scope": {
+    "uf": "PI",
+    "modality": 6,
+    "date_basis": "publication",
+    "resource": "purchases"
+  },
+  "raw_pages": 23,
+  "source_paginated_total_matched": true
+}

@@ -78,3 +78,9 @@ O lote `agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9` aprovou os casos 7–14
 15. O reteste `agent-eval-2c284880-8bde-4dd0-9892-0d52f5816f78` aprovou o caso 15.
 `agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7` aprovou os casos 16–28 e parou no 29 com quota diária gratuita de 20 requisições.
 [Diagnóstico seguro](agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7/quota-observation.json). Restam 32 casos contando o 29 interrompido.
+
+## Contingência de provedores
+
+[provider-verification-6f377e0f-a72c-4fc3-92ab-e225d79a95e1/verification.json](provider-verification-6f377e0f-a72c-4fc3-92ab-e225d79a95e1/verification.json) consolida o corpus principal e as perguntas adicionais, com seleção real de modelos. Há testes individuais, erros de configuração/serviço preservados, troca inicial simulada seguida de GPT-OSS real e catálogo minimizado. A nota principal não representa a qualidade de todas as reservas. [Índice e limites](../docs/provider-contingency.md). O código atual passou em 79 testes; o relatório da medição anterior registra os 75 daquela etapa.
+
+[Proveniência dos bytes](evidence-byte-provenance-412a1cc6-2875-4a33-95d6-152a4ec7626d/manifest.json): os JSON antigos continuam idênticos aos publicados no Git; cópias exatas dos bytes usados nas execuções permitem conferir os hashes após conversão histórica de quebras de linha. Novas evidências têm conversão de texto desativada.

@@ -1,0 +1,70 @@
+{
+  "started_scope": "PNCP PI modality 6, purchase publication 2026-08 through 2026-10; fixed 1081-purchase snapshot",
+  "provider": "openrouter-liquid",
+  "request_interval_seconds": 6.0,
+  "code_sha256": {
+    "agent.py": "7d6ebe9337acdeac8004566c8bc40fe1de2938ecf600af2f7948a95cce180756",
+    "gemini.py": "3e00b957e1757c38c197a101dbaa2f53512227bf298cb629a069e8af7d04affb",
+    "query.py": "73bbf7ce844e2bdd1fbe93e3e2a7e12872c48dfcfdfaa81124d63b67d424bb4d",
+    "evaluate.py": "529b3d38564678eeb9fee7514f6c4a58fc17f8d01228f666041a5aac001ca93f",
+    "providers.py": "75c4fbaee85e2303278cbe755810e46258f9c03ea773f437110bcf8301eb1cc2",
+    "provider_gateway.py": "388adf2ad38490f25a932c58a5a24d9fd69929d4b6046862ef9023b5f0a207cf"
+  },
+  "finished_at": "2026-11-04T17:10:11.184769+00:00",
+  "suite_sha256": "873d947d680e0c776e01e866d07b2be4d55f2a8d0907228aa0b49e604b19e557",
+  "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+  "provider_config_sha256": "fdc2b98a3c427e0b04dffb3bbd4ab8e9ab07df6d83f307cb5b48a44f3d8bd261",
+  "suite_size": 60,
+  "requested_cases": 3,
+  "start_case": 1,
+  "unexecuted_requested_cases": 2,
+  "completion": "interrupted",
+  "routing_failures_without_errors": 0,
+  "executed": 1,
+  "passed": 0,
+  "errors": 1,
+  "llm_attempts": 1,
+  "tool_calls": 0,
+  "median_latency_ms": 493.55,
+  "latency_note": "Local verified-query cache enabled; not uncached production latency.",
+  "cost_currency": null,
+  "cost_note": "No billing data available; not assumed zero.",
+  "generalization_note": "Curated development suite, not a blind employment benchmark.",
+  "results": [
+    {
+      "case_id": "business-v1-001",
+      "category": "summary",
+      "routing_passed": false,
+      "grounding_passed": false,
+      "passed": false,
+      "actual": {
+        "question": "Qual é o resumo da cobertura?",
+        "provider": "openrouter-liquid",
+        "status": "error",
+        "answer": "A consulta não pôde ser concluída com segurança.",
+        "trace": [
+          {
+            "step": "provider_attempt",
+            "candidate": "openrouter-liquid",
+            "provider": "openrouter",
+            "model": "liquid/lfm-2.5-2.6b:free",
+            "outcome": "failed",
+            "http_status": 429,
+            "provider_limits": {
+              "retry_after_seconds": 1.0
+            }
+          },
+          {
+            "step": "failure",
+            "error_type": "ContingencyFailure",
+            "provider_http_status": null,
+            "provider_limits": null
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 0,
+        "latency_ms": 493.55
+      }
+    }
+  ]
+}

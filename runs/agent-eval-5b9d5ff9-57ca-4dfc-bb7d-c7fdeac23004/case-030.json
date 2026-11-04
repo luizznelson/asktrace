@@ -1,0 +1,57 @@
+{
+  "case_id": "business-v1-030",
+  "category": "municipalities",
+  "routing_passed": false,
+  "grounding_passed": false,
+  "passed": false,
+  "actual": {
+    "question": "Quantos valores estimados faltam em cada município listado?",
+    "provider": "groq-qwen",
+    "status": "refused",
+    "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b",
+        "outcome": "selected"
+      },
+      {
+        "step": "plan",
+        "plan": {
+          "action": "refuse",
+          "purchase_id": null
+        },
+        "usage": {
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b",
+          "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+          "prompt_tokens": 333,
+          "completion_tokens": 14,
+          "total_tokens": 347,
+          "candidate": "groq-qwen",
+          "attempt_count": 1,
+          "provider_config_sha256": "d6eea97166f292cc019b41b98a3a0dfacad842dadd633983d0e56310a823988f",
+          "provider_events": [
+            {
+              "candidate": "groq-qwen",
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "outcome": "selected"
+            }
+          ],
+          "fallback_used": false
+        }
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 0,
+    "selected_provider": {
+      "candidate": "groq-qwen",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b"
+    },
+    "latency_ms": 554.09
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "verified_at": "2026-11-04T16:43:55.830670+00:00",
+  "model": "gemini-2.5-flash",
+  "method": "Disjoint continuation ranges with independently rescored expectations.",
+  "suite_sha256": "873d947d680e0c776e01e866d07b2be4d55f2a8d0907228aa0b49e604b19e557",
+  "coverage_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+  "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+  "suite_size": 60,
+  "observed_distinct_cases": 29,
+  "passed": 28,
+  "unexecuted": 31,
+  "errors": 1,
+  "categories": {
+    "summary": 20,
+    "municipalities": 8,
+    "purchase": 1
+  },
+  "local_policy_refusals_observed": 0,
+  "llm_attempts_in_selected_cases": 29,
+  "tool_calls_in_selected_cases": 28,
+  "same_model_prompt_suite_and_coverage": true,
+  "runtime_code_hashes_by_segment": [
+    {
+      "agent.py": "bc11ddc2661f549e4813ee83ae1fc599c5dbcf04bc8043f3f6627332260943b6",
+      "gemini.py": "26d0693d7d02a40be549cd222b30ccc2f349a771e41275054bff60b9ae3c2512",
+      "query.py": "73bbf7ce844e2bdd1fbe93e3e2a7e12872c48dfcfdfaa81124d63b67d424bb4d",
+      "evaluate.py": "dea49bfb9ec0dc42559ba89543278c45d9413d6791d326f65347c8201058f7d3"
+    },
+    {
+      "agent.py": "bc11ddc2661f549e4813ee83ae1fc599c5dbcf04bc8043f3f6627332260943b6",
+      "gemini.py": "26d0693d7d02a40be549cd222b30ccc2f349a771e41275054bff60b9ae3c2512",
+      "query.py": "73bbf7ce844e2bdd1fbe93e3e2a7e12872c48dfcfdfaa81124d63b67d424bb4d",
+      "evaluate.py": "07a5b79af2476b7fa9a942c8181691e81facfa05fcfc90248fa0a5c824bcd618"
+    },
+    {
+      "agent.py": "b9c7c5ce51c2d237088f89555a5dc953b46261296c5655ea5de013951e9c6482",
+      "gemini.py": "c98ae97c141b8d8603f16a8da149c952d74c71ffe55f3d01b6efd87fc30d7af4",
+      "query.py": "73bbf7ce844e2bdd1fbe93e3e2a7e12872c48dfcfdfaa81124d63b67d424bb4d",
+      "evaluate.py": "07a5b79af2476b7fa9a942c8181691e81facfa05fcfc90248fa0a5c824bcd618"
+    },
+    {
+      "agent.py": "b9c7c5ce51c2d237088f89555a5dc953b46261296c5655ea5de013951e9c6482",
+      "gemini.py": "c98ae97c141b8d8603f16a8da149c952d74c71ffe55f3d01b6efd87fc30d7af4",
+      "query.py": "73bbf7ce844e2bdd1fbe93e3e2a7e12872c48dfcfdfaa81124d63b67d424bb4d",
+      "evaluate.py": "07a5b79af2476b7fa9a942c8181691e81facfa05fcfc90248fa0a5c824bcd618"
+    }
+  ],
+  "runtime_note": "Adapter/trace code changed to add sanitized quota diagnostics between segments. Not a single-run benchmark.",
+  "scope_note": "Curated development corpus; local policy refusals do not evaluate model refusal ability.",
+  "cost_currency": null,
+  "billing_note": "Tokens and attempts do not establish monetary cost or zero billing.",
+  "sources": [
+    {
+      "path": "runs/agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/evaluation.json",
+      "sha256": "59e7b3660da8abfbccd9d5bf1abb75112044051ba9464118cdef61eb251f9d6e",
+      "range": [
+        1,
+        6
+      ]
+    },
+    {
+      "path": "runs/agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9/evaluation.json",
+      "sha256": "4e71b819d0c500ace35c8ad6bb7a1c07e419712e58e14981e2fbc8d6e2db9d32",
+      "range": [
+        7,
+        14
+      ]
+    },
+    {
+      "path": "runs/agent-eval-2c284880-8bde-4dd0-9892-0d52f5816f78/evaluation.json",
+      "sha256": "0b32baca82b33635154e20600c5f174a3bd82d3be558f15a1e74f2c4f57113c3",
+      "range": [
+        15,
+        15
+      ]
+    },
+    {
+      "path": "runs/agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7/evaluation.json",
+      "sha256": "f552538f417e2da7143e7c30d39b0eb4b8a3b79b714ffdd3675e6b372d277786",
+      "range": [
+        16,
+        60
+      ]
+    }
+  ],
+  "results": [
+    {
+      "case_id": "business-v1-001",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-6de25618-3cbe-4252-95ab-4620422340e8",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-002",
+      "passed": true,
+      "status": "answered",
+      "category": "municipalities",
+      "source_run": "agent-eval-6de25618-3cbe-4252-95ab-4620422340e8",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-003",
+      "passed": true,
+      "status": "answered",
+      "category": "purchase",
+      "source_run": "agent-eval-6de25618-3cbe-4252-95ab-4620422340e8",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-004",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-6de25618-3cbe-4252-95ab-4620422340e8",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-005",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-6de25618-3cbe-4252-95ab-4620422340e8",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-006",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-6de25618-3cbe-4252-95ab-4620422340e8",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-007",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-008",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-009",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-010",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-011",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-012",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-013",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-014",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-015",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-2c284880-8bde-4dd0-9892-0d52f5816f78",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-016",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-017",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-018",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-019",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-020",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-021",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-022",
+      "passed": true,
+      "status": "answered",
+      "category": "summary",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-023",
+      "passed": true,
+      "status": "answered",
+      "category": "municipalities",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-024",
+      "passed": true,
+      "status": "answered",
+      "category": "municipalities",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-025",
+      "passed": true,
+      "status": "answered",
+      "category": "municipalities",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-026",
+      "passed": true,
+      "status": "answered",
+      "category": "municipalities",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-027",
+      "passed": true,
+      "status": "answered",
+      "category": "municipalities",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-028",
+      "passed": true,
+      "status": "answered",
+      "category": "municipalities",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 1
+    },
+    {
+      "case_id": "business-v1-029",
+      "passed": false,
+      "status": "error",
+      "category": "municipalities",
+      "source_run": "agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7",
+      "llm_attempts": 1,
+      "tool_calls": 0
+    }
+  ]
+}

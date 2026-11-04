@@ -1,0 +1,69 @@
+{
+  "started_scope": "PNCP PI modality 6, purchase publication 2026-08 through 2026-10; fixed 1081-purchase snapshot",
+  "provider": "openrouter-gemma",
+  "request_interval_seconds": 6.0,
+  "code_sha256": {
+    "agent.py": "7d6ebe9337acdeac8004566c8bc40fe1de2938ecf600af2f7948a95cce180756",
+    "gemini.py": "ef8376957fda2565c16b034d977b893554c580fbc4fa2f348efa685346d0b8f9",
+    "query.py": "73bbf7ce844e2bdd1fbe93e3e2a7e12872c48dfcfdfaa81124d63b67d424bb4d",
+    "evaluate.py": "334702c012e2762eab1471379f45441d3216216715b50398e2e8d7a33b557119",
+    "providers.py": "75a7b8d343390fa9f70041eaef79a0ff73ad285bd069c595754d4401ef517b33",
+    "provider_gateway.py": "725bb2a29b9f2e39f5b4cae89b19a304ea923a3f4ed6505344b196ceaec357a0",
+    "planning.py": "b65b743774d7876eafda9fbf4c3067e2d73592356d5b467d9dfc2197f47daf78"
+  },
+  "finished_at": "2026-11-04T17:25:08.773167+00:00",
+  "suite_sha256": "873d947d680e0c776e01e866d07b2be4d55f2a8d0907228aa0b49e604b19e557",
+  "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+  "provider_config_sha256": "d6eea97166f292cc019b41b98a3a0dfacad842dadd633983d0e56310a823988f",
+  "suite_size": 60,
+  "requested_cases": 3,
+  "start_case": 1,
+  "unexecuted_requested_cases": 2,
+  "completion": "interrupted",
+  "routing_failures_without_errors": 0,
+  "executed": 1,
+  "passed": 0,
+  "errors": 1,
+  "llm_attempts": 1,
+  "tool_calls": 0,
+  "median_latency_ms": 794.99,
+  "latency_note": "Local verified-query cache enabled; not uncached production latency.",
+  "cost_currency": null,
+  "cost_note": "No billing data available; not assumed zero.",
+  "generalization_note": "Curated development suite, not a blind employment benchmark.",
+  "results": [
+    {
+      "case_id": "business-v1-001",
+      "category": "summary",
+      "routing_passed": false,
+      "grounding_passed": false,
+      "passed": false,
+      "actual": {
+        "question": "Qual é o resumo da cobertura?",
+        "provider": "openrouter-gemma",
+        "status": "error",
+        "answer": "A consulta não pôde ser concluída com segurança.",
+        "trace": [
+          {
+            "step": "provider_attempt",
+            "candidate": "openrouter-gemma",
+            "provider": "openrouter",
+            "model": "google/gemma-4-26b-a4b-it:free",
+            "outcome": "failed",
+            "http_status": 429,
+            "provider_limits": {}
+          },
+          {
+            "step": "failure",
+            "error_type": "ContingencyFailure",
+            "provider_http_status": null,
+            "provider_limits": null
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 0,
+        "latency_ms": 794.99
+      }
+    }
+  ]
+}

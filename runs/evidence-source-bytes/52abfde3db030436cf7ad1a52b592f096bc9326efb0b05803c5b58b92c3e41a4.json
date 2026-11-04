@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "run_id": "13037e9b-fbca-488c-a435-9b327710276a",
+  "started_at": "2026-11-02T21:39:20.828443+00:00",
+  "source": "https://pncp.gov.br/api/consulta/v1/contratacoes/publicacao",
+  "date_start": "2026-08-01",
+  "date_end": "2026-10-31",
+  "scope": {
+    "uf": "PI",
+    "modality": 6,
+    "date_basis": "publication",
+    "resource": "purchases"
+  },
+  "mode": "live",
+  "status": "failed",
+  "pages": [
+    {
+      "params": {
+        "dataInicial": "20260801",
+        "dataFinal": "20260831",
+        "codigoModalidadeContratacao": 6,
+        "uf": "PI",
+        "pagina": 1,
+        "tamanhoPagina": 50
+      },
+      "request_sha256": "8ca339e7b3c3b7cb9b952acb91d2d9bd4a93ba55c0cffca1336b9ed1b5eaff7c",
+      "body_sha256": "0e23b3272da6cda80aee57c27225ea120eaab4e7804a735b079e1a362c3a91d3",
+      "relative_path": "data/raw/13037e9b-fbca-488c-a435-9b327710276a/202608-page-00001.json",
+      "fetched_at": "2026-11-02T21:39:21.918940+00:00",
+      "http_status": 200,
+      "page": 1,
+      "records_count": 50
+    }
+  ],
+  "windows": [],
+  "error_type": "ValueError",
+  "error_code": "page_budget_exceeded",
+  "ended_at": "2026-11-02T21:39:21.921413+00:00",
+  "quality": {
+    "source_records": 50,
+    "awarded_missing": 26,
+    "normalized_records": 50
+  },
+  "normalized": {
+    "relative_path": "data/processed/13037e9b-fbca-488c-a435-9b327710276a/purchases.json",
+    "sha256": "aa18f9a538206c4c336d10c4530bf7a8f43fb7fd303159919ca7c81accb20951"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "verified_at": "2026-11-03T18:39:17.103274+00:00",
+  "suite_size": 60,
+  "latest_requested_cases": 60,
+  "latest_executed": 7,
+  "latest_passed": 6,
+  "latest_provider_errors": 1,
+  "latest_not_executed": 53,
+  "next_case_one_based": 7,
+  "provider_http_status": 429,
+  "current_prompt_matches_latest_successful_plans": true,
+  "current_prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+  "software_tests_passed": 61,
+  "note": "No combined pass rate: earlier attempt used a different prompt; full suite incomplete.",
+  "evaluation_sha256": "59e7b3660da8abfbccd9d5bf1abb75112044051ba9464118cdef61eb251f9d6e"
+}

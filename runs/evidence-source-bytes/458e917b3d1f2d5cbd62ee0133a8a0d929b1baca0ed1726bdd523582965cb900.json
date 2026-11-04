@@ -1,0 +1,12 @@
+{
+  "verified_at": "2026-11-03T18:14:28.234252+00:00",
+  "read_only_login_write_denied": true,
+  "summary_matches_ingestion_and_coverage": true,
+  "software_tests_passed": 51,
+  "postgresql_integration": true,
+  "example_questions": {
+    "summary": "queries-ee5ffc31-e565-4e75-8ce4-cfa6aac17046/summary.json",
+    "municipalities": "queries-ee5ffc31-e565-4e75-8ce4-cfa6aac17046/municipalities.json",
+    "purchase": "queries-ee5ffc31-e565-4e75-8ce4-cfa6aac17046/purchase.json"
+  }
+}
