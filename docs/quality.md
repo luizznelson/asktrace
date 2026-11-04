@@ -102,3 +102,7 @@ Passaram **89 testes Python locais**, incluindo PostgreSQL. Três novos testes c
 ## Diagnóstico e aviso prévio de limites
 
 95 testes Python locais passaram. Quatro novos testes cobrem prazos de quota minimizados, entrada inválida e disponibilidade sem executar pergunta. O contrato DOM verifica aviso e escolha local sem chamada oculta. [Verificação real dos municípios por regras locais](../runs/availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json), sem chamada de provedor.
+
+## Revisão da aplicação e regressões
+
+102 testes Python, contrato DOM, Ruff e verificações HTTP/banco passaram. O aviso de IA deixou de aparecer na entrada sem pergunta. Validação de requisições, histórico e quotas recebeu cenários de falha; redirecionamentos com credenciais são bloqueados. [Correções, reprodução e limites](application-review.md).

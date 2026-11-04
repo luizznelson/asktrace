@@ -133,25 +133,33 @@ O portfólio deve apresentar os resultados medidos e as limitações reais de ca
 A introdução explica PNCP, propósito e os três passos de uso. O padrão passou a maio–outubro/2026, com 2.537 compras e cobertura parcial de contratos explícita. O recorte anterior permanece disponível. O histórico é restaurado do sessionStorage sem chamadas externas. [Método e evidências atuais](dataset-expansion.md).
 
 ## Quando a IA está em espera
-+
-+Falhas de contingência antes da ferramenta retornam `availability.component=ai_planner` e
-+`database_checked=false`. A tela explica que o banco não foi consultado, não sugere que uma quota
-+seja falha dos dados, esconde fontes/cobertura vazias e oferece uma consulta explícita por regras
-+locais. O botão preserva pergunta e recorte, muda o modo visível e só então envia outra consulta.
-+Não há fallback silencioso. Regras locais precisam do banco ativo e respeitam seu catálogo.
-+
-+Horários de espera são apresentados quando registrados, como possibilidade de nova tentativa,
-+sem garantia de recuperação. O rastro principal usa linguagem simples; os detalhes e candidatos
-+desativados continuam no registro técnico completo. Resultados antigos de sessão também recebem
-+essa apresentação a partir do rastro preservado, sem editar seus dados históricos.
-+
-+Passaram 91 testes Python e o contrato DOM de recuperação: não há nova chamada ao renderizar erro,
-+somente após clique; o pedido usa baseline e fontes reaparecem após resposta válida. A
-+[verificação controlada](../runs/recovery-verification-da469824-8e8f-43dd-b8ec-f0f220c19af1/verification.json) usa falha de IA simulada e PostgreSQL real,
-+com zero chamadas externas. Não comprova a liberação da quota nem uma indisponibilidade real do
-+provedor. Não houve inspeção visual de navegador nesta etapa.
-+
 
-## Disponibilidade antes de perguntar
+Falhas de contingência antes da ferramenta retornam `availability.component=ai_planner` e
+`database_checked=false`. A tela explica que o banco não foi consultado, não sugere que uma quota
+seja falha dos dados, esconde fontes/cobertura vazias e oferece uma consulta explícita por regras
+locais. O botão preserva pergunta e recorte, muda o modo visível e só então envia outra consulta.
+Não há fallback silencioso. Regras locais precisam do banco ativo e respeitam seu catálogo.
 
-A página consulta o estado local ao abrir e pode atualizá-lo pelo botão de disponibilidade, sem chamadas externas. Quando todos os candidatos estão em espera ou sem chave, mostra um aviso e a opção de regras locais antes da pergunta. A seleção é explícita. HTTP 429 passa a preservar prazos numéricos/fracionários, datas, resets de tokens/requisições e vocabulário de quota minimizado; mensagens completas e IDs não são publicados. Esperas antigas sem diagnóstico continuam desconhecidas, sem reinício forçado. [Verificação sem chamadas externas](../runs/availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json): consulta real por municípios funcionou no PostgreSQL de 2.537 compras. 95 testes Python e contrato DOM passaram. O funcionamento atual da IA não foi afirmado nem testado contra uma espera ativa.
+Horários de espera são apresentados quando registrados, como possibilidade de nova tentativa,
+sem garantia de recuperação. O rastro principal usa linguagem simples; os detalhes e candidatos
+desativados continuam no registro técnico completo. Resultados antigos de sessão também recebem
+essa apresentação a partir do rastro preservado, sem editar seus dados históricos.
+
+Passaram 91 testes Python e o contrato DOM de recuperação: não há nova chamada ao renderizar erro,
+somente após clique; o pedido usa baseline e fontes reaparecem após resposta válida. A
+[verificação controlada](../runs/recovery-verification-da469824-8e8f-43dd-b8ec-f0f220c19af1/verification.json) usa falha de IA simulada e PostgreSQL real,
+com zero chamadas externas. Não comprova a liberação da quota nem uma indisponibilidade real do
+provedor. Não houve inspeção visual de navegador nesta etapa.
+
+
+## Disponibilidade e a tela inicial
+
+A página lê o estado local ao abrir, sem chamadas externas, mas não apresenta uma espera
+compartilhada como falha de uma pergunta ainda não feita. O alerta fica condicionado a
+uma tentativa de IA que falhou e desaparece no modo local ou em nova exploração.
+Atualizar disponibilidade não envia a pergunta e trata falhas de conexão.
+
+Esperas observadas continuam preservadas. Os detalhes da correção, verificações e
+limitações estão na [revisão da aplicação](application-review.md). A
+[verificação anterior](../runs/availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json)
+registra o diagnóstico de quotas daquela execução; sua apresentação inicial foi substituída.

@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "started_at": "2026-11-04T19:10:57.726348+00:00",
+  "external_ai_calls": 0,
+  "browser_visual_inspection": false,
+  "checks": [
+    {
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-q"
+      ],
+      "exit_code": 0,
+      "tests_run": 102
+    },
+    {
+      "command": [
+        ".venv/Scripts/ruff.exe",
+        "check",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/Scripts/ruff.exe",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "web/app.js"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_assistant_ui.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "credential_check": {
+    "scope": "tracked and nonignored untracked files; exact configured secret values",
+    "files_checked": 458,
+    "configured_secret_matches": 0,
+    "env_tracked": false,
+    "limitation": "Not a scan of Git history or unknown/revoked credentials."
+  },
+  "database_permissions": {
+    "rolsuper": false,
+    "rolcreatedb": false,
+    "rolcreaterole": false,
+    "can_read": true,
+    "can_insert": false,
+    "transaction_read_only": "on"
+  },
+  "http_queries": [
+    {
+      "dataset": "original",
+      "status": "answered",
+      "purchases": 1081,
+      "tool_calls": 1,
+      "llm_attempts": 0,
+      "scope": {
+        "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+        "date_start": "2026-08-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "response_sha256": "aab08f2399c764dc72c50fb62e93fe20407cda612dc533f01feacd58332f4e3c"
+    },
+    {
+      "dataset": "expanded",
+      "status": "answered",
+      "purchases": 2537,
+      "tool_calls": 1,
+      "llm_attempts": 0,
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "response_sha256": "7ccb687772ae98ef049e6ad0564a017f80d5e6e4dbc9968bb655c64aeb61472e"
+    }
+  ],
+  "source_sha256": {
+    "asktrace/http_transport.py": "a3c250adb1419274558c987fb34daffc9e9626a80a06801c39f6682d774b3a3a",
+    "tests/test_http_transport.py": "fd1e7740cc0a2cc5216e534ccccddd51ca867d9f3d3779034f966dfd9d349cde",
+    "asktrace/__init__.py": "6ed54afe74ff44f279d65f0150f8ef984aac58cda4914c79d2ad1cde4ce71a8a",
+    "asktrace/agent.py": "5c4b67f98294d8b580a0087106b1ec8fa1303e92bea3d2ba56050d43c18006dc",
+    "asktrace/contract_batches.py": "98a621750734827dc1d04d2492498d839d31309e9c53e5c9f8848c0490098cb8",
+    "asktrace/contracts.py": "41799e3dcbd8dcd3327038e8d72bcd92a8566f169a232a91df290324a832e54d",
+    "asktrace/database.py": "3509627a46b58803829ed5d76e6fca5dd3a8ddcfd4d9a1702d1a5c367bd67ef1",
+    "asktrace/evaluate.py": "46b812db5a17b04c751642455d475a32e75574053f5f1d42e9e685e96ee54f15",
+    "asktrace/evidence.py": "5b1d5998940ea021c440d8f1473e7a59acb8e053f6de8b9e8cd2a0a21740a149",
+    "asktrace/gemini.py": "99ff6f04eac23372a792e0e553ce62bd4ac715f2836466e0b99fd50b30851df2",
+    "asktrace/ingest.py": "91aaded8a31865a78963a1d06a8fa9bc92e45a7403d400368cd1225b8296c48b",
+    "asktrace/planning.py": "1d12938af037bbf7c1c46f20454f8e20c8d994e909dc9aa2cbb77d4c8679cc84",
+    "asktrace/provider_gateway.py": "a9e69724ff86610b426064542cb4993f0fa7b653f6fe1f9973ae33d18b4083d4",
+    "asktrace/providers.py": "33b3b331e09539a5bf964a1639109db4a7f93fbdc587a26098b5a5fe22ea5271",
+    "asktrace/query.py": "e70cfa07909d906389d562eb709ef0061f7339b03dce9337f58e7f3e6609ba35",
+    "asktrace/rate_limits.py": "9e066d9bc3497ec01a4cab9f9b8582ae9e9ae3fe54ce2ec3648ec84096076346",
+    "asktrace/web.py": "543c2368383eac65bf16ae92c52577db01a66163356c68811efff62c41c02eb3",
+    "tests/test_agent.py": "30e28ff3996d1531addd055e13e566df6fb2213ab2eab0bc39e8e52553a15655",
+    "tests/test_assistant_ui.cjs": "c740d38da76034ceef8dfb5b20bcbc4521b53e51f01e2aa2d1431974662e375d",
+    "tests/test_availability.py": "bb5cc406320b000e29582dbfbcc0d36720b63d6848a1feb36831d89a9edb5941",
+    "tests/test_contract_batches.py": "da0f6f1a1a861f59f880b1fa94d66e69bfe865109364e1ab3a3b6bc9eb8a1d21",
+    "tests/test_contracts.py": "87a4178384b17a88db7e9bafaff64481eb73669b78ca7fbcd7a5157708d5dbec",
+    "tests/test_database_integration.py": "2151fd3afe52732ec429cd6b53598822caea9247066d6ea9c91ce84a8cb7963d",
+    "tests/test_evidence.py": "22b4131a701937a1ca4abc616e3ba4d69e60942676d4761a4fb081e9a4a60a8d",
+    "tests/test_ingestion.py": "ecd6996986d7e2d1825b1bee88e45e060275c4742b065020f4a8108d2cd12cc9",
+    "tests/test_providers.py": "b95e60a4f236b672610a4bf0bab1625e18a5b087f47269e7068892db497de636",
+    "tests/test_queries.py": "405fd83e033f5974a0ef0112e19bff6250d21a197e56b56b8db1083f6d0e197b",
+    "tests/test_rate_limits.py": "6ed87b28c88c268511966e35a08d9be926c66275c7fe4ad7ac372f019287e1e7",
+    "tests/test_samples.py": "bd01cd7fc25970b6387ab7da121031784ba748096de0ae3a03a619d1e3fc3a70",
+    "tests/test_scope.py": "d934c9b4fa31bf1dcc2d05547b60ef28dd7e73079637ee8b02834e4baa5b1c00",
+    "tests/test_web.py": "ff3cf9d55cc283dcf7ab73543a05e99f88066440cbe519522e5846464872c690",
+    "web/app.css": "aa183a5aa9e2abe07ffc4d57fa48083ef547342ede4839e8c304b7d67b92f75a",
+    "web/app.js": "d8ea32bd8f8e2d8f4b24ec655cf9bf23e9ec0fbaef00cbedaa062886526a83bd",
+    "web/index.html": "6b3bae8fdcb9f8f44d99a08392ceb035edeb7b343f074ad26c0e668468570a3c"
+  },
+  "finished_at": "2026-11-04T19:11:32.930132+00:00"
+}

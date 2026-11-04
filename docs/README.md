@@ -40,3 +40,5 @@ A cobertura mais recente de contratos está na [ampliação para 100 compras](co
 [Interface local](interface.md): percurso, comandos, proteções e verificação HTTP.
 
 [Base ampliada, orientação e histórico da sessão](dataset-expansion.md): resultados atuais, limites e uso.
+
+[Revisão da aplicação](application-review.md): falhas corrigidas, controles de segurança locais, evidências e limites de publicação.
