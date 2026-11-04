@@ -125,3 +125,7 @@ troca PT/EN e ausência de mistura entre relatórios históricos e metadados atu
 Uma verificação textual impede regressões de menções a portfólio na aplicação.
 [Evidência](../runs/application-review-8ae90c1e-92fe-4782-855c-9c8d76817734/verification.json): consultas HTTP reais por regras locais nos dois recortes,
 sem chamadas externas de IA. Não houve inspeção visual em navegador.
+
+## Análises ampliadas
+
+108 testes Python passaram. A regressão cobre nome variante de órgão sem divisão de CNPJ, soma de compra sem multiplicação por contratos e zero versus ausência. Contratos Node validam CSV e novos resultados; HTTP real confere meses, órgãos e qualidade. O corpus local novo passou 12/12; três testes iniciais reais da IA v3 passaram. [Escopo das verificações](analytics.md).

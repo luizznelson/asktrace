@@ -83,3 +83,7 @@ Aplicação com navegação lateral, histórico da aba, sugestões por assunto e
 ## Orientação, histórico e seis meses de dados
 
 Nova base maio–outubro/2026 com 2.537 compras carregadas e 54 páginas; histórico de sessão restaurável e seletor de recortes. Contratos novos: 100 consultas, 21 contratos, 2.436 consultas elegíveis pendentes e uma exclusão. Recorte anterior preservado e não somado. 89 testes Python e verificações de sessão/HTTP passaram. Próximo passo: continuar cobertura e avaliar perguntas do recorte ampliado. [Evidências](docs/dataset-expansion.md).
+
+## Análises de publicação, órgãos e qualidade
+
+Três consultas fixas adicionais e exportação CSV implementadas. Interface com seis caminhos, corpus local v3 e testes iniciais reais de IA. Próximas etapas: ampliar a cobertura de contratos, avaliar o planejador v3 em conjunto maior e realizar validação visual antes de hospedagem. [Entrega e limites](docs/analytics.md).

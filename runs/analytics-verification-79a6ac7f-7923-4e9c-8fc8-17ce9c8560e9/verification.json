@@ -1,0 +1,49 @@
+{
+  "started_at": "2026-11-04T21:11:29.233655+00:00",
+  "baseline_evaluation": "runs/agent-eval-b90e11bf-d941-4276-a342-287a327b6fb7/evaluation.json",
+  "baseline_passed": 12,
+  "live_requested": true,
+  "live_cases": [
+    {
+      "action": "monthly",
+      "status": "answered",
+      "passed": true,
+      "llm_attempts": 1,
+      "tool_calls": 1,
+      "selected_provider": {
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evidence": "live-01.json"
+    },
+    {
+      "action": "organizations",
+      "status": "answered",
+      "passed": true,
+      "llm_attempts": 1,
+      "tool_calls": 1,
+      "selected_provider": {
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evidence": "live-04.json"
+    },
+    {
+      "action": "quality",
+      "status": "answered",
+      "passed": true,
+      "llm_attempts": 1,
+      "tool_calls": 1,
+      "selected_provider": {
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evidence": "live-07.json"
+    }
+  ],
+  "note": "Author-curated cases. AI smoke is not a full-model quality benchmark.",
+  "finished_at": "2026-11-04T21:11:44.370944+00:00"
+}

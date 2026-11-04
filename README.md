@@ -8,6 +8,10 @@ Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A pri
 
 [English](README.en.md) · [Estudo de caso](docs/case-study.md) · [Decisões de engenharia](docs/architecture.md) · [Documentação](docs/README.md)
 
+## Análises disponíveis
+
+Panorama, municípios, evolução por mês de publicação, órgãos com mais compras, qualidade dos dados e rastreio por ID PNCP. A interface permite exportar a tabela em CSV com recorte e hash, além do JSON completo. [Perguntas, interpretação, testes e limites](docs/analytics.md).
+
 ## Em 1 minuto
 
 | | |

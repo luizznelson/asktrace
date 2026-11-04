@@ -1,0 +1,142 @@
+{
+  "version": 3,
+  "description": "Expanded dataset; author-curated local routing checks, not a blind benchmark",
+  "cases": [
+    {
+      "id": "expanded-01",
+      "category": "monthly",
+      "question": "Como evoluíram as compras por mês de publicação?",
+      "expected": {
+        "action": "monthly",
+        "status": "answered",
+        "coverage": {
+          "purchases": 2537
+        }
+      }
+    },
+    {
+      "id": "expanded-02",
+      "category": "monthly",
+      "question": "Qual é a evolução mensal das compras?",
+      "expected": {
+        "action": "monthly",
+        "status": "answered",
+        "coverage": {
+          "purchases": 2537
+        }
+      }
+    },
+    {
+      "id": "expanded-03",
+      "category": "monthly",
+      "question": "Quantas compras há em cada mês?",
+      "expected": {
+        "action": "monthly",
+        "status": "answered",
+        "coverage": {
+          "purchases": 2537
+        }
+      }
+    },
+    {
+      "id": "expanded-04",
+      "category": "organizations",
+      "question": "Quais órgãos têm mais compras na base?",
+      "expected": {
+        "action": "organizations",
+        "status": "answered",
+        "coverage": {
+          "purchases": 2537
+        }
+      }
+    },
+    {
+      "id": "expanded-05",
+      "category": "organizations",
+      "question": "Mostre compras por órgão.",
+      "expected": {
+        "action": "organizations",
+        "status": "answered",
+        "coverage": {
+          "purchases": 2537
+        }
+      }
+    },
+    {
+      "id": "expanded-06",
+      "category": "organizations",
+      "question": "Qual a distribuição de compras entre órgãos?",
+      "expected": {
+        "action": "organizations",
+        "status": "answered",
+        "coverage": {
+          "purchases": 2537
+        }
+      }
+    },
+    {
+      "id": "expanded-07",
+      "category": "quality",
+      "question": "Como está a qualidade e o preenchimento dos dados?",
+      "expected": {
+        "action": "quality",
+        "status": "answered",
+        "coverage": {
+          "purchases": 2537
+        }
+      }
+    },
+    {
+      "id": "expanded-08",
+      "category": "quality",
+      "question": "Quais lacunas existem na base?",
+      "expected": {
+        "action": "quality",
+        "status": "answered",
+        "coverage": {
+          "purchases": 2537
+        }
+      }
+    },
+    {
+      "id": "expanded-09",
+      "category": "quality",
+      "question": "Quero conferir a completude dos dados.",
+      "expected": {
+        "action": "quality",
+        "status": "answered",
+        "coverage": {
+          "purchases": 2537
+        }
+      }
+    },
+    {
+      "id": "expanded-10",
+      "category": "refuse",
+      "question": "Compras por mês e município.",
+      "expected": {
+        "action": "refuse",
+        "status": "refused"
+      }
+    },
+    {
+      "id": "expanded-11",
+      "category": "refuse",
+      "question": "Compras por mês e órgão.",
+      "expected": {
+        "action": "refuse",
+        "status": "refused"
+      }
+    },
+    {
+      "id": "expanded-12",
+      "category": "refuse",
+      "question": "Mostre pagamentos por órgão.",
+      "expected": {
+        "action": "refuse",
+        "status": "refused"
+      }
+    }
+  ],
+  "scope": "PNCP PI modality 6; purchase publication 2026-05-01 through 2026-10-31; fixed 2537-purchase snapshot"
+}

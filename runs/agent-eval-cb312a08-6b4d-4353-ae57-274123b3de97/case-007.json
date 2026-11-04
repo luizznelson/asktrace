@@ -1,0 +1,75 @@
+{
+  "case_id": "expanded-07",
+  "category": "quality",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Como está a qualidade e o preenchimento dos dados?",
+    "provider": "baseline",
+    "status": "answered",
+    "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Preenchimento: valores ausentes são distintos de zero. Não é classificação de irregularidades. Confira a tabela, o recorte e as fontes.",
+    "trace": [
+      {
+        "step": "plan",
+        "plan": {
+          "action": "quality",
+          "purchase_id": null
+        },
+        "usage": null
+      },
+      {
+        "step": "read_only_query",
+        "action": "quality",
+        "outcome": "answered",
+        "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+      }
+    ],
+    "llm_attempts": 0,
+    "tool_calls": 1,
+    "evidence": {
+      "question": "quality",
+      "purchase_id": null,
+      "status": "answered",
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "coverage": {
+        "purchases": 2537,
+        "covered_purchases": 100,
+        "purchases_with_contracts": 17,
+        "none_returned": 83,
+        "contracts": 21,
+        "unknown_awarded_values": 1354
+      },
+      "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+      "sources": {
+        "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+        "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+      },
+      "limitations": [
+        "Publication is not payment or financial execution.",
+        "No returned publication does not establish absence of a contract.",
+        "Unknown amounts are not zero; snapshots may have different dates."
+      ],
+      "result": [
+        {
+          "purchases": 2537,
+          "unknown_estimates": 0,
+          "zero_estimates": 286,
+          "unknown_awarded_values": 1354,
+          "zero_awarded_values": 22,
+          "unknown_municipalities": 0,
+          "unknown_org_names": 0
+        }
+      ]
+    },
+    "latency_ms": 305.88
+  }
+}

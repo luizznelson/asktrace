@@ -214,3 +214,7 @@ Os testes DOM cobrem as duas bases, ambos os idiomas, metadados incompatíveis e
 de menções a portfólio nos arquivos da aplicação. A formatação de HTML e CSS também
 facilita a manutenção. [Registro de validação](../runs/application-review-8ae90c1e-92fe-4782-855c-9c8d76817734/verification.json). A coleta não foi ampliada
 nesta alteração; os estados apresentados refletem os registros já existentes.
+
+## Seis caminhos e exportação
+
+A descoberta passou a seis cartões. Evolução mensal, órgãos e qualidade têm respostas e tabelas próprias, com sugestões para continuar a exploração. O CSV preserva contexto, precisão original e trata fórmulas de planilha; JSON continua disponível. [Detalhes e limites](analytics.md).

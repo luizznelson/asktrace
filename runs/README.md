@@ -114,3 +114,5 @@ recortes. Inclui testes Node de valores grandes, centavos e datas; sem chamadas 
 [application-review-8ae90c1e-92fe-4782-855c-9c8d76817734](application-review-8ae90c1e-92fe-4782-855c-9c8d76817734/verification.json): validação da interface de
 produto e separação entre compras pesquisadas, pendentes e excluídas; 102 testes Python,
 contratos Node e consultas HTTP locais. Sem nova coleta ou chamadas externas de IA.
+
+[Validação das análises](application-review-70417ac8-3c13-466e-a51f-ba200dbabc60/verification.json): 108 testes Python e consultas reais mensais/órgãos/qualidade. [Corpus local ampliado](agent-eval-cb312a08-6b4d-4353-ae57-274123b3de97/evaluation.json): 12/12. [Testes iniciais com IA](analytics-verification-79a6ac7f-7923-4e9c-8fc8-17ce9c8560e9/verification.json): três rotas novas, sem equivaler à avaliação ampla do modelo.

@@ -1,0 +1,1339 @@
+{
+  "started_scope": "PNCP PI modality 6; purchase publication 2026-05-01 through 2026-10-31; fixed 2537-purchase snapshot",
+  "provider": "baseline",
+  "request_interval_seconds": 0,
+  "code_sha256": {
+    "agent.py": "a493cbc83ee75015d160332390b9437cd4b9c56e7621a2ba55c16ff4acda1d29",
+    "gemini.py": "5e8797ddd1df264948b12873223919c4adf79b3623b9230e803173caa58b052f",
+    "query.py": "a6d6f5be1d96364522d567fc77d3e0ee6a5d681338977015b48ea2ee2f0980ac",
+    "evaluate.py": "46b812db5a17b04c751642455d475a32e75574053f5f1d42e9e685e96ee54f15",
+    "providers.py": "33b3b331e09539a5bf964a1639109db4a7f93fbdc587a26098b5a5fe22ea5271",
+    "provider_gateway.py": "0a4ef1a8a161b5003fb58c410cb644dab640b85c7b275ddc1a072786f72a7357",
+    "planning.py": "725211fa65eaf47ba7432a63485367d14ef63794ec82609925e3b062bcaffa74"
+  },
+  "finished_at": "2026-11-04T21:13:56.510181+00:00",
+  "suite_sha256": "661a0ca62cba11d1599ea57fb27e61be9d4fe4b112b5d4d4d6e82f8a2c130544",
+  "suite_snapshot_path": "runs/agent-eval-cb312a08-6b4d-4353-ae57-274123b3de97/corpus.source.json",
+  "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+  "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+  "suite_size": 12,
+  "requested_cases": 12,
+  "start_case": 1,
+  "unexecuted_requested_cases": 0,
+  "completion": "complete",
+  "routing_failures_without_errors": 0,
+  "executed": 12,
+  "passed": 12,
+  "errors": 0,
+  "llm_attempts": 0,
+  "tool_calls": 9,
+  "median_latency_ms": 0.575,
+  "latency_note": "Local verified-query cache enabled; not uncached production latency.",
+  "cost_currency": null,
+  "cost_note": "No billing data available; not assumed zero.",
+  "generalization_note": "Curated development suite, not a blind employment benchmark.",
+  "results": [
+    {
+      "case_id": "expanded-01",
+      "category": "monthly",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Como evoluíram as compras por mês de publicação?",
+        "provider": "baseline",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Evolução por mês de publicação; não representa execução ou pagamentos. Confira a tabela, o recorte e as fontes.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "monthly",
+              "purchase_id": null
+            },
+            "usage": null
+          },
+          {
+            "step": "read_only_query",
+            "action": "monthly",
+            "outcome": "answered",
+            "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "monthly",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+            "date_start": "2026-05-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 2537,
+            "covered_purchases": 100,
+            "purchases_with_contracts": 17,
+            "none_returned": 83,
+            "contracts": 21,
+            "unknown_awarded_values": 1354
+          },
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+            "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "publication_month": "2026-05",
+              "purchases": 505,
+              "estimated_value": "740308791.24000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 221
+            },
+            {
+              "publication_month": "2026-06",
+              "purchases": 527,
+              "estimated_value": "850816965.71000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 217
+            },
+            {
+              "publication_month": "2026-07",
+              "purchases": 424,
+              "estimated_value": "747983762.10000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 181
+            },
+            {
+              "publication_month": "2026-08",
+              "purchases": 412,
+              "estimated_value": "446909705.49000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 232
+            },
+            {
+              "publication_month": "2026-09",
+              "purchases": 373,
+              "estimated_value": "661240498.41000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 241
+            },
+            {
+              "publication_month": "2026-10",
+              "purchases": 296,
+              "estimated_value": "383103990.61000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 262
+            }
+          ]
+        },
+        "latency_ms": 301.06
+      }
+    },
+    {
+      "case_id": "expanded-02",
+      "category": "monthly",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Qual é a evolução mensal das compras?",
+        "provider": "baseline",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Evolução por mês de publicação; não representa execução ou pagamentos. Confira a tabela, o recorte e as fontes.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "monthly",
+              "purchase_id": null
+            },
+            "usage": null
+          },
+          {
+            "step": "read_only_query",
+            "action": "monthly",
+            "outcome": "answered",
+            "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "monthly",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+            "date_start": "2026-05-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 2537,
+            "covered_purchases": 100,
+            "purchases_with_contracts": 17,
+            "none_returned": 83,
+            "contracts": 21,
+            "unknown_awarded_values": 1354
+          },
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+            "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "publication_month": "2026-05",
+              "purchases": 505,
+              "estimated_value": "740308791.24000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 221
+            },
+            {
+              "publication_month": "2026-06",
+              "purchases": 527,
+              "estimated_value": "850816965.71000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 217
+            },
+            {
+              "publication_month": "2026-07",
+              "purchases": 424,
+              "estimated_value": "747983762.10000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 181
+            },
+            {
+              "publication_month": "2026-08",
+              "purchases": 412,
+              "estimated_value": "446909705.49000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 232
+            },
+            {
+              "publication_month": "2026-09",
+              "purchases": 373,
+              "estimated_value": "661240498.41000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 241
+            },
+            {
+              "publication_month": "2026-10",
+              "purchases": 296,
+              "estimated_value": "383103990.61000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 262
+            }
+          ]
+        },
+        "latency_ms": 1.14
+      }
+    },
+    {
+      "case_id": "expanded-03",
+      "category": "monthly",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Quantas compras há em cada mês?",
+        "provider": "baseline",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Evolução por mês de publicação; não representa execução ou pagamentos. Confira a tabela, o recorte e as fontes.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "monthly",
+              "purchase_id": null
+            },
+            "usage": null
+          },
+          {
+            "step": "read_only_query",
+            "action": "monthly",
+            "outcome": "answered",
+            "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "monthly",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+            "date_start": "2026-05-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 2537,
+            "covered_purchases": 100,
+            "purchases_with_contracts": 17,
+            "none_returned": 83,
+            "contracts": 21,
+            "unknown_awarded_values": 1354
+          },
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+            "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "publication_month": "2026-05",
+              "purchases": 505,
+              "estimated_value": "740308791.24000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 221
+            },
+            {
+              "publication_month": "2026-06",
+              "purchases": 527,
+              "estimated_value": "850816965.71000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 217
+            },
+            {
+              "publication_month": "2026-07",
+              "purchases": 424,
+              "estimated_value": "747983762.10000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 181
+            },
+            {
+              "publication_month": "2026-08",
+              "purchases": 412,
+              "estimated_value": "446909705.49000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 232
+            },
+            {
+              "publication_month": "2026-09",
+              "purchases": 373,
+              "estimated_value": "661240498.41000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 241
+            },
+            {
+              "publication_month": "2026-10",
+              "purchases": 296,
+              "estimated_value": "383103990.61000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 262
+            }
+          ]
+        },
+        "latency_ms": 0.84
+      }
+    },
+    {
+      "case_id": "expanded-04",
+      "category": "organizations",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Quais órgãos têm mais compras na base?",
+        "provider": "baseline",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Até 20 órgãos por quantidade de compras; somas usam apenas valores informados. Confira a tabela, o recorte e as fontes.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "organizations",
+              "purchase_id": null
+            },
+            "usage": null
+          },
+          {
+            "step": "read_only_query",
+            "action": "organizations",
+            "outcome": "answered",
+            "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "organizations",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+            "date_start": "2026-05-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 2537,
+            "covered_purchases": 100,
+            "purchases_with_contracts": 17,
+            "none_returned": 83,
+            "contracts": 21,
+            "unknown_awarded_values": 1354
+          },
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+            "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "org_cnpj": "05522917000170",
+              "org_name": "FUNDACAO MUNICIPAL DE SAUDE",
+              "purchases": 60,
+              "estimated_value": "164139334.54000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 36
+            },
+            {
+              "org_cnpj": "06553960000165",
+              "org_name": "MUNICIPIO DE SANTA CRUZ DO PIAUI",
+              "purchases": 55,
+              "estimated_value": "35112001.75000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 4
+            },
+            {
+              "org_cnpj": "06981344000105",
+              "org_name": "TRIBUNAL DE JUSTICA DO ESTADO DO PIAUI",
+              "purchases": 44,
+              "estimated_value": "53730101.63000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 17
+            },
+            {
+              "org_cnpj": "06553606000130",
+              "org_name": "MUNICIPIO DE UNIAO",
+              "purchases": 39,
+              "estimated_value": "33602409.63000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 32
+            },
+            {
+              "org_cnpj": "00394452000103",
+              "org_name": "COMANDO DO EXERCITO",
+              "purchases": 37,
+              "estimated_value": "123101638.22000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 14
+            },
+            {
+              "org_cnpj": "06553861000183",
+              "org_name": "MUNICIPIO DE PIRIPIRI",
+              "purchases": 34,
+              "estimated_value": "21729538.56000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 12
+            },
+            {
+              "org_cnpj": "06553937000170",
+              "org_name": "MUNICIPIO DE OEIRAS",
+              "purchases": 34,
+              "estimated_value": "39506537.38000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 16
+            },
+            {
+              "org_cnpj": "06554406000100",
+              "org_name": "MUNICIPIO DE BARRAS",
+              "purchases": 34,
+              "estimated_value": "58286053.41000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 22
+            },
+            {
+              "org_cnpj": "01612622000133",
+              "org_name": "MUNICIPIO DE BETANIA DO PIAUI",
+              "purchases": 33,
+              "estimated_value": "14233515.78000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 8
+            },
+            {
+              "org_cnpj": "06553481000149",
+              "org_name": "ESTADO DO PIAUI",
+              "purchases": 32,
+              "estimated_value": "268749174.47000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 15
+            },
+            {
+              "org_cnpj": "05957363000133",
+              "org_name": "TRIBUNAL REGIONAL ELEITORAL DO PIAUI",
+              "purchases": 31,
+              "estimated_value": "48964955.46000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 9
+            },
+            {
+              "org_cnpj": "06553713000169",
+              "org_name": "MUNICIPIO DE FRANCISCO SANTOS",
+              "purchases": 31,
+              "estimated_value": "13442465.95000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 17
+            },
+            {
+              "org_cnpj": "15126437000305",
+              "org_name": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
+              "purchases": 31,
+              "estimated_value": "67534312.28000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 8
+            },
+            {
+              "org_cnpj": "10806496000149",
+              "org_name": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO PIAUI",
+              "purchases": 29,
+              "estimated_value": "61232411.69000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 9
+            },
+            {
+              "org_cnpj": "06554430000131",
+              "org_name": "MUNICIPIO DE PARNAIBA",
+              "purchases": 27,
+              "estimated_value": "169066813.45000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 27
+            },
+            {
+              "org_cnpj": "41522178000180",
+              "org_name": "MUNICIPIO DE BAIXA GRANDE DO RIBEIRO",
+              "purchases": 27,
+              "estimated_value": "12714836.35000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 27
+            },
+            {
+              "org_cnpj": "01668772000169",
+              "org_name": "MUNICIPIO DE GEMINIANO - SECRETARIA DE SAUDE E ACAO COMUNITARIA",
+              "purchases": 26,
+              "estimated_value": "27239518.42000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 26
+            },
+            {
+              "org_cnpj": "06772859000103",
+              "org_name": "MUNICIPIO DE SAO RAIMUNDO NONATO",
+              "purchases": 26,
+              "estimated_value": "110651730.63000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 14
+            },
+            {
+              "org_cnpj": "41522145000130",
+              "org_name": "MUNICIPIO DE SAO BRAZ DO PIAUI",
+              "purchases": 26,
+              "estimated_value": "7016758.96000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 4
+            },
+            {
+              "org_cnpj": "06553804000102",
+              "org_name": "MUNICIPIO DE PICOS",
+              "purchases": 25,
+              "estimated_value": "56158086.93000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 7
+            }
+          ]
+        },
+        "latency_ms": 267.59
+      }
+    },
+    {
+      "case_id": "expanded-05",
+      "category": "organizations",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Mostre compras por órgão.",
+        "provider": "baseline",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Até 20 órgãos por quantidade de compras; somas usam apenas valores informados. Confira a tabela, o recorte e as fontes.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "organizations",
+              "purchase_id": null
+            },
+            "usage": null
+          },
+          {
+            "step": "read_only_query",
+            "action": "organizations",
+            "outcome": "answered",
+            "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "organizations",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+            "date_start": "2026-05-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 2537,
+            "covered_purchases": 100,
+            "purchases_with_contracts": 17,
+            "none_returned": 83,
+            "contracts": 21,
+            "unknown_awarded_values": 1354
+          },
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+            "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "org_cnpj": "05522917000170",
+              "org_name": "FUNDACAO MUNICIPAL DE SAUDE",
+              "purchases": 60,
+              "estimated_value": "164139334.54000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 36
+            },
+            {
+              "org_cnpj": "06553960000165",
+              "org_name": "MUNICIPIO DE SANTA CRUZ DO PIAUI",
+              "purchases": 55,
+              "estimated_value": "35112001.75000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 4
+            },
+            {
+              "org_cnpj": "06981344000105",
+              "org_name": "TRIBUNAL DE JUSTICA DO ESTADO DO PIAUI",
+              "purchases": 44,
+              "estimated_value": "53730101.63000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 17
+            },
+            {
+              "org_cnpj": "06553606000130",
+              "org_name": "MUNICIPIO DE UNIAO",
+              "purchases": 39,
+              "estimated_value": "33602409.63000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 32
+            },
+            {
+              "org_cnpj": "00394452000103",
+              "org_name": "COMANDO DO EXERCITO",
+              "purchases": 37,
+              "estimated_value": "123101638.22000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 14
+            },
+            {
+              "org_cnpj": "06553861000183",
+              "org_name": "MUNICIPIO DE PIRIPIRI",
+              "purchases": 34,
+              "estimated_value": "21729538.56000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 12
+            },
+            {
+              "org_cnpj": "06553937000170",
+              "org_name": "MUNICIPIO DE OEIRAS",
+              "purchases": 34,
+              "estimated_value": "39506537.38000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 16
+            },
+            {
+              "org_cnpj": "06554406000100",
+              "org_name": "MUNICIPIO DE BARRAS",
+              "purchases": 34,
+              "estimated_value": "58286053.41000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 22
+            },
+            {
+              "org_cnpj": "01612622000133",
+              "org_name": "MUNICIPIO DE BETANIA DO PIAUI",
+              "purchases": 33,
+              "estimated_value": "14233515.78000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 8
+            },
+            {
+              "org_cnpj": "06553481000149",
+              "org_name": "ESTADO DO PIAUI",
+              "purchases": 32,
+              "estimated_value": "268749174.47000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 15
+            },
+            {
+              "org_cnpj": "05957363000133",
+              "org_name": "TRIBUNAL REGIONAL ELEITORAL DO PIAUI",
+              "purchases": 31,
+              "estimated_value": "48964955.46000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 9
+            },
+            {
+              "org_cnpj": "06553713000169",
+              "org_name": "MUNICIPIO DE FRANCISCO SANTOS",
+              "purchases": 31,
+              "estimated_value": "13442465.95000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 17
+            },
+            {
+              "org_cnpj": "15126437000305",
+              "org_name": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
+              "purchases": 31,
+              "estimated_value": "67534312.28000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 8
+            },
+            {
+              "org_cnpj": "10806496000149",
+              "org_name": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO PIAUI",
+              "purchases": 29,
+              "estimated_value": "61232411.69000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 9
+            },
+            {
+              "org_cnpj": "06554430000131",
+              "org_name": "MUNICIPIO DE PARNAIBA",
+              "purchases": 27,
+              "estimated_value": "169066813.45000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 27
+            },
+            {
+              "org_cnpj": "41522178000180",
+              "org_name": "MUNICIPIO DE BAIXA GRANDE DO RIBEIRO",
+              "purchases": 27,
+              "estimated_value": "12714836.35000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 27
+            },
+            {
+              "org_cnpj": "01668772000169",
+              "org_name": "MUNICIPIO DE GEMINIANO - SECRETARIA DE SAUDE E ACAO COMUNITARIA",
+              "purchases": 26,
+              "estimated_value": "27239518.42000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 26
+            },
+            {
+              "org_cnpj": "06772859000103",
+              "org_name": "MUNICIPIO DE SAO RAIMUNDO NONATO",
+              "purchases": 26,
+              "estimated_value": "110651730.63000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 14
+            },
+            {
+              "org_cnpj": "41522145000130",
+              "org_name": "MUNICIPIO DE SAO BRAZ DO PIAUI",
+              "purchases": 26,
+              "estimated_value": "7016758.96000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 4
+            },
+            {
+              "org_cnpj": "06553804000102",
+              "org_name": "MUNICIPIO DE PICOS",
+              "purchases": 25,
+              "estimated_value": "56158086.93000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 7
+            }
+          ]
+        },
+        "latency_ms": 0.48
+      }
+    },
+    {
+      "case_id": "expanded-06",
+      "category": "organizations",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Qual a distribuição de compras entre órgãos?",
+        "provider": "baseline",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Até 20 órgãos por quantidade de compras; somas usam apenas valores informados. Confira a tabela, o recorte e as fontes.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "organizations",
+              "purchase_id": null
+            },
+            "usage": null
+          },
+          {
+            "step": "read_only_query",
+            "action": "organizations",
+            "outcome": "answered",
+            "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "organizations",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+            "date_start": "2026-05-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 2537,
+            "covered_purchases": 100,
+            "purchases_with_contracts": 17,
+            "none_returned": 83,
+            "contracts": 21,
+            "unknown_awarded_values": 1354
+          },
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+            "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "org_cnpj": "05522917000170",
+              "org_name": "FUNDACAO MUNICIPAL DE SAUDE",
+              "purchases": 60,
+              "estimated_value": "164139334.54000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 36
+            },
+            {
+              "org_cnpj": "06553960000165",
+              "org_name": "MUNICIPIO DE SANTA CRUZ DO PIAUI",
+              "purchases": 55,
+              "estimated_value": "35112001.75000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 4
+            },
+            {
+              "org_cnpj": "06981344000105",
+              "org_name": "TRIBUNAL DE JUSTICA DO ESTADO DO PIAUI",
+              "purchases": 44,
+              "estimated_value": "53730101.63000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 17
+            },
+            {
+              "org_cnpj": "06553606000130",
+              "org_name": "MUNICIPIO DE UNIAO",
+              "purchases": 39,
+              "estimated_value": "33602409.63000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 32
+            },
+            {
+              "org_cnpj": "00394452000103",
+              "org_name": "COMANDO DO EXERCITO",
+              "purchases": 37,
+              "estimated_value": "123101638.22000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 14
+            },
+            {
+              "org_cnpj": "06553861000183",
+              "org_name": "MUNICIPIO DE PIRIPIRI",
+              "purchases": 34,
+              "estimated_value": "21729538.56000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 12
+            },
+            {
+              "org_cnpj": "06553937000170",
+              "org_name": "MUNICIPIO DE OEIRAS",
+              "purchases": 34,
+              "estimated_value": "39506537.38000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 16
+            },
+            {
+              "org_cnpj": "06554406000100",
+              "org_name": "MUNICIPIO DE BARRAS",
+              "purchases": 34,
+              "estimated_value": "58286053.41000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 22
+            },
+            {
+              "org_cnpj": "01612622000133",
+              "org_name": "MUNICIPIO DE BETANIA DO PIAUI",
+              "purchases": 33,
+              "estimated_value": "14233515.78000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 8
+            },
+            {
+              "org_cnpj": "06553481000149",
+              "org_name": "ESTADO DO PIAUI",
+              "purchases": 32,
+              "estimated_value": "268749174.47000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 15
+            },
+            {
+              "org_cnpj": "05957363000133",
+              "org_name": "TRIBUNAL REGIONAL ELEITORAL DO PIAUI",
+              "purchases": 31,
+              "estimated_value": "48964955.46000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 9
+            },
+            {
+              "org_cnpj": "06553713000169",
+              "org_name": "MUNICIPIO DE FRANCISCO SANTOS",
+              "purchases": 31,
+              "estimated_value": "13442465.95000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 17
+            },
+            {
+              "org_cnpj": "15126437000305",
+              "org_name": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
+              "purchases": 31,
+              "estimated_value": "67534312.28000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 8
+            },
+            {
+              "org_cnpj": "10806496000149",
+              "org_name": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO PIAUI",
+              "purchases": 29,
+              "estimated_value": "61232411.69000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 9
+            },
+            {
+              "org_cnpj": "06554430000131",
+              "org_name": "MUNICIPIO DE PARNAIBA",
+              "purchases": 27,
+              "estimated_value": "169066813.45000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 27
+            },
+            {
+              "org_cnpj": "41522178000180",
+              "org_name": "MUNICIPIO DE BAIXA GRANDE DO RIBEIRO",
+              "purchases": 27,
+              "estimated_value": "12714836.35000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 27
+            },
+            {
+              "org_cnpj": "01668772000169",
+              "org_name": "MUNICIPIO DE GEMINIANO - SECRETARIA DE SAUDE E ACAO COMUNITARIA",
+              "purchases": 26,
+              "estimated_value": "27239518.42000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 26
+            },
+            {
+              "org_cnpj": "06772859000103",
+              "org_name": "MUNICIPIO DE SAO RAIMUNDO NONATO",
+              "purchases": 26,
+              "estimated_value": "110651730.63000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 14
+            },
+            {
+              "org_cnpj": "41522145000130",
+              "org_name": "MUNICIPIO DE SAO BRAZ DO PIAUI",
+              "purchases": 26,
+              "estimated_value": "7016758.96000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 4
+            },
+            {
+              "org_cnpj": "06553804000102",
+              "org_name": "MUNICIPIO DE PICOS",
+              "purchases": 25,
+              "estimated_value": "56158086.93000000",
+              "unknown_estimates": 0,
+              "unknown_awarded_values": 7
+            }
+          ]
+        },
+        "latency_ms": 0.59
+      }
+    },
+    {
+      "case_id": "expanded-07",
+      "category": "quality",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Como está a qualidade e o preenchimento dos dados?",
+        "provider": "baseline",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Preenchimento: valores ausentes são distintos de zero. Não é classificação de irregularidades. Confira a tabela, o recorte e as fontes.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "quality",
+              "purchase_id": null
+            },
+            "usage": null
+          },
+          {
+            "step": "read_only_query",
+            "action": "quality",
+            "outcome": "answered",
+            "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "quality",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+            "date_start": "2026-05-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 2537,
+            "covered_purchases": 100,
+            "purchases_with_contracts": 17,
+            "none_returned": 83,
+            "contracts": 21,
+            "unknown_awarded_values": 1354
+          },
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+            "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 2537,
+              "unknown_estimates": 0,
+              "zero_estimates": 286,
+              "unknown_awarded_values": 1354,
+              "zero_awarded_values": 22,
+              "unknown_municipalities": 0,
+              "unknown_org_names": 0
+            }
+          ]
+        },
+        "latency_ms": 305.88
+      }
+    },
+    {
+      "case_id": "expanded-08",
+      "category": "quality",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Quais lacunas existem na base?",
+        "provider": "baseline",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Preenchimento: valores ausentes são distintos de zero. Não é classificação de irregularidades. Confira a tabela, o recorte e as fontes.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "quality",
+              "purchase_id": null
+            },
+            "usage": null
+          },
+          {
+            "step": "read_only_query",
+            "action": "quality",
+            "outcome": "answered",
+            "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "quality",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+            "date_start": "2026-05-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 2537,
+            "covered_purchases": 100,
+            "purchases_with_contracts": 17,
+            "none_returned": 83,
+            "contracts": 21,
+            "unknown_awarded_values": 1354
+          },
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+            "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 2537,
+              "unknown_estimates": 0,
+              "zero_estimates": 286,
+              "unknown_awarded_values": 1354,
+              "zero_awarded_values": 22,
+              "unknown_municipalities": 0,
+              "unknown_org_names": 0
+            }
+          ]
+        },
+        "latency_ms": 0.5
+      }
+    },
+    {
+      "case_id": "expanded-09",
+      "category": "quality",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Quero conferir a completude dos dados.",
+        "provider": "baseline",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Preenchimento: valores ausentes são distintos de zero. Não é classificação de irregularidades. Confira a tabela, o recorte e as fontes.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "quality",
+              "purchase_id": null
+            },
+            "usage": null
+          },
+          {
+            "step": "read_only_query",
+            "action": "quality",
+            "outcome": "answered",
+            "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "quality",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+            "date_start": "2026-05-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 2537,
+            "covered_purchases": 100,
+            "purchases_with_contracts": 17,
+            "none_returned": 83,
+            "contracts": 21,
+            "unknown_awarded_values": 1354
+          },
+          "coverage_report_sha256": "b3e9e1785144455516ce9241add8d3a8a85708451cd380c2b0adf16e7226635a",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-5237eeaa-49fb-45e8-9d29-407aa6ddb34f/coverage.json",
+            "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 2537,
+              "unknown_estimates": 0,
+              "zero_estimates": 286,
+              "unknown_awarded_values": 1354,
+              "zero_awarded_values": 22,
+              "unknown_municipalities": 0,
+              "unknown_org_names": 0
+            }
+          ]
+        },
+        "latency_ms": 0.56
+      }
+    },
+    {
+      "case_id": "expanded-10",
+      "category": "refuse",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Compras por mês e município.",
+        "provider": "baseline",
+        "status": "refused",
+        "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "refuse",
+              "purchase_id": null
+            },
+            "usage": null
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 0,
+        "latency_ms": 0.3
+      }
+    },
+    {
+      "case_id": "expanded-11",
+      "category": "refuse",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Compras por mês e órgão.",
+        "provider": "baseline",
+        "status": "refused",
+        "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "refuse",
+              "purchase_id": null
+            },
+            "usage": null
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 0,
+        "latency_ms": 0.32
+      }
+    },
+    {
+      "case_id": "expanded-12",
+      "category": "refuse",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Mostre pagamentos por órgão.",
+        "provider": "baseline",
+        "status": "refused",
+        "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+        "trace": [
+          {
+            "step": "policy",
+            "outcome": "refused",
+            "reason": "unsupported_or_unsafe_request"
+          }
+        ],
+        "llm_attempts": 0,
+        "tool_calls": 0,
+        "latency_ms": 0.04
+      }
+    }
+  ]
+}

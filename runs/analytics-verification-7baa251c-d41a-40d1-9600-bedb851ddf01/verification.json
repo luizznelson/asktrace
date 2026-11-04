@@ -1,0 +1,9 @@
+{
+  "started_at": "2026-11-04T21:13:56.530053+00:00",
+  "baseline_evaluation": "runs/agent-eval-cb312a08-6b4d-4353-ae57-274123b3de97/evaluation.json",
+  "baseline_passed": 12,
+  "live_requested": false,
+  "live_cases": [],
+  "note": "Author-curated cases. AI smoke is not a full-model quality benchmark.",
+  "finished_at": "2026-11-04T21:13:56.530268+00:00"
+}

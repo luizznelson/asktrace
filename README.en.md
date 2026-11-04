@@ -8,6 +8,10 @@ An applied AI engineering portfolio project developed by Luiz. The first deliver
 
 [Português](README.md) · [Case study](docs/case-study.md) · [Engineering decisions](docs/architecture.md) · [Documentation](docs/README.md)
 
+## Available analyses
+
+Overview, municipalities, publication-month trends, top purchasing organizations, data completeness and tracing by PNCP purchase ID. Export tables as CSV with scope and source hash, alongside full JSON evidence. [Queries, interpretation, verification and limitations](docs/analytics.md) (Portuguese).
+
 ## In one minute
 
 | | |
