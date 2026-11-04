@@ -16,7 +16,7 @@ An applied AI engineering portfolio project developed by Luiz. The first deliver
 | **What I built** | A paginated PNCP collector, exact decimal normalization, transactional PostgreSQL loading and reports linking records to original pages. |
 | **Verified result** | 1,081 auctions published August–October 2026, across 23 pages, checked in PostgreSQL. Missing awarded amounts in 749 records remain NULL. Contract acquisition covered all 1,080 eligible purchases: 125 contracts, with one purchase excluded due to an invalid year. [Coverage](docs/contract-coverage.md). |
 | **Skills demonstrated** | Python 3.14, public API integration, data quality, SQL, PostgreSQL with Docker, provenance, failure testing and configured CI. |
-| **Current stage** | Purchases, linked contracts and read-only business queries verified locally. Evaluated bounded routing with explicit provider contingency; no interface or hosted demo yet. |
+| **Current stage** | Purchases, linked contracts and read-only business queries verified locally. Evaluated bounded routing with explicit provider contingency; a local PT-BR/EN interface, with no hosted demo yet. |
 | **Start here** | [Method and results](docs/ingestion.md) · [Database verification](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Quality checks](docs/quality.md) |
 
 ## 1. The problem: a page is not a dataset
@@ -115,9 +115,17 @@ tests; OpenRouter passed two and returned 429 on the third. Backup models do not
 model's score. All 79 local software tests passed, including PostgreSQL integration.
 [Configuration and limits](docs/provider-contingency.md) · [Evaluation method](docs/agent-evaluation.md) (Portuguese).
 
+## Local interface
+
+The PT-BR/EN interface connects the project story, questions, answers, coverage, sources and trace.
+Run `python -m asktrace.web` in the project environment and open `http://127.0.0.1:8010`.
+Choose local rules or AI contingency; business questions are currently supported in Portuguese.
+All six real HTTP flows passed, alongside 86 local software tests. Browser visual inspection remains
+pending because browser preview is disabled in this environment. [Usage and limitations](docs/interface.md) (Portuguese).
+
 ## 7. Next steps and attribution
 
-Next, build the interface with scope, answer, sources and trace, and evaluate external questions separately. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
+Next, review the interface visually on desktop/mobile and prepare hosting with access controls. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
 
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 

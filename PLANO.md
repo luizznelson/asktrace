@@ -71,3 +71,7 @@ Consolidação parcial por segmentos: 28 casos aprovados, um erro de provedor e 
 ## Contingência implementada em 04/11/2026
 
 Pool revisado: Qwen/GPT-OSS na Groq, Xing gratuito no OpenRouter, Gemini após quota; opção Ollama desativada. Limites, espera, rastro e consultas somente leitura mantidos. Corpus de contingência 60/60 em trechos compatíveis e oito adicionais aprovados; GPT-OSS 3/3 em teste inicial e OpenRouter 2/3 com 429. Software: 79 testes locais. Próximo passo: interface com evidências e avaliação de perguntas externas. [Detalhes](docs/provider-contingency.md).
+
+## Interface local implementada
+
+Fluxo PT-BR/EN: contexto → pergunta → resposta → cobertura/fontes → rastro. Seis exemplos HTTP reais e 86 testes de software aprovados. Revisão visual de navegador pendente por prévia desativada. Próximo passo: verificar desktop/celular, ajustar o necessário e preparar hospedagem. [Comandos](docs/interface.md).

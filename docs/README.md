@@ -36,3 +36,5 @@ A cobertura mais recente de contratos está na [ampliação para 100 compras](co
 [Roteador limitado e avaliação de perguntas](agent-evaluation.md): baseline medido e estado da integração Gemini.
 
 [Contingência de provedores](provider-contingency.md): configuração em arquivo, modelos ativos, limites e evidências.
+
+[Interface local](interface.md): percurso, comandos, proteções e verificação HTTP.

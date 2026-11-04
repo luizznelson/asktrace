@@ -16,7 +16,7 @@ Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A pri
 | **O que construí** | Coletor paginado do PNCP, normalização com precisão decimal, carga transacional no PostgreSQL e relatórios que ligam cada registro à página original. |
 | **Resultado verificado** | 1.081 pregões publicados de agosto a outubro de 2026, em 23 páginas, conferidos no banco. São 749 registros sem valor homologado informado, mantidos como NULL. Consulta de contratos concluída para 1.080 compras elegíveis: 125 contratos; uma compra excluída por ano inválido. [Cobertura](docs/contract-coverage.md). |
 | **Habilidades demonstradas** | Python 3.14, integração com API pública, qualidade de dados, SQL, PostgreSQL com Docker, rastreabilidade, testes de falhas e CI configurada. |
-| **Estágio atual** | Compras, contratos vinculados e consultas de negócio somente leitura verificados localmente. Roteador com contingência e avaliação local; sem interface ou demonstração online. |
+| **Estágio atual** | Compras, contratos vinculados e consultas de negócio somente leitura verificados localmente. Roteador com contingência e avaliação local; interface local PT-BR/EN, sem demonstração online. |
 | **Onde começar** | [Resultado e método](docs/ingestion.md) · [Evidência no banco](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Como verificar](docs/quality.md) |
 
 ## 1. O problema: contar registros não basta
@@ -114,9 +114,17 @@ testes reais; o OpenRouter passou em dois e encontrou 429 no terceiro. Os modelo
 herdam a nota do principal. O código atual passou em 79 testes locais, incluindo PostgreSQL.
 [Modelos, configuração e limites](docs/provider-contingency.md) · [Método de avaliação](docs/agent-evaluation.md).
 
+## Interface local
+
+Apresentação, perguntas, resposta, cobertura, fontes e rastro estão conectados em uma interface PT-BR/EN.
+Execute `python -m asktrace.web` no ambiente do projeto e abra `http://127.0.0.1:8010`.
+Comece por regras locais ou selecione IA com contingência. As perguntas continuam suportadas em português.
+Seis fluxos HTTP reais passaram; a suíte tem 86 testes locais aprovados. A revisão visual de navegador
+está pendente porque a prévia está desativada no ambiente. [Uso, evidências e limites](docs/interface.md).
+
 ## 7. O que vem depois
 
-O próximo passo é construir a interface com recorte, resposta, fonte e rastro, e medir perguntas externas separadamente. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
+O próximo passo é revisar a interface visualmente em desktop/celular e preparar hospedagem com limites de acesso. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
 
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 

@@ -82,3 +82,7 @@ Suíte de software: **62 testes locais passaram**, incluindo PostgreSQL. O novo 
 ## Contingência e preservação de evidências
 
 O código atual passou em **79 testes locais**, incluindo PostgreSQL. A avaliação de contingência aprovou 60 casos curados em dois trechos compatíveis e oito adicionais; são métricas distintas dos testes. Troca controlada: falha inicial simulada e uma chamada real de reserva. Os relatórios históricos foram mantidos idênticos ao Git, com cópias dos bytes de execução para verificar hashes no Windows. [Método e limites](provider-contingency.md).
+
+## Interface local
+
+Suíte atual: **86 testes locais passaram**, incluindo PostgreSQL. Sete testes novos cobrem fronteiras HTTP, sessão e limites. Seis fluxos HTTP reais passaram; sintaxe JS verificada. Inspeção visual e interação no navegador pendentes: prévia local desativada no ambiente. [Detalhes](interface.md).
