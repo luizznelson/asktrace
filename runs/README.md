@@ -106,3 +106,7 @@ O lote `agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9` aprovou os casos 7–14
 [availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json](availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json): esperas locais observadas, nenhuma chamada externa e consulta real por municípios com 2.537 compras no recorte. Registros antigos não permitem inferir o tipo de quota de Groq/OpenRouter. [Interface](../docs/interface.md).
 
 [Revisão da aplicação](application-review-dbcf1edc-1550-4274-bfb9-fcc210fa104f/verification.json): 102 testes, verificações HTTP por regras locais nos dois recortes, permissões efetivas do banco e busca por credenciais configuradas. Zero chamadas externas de IA; sem inspeção visual.
+
+[application-review-348a9663-dda0-42ca-bd0b-bf32bb2d84cb](application-review-348a9663-dda0-42ca-bd0b-bf32bb2d84cb/verification.json): validação de formatação PT/EN,
+contratos em tabela, preservação do JSON, 102 testes Python e consultas locais nos dois
+recortes. Inclui testes Node de valores grandes, centavos e datas; sem chamadas de IA.

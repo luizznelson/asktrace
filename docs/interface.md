@@ -163,3 +163,30 @@ Esperas observadas continuam preservadas. Os detalhes da correção, verificaç�
 limitações estão na [revisão da aplicação](application-review.md). A
 [verificação anterior](../runs/availability-diagnosis-6d8f3e82-c79c-4319-9687-6a1b52674168/verification.json)
 registra o diagnóstico de quotas daquela execução; sua apresentação inicial foi substituída.
+
+## Valores que podem ser lidos sem interpretar o formato do banco
+
+A apresentação usa o idioma selecionado: `1571718049.25000000` vira
+**R$ 1.571.718.049,25** em português e **R$1,571,718,049.25** em inglês.
+Quantidades recebem separadores de milhar, datas civis são localizadas sem mudança de
+fuso e identificadores como IBGE/PNCP continuam intactos. Ausência aparece como
+“Não informado”; zero monetário aparece como “R$ 0,00”. Os títulos distinguem compras
+sem estimativa de compras sem valor homologado, e as somas consideram somente valores
+informados, sem converter ausências em zero.
+
+`web/formatters.js` concentra a apresentação. Moedas partem da string decimal original,
+com cálculo de centavos em BigInt e arredondamento de apresentação para duas casas
+(metade para longe de zero). Não há conversão prévia para ponto flutuante. O backend,
+histórico e JSON baixado mantêm os valores originais, inclusive casas adicionais.
+
+Valores numéricos ficam alinhados à direita com algarismos de largura uniforme; o
+cabeçalho permanece visível na rolagem. A região da tabela recebe foco por teclado.
+Contratos vinculados são apresentados em tabela com ID, valor inicial, valor global e
+índice na fonte, em vez de um bloco JSON dentro da célula. Fontes e hashes continuam
+disponíveis no registro técnico.
+
+Os testes de formatação cobrem PT/EN, negativos, zero, nulos, arredondamento com
+transporte de centavos, quantias acima do limite de inteiros seguros de Number, anos
+bissextos e preservação de identificadores. O contrato DOM confere células renderizadas,
+troca de idioma, contratos e ausência de mutação das evidências.
+[Verificação completa desta etapa](../runs/application-review-348a9663-dda0-42ca-bd0b-bf32bb2d84cb/verification.json). Não houve inspeção visual em navegador.

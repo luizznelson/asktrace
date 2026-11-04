@@ -106,3 +106,13 @@ Passaram **89 testes Python locais**, incluindo PostgreSQL. Três novos testes c
 ## Revisão da aplicação e regressões
 
 102 testes Python, contrato DOM, Ruff e verificações HTTP/banco passaram. O aviso de IA deixou de aparecer na entrada sem pergunta. Validação de requisições, histórico e quotas recebeu cenários de falha; redirecionamentos com credenciais são bloqueados. [Correções, reprodução e limites](application-review.md).
+
+## Apresentação de números e contratos
+
+102 testes Python passaram, incluindo o novo arquivo estático servido pela allowlist HTTP.
+Os contratos Node de formatação e interface conferem moeda com precisão decimal,
+quantidades, datas sem deslocamento de fuso, campos ausentes e contratos em tabela.
+Valores acima de 2^53 e arredondamento nos limites de centavos têm casos explícitos.
+As evidências originais não são alteradas para produzir os textos da tela.
+[Registro final](../runs/application-review-348a9663-dda0-42ca-bd0b-bf32bb2d84cb/verification.json); consultas reais por regras locais nos dois recortes,
+sem chamadas externas de IA e sem inspeção visual.
