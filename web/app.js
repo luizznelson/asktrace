@@ -6,7 +6,7 @@ const text = {
         local: "PRÉVIA LOCAL",
         navMethod: "Como funciona",
         navAsk: "Consultar",
-        eyebrow: "ENGENHARIA DE IA · DADOS PÚBLICOS · POR LUIZ",
+        eyebrow: "COMPRAS PÚBLICAS · DADOS DO PNCP",
         title: "Uma pergunta.\nUm caminho até a fonte.",
         lede: "Investigue compras públicas sem perder de vista de onde vieram os números — e o que eles permitem concluir.",
         start: "Explorar o recorte ↗",
@@ -54,10 +54,6 @@ const text = {
         sources: "Fontes e cobertura",
         trace: "Rastro da consulta",
         technical: "Registro técnico completo",
-        endLabel: "03 / O QUE ESTE PROJETO DEMONSTRA",
-        endTitle: "Da integração à resposta verificável.",
-        endText:
-            "Coleta paginada, precisão decimal, carga transacional, acesso somente leitura, avaliação de perguntas e contingência explícita. A interface conecta essas decisões ao resultado que você pode conferir.",
         repo: "Explorar código, método e evidências no GitHub ↗",
         footer: "Projeto independente · Fonte: PNCP · Execução local",
         placeholder: "Pergunte sobre as compras deste recorte…",
@@ -79,9 +75,9 @@ const text = {
             "A consulta não pôde ser concluída. O rastro informa o ponto de falha sem expor credenciais.",
         coverageLabels: [
             "Compras na base",
-            "Consultas confirmadas",
+            "Compras com contratos pesquisados",
             "Contratos vinculados",
-            "Sem publicação retornada",
+            "Pesquisadas sem publicação retornada",
         ],
         scopeLabel: "Recorte",
         reportLabel: "Relatório de cobertura",
@@ -114,8 +110,8 @@ const text = {
         newSession: "Nova exploração",
         sessionLabel: "NESTA SESSÃO",
         historyEmpty: "Suas perguntas aparecem aqui.",
-        projectCode: "Código e decisões de engenharia",
-        portfolio: "Portfólio · Engenharia de IA",
+        projectCode: "Documentação e código",
+        runtimeLabel: "Consulta de dados públicos",
         workspaceName: "Área de investigação",
         workspaceData: "Compras públicas",
         scopeShort: "Piauí · Pregões eletrônicos",
@@ -123,14 +119,14 @@ const text = {
         scopeMore: "O que há nesta base? ⓘ",
         scopeTitle: "Dados públicos com um recorte explícito.",
         scopeDetail:
-            "Publicação de ago–out/2026, modalidade 6, unidades do Piauí. Uma compra tem ano inválido na fonte e foi excluída apenas da consulta de contratos.",
+            "Confira o período, a quantidade de compras e o andamento da busca de contratos na base selecionada.",
         welcomeLabel: "DADOS PÚBLICOS. PERGUNTAS MELHORES.",
         assistantTitle: "O que vamos descobrir\nnos dados de compras?",
         assistantLede:
             "O AskTrace transforma registros do Portal Nacional de Contratações Públicas (PNCP) em respostas que você pode conferir. Descubra o volume de compras, compare municípios ou encontre os contratos ligados a uma compra.",
         statPurchases: "compras na base",
         statContracts: "contratos vinculados",
-        statCoverage: "compras com consulta confirmada",
+        statCoverage: "compras com contratos pesquisados",
         exploreLabel: "COMECE POR UMA PERGUNTA",
         suggestionHint: "Selecione, personalize e envie ↘",
         welcomeLimit:
@@ -144,19 +140,19 @@ const text = {
             "Interface em português e inglês. As perguntas são suportadas em português.",
         independentNote:
             "O histórico sobrevive à atualização da página nesta aba. Cada pergunta é consultada de forma independente; escreva o assunto e o identificador quando necessário.",
-        portfolioStory: "A engenharia por trás da resposta",
-        portfolioStorySub: "Para quem está conhecendo meu portfólio",
-        story1: "A fonte antes da resposta",
+        dataStory: "Como interpretar os dados",
+        dataStorySub: "Origem, cobertura e limites",
+        story1: "O que é uma compra nesta base?",
         story1text:
-            "Coleta paginada e hashes preservam a origem. Valores ausentes continuam desconhecidos, sem virar zero.",
-        story2: "IA com limites claros",
+            "É um registro publicado no PNCP, dentro do período e da modalidade selecionados. A base não representa todas as compras do Piauí.",
+        story2: "Por que há mais compras que contratos?",
         story2text:
-            "O modelo seleciona uma consulta permitida. Credencial somente leitura, contingência e rastro mantêm o fluxo verificável.",
-        story3: "Resultados que você confere",
+            "A busca de contratos é uma etapa separada da coleta de compras. Algumas compras ainda não foram pesquisadas; outras não retornaram publicação. Uma compra também pode ter vários contratos.",
+        story3: "O que os valores permitem concluir?",
         story3text:
-            "Recorte, cobertura e evidências acompanham cada resposta. As avaliações e suas limitações estão no repositório.",
-        storyRepo: "Ver código e evidências no GitHub ↗",
-        footerShort: "Fonte: PNCP · Projeto independente",
+            "Valores estimados e homologados descrevem etapas diferentes da compra. Eles não comprovam pagamento. Campos não informados continuam desconhecidos; as fontes acompanham a resposta.",
+        storyRepo: "Consultar documentação e evidências ↗",
+        footerShort: "Fonte: PNCP · Sem vínculo oficial",
         footerLocal: "Ambiente local · Sem dados em tempo real",
         cardTitles: [
             "Entender o panorama",
@@ -213,7 +209,7 @@ const text = {
         local: "LOCAL PREVIEW",
         navMethod: "How it works",
         navAsk: "Ask a question",
-        eyebrow: "AI ENGINEERING · PUBLIC DATA · BY LUIZ",
+        eyebrow: "PUBLIC PROCUREMENT · PNCP DATA",
         title: "One question.\nA path to the source.",
         lede: "Explore public procurement while keeping the origin of every number — and the limits of every conclusion — in view.",
         start: "Explore the dataset ↗",
@@ -261,10 +257,6 @@ const text = {
         sources: "Sources and coverage",
         trace: "Query trace",
         technical: "Complete technical record",
-        endLabel: "03 / WHAT THIS PROJECT DEMONSTRATES",
-        endTitle: "From integration to a verifiable answer.",
-        endText:
-            "Paginated ingestion, decimal precision, transactional loading, read-only access, question evaluation and explicit contingency. This interface connects engineering decisions to results you can inspect.",
         repo: "Explore code, methodology and evidence on GitHub ↗",
         footer: "Independent project · Source: PNCP · Local execution",
         placeholder: "Ask about purchases in this dataset (Portuguese)…",
@@ -285,9 +277,9 @@ const text = {
             "The query could not finish. The trace identifies the failure point without exposing credentials.",
         coverageLabels: [
             "Dataset purchases",
-            "Confirmed queries",
+            "Purchases with contracts searched",
             "Linked contracts",
-            "No publication returned",
+            "Searched with no publication returned",
         ],
         scopeLabel: "Scope",
         reportLabel: "Coverage report",
@@ -320,8 +312,8 @@ const text = {
         newSession: "New exploration",
         sessionLabel: "THIS SESSION",
         historyEmpty: "Your questions will appear here.",
-        projectCode: "Code and engineering decisions",
-        portfolio: "Portfolio · AI Engineering",
+        projectCode: "Documentation and source code",
+        runtimeLabel: "Public data queries",
         workspaceName: "Investigation workspace",
         workspaceData: "Public procurement",
         scopeShort: "Piauí · Electronic auctions",
@@ -329,14 +321,14 @@ const text = {
         scopeMore: "What is in this dataset? ⓘ",
         scopeTitle: "Public data with an explicit scope.",
         scopeDetail:
-            "Published Aug–Oct 2026, method 6, units in Piauí. One purchase has an invalid source year and was excluded only from contract queries.",
+            "Check the period, purchase count and contract search progress for the selected dataset.",
         welcomeLabel: "PUBLIC DATA. BETTER QUESTIONS.",
         assistantTitle: "What will we discover\nin procurement data?",
         assistantLede:
             "AskTrace turns records from Brazil’s National Public Procurement Portal (PNCP) into answers you can verify. Explore purchase volumes, compare municipalities or find contracts linked to a purchase.",
         statPurchases: "dataset purchases",
         statContracts: "linked contracts",
-        statCoverage: "purchases with confirmed queries",
+        statCoverage: "purchases with contracts searched",
         exploreLabel: "START WITH A QUESTION",
         suggestionHint: "Select, customize and send ↘",
         welcomeLimit:
@@ -350,19 +342,19 @@ const text = {
             "Portuguese and English interface. Business questions are supported in Portuguese.",
         independentNote:
             "History survives a reload in this tab. Each question is queried independently; include the subject and purchase identifier when needed.",
-        portfolioStory: "The engineering behind the answer",
-        portfolioStorySub: "For visitors exploring my portfolio",
-        story1: "The source before the answer",
+        dataStory: "How to interpret the data",
+        dataStorySub: "Source, coverage and limitations",
+        story1: "What is a purchase in this dataset?",
         story1text:
-            "Paginated ingestion and hashes preserve provenance. Missing amounts remain unknown instead of becoming zero.",
-        story2: "AI with clear boundaries",
+            "It is a PNCP publication within the selected period and procurement method. This dataset does not represent every purchase in Piauí.",
+        story2: "Why are there more purchases than contracts?",
         story2text:
-            "The model selects an allowed query. Read-only access, contingency and traces keep the flow verifiable.",
-        story3: "Results you can check",
+            "Searching for contracts is a separate collection step. Some purchases have not been searched yet; others returned no publication. One purchase can also have multiple contracts.",
+        story3: "What do the amounts tell you?",
         story3text:
-            "Scope, coverage and evidence accompany every answer. Evaluations and their limitations live in the repository.",
-        storyRepo: "View code and evidence on GitHub ↗",
-        footerShort: "Source: PNCP · Independent project",
+            "Estimated and awarded amounts describe different procurement stages. They do not establish payment. Unreported fields remain unknown, and each answer includes its sources.",
+        storyRepo: "Read documentation and evidence ↗",
+        footerShort: "Source: PNCP · No official affiliation",
         footerLocal: "Local environment · No real-time data",
         cardTitles: [
             "Understand the overview",
@@ -917,14 +909,143 @@ function initializeDatasets(session) {
     }
     applyDataset();
 }
+function coverageBreakdown(data) {
+    const c = data.evidence.coverage;
+    const selected = datasetCatalog.find((item) => item.id === selectedDataset);
+    const matches =
+        selected &&
+        selected.coverage === data.evidence.sources.coverage_report &&
+        selected.purchases === c.purchases &&
+        selected.covered === c.covered_purchases &&
+        selected.start === data.evidence.scope.date_start &&
+        selected.end === data.evidence.scope.date_end;
+    const remaining = c.purchases - c.covered_purchases;
+    const excluded =
+        matches &&
+        Number.isSafeInteger(selected.excluded) &&
+        selected.excluded >= 0 &&
+        selected.excluded <= remaining
+            ? selected.excluded
+            : null;
+    return {
+        remaining,
+        excluded,
+        pending: excluded === null ? null : remaining - excluded,
+    };
+}
 function renderDataset(data) {
     renderAssistant(data);
-    if (data.evidence) {
-        const c = data.evidence.coverage;
-        $("insight").textContent =
-            lang === "pt"
-                ? `${displayFormat.integer(c.covered_purchases, lang)} de ${displayFormat.integer(c.purchases, lang)} compras têm consulta de contratos confirmada; ${displayFormat.integer(c.purchases - c.covered_purchases, lang)} não estão nessa cobertura. Compras não consultadas e localizadores inválidos são distintos de uma resposta sem publicação. ${displayFormat.integer(c.unknown_awarded_values, lang)} valores homologados continuam desconhecidos.`
-                : `${displayFormat.integer(c.covered_purchases, lang)} of ${displayFormat.integer(c.purchases, lang)} purchases have confirmed contract queries; ${displayFormat.integer(c.purchases - c.covered_purchases, lang)} are outside that coverage. Unqueried purchases and invalid locators differ from a query returning no publication. ${displayFormat.integer(c.unknown_awarded_values, lang)} awarded amounts remain unknown.`;
+    if (!data.evidence) return;
+    const c = data.evidence.coverage,
+        b = coverageBreakdown(data);
+    const n = (value) => displayFormat.integer(value, lang);
+    const pt = lang === "pt";
+    const insight = $("insight");
+    insight.replaceChildren();
+    insight.append(
+        node(
+            "strong",
+            pt
+                ? "O que já foi pesquisado nesta base"
+                : "What has already been searched in this dataset",
+        ),
+    );
+    const list = node("ul");
+    list.append(
+        node(
+            "li",
+            pt
+                ? `Já pesquisamos contratos de ${n(c.covered_purchases)} das ${n(c.purchases)} compras. Essa é uma etapa da coleta de dados, não a quantidade de perguntas feitas aqui.`
+                : `Contracts have been searched for ${n(c.covered_purchases)} of ${n(c.purchases)} purchases. This is a data collection step, not the number of questions asked here.`,
+        ),
+    );
+    if (b.pending !== null) {
+        list.append(
+            node(
+                "li",
+                b.pending === 0
+                    ? pt
+                        ? "Todas as compras aptas já passaram pela busca de contratos."
+                        : "All eligible purchases have been searched for contracts."
+                    : pt
+                      ? `Ainda falta pesquisar contratos de ${n(b.pending)} compras.`
+                      : `Contract searches are still pending for ${n(b.pending)} purchases.`,
+            ),
+        );
+        if (b.excluded > 0)
+            list.append(
+                node(
+                    "li",
+                    pt
+                        ? b.excluded === 1
+                            ? "Uma compra não pôde ser pesquisada porque o ano informado na fonte é inválido."
+                            : `${n(b.excluded)} compras não puderam ser pesquisadas porque o ano informado na fonte é inválido.`
+                        : b.excluded === 1
+                          ? "One purchase could not be searched because its source year is invalid."
+                          : `${n(b.excluded)} purchases could not be searched because their source year is invalid.`,
+                ),
+            );
+    } else
+        list.append(
+            node(
+                "li",
+                pt
+                    ? `${n(b.remaining)} compras ainda não têm busca de contratos concluída. Esta resposta não informa quantas estão pendentes ou foram excluídas.`
+                    : `${n(b.remaining)} purchases have no completed contract search. This response does not distinguish pending searches from exclusions.`,
+            ),
+        );
+    list.append(
+        node(
+            "li",
+            pt
+                ? `Em ${n(c.none_returned)} compras pesquisadas, o PNCP não retornou publicação de contrato. Isso não comprova que não exista contrato.`
+                : `For ${n(c.none_returned)} searched purchases, PNCP returned no contract publication. This does not establish that no contract exists.`,
+        ),
+    );
+    list.append(
+        node(
+            "li",
+            pt
+                ? `A fonte não informou o valor homologado de ${n(c.unknown_awarded_values)} compras. Ausência de valor não significa zero nem comprova pagamento.`
+                : `The source did not report awarded amounts for ${n(c.unknown_awarded_values)} purchases. Missing amounts do not mean zero or establish payment.`,
+        ),
+    );
+    insight.append(list);
+    if (b.pending !== null) {
+        const rows = [
+            [c.purchases, pt ? "Compras na base" : "Dataset purchases"],
+            [
+                c.covered_purchases,
+                pt
+                    ? "Compras com contratos pesquisados"
+                    : "Purchases with contracts searched",
+            ],
+            [
+                b.pending,
+                pt
+                    ? "Compras ainda não pesquisadas"
+                    : "Purchases not yet searched",
+            ],
+            [c.contracts, pt ? "Contratos encontrados" : "Contracts found"],
+            [
+                c.none_returned,
+                pt
+                    ? "Pesquisadas sem publicação retornada"
+                    : "Searched with no publication returned",
+            ],
+            [
+                b.excluded,
+                pt
+                    ? "Compras excluídas da busca"
+                    : "Purchases excluded from searches",
+            ],
+        ];
+        $("coverage").replaceChildren();
+        rows.forEach(([count, label]) => {
+            const card = node("div");
+            card.append(node("strong", n(count)), node("span", label));
+            $("coverage").append(card);
+        });
     }
 }
 $("dataset").addEventListener("change", () => {

@@ -369,6 +369,71 @@ vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
     );
     assert.equal(contractRows[0].children[1].textContent, "R$1,234.50");
     assert.equal(contractRows[0].children[2].textContent, "Not reported");
+    const currentCoverage = structuredClone(result);
+    Object.assign(currentCoverage.evidence.coverage, {
+        purchases: 2537,
+        covered_purchases: 100,
+        contracts: 21,
+        none_returned: 83,
+        unknown_awarded_values: 1354,
+    });
+    currentCoverage.evidence.scope.date_start = "2026-05-01";
+    currentCoverage.evidence.sources.coverage_report = "runs/expanded.json";
+    context.currentCoverage = currentCoverage;
+    vm.runInContext(
+        'datasetCatalog.push({id:"expanded",coverage:"runs/expanded.json",purchases:2537,covered:100,excluded:1,start:"2026-05-01",end:"2026-10-31"});selectedDataset="expanded";lang="pt";latest=currentCoverage;render(latest)',
+        context,
+    );
+    assert.equal(get("coverage").children.length, 6);
+    assert.equal(get("coverage").children[2].children[0].textContent, "2.436");
+    assert.equal(get("coverage").children[5].children[0].textContent, "1");
+    let explanation = get("insight")
+        .children[1].children.map((item) => item.textContent)
+        .join(" ");
+    assert.match(explanation, /2\.436 compras/);
+    assert.match(explanation, /ano.*inválido/);
+    assert.match(explanation, /não a quantidade de perguntas/);
+    get("language").click();
+    explanation = get("insight")
+        .children[1].children.map((item) => item.textContent)
+        .join(" ");
+    assert.match(explanation, /2,436 purchases/);
+    assert.match(explanation, /not the number of questions/);
+    vm.runInContext(
+        'selectedDataset="original";latest=' +
+            JSON.stringify(result) +
+            ";render(latest)",
+        context,
+    );
+    assert.equal(get("coverage").children[2].children[0].textContent, "0");
+    explanation = get("insight")
+        .children[1].children.map((item) => item.textContent)
+        .join(" ");
+    assert.match(explanation, /All eligible purchases/);
+    currentCoverage.evidence.scope.date_start = "2020-01-01";
+    vm.runInContext(
+        'selectedDataset="expanded";render(currentCoverage)',
+        context,
+    );
+    assert.equal(
+        get("coverage").children.length,
+        4,
+        "Different snapshots must not borrow catalog exclusions",
+    );
+    explanation = get("insight")
+        .children[1].children.map((item) => item.textContent)
+        .join(" ");
+    assert.match(
+        explanation,
+        /does not distinguish pending searches from exclusions/,
+    );
+    for (const filename of ["web/index.html", "web/app.js", "web/app.css"]) {
+        assert.doesNotMatch(
+            fs.readFileSync(filename, "utf8"),
+            /portf[oó]lio|por luiz|by luiz/i,
+            "Application must use product-facing language",
+        );
+    }
     console.log(
         "Assistant session persistence and DOM contract passed: discovery, submit, response, suggestions, history, language, reset, session.",
     );
