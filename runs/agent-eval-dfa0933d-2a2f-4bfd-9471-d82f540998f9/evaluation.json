@@ -1,0 +1,759 @@
+{
+  "started_scope": "PNCP PI modality 6, purchase publication 2026-08 through 2026-10; fixed 1081-purchase snapshot",
+  "provider": "gemini",
+  "request_interval_seconds": 6.0,
+  "code_sha256": {
+    "agent.py": "bc11ddc2661f549e4813ee83ae1fc599c5dbcf04bc8043f3f6627332260943b6",
+    "gemini.py": "26d0693d7d02a40be549cd222b30ccc2f349a771e41275054bff60b9ae3c2512",
+    "query.py": "73bbf7ce844e2bdd1fbe93e3e2a7e12872c48dfcfdfaa81124d63b67d424bb4d",
+    "evaluate.py": "07a5b79af2476b7fa9a942c8181691e81facfa05fcfc90248fa0a5c824bcd618"
+  },
+  "finished_at": "2026-11-04T16:30:17.597646+00:00",
+  "suite_sha256": "873d947d680e0c776e01e866d07b2be4d55f2a8d0907228aa0b49e604b19e557",
+  "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+  "suite_size": 60,
+  "requested_cases": 54,
+  "start_case": 7,
+  "unexecuted_requested_cases": 45,
+  "completion": "interrupted",
+  "routing_failures_without_errors": 0,
+  "executed": 9,
+  "passed": 8,
+  "errors": 1,
+  "llm_attempts": 9,
+  "tool_calls": 8,
+  "median_latency_ms": 1361.57,
+  "latency_note": "Local verified-query cache enabled; not uncached production latency.",
+  "cost_currency": null,
+  "cost_note": "No billing data available; not assumed zero.",
+  "generalization_note": "Curated development suite, not a blind employment benchmark.",
+  "results": [
+    {
+      "case_id": "business-v1-007",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Quantas consultas de contratos foram confirmadas?",
+        "provider": "gemini",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "model": "gemini-2.5-flash",
+              "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+              "promptTokenCount": 320,
+              "candidatesTokenCount": 13,
+              "totalTokenCount": 442,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 320
+                }
+              ],
+              "thoughtsTokenCount": 109,
+              "serviceTier": "standard"
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 61333.23
+      }
+    },
+    {
+      "case_id": "business-v1-008",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Quantos valores homologados estão ausentes?",
+        "provider": "gemini",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "model": "gemini-2.5-flash",
+              "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+              "promptTokenCount": 320,
+              "candidatesTokenCount": 13,
+              "totalTokenCount": 375,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 320
+                }
+              ],
+              "thoughtsTokenCount": 42,
+              "serviceTier": "standard"
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 1048.14
+      }
+    },
+    {
+      "case_id": "business-v1-009",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Qual o total de registros de compras?",
+        "provider": "gemini",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "model": "gemini-2.5-flash",
+              "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+              "promptTokenCount": 319,
+              "candidatesTokenCount": 13,
+              "totalTokenCount": 381,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 319
+                }
+              ],
+              "thoughtsTokenCount": 49,
+              "serviceTier": "standard"
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 1251.12
+      }
+    },
+    {
+      "case_id": "business-v1-010",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Quantas compras estão sem publicação retornada?",
+        "provider": "gemini",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "model": "gemini-2.5-flash",
+              "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+              "promptTokenCount": 320,
+              "candidatesTokenCount": 13,
+              "totalTokenCount": 427,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 320
+                }
+              ],
+              "thoughtsTokenCount": 94,
+              "serviceTier": "standard"
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 1361.57
+      }
+    },
+    {
+      "case_id": "business-v1-011",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Como está a cobertura dos pregões do Piauí?",
+        "provider": "gemini",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "model": "gemini-2.5-flash",
+              "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+              "promptTokenCount": 323,
+              "candidatesTokenCount": 13,
+              "totalTokenCount": 542,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 323
+                }
+              ],
+              "thoughtsTokenCount": 206,
+              "serviceTier": "standard"
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 1932.44
+      }
+    },
+    {
+      "case_id": "business-v1-012",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Quero um resumo das compras de agosto a outubro de 2026.",
+        "provider": "gemini",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "model": "gemini-2.5-flash",
+              "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+              "promptTokenCount": 328,
+              "candidatesTokenCount": 13,
+              "totalTokenCount": 461,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 328
+                }
+              ],
+              "thoughtsTokenCount": 120,
+              "serviceTier": "standard"
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 1481.72
+      }
+    },
+    {
+      "case_id": "business-v1-013",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Quantos valores homologados são desconhecidos?",
+        "provider": "gemini",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "model": "gemini-2.5-flash",
+              "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+              "promptTokenCount": 321,
+              "candidatesTokenCount": 13,
+              "totalTokenCount": 376,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 321
+                }
+              ],
+              "thoughtsTokenCount": 42,
+              "serviceTier": "standard"
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 1306.45
+      }
+    },
+    {
+      "case_id": "business-v1-014",
+      "category": "summary",
+      "routing_passed": true,
+      "grounding_passed": true,
+      "passed": true,
+      "actual": {
+        "question": "Qual é o total de contratos vinculados?",
+        "provider": "gemini",
+        "status": "answered",
+        "answer": "Recorte: PI, modalidade 6, publicação de 2026-08-01 a 2026-10-31. O recorte tem 1081 compras; 1080 têm consulta de contratos confirmada. Retornaram 125 contratos vinculados a 85 compras. Em 995 compras, não retornou publicação. Há 749 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+        "trace": [
+          {
+            "step": "plan",
+            "plan": {
+              "action": "summary",
+              "purchase_id": null
+            },
+            "usage": {
+              "model": "gemini-2.5-flash",
+              "prompt_sha256": "99a694f65ee95db9e71e33732cefd5f1bb68c87ca9e58cdb252f2b63568f053f",
+              "promptTokenCount": 320,
+              "candidatesTokenCount": 13,
+              "totalTokenCount": 495,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 320
+                }
+              ],
+              "thoughtsTokenCount": 162,
+              "serviceTier": "standard"
+            }
+          },
+          {
+            "step": "read_only_query",
+            "action": "summary",
+            "outcome": "answered",
+            "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10"
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 1,
+        "evidence": {
+          "question": "summary",
+          "purchase_id": null,
+          "status": "answered",
+          "scope": {
+            "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+            "date_start": "2026-08-01",
+            "date_end": "2026-10-31",
+            "uf": "PI",
+            "modality": 6,
+            "date_basis": "publication",
+            "resource": "purchases"
+          },
+          "coverage": {
+            "purchases": 1081,
+            "covered_purchases": 1080,
+            "purchases_with_contracts": 85,
+            "none_returned": 995,
+            "contracts": 125,
+            "unknown_awarded_values": 749
+          },
+          "coverage_report_sha256": "2e1606d0a776fdc9ef3cae7a19acc4f5f16021c7e2f4c4c194f558218e994c10",
+          "sources": {
+            "coverage_report": "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json",
+            "purchase_manifest": "runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json"
+          },
+          "limitations": [
+            "Publication is not payment or financial execution.",
+            "No returned publication does not establish absence of a contract.",
+            "Unknown amounts are not zero; snapshots may have different dates."
+          ],
+          "result": [
+            {
+              "purchases": 1081,
+              "covered_purchases": 1080,
+              "purchases_with_contracts": 85,
+              "none_returned": 995,
+              "contracts": 125,
+              "unknown_awarded_values": 749
+            }
+          ]
+        },
+        "latency_ms": 1622.25
+      }
+    },
+    {
+      "case_id": "business-v1-015",
+      "category": "summary",
+      "routing_passed": false,
+      "grounding_passed": false,
+      "passed": false,
+      "actual": {
+        "question": "Quantas compras foram analisadas para contratos?",
+        "provider": "gemini",
+        "status": "error",
+        "answer": "A consulta não pôde ser concluída com segurança.",
+        "trace": [
+          {
+            "step": "failure",
+            "error_type": "ProviderFailure",
+            "provider_http_status": 429
+          }
+        ],
+        "llm_attempts": 1,
+        "tool_calls": 0,
+        "latency_ms": 490.75
+      }
+    }
+  ]
+}

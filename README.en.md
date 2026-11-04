@@ -107,12 +107,12 @@ Fixed queries provide a coverage summary, municipality breakdown and purchase-le
 
 A one-step router selects at most one read-only query and returns a grounded template with sources,
 coverage and a trace. The **baseline uses no LLM** and passed all 60 curated development cases.
-Gemini 2.5 Flash passed three live integration questions; its full evaluation was started but stopped with HTTP 429. In the latest attempt, six cases passed before the error and 53 were not executed. All 61 software tests passed, including PostgreSQL integration. These are separate
+Gemini 2.5 Flash passed three live integration questions; continuation consolidated 28/60 curated cases across segments using the same prompt. There were 29 observed cases: 28 passed and one failed at the API daily limit (20 requests per project/model). The following 31 cases were not executed, and local-policy refusal cases were not reached. Evaluation remains incomplete. All 62 software tests passed, including PostgreSQL integration. These are separate
 measurements. See [commands, evidence and limitations (Portuguese)](docs/agent-evaluation.md).
 
 ## 7. Next steps and attribution
 
-Next, resume Gemini evaluation at case seven when quota permits; the full suite has not passed. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
+Next, resume evaluation at case 29 after quota resets, before reviewing new questions and building the interface. Price-registration records still need a separate acquisition strategy. Read-only tools, exact calculations, semantic search and evaluated questions follow. UI, video and a hosted demo will be added when the real workflow exists. [Plan](PLANO.md).
 
 Data comes from [PNCP](https://www.gov.br/pncp/pt-br) and its [official API](https://pncp.gov.br/api/consulta/swagger-ui/index.html). This project is independent of the portal. The [code license](LICENSE) does not determine third-party data licensing.
 

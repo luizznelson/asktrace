@@ -106,13 +106,13 @@ Consultas fixas respondem o resumo da cobertura, a distribuição por município
 
 Um roteador de uma etapa seleciona no máximo uma consulta somente leitura e apresenta resposta,
 fonte, cobertura e rastro. O modo **baseline não usa LLM**: passou nos 60 casos curados de
-desenvolvimento. O Gemini 2.5 Flash passou em três perguntas reais de integração; sua avaliação completa foi iniciada, mas parou por HTTP 429. Na última tentativa, seis casos passaram antes do erro; 53 não foram executados.
-Os 61 testes de software passaram, incluindo PostgreSQL. Esses dois resultados medem coisas diferentes.
+desenvolvimento. O Gemini 2.5 Flash passou em três perguntas reais de integração; a continuação consolidou 28/60 casos curados aprovados em segmentos com o mesmo prompt. Foram observados 29 casos: 28 aprovados e um erro no limite diário da API (20 requisições por projeto/modelo). Os 31 seguintes ainda não foram executados; as recusas locais não foram percorridas nessa continuação. A avaliação permanece parcial.
+Os 62 testes de software passaram, incluindo PostgreSQL. Esses dois resultados medem coisas diferentes.
 Veja [comandos, evidências e limites](docs/agent-evaluation.md).
 
 ## 7. O que vem depois
 
-O próximo passo é retomar a avaliação Gemini do caso sete quando a quota permitir; não há aprovação da suíte completa. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
+O próximo passo é continuar a avaliação do caso 29 após a liberação da quota, antes de revisar perguntas novas e construir a interface. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
 
 Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
 

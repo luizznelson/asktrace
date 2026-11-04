@@ -174,7 +174,7 @@ somadas, pois há sobreposição e os prompts diferem. O resultado baseline 60/6
 como recusa correta, e perguntas não executadas não foram aprovadas. Nenhuma chamada adicional foi
 feita após o segundo bloqueio. O custo monetário continua desconhecido.
 
-## Continuação sem repetir casos aprovados
+## Continuação inicial em 03/11: histórico
 
 O avaliador ganhou `--start-case` (posição começando em 1), `--interval` (segundos) e arquivos
 `case-NNN.json` por caso concluído. O relatório final distingue casos solicitados, executados e não
@@ -201,7 +201,54 @@ verificam status HTTP 429 sem vazamento e continuação com journal sem repetir 
 Ruff, formatação e links foram conferidos. CI remoto não verificado. Este resultado é separado da
 avaliação do LLM, que não foi concluída. Interface e deploy permanecem pendentes.
 
+## Continuação e consolidação em 04/11/2026
+
+A retomada começou no caso sete. O banco local precisou ser iniciado; os primeiros resultados
+confirmaram respostas com PostgreSQL saudável. Os casos 7 a 14 passaram; o caso 15 recebeu HTTP 429.
+Depois de uma pausa e da melhoria do diagnóstico, o caso 15 passou em uma tentativa isolada.
+A continuação a partir do caso 16 usou 30 segundos entre tentativas de LLM.
+
+Os quatro segmentos consolidados cobrem **29 casos distintos, com 28
+aprovados, um erro técnico e 31 casos ainda não executados**.
+Há 29 tentativas de LLM e 28
+chamadas lógicas de consulta nos casos selecionados. As recusas por política local não chamam Gemini.
+
+[Conferência consolidada](../runs/agent-consolidated-cbf07cd7-7961-4f6d-9b94-b0db226a64d1/verification.json) lista os intervalos, hashes e a
+origem de cada resultado. Os valores esperados foram conferidos novamente, sem confiar somente no
+campo `passed` dos relatórios. Os intervalos solicitados são 1–6, 7–14, 15 e 16–60; neste último, apenas os casos 16–29 foram executados. Não há sobreposição.
+Cada plano observado usa o mesmo modelo, prompt, corpus e relatório de cobertura. O código de
+diagnóstico do adaptador/rastro mudou entre os segmentos; não apresentamos isso como uma rodada
+única nem como teste cego de uma versão imutável. Os relatórios antigos, inclusive erros, permanecem.
+
+O erro 429 agora pode registrar somente nomes/valores de quota e tempo sugerido de espera quando
+presentes no JSON do provedor. Mensagens completas, dimensões com projeto e credenciais ficam fora
+do rastro. O teste cobre também entradas inválidas, corpo excessivo e exclusão de campos sensíveis.
+O caso 29 retornou um diagnóstico explícito: `GenerateRequestsPerDayPerProjectPerModel-FreeTier`,
+valor 20, métrica `generate_content_free_tier_requests`. É um limite diário da faixa gratuita informado
+pelo provedor, não uma dedução a partir do status HTTP. A resposta sugeriu esperar 55.052 segundos
+(aproximadamente 15 horas e 17 minutos) no momento observado. Não garantimos um horário de liberação.
+[Observação da quota](../runs/agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7/quota-observation.json) preserva apenas esses campos seguros.
+Não fizemos novas chamadas depois desse erro diário. O custo monetário permanece desconhecido.
+
+Passaram **62 testes locais de software**, incluindo PostgreSQL. O novo teste verifica minimização
+dos diagnósticos de quota. Ruff e formatação foram verificados; CI remoto não verificado.
+Nenhuma chave foi impressa ou publicada, e `.env` continua ignorado pelo Git.
+
+O corpus planejado contém 60 perguntas curadas de desenvolvimento: 20 de resumo, 12 de
+municípios, oito rastreios da mesma compra e 20 recusas pelo filtro. Não mede generalização ampla,
+conversas abertas ou recusas do modelo em ataques que não passam pelo filtro local.
+
 ## Próximo passo
 
-Conferir a quota disponível e continuar a partir do caso sete. Revisar os erros antes de ampliar
-o corpus com perguntas separadas das usadas em desenvolvimento e construir a interface.
+A avaliação continua incompleta: 28 casos aprovados, um erro de provedor e 31 não executados.
+Os casos de recusa por filtro local ainda não foram percorridos nestes segmentos Gemini.
+Depois da liberação da quota, continuar com os 32 casos restantes, incluindo o caso 29 interrompido:
+
+```powershell
+.venv/Scripts/python.exe -m asktrace.evaluate --provider gemini --start-case 29 --interval 30 --coverage runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json
+```
+
+Não repetir os 28 casos aprovados. A quota é por projeto/modelo: esperar 30 segundos entre chamadas
+não aumenta o limite diário. Confirmar a disponibilidade no painel do provedor antes de retomar.
+Depois da conclusão, revisar erros, separar perguntas novas das usadas em desenvolvimento e construir
+a interface. Não há implantação ou demonstração pública nesta etapa.

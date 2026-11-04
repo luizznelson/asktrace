@@ -69,3 +69,12 @@ a suíte completa de 60 casos com Gemini. [Interpretação](../docs/agent-evalua
 ## Avaliação Gemini interrompida
 
 [agent-eval-6908e93c-b894-4638-8ddf-96d21200a3c8/evaluation.json](agent-eval-6908e93c-b894-4638-8ddf-96d21200a3c8/evaluation.json): 11 executados, nove aprovados, uma recusa indevida e uma falha técnica sem status preservado. [agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/evaluation.json](agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/evaluation.json): novo prompt, sete executados, seis aprovados e um HTTP 429; 53 não executados. Não somar resultados. [Conferência](agent-eval-6de25618-3cbe-4252-95ab-4620422340e8/verification.json) e [continuação](../docs/agent-evaluation.md).
+
+## Continuação Gemini em 04/11/2026
+
+[agent-consolidated-cbf07cd7-7961-4f6d-9b94-b0db226a64d1/verification.json](agent-consolidated-cbf07cd7-7961-4f6d-9b94-b0db226a64d1/verification.json): 29 casos distintos conferidos, 28 aprovados, 1 erros e 31 não executados. Segmentos com mesmo prompt/modelo/corpus/cobertura; versões de diagnóstico diferem. [Limites](../docs/agent-evaluation.md).
+
+O lote `agent-eval-dfa0933d-2a2f-4bfd-9471-d82f540998f9` aprovou os casos 7–14 e parou em 429 no
+15. O reteste `agent-eval-2c284880-8bde-4dd0-9892-0d52f5816f78` aprovou o caso 15.
+`agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7` aprovou os casos 16–28 e parou no 29 com quota diária gratuita de 20 requisições.
+[Diagnóstico seguro](agent-eval-ba79adc6-6420-46c9-9e78-59b54f28a0c7/quota-observation.json). Restam 32 casos contando o 29 interrompido.

@@ -74,3 +74,7 @@ não foram repetidos nesta execução sem alterações de código. [Rastros e li
 ## Diagnóstico da avaliação Gemini
 
 Suíte atual: **61 testes locais passaram**, incluindo PostgreSQL. Dois testes novos cobrem HTTP 429 preservado e continuação por posição com journal por caso. A avaliação do modelo está incompleta: última tentativa com seis aprovados, um erro 429 e 53 casos não executados. [Evidências](agent-evaluation.md).
+
+## Continuação e diagnóstico de quota
+
+Suíte de software: **62 testes locais passaram**, incluindo PostgreSQL. O novo teste verifica minimização dos detalhes de quota. Separadamente, 28/60 casos de desenvolvimento foram aprovados na consolidação Gemini por segmentos, com 29 tentativas de LLM e 0 recusas locais observadas nesses segmentos. A avaliação continua parcial. [Evidências e limitações](agent-evaluation.md).

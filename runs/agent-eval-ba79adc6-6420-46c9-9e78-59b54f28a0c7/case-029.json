@@ -1,0 +1,33 @@
+{
+  "case_id": "business-v1-029",
+  "category": "municipalities",
+  "routing_passed": false,
+  "grounding_passed": false,
+  "passed": false,
+  "actual": {
+    "question": "Mostre o valor estimado agregado por município.",
+    "provider": "gemini",
+    "status": "error",
+    "answer": "A consulta não pôde ser concluída com segurança.",
+    "trace": [
+      {
+        "step": "failure",
+        "error_type": "ProviderFailure",
+        "provider_http_status": 429,
+        "provider_limits": {
+          "retry_after_seconds": 55052.0,
+          "quotas": [
+            {
+              "quotaMetric": "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+              "quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier",
+              "quotaValue": "20"
+            }
+          ]
+        }
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 0,
+    "latency_ms": 521.25
+  }
+}
