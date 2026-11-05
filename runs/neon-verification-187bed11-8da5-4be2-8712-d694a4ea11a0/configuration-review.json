@@ -1,0 +1,9 @@
+{
+  "python_tests_passed": 131,
+  "credential_scan": "passed",
+  "known_secret_matches": 0,
+  "private_runtime_settings_tracked": false,
+  "blueprint_sha256": "2b852d256f7563cb1c6740a31235a0fb3dd07351d2b7fc18b5166f6ac855c435",
+  "application_credentials": "reader and runtime-state only; no admin credential in deployment configuration",
+  "source_note": "After remote verification, the generated settings were reduced to the three database/artifact values; AI enablement remains declared in render.yaml."
+}

@@ -145,7 +145,7 @@ end of this README. Detailed documentation is primarily in Portuguese.
 
 ## Software checks and AI evaluation are different
 
-- **Software:** 130 Python tests in the latest suite, including isolated PostgreSQL;
+- **Software:** 131 Python tests in the latest suite, including isolated PostgreSQL;
   Node contracts cover UI, charts, formatting and CSV. [Verification](docs/quality.md).
 - **Local v3 routing:** 60/60 author-curated release cases covering six queries and refusals.
 - **AI contingency v3:** 60 passes across 61 executions, with one failure preserved.
@@ -189,6 +189,11 @@ Once prepared, run `.venv/Scripts/python.exe -m asktrace.web` and open
 PostgreSQL, separate credentials, evidence restoration and persistent demo limits.
 External deployment has not yet been verified. Follow the [deployment guide](docs/deployment.md)
 (Portuguese); the local preview server above remains restricted to this computer.
+
+The Neon database was loaded and verified: six routes for each dataset passed with
+restricted logins, evidence was restored from the database, and the budget survived
+restarting the test application. [Remote verification](runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json).
+This does not replace verification of a public Render URL.
 
 ## Explore further
 

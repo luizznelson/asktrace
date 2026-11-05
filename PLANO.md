@@ -22,7 +22,7 @@ agosto–outubro permanece separado. Sem filtros livres, memória no modelo ou n
 ## Fechamento pendente
 
 - [x] Avaliação do catálogo atual: 60 aprovações em 61 execuções; uma falha preservada e retomada explícita.
-- [ ] Configurar o banco externo e verificar a importação remota e os logins de execução.
+- [x] Banco Neon carregado; duas bases, logins restritos, restauração e limites persistentes verificados.
 - [ ] Publicar e conferir a aplicação na URL externa, incluindo reinício e retomada.
 - [ ] Inspecionar visualmente desktop e celular. O navegador ainda retorna bloqueado nesta sessão.
 - [ ] Gravar o vídeo com a aplicação hospedada e acrescentar capturas reais ao README.

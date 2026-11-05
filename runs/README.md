@@ -146,3 +146,11 @@ internos passaram. Não houve estudo com usuários ou nova inspeção visual em 
 execuções. A falha do caso 51 e a retomada permanecem nos relatórios originais.
 Os arquivos de `data/deploy` contêm dados privados e configurações; não entram no Git.
 Banco remoto, URL externa, inspeção visual e vídeo ainda não foram verificados.
+
+## Banco remoto no Neon
+
+[Verificação](../runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json): duas bases carregadas e doze consultas reais,
+restauração privada, logins restritos e persistência dos limites. Nenhuma chamada de IA.
+O registro também preserva o incidente de isolamento dos testes e a limpeza conferida.
+Após o bloqueio de conexões remotas nos testes, 131 testes passaram. A URL do Render
+e a inspeção visual continuam pendentes.

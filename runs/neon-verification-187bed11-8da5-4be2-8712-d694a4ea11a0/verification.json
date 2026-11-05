@@ -1,0 +1,131 @@
+{
+  "started_at": "2026-11-05T02:10:00.221369+00:00",
+  "remote_database_verified": true,
+  "external_deployment_verified": false,
+  "browser_visual_inspection": false,
+  "external_ai_calls": 0,
+  "private_settings_file": "data/deploy/runtime.env",
+  "artifact_sha256": "149dffbae561e71edd7380c9c21195720186bf91a6b867896756126389a8ecfd",
+  "queries": [
+    {
+      "dataset": "expanded",
+      "action": "summary",
+      "purchases": 2537,
+      "contracts": 679,
+      "covered_purchases": 2536,
+      "response_sha256": "225819e5560346177141df2b09a493a9b212df557cb5495057c1084e8aaf0abc"
+    },
+    {
+      "dataset": "expanded",
+      "action": "municipalities",
+      "purchases": 2537,
+      "contracts": 679,
+      "covered_purchases": 2536,
+      "response_sha256": "0502a1b011e8eed33aecd2cd6ec053bf8438316a25d88c9d8781773a992ec700"
+    },
+    {
+      "dataset": "expanded",
+      "action": "monthly",
+      "purchases": 2537,
+      "contracts": 679,
+      "covered_purchases": 2536,
+      "response_sha256": "a8b562150fafd302402b1d749ec9172073b64409ca9746740e346d3fb5a62ca9"
+    },
+    {
+      "dataset": "expanded",
+      "action": "organizations",
+      "purchases": 2537,
+      "contracts": 679,
+      "covered_purchases": 2536,
+      "response_sha256": "3762d515316e899298975a77779529b0fa1320a155cfa1b66cf5e7c413e57196"
+    },
+    {
+      "dataset": "expanded",
+      "action": "quality",
+      "purchases": 2537,
+      "contracts": 679,
+      "covered_purchases": 2536,
+      "response_sha256": "687376460c83681698e1ae89ffceb1dc11e0bb6814343f590ca1032d70852d12"
+    },
+    {
+      "dataset": "expanded",
+      "action": "purchase",
+      "purchases": 2537,
+      "contracts": 679,
+      "covered_purchases": 2536,
+      "response_sha256": "9fb802c99e2e634fd556f8dede7b00cffbfbb35ddfd4ba9c357464280ba9cf92"
+    },
+    {
+      "dataset": "original",
+      "action": "summary",
+      "purchases": 1081,
+      "contracts": 125,
+      "covered_purchases": 1080,
+      "response_sha256": "122e361728b13ce15e55e46884d2856722cf7f9f32a69fc558c488a80ef812de"
+    },
+    {
+      "dataset": "original",
+      "action": "municipalities",
+      "purchases": 1081,
+      "contracts": 125,
+      "covered_purchases": 1080,
+      "response_sha256": "cf77d1a126b268d654eecf141e165bdfd120a29efdbdcf5ef43c34e46cef21ca"
+    },
+    {
+      "dataset": "original",
+      "action": "monthly",
+      "purchases": 1081,
+      "contracts": 125,
+      "covered_purchases": 1080,
+      "response_sha256": "7f1982aaac58faa724e8d6b261f199949062438d40980bfbb54299a0b138eca0"
+    },
+    {
+      "dataset": "original",
+      "action": "organizations",
+      "purchases": 1081,
+      "contracts": 125,
+      "covered_purchases": 1080,
+      "response_sha256": "c470c6c3fa564c5e7e1028f5ea65ac75b5c1e0d0d63548161f47a465c44103ef"
+    },
+    {
+      "dataset": "original",
+      "action": "quality",
+      "purchases": 1081,
+      "contracts": 125,
+      "covered_purchases": 1080,
+      "response_sha256": "54dabcf1ebc693ab0ee3b284e40c59f5b217e691a613eefadb98f236659fac83"
+    },
+    {
+      "dataset": "original",
+      "action": "purchase",
+      "purchases": 1081,
+      "contracts": 125,
+      "covered_purchases": 1080,
+      "response_sha256": "cbbcaac072ee8fbc7dda8db8939371e63f286c405d514af8eb008adefe0e2722"
+    }
+  ],
+  "test_isolation_incident": {
+    "owned_synthetic_runs_created": 5,
+    "owned_synthetic_runs_removed": 5,
+    "cause": "Integration tests inherited the newly configured admin database URL.",
+    "correction": "Opt-in tests require asktrace_test and cannot inherit remote admin or reader URLs; remote state URLs are rejected.",
+    "regression_suite_passed": 131
+  },
+  "synthetic_records_remaining": 0,
+  "budget_before": 0,
+  "budget_after_restart": 12,
+  "budget_survived_application_restart": true,
+  "client_tls_verified": true,
+  "startup_checks_used_real_remote_roles": true,
+  "private_artifact_restored_from_database": true,
+  "finished_at": "2026-11-05T02:13:47.917844+00:00",
+  "transport_note": "ASGI client with actual remote database, artifact and runtime state. No public Render URL or browser inspection is claimed.",
+  "source_sha256": {
+    "asktrace/connections.py": "cc61d4cab7151b0d44c57f0b0130ed8747de3cbff647b49190bbf693ae2bc1d8",
+    "asktrace/database.py": "b095a625a016034cb734c5b8d917cf0130b2574ff6c65e31755643915b57fe57",
+    "asktrace/contracts.py": "e3ab56ad3b1ee13714c3c4fb6b4e8b595086460642bcdd3d1fc33a28951f750a",
+    "asktrace/public.py": "73f6b0194183ab70549936fe84f2c23fb91b97bb6d87c4917d9a39be9077f13f",
+    "asktrace/release.py": "d32e4a0a432fb64455fba4a1544dd53f4b232a29c81deadfd3cf65b1feeb3d85",
+    "tests/test_deployment_data.py": "bfa6fcf7cfddc14b39716163daa37c680518fe8c62193287eb0e894c2413967e"
+  }
+}

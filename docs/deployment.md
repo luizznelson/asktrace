@@ -87,9 +87,15 @@ O health check é `/healthz`: confere conexão e permissões, devolvendo apenas 
 
 ## IA e limites da demonstração
 
-A configuração inicial `ASKTRACE_PUBLIC_AI=false` deixa o catálogo inteiro acessível
-por regras, sem chamadas de API. Para habilitar a IA, cadastrar as chaves desejadas como
-segredos e definir `ASKTRACE_PUBLIC_AI=true`. Não é preciso habilitar todos os provedores.
+O código mantém a IA desligada quando `ASKTRACE_PUBLIC_AI` não é definido. O Blueprint
+desta demonstração define `ASKTRACE_PUBLIC_AI=true` e solicita as chaves Groq, OpenRouter
+e Gemini, já utilizadas no desenvolvimento. Seus valores são cadastrados como segredos;
+nenhuma chave fica no YAML. O modo por regras permanece disponível sem chamadas externas.
+
+O arquivo `data/deploy/runtime.env` contém somente as duas conexões de execução e o hash
+dos dados. A escolha de habilitar IA pertence ao Blueprint. Para manter outra escolha
+em futuras sincronizações, alterar o valor no `render.yaml`, em vez de criar configurações
+divergentes no painel.
 
 O limite padrão é **10 solicitações de IA por dia UTC**, compartilhadas entre visitantes.
 Cada solicitação pode tentar até três candidatos, respeitando a espera por provedor;
@@ -108,13 +114,40 @@ antes de criar recursos; a aplicação não comprova a gratuidade da conta dos p
 
 ## Checklist de publicação
 
-- [ ] Banco de destino preparado e totais das duas bases conferidos.
+- [x] Banco Neon preparado e totais das duas bases conferidos.
 - [ ] Segredos de execução cadastrados; credencial administrativa ausente do serviço.
 - [ ] Startup restaura o pacote com o hash esperado e saúde retorna 200.
 - [ ] Seis consultas, recusas, histórico, troca de idioma e downloads conferidos na URL pública.
 - [ ] Reinício e retomada após inatividade conferidos; limites não são apagados.
 - [ ] Inspeção visual de desktop e celular realizada, sem afirmar certificação de acessibilidade.
 - [ ] URL, capturas reais e vídeo adicionados ao README; pendências atualizadas.
+
+## Verificação executada no Neon
+
+[Registro completo](../runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json): conexão com certificado validado, leitura
+e estado com permissões separadas, restauração do artefato privado e doze consultas reais.
+Base padrão: 2.537 compras, 2.536 pesquisas e 679 contratos. Base original: 1.081 compras,
+1.080 pesquisas e 125 contratos, sem somar os recortes. Uma nova instância manteve o
+orçamento persistido e rejeitou o token da instância anterior.
+
+Durante a preparação, testes herdaram a conexão administrativa e criaram cinco registros
+sintéticos no banco novo. A execução foi interrompida; somente esses cinco registros foram
+identificados e removidos em transação. A verificação final confirmou zero registros
+sintéticos. A correção bloqueia conexões remotas quando os testes de integração estão
+habilitados e exige o banco local `asktrace_test`; 131 testes passaram após a correção.
+
+As inserções da carga usam pipeline dentro da transação original para evitar uma espera
+de rede por registro. Validação dos arquivos, integridade e comportamento contra duplicação
+foram preservados. A carga administrativa não é executada no startup do serviço.
+
+Para repetir a conferência remota antes de receber tráfego público:
+
+```powershell
+.venv/Scripts/python.exe -m scripts.verify_remote
+```
+
+Essa verificação consome doze consultas do orçamento compartilhado e usa o arquivo privado
+de execução. Ela não chama modelos nem representa um teste da URL pública do Render.
 
 ## Referências oficiais
 

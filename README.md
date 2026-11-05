@@ -145,7 +145,7 @@ desenvolvimento está declarada ao final deste README.
 
 ## Qualidade: software e IA são verificações diferentes
 
-- **Software:** 130 testes Python na última suíte, com PostgreSQL isolado; contratos Node
+- **Software:** 131 testes Python na última suíte, com PostgreSQL isolado; contratos Node
   para interface, gráficos, formatação e CSV. [Como reproduzir e interpretar](docs/quality.md).
 - **Roteamento local v3:** 60/60 casos do corpus final curado, incluindo as seis consultas e recusas.
 - **Contingência de IA v3:** 60 aprovações em 61 execuções, com uma falha preservada.
@@ -189,6 +189,11 @@ Com a base preparada, execute `.venv/Scripts/python.exe -m asktrace.web` e abra
 com PostgreSQL remoto, credenciais separadas, restauração das evidências e limites
 persistentes. O deploy externo ainda não foi verificado. Siga o [guia de publicação](docs/deployment.md);
 o servidor local acima continua restrito ao computador.
+
+O banco no Neon também foi carregado e verificado: os seis caminhos das duas bases
+passaram com os logins restritos, as evidências foram restauradas do banco e o limite
+persistiu após reinicializar a aplicação de teste. [Verificação remota](runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json).
+Isso não substitui a conferência do endereço público no Render.
 
 ## Para aprofundar
 

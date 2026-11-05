@@ -4,7 +4,7 @@
 
 | Camada | Verificação | Limite |
 | --- | --- | --- |
-| Software | 130 testes Python com PostgreSQL isolado; Ruff e formatação | Não prova ausência de falhas ou implantação em produção |
+| Software | 131 testes Python com PostgreSQL isolado; Ruff e formatação | Não prova ausência de falhas ou implantação em produção |
 | Apresentação | Contratos Node de gráficos, empates, moeda, histórico, CSV e PT/EN | Não é inspeção visual em navegador |
 | Dados reais | Consultas HTTP, contagens de seis meses, permissões e integridade dos snapshots | O PNCP não fornece uma transação única para toda a coleta |
 | Cobertura | 2.536 compras aptas pesquisadas; 679 contratos; 26 cargas repetidas sem duplicação | Uma exclusão por ano inválido; ausência de publicação não prova ausência de contrato |
@@ -82,4 +82,12 @@ Uma rodada intermediária falhou em uma asserção HTTP, sem diagnóstico de cau
 As cinco consultas isoladas e a repetição completa passaram; o evento permanece registrado
 na síntese. Isso não equivale a uma garantia de ausência de falhas.
 
-A validação externa do banco e da URL pública, a inspeção visual e o vídeo continuam pendentes.
+O banco remoto foi verificado no Neon; URL pública, inspeção visual e vídeo continuam pendentes.
+
+## Banco remoto e isolamento dos testes
+
+[Neon verificado](../runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json): doze consultas, conexão TLS no cliente,
+logins restritos, restauração e limites após reinicialização da aplicação de teste.
+A regressão com uma URL de produção configurada comprova que testes opt-in usam somente
+`asktrace_test` local. Após a correção, 131 testes Python passaram. O incidente e a limpeza
+dos cinco registros sintéticos estão documentados no [guia de publicação](deployment.md).

@@ -1,0 +1,10 @@
+{
+  "schema_url": "https://render.com/schema/render.yaml.json",
+  "schema_sha256": "8a3fb8da6b4f55fe686fbefa790e011d3dd7895f013f355953c572a21ab6494a",
+  "blueprint_sha256": "33c6f3847225b87d426062c312ab9dd0d77203559fdb9f402cd1f0423f2d323e",
+  "schema_validation_passed": true,
+  "platform_api_validation_performed": false,
+  "services": 1,
+  "plan": "free",
+  "note": "Structural validation against the current public schema; no account or deployment accessed."
+}
