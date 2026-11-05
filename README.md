@@ -10,6 +10,8 @@
 
 [![Quality](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml)
 
+**Demonstração em vídeo (62 s):** [português](docs/assets/demo/asktrace-demo.mp4) · [English](docs/assets/demo/asktrace-demo-en.mp4). São capturas reais do aplicativo publicado, em sequência editada; o vídeo não mede tempo de resposta. Para refazê-lo: `python scripts/build_demo.py --language pt` (ou `en`), usando as capturas e o roteiro em `docs/assets/demo/source/` e `docs/media/storyboard.json`.
+
 O AskTrace apoia a preparação de relatórios de acompanhamento de compras públicas.
 A pessoa que faz essa análise precisa entender o panorama, escolher o que conferir com
 mais detalhe e explicar quais dados sustentam suas conclusões. O aplicativo reúne

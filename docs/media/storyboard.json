@@ -1,0 +1,68 @@
+[
+  {
+    "source": "01-inicio",
+    "seconds": 6,
+    "pt": {"title": "Das publicações a uma análise que você pode explicar", "body": "O AskTrace ajuda a preparar um panorama de compras públicas: compare onde e quando as compras foram publicadas e leve os resultados com suas fontes."},
+    "en": {"title": "From publications to an analysis you can explain", "body": "AskTrace helps prepare an overview of public procurement: compare where and when purchases were published and take the results along with their sources."}
+  },
+  {
+    "source": "02-contexto-e-base",
+    "seconds": 6,
+    "pt": {"title": "Uma base conhecida, com limites declarados", "body": "Pregões eletrônicos do Piauí, de maio a outubro de 2026: 2.537 compras e 679 contratos vinculados. Os limites da base aparecem antes da primeira pergunta."},
+    "en": {"title": "A known dataset, with stated limits", "body": "Electronic auctions in Piauí, May to October 2026: 2,537 purchases and 679 linked contracts. The dataset limits appear before the first question."}
+  },
+  {
+    "source": "03-perguntas-sugeridas",
+    "seconds": 5,
+    "pt": {"title": "Comece por uma pergunta", "body": "Seis percursos prontos cobrem o panorama, os municípios, os meses, os órgãos, a consulta de uma compra e as lacunas dos dados."},
+    "en": {"title": "Start with a question", "body": "Six ready paths cover the overview, municipalities, months, agencies, looking up one purchase, and gaps in the data."}
+  },
+  {
+    "source": "04-pergunta",
+    "seconds": 5,
+    "pt": {"title": "Pergunte em linguagem natural", "body": "A IA interpreta a pergunta e escolhe uma consulta pré-definida. Os números não são calculados pelo modelo."},
+    "en": {"title": "Ask in plain language", "body": "The AI interprets the question and picks a predefined query. The numbers are not computed by the model."}
+  },
+  {
+    "source": "05-resposta-mensal",
+    "seconds": 7,
+    "pt": {"title": "Resposta com números conferíveis", "body": "Junho de 2026 teve o maior volume: 527 compras. Os seis meses somam as 2.537 compras da base. O aviso lembra que publicação não comprova pagamento."},
+    "en": {"title": "An answer with checkable numbers", "body": "June 2026 had the highest volume: 527 purchases. The six months add up to the 2,537 purchases in the dataset. The notice reminds that publication does not establish payment."}
+  },
+  {
+    "source": "06-origem-dos-dados",
+    "seconds": 6,
+    "pt": {"title": "Cada resposta aponta para sua origem", "body": "O recorte, o relatório de cobertura e o hash do relatório acompanham o resultado, com download das evidências em JSON e da tabela em CSV."},
+    "en": {"title": "Every answer points to its origin", "body": "The dataset window, the coverage report and its hash accompany the result, with the evidence available as JSON and the table as CSV."}
+  },
+  {
+    "source": "07-qualidade-dos-dados",
+    "seconds": 7,
+    "pt": {"title": "Ausente não é zero", "body": "1.354 compras não têm valor homologado informado; 286 têm estimativa explicitamente zero. O app mantém as duas situações separadas e avisa que os indicadores podem se sobrepor."},
+    "en": {"title": "Missing is not zero", "body": "1,354 purchases have no awarded amount reported; 286 have an explicitly zero estimate. The app keeps the two situations apart and warns that the indicators can overlap."}
+  },
+  {
+    "source": "08-ingles",
+    "seconds": 5,
+    "pt": {"title": "Português e inglês", "body": "A interface e as respostas podem ser trocadas de idioma a qualquer momento, incluindo os rótulos de estado e a escolha do recorte."},
+    "en": {"title": "Portuguese and English", "body": "The interface and answers can switch language at any time, including status labels and the dataset selector."}
+  },
+  {
+    "source": "09-historico",
+    "seconds": 5,
+    "pt": {"title": "Histórico da sessão", "body": "As perguntas feitas na aba ficam listadas para voltar a qualquer resposta durante a sessão."},
+    "en": {"title": "Session history", "body": "Questions asked in the tab stay listed so you can return to any answer during the session."}
+  },
+  {
+    "source": "10-celular",
+    "seconds": 5,
+    "pt": {"title": "Também no celular", "body": "O layout se reorganiza em coluna única, com os indicadores e a explicação do resultado legíveis em tela pequena."},
+    "en": {"title": "On mobile too", "body": "The layout reflows to a single column, with indicators and result explanation readable on a small screen."}
+  },
+  {
+    "source": null,
+    "seconds": 5,
+    "pt": {"title": "Três passos", "body": "Escolha o recorte, faça uma pergunta e confira as fontes antes de levar o resultado para o seu relatório."},
+    "en": {"title": "Three steps", "body": "Choose the dataset, ask a question, and check the sources before taking the result into your report."}
+  }
+]
