@@ -14,6 +14,12 @@ mais detalhe e explicar quais dados sustentam suas conclusões. O aplicativo re�
 comparações de publicações, consulta de uma compra identificada e exportação com fontes,
 usando um recorte histórico do Portal Nacional de Contratações Públicas (PNCP).
 
+## Escolha seu percurso de leitura
+
+- **Entender a proposta:** cenário, perguntas e exemplo nas seções abaixo; depois o [estudo de caso](docs/case-study.md).
+- **Avaliar a engenharia:** [habilidades e evidências](#habilidades-demonstradas-e-onde-conferir), [arquitetura](docs/architecture.md) e [qualidade](docs/quality.md).
+- **Executar ou reproduzir:** [instruções neste README](#executar-e-reproduzir) e [preparação do ambiente e da base](docs/development.md).
+
 ## Uma situação que explica a proposta
 
 **Cenário ilustrativo:** uma equipe quer um panorama das compras publicadas no período.
@@ -118,15 +124,24 @@ numérico. Os dados do banco não são enviados ao planejador. Sem API externa, 
 regras atende os mesmos seis caminhos. O histórico organiza a aba, sem memória
 conversacional no modelo, e identifica respostas de versões anteriores da base.
 
-## Decisões de engenharia que você pode verificar
+## Habilidades demonstradas e onde conferir
 
-| Decisão | Problema evitado | Evidência |
+As decisões abaixo conectam a tarefa de negócio à implementação. Os links permitem
+examinar o trabalho realizado, seus testes e suas limitações.
+
+| Habilidade | Como aparece no projeto | Evidência para avaliação |
 | --- | --- | --- |
-| Decimal → NUMERIC → texto decimal | Perda de precisão e ausência convertida em zero | [Consultas](asktrace/query.py), [formatação](web/formatters.js) |
-| Hashes, snapshots e carga idempotente | Alteração silenciosa de fontes e duplicação na carga | [Integridade](asktrace/evidence.py), [cobertura concluída](docs/contracts-expanded-coverage.md) |
-| Plano validado e login de leitura | SQL livre gerado pelo modelo e escrita no banco | [Agente](asktrace/agent.py), [permissões](sql/004_reporting.sql) |
-| Tentativas limitadas e espera por provedor | Rotação de modelos para contornar quota e falhas ocultas | [Contingência](docs/provider-contingency.md) |
-| Conteúdo e escopo no CSV | Exportação sem origem e fórmulas de planilha em texto externo | [Exportação](docs/analytics.md) |
+| Comunicar problema, solução e limites | Cenário de uso, perguntas de negócio e interpretação de um resultado real | [Estudo de caso](docs/case-study.md), [visão de negócio](docs/business-case.md) |
+| Trabalhar com dados de uma fonte real | Coleta paginada, validação, hashes e carga sem duplicar registros | [Ingestão](docs/ingestion.md), [cobertura concluída](docs/contracts-expanded-coverage.md), [integridade](asktrace/evidence.py) |
+| Integrar LLMs com comportamento delimitado | Catálogo de consultas, validação do plano e recusas fora do escopo | [Agente](asktrace/agent.py), [método de avaliação](docs/agent-evaluation.md) |
+| Projetar consultas e preservar valores | Agregações por compra, precisão decimal, ausências e acesso de leitura | [Consultas](asktrace/query.py), [permissões](sql/004_reporting.sql), [formatação](web/formatters.js) |
+| Construir uma experiência utilizável | Interface PT-BR/EN, histórico da aba, resumos, gráficos e exportação contextualizada | [Interface](docs/interface.md), [análises](docs/analytics.md), [código da interface](web/app.js) |
+| Verificar qualidade e lidar com falhas | Testes de software, avaliação de roteamento, tentativas limitadas e espera por provedor | [Qualidade](docs/quality.md), [contingência](docs/provider-contingency.md), [execuções](runs/README.md) |
+
+A contribuição está na integração dessas partes e nas decisões documentadas. Os testes
+comprovam comportamentos delimitados; os dados coletados comprovam cobertura. A utilidade
+com usuários e a operação pública ainda precisam de validação. A assistência de IA no
+desenvolvimento está declarada ao final deste README.
 
 ## Qualidade: software e IA são verificações diferentes
 

@@ -14,6 +14,12 @@ data supports the findings. The application combines publication comparisons, lo
 an identified purchase and exports with sources, using a historical dataset from
 Brazil's National Public Procurement Portal (PNCP).
 
+## Choose a reading path
+
+- **Understand the purpose:** scenario, questions and example below, then the [case study](docs/case-study.md).
+- **Review the engineering:** [skills and evidence](#demonstrated-skills-and-supporting-evidence), [architecture](docs/architecture.md) and [quality](docs/quality.md).
+- **Run or reproduce:** [instructions in this README](#run-and-reproduce) and [environment and dataset preparation](docs/development.md).
+
 ## A scenario that explains the purpose
 
 **Illustrative scenario:** a team wants an overview of purchases published during a
@@ -118,15 +124,24 @@ answer. Database results are not sent to the planner. Local rules support the sa
 paths without an external API. Tab history is not model conversation memory and marks
 results from earlier dataset versions.
 
-## Engineering decisions
+## Demonstrated skills and supporting evidence
 
-| Decision | Failure prevented | Evidence |
+These decisions connect the business task to implementation. The links expose the
+work, checks and limitations for review.
+
+| Skill | How it appears in this project | Review evidence |
 | --- | --- | --- |
-| Decimal → NUMERIC → decimal text | Precision loss and treating missing amounts as zero | [Queries](asktrace/query.py), [formatting](web/formatters.js) |
-| Hashes, snapshots and idempotent loading | Silent source changes and duplicate loading | [Integrity](asktrace/evidence.py), [completed coverage](docs/contracts-expanded-coverage.md) |
-| Validated plans and a read-only login | Unrestricted model-generated SQL and database writes | [Router](asktrace/agent.py), [permissions](sql/004_reporting.sql) |
-| Bounded attempts and provider cooldowns | Rotating models to bypass shared quotas and hidden failures | [Contingency](docs/provider-contingency.md) |
-| Context in CSV exports | Losing provenance and spreadsheet formulas in external text | [Exports](docs/analytics.md) |
+| Communicating the problem, solution and limits | Use scenario, business questions and interpretation of an actual result | [Case study](docs/case-study.md), [business rationale](docs/business-case.md) |
+| Working with a real data source | Paginated collection, validation, hashes and loading without duplicate records | [Ingestion](docs/ingestion.md), [completed coverage](docs/contracts-expanded-coverage.md), [integrity](asktrace/evidence.py) |
+| Integrating LLMs with bounded behavior | Query catalog, plan validation and out-of-scope refusals | [Agent](asktrace/agent.py), [evaluation method](docs/agent-evaluation.md) |
+| Designing queries and preserving values | Purchase-level aggregation, decimal precision, missing values and read-only access | [Queries](asktrace/query.py), [permissions](sql/004_reporting.sql), [formatting](web/formatters.js) |
+| Building a usable experience | PT-BR/EN interface, tab history, summaries, charts and contextual exports | [Interface](docs/interface.md), [analyses](docs/analytics.md), [UI source](web/app.js) |
+| Verifying quality and handling failure | Software tests, routing evaluation, bounded attempts and provider cooldowns | [Quality](docs/quality.md), [contingency](docs/provider-contingency.md), [execution records](runs/README.md) |
+
+The contribution lies in integrating these parts and documenting the decisions. Tests
+establish bounded behaviors; collected data establishes coverage. User value and public
+operation still need validation. AI assistance during development is disclosed at the
+end of this README. Detailed documentation is primarily in Portuguese.
 
 ## Software checks and AI evaluation are different
 

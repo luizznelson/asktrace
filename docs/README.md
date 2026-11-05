@@ -1,12 +1,25 @@
 # Como explorar o AskTrace
 
+## Percurso recomendado
+
+Comece pelo problema e pelo exemplo de uso. Depois confira as decisões, o código e os
+resultados de avaliação. Os registros históricos ficam ao final deste índice para que
+a evolução seja auditável sem interromper a apresentação do estado atual.
+
+| O que você quer avaliar | Por onde começar | Onde aprofundar |
+| --- | --- | --- |
+| Clareza de negócio e comunicação | [README](../README.md), [estudo de caso](case-study.md) | [Visão de negócio e hipóteses](business-case.md) |
+| Capacidade de construir a solução | [Habilidades e evidências](../README.md#habilidades-demonstradas-e-onde-conferir) | [Arquitetura](architecture.md), [ingestão](ingestion.md), [consultas](business-queries.md) |
+| Cuidado com qualidade e limites | [Qualidade](quality.md) | [Avaliação do agente](agent-evaluation.md), [execuções](../runs/README.md) |
+| Reprodução do trabalho | [Desenvolvimento](development.md) | [Base concluída](contracts-expanded-coverage.md), [contribuição](../CONTRIBUTING.md) |
+
 ## Entender o produto
 
-0. [Visão de negócio](business-case.md): público proposto, tarefa, decisões, fontes e validação pendente.
-1. [README](../README.md): problema, perguntas, resultados atuais e funcionamento.
-2. [Estudo de caso](case-study.md): uma investigação completa e decisões de implementação.
-3. [Análises](analytics.md): seis consultas, exportação e interpretação dos números.
-4. [Interface](interface.md): uso, histórico e fontes.
+1. [Visão de negócio](business-case.md): público proposto, tarefa, decisões, fontes e validação pendente.
+2. [README](../README.md): problema, perguntas, resultados atuais e funcionamento.
+3. [Estudo de caso](case-study.md): uma investigação completa e decisões de implementação.
+4. [Análises](analytics.md): seis consultas, exportação e interpretação dos números.
+5. [Interface](interface.md): uso, histórico e fontes.
 
 ## Conferir a implementação
 
