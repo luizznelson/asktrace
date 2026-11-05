@@ -1,0 +1,66 @@
+{
+  "started_at": "2026-11-05T13:53:34.476566+00:00",
+  "url": "https://asktrace-pyop.onrender.com",
+  "commit": "59ca88dfaab2c842da4b70534ca98b3c5e50fdb7",
+  "deploy_id": "dep-dbm8it5bedkc73bi3pjg",
+  "checks": [
+    {
+      "name": "health",
+      "passed": true,
+      "seconds": 0.552
+    },
+    {
+      "name": "new_instance_session",
+      "passed": true
+    },
+    {
+      "name": "old_instance_token_rejected",
+      "passed": true
+    },
+    {
+      "name": "expanded:summary",
+      "passed": true
+    },
+    {
+      "name": "expanded:municipalities",
+      "passed": false
+    }
+  ],
+  "queries": [
+    {
+      "dataset": "expanded",
+      "action": "summary",
+      "seconds": 0.716,
+      "response_sha256": "e205449380ac641ea40fb1ca5b238f403930ec4858c806305e75d02cea74a3fa"
+    }
+  ],
+  "browser_visual_inspection": false,
+  "external_ai_requests_reserved": 0,
+  "restart_evidence": "runs/render-performance-59ca88d-restart/verification.json",
+  "intermediate_query_failure": {
+    "action": "municipalities",
+    "cause": "not established",
+    "isolated_retry_status": "answered",
+    "isolated_retry_application_latency_ms": 232.08
+  },
+  "last_response": {
+    "http_status": 200,
+    "status": "refused",
+    "error": null,
+    "trace": [
+      {
+        "step": "plan",
+        "plan": {
+          "action": "refuse",
+          "purchase_id": null
+        },
+        "usage": null
+      }
+    ]
+  },
+  "passed": false,
+  "error_type": "AssertionError",
+  "finished_at": "2026-11-05T13:53:37.391179+00:00",
+  "measurement_invalid_reason": "Windows default text decoding corrupted accented questions in the verification script; baseline correctly refused altered input. Verification script corrected without application changes.",
+  "application_failure_established": false
+}

@@ -60,7 +60,7 @@ dos arquivos de aplicação e teste verificados.
 Houve revisão inicial da aplicação publicada: página inicial em tela estreita, idioma,
 resposta, histórico e download CSV. Ainda faltam a revisão visual completa de desktop e
 celular, contraste, leitores de tela e dispositivos reais. O vídeo não foi publicado.
-O resultado remoto da CI precisa ser observado após o push da otimização.
+O resultado remoto da CI deve ser conferido separadamente; publicação validada não significa CI observada.
 
 A busca de contratos foi concluída para o snapshot apto, não para todas as contratações
 existentes no estado. Os limites do servidor local e do planejador permanecem documentados
@@ -84,7 +84,7 @@ As cinco consultas isoladas e a repetição completa passaram; o evento permanec
 na síntese. Isso não equivale a uma garantia de ausência de falhas.
 
 O banco remoto e a URL pública foram verificados. A inspeção visual completa e o vídeo
-continuam pendentes; a atualização de desempenho ainda precisa chegar ao Render.
+continuam pendentes; a atualização de desempenho também foi conferida no Render, conforme o registro ao final.
 
 ## Banco remoto e isolamento dos testes
 
@@ -107,3 +107,12 @@ do Docker também está registrada, separada dos resultados finais.
 Os tempos ASGI são locais com banco remoto e não substituem medir o novo deploy no Render.
 A revisão visual inicial hospedada, o histórico e o CSV estão registrados na
 [publicação](deployment.md); revisão completa, vídeo e cold start hospedado continuam pendentes.
+
+
+## Conferência pública da otimização
+
+O [registro HTTPS](../runs/render-performance-59ca88d-verified/verification.json) documenta os doze caminhos e uma solicitação de IA
+na versão otimizada hospedada, além do orçamento preservado e do token anterior
+rejeitado após um redeploy controlado do mesmo commit. Isso conclui a conferência de
+nova instância no Render; não equivale a testar a retomada por inatividade nem apaga
+a falha anterior do verificador local. Os resultados locais acima permanecem históricos.

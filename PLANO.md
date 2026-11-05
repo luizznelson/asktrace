@@ -25,8 +25,9 @@ agosto–outubro permanece separado. Sem filtros livres, memória no modelo ou n
 - [x] Banco Neon carregado; duas bases, logins restritos, restauração e limites persistentes verificados.
 - [x] Publicar no Render Free; seis consultas de ambas as bases e uma consulta com IA verificadas.
 - [x] Otimizar a validação repetida; medir os doze caminhos ASGI com Neon.
-- [ ] Enviar o commit da otimização, atualizar o Render e medir a latência pública.
-- [ ] Conferir reinício da versão otimizada e retomada após suspensão no serviço hospedado.
+- [x] Commit da otimização publicado no Render; doze caminhos e IA real verificados com latência registrada.
+- [x] Conferir nova instância da versão otimizada no Render: orçamento preservado e token anterior rejeitado.
+- [ ] Conferir retomada após suspensão por inatividade, separadamente do redeploy.
 - [ ] Concluir revisão visual de todas as telas. Navegador disponível; apresentação inicial, idioma, resposta, histórico e CSV já conferidos.
 - [ ] Gravar o vídeo com a aplicação hospedada e acrescentar capturas reais ao README.
 - [ ] Observar a CI do commit publicado; não equiparar testes locais à execução remota.

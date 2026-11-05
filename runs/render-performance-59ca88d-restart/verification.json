@@ -1,0 +1,52 @@
+{
+  "started_at": "2026-11-05T13:52:12.608900+00:00",
+  "url": "https://asktrace-pyop.onrender.com",
+  "commit": "59ca88dfaab2c842da4b70534ca98b3c5e50fdb7",
+  "deploy_id": "dep-dbm8it5bedkc73bi3pjg",
+  "checks": [
+    {
+      "name": "durable_budget_retained_after_deploy",
+      "passed": true,
+      "daily_before": 52,
+      "daily_after": 52,
+      "ai_before": 1,
+      "ai_after": 1
+    },
+    {
+      "name": "health",
+      "passed": true,
+      "seconds": 0.649
+    },
+    {
+      "name": "new_instance_session",
+      "passed": true
+    },
+    {
+      "name": "old_instance_token_rejected",
+      "passed": true
+    },
+    {
+      "name": "expanded:summary",
+      "passed": true
+    },
+    {
+      "name": "expanded:municipalities",
+      "passed": false
+    }
+  ],
+  "queries": [
+    {
+      "dataset": "expanded",
+      "action": "summary",
+      "seconds": 0.676,
+      "response_sha256": "4ae5c90fdda4eb5ed7a559e9eb676be763f817bed1496e756fb7bacd8da8aa75"
+    }
+  ],
+  "browser_visual_inspection": false,
+  "external_ai_requests_reserved": 0,
+  "passed": false,
+  "error_type": "AssertionError",
+  "finished_at": "2026-11-05T13:52:18.266551+00:00",
+  "measurement_invalid_reason": "Windows default text decoding corrupted accented questions in the verification script; baseline correctly refused altered input. Verification script corrected without application changes.",
+  "application_failure_established": false
+}

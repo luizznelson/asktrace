@@ -1,5 +1,8 @@
 # Publicação do AskTrace
 
+**Publicado e verificado:** [aplicação](https://asktrace-pyop.onrender.com), commit `59ca88d`.
+[Resultados da atualização e da nova instância](../runs/render-performance-59ca88d-verified/verification.json).
+
 ## O que foi preparado
 
 A aplicação mantém o servidor local e tem uma entrada pública com FastAPI/Uvicorn.
@@ -122,7 +125,8 @@ antes de criar recursos; a aplicação não comprova a gratuidade da conta dos p
 - [x] Segredos de execução cadastrados; credencial administrativa ausente do serviço.
 - [x] Startup restaura o pacote com o hash esperado e saúde retorna 200.
 - [ ] Seis consultas, recusas, histórico, troca de idioma e downloads conferidos na URL pública.
-- [ ] Reinício e retomada após inatividade conferidos; limites não são apagados.
+- [x] Nova instância após redeploy do mesmo commit: orçamento preservado e token antigo rejeitado.
+- [ ] Retomada após suspensão por inatividade conferida separadamente.
 - [ ] Inspeção visual de desktop e celular realizada, sem afirmar certificação de acessibilidade.
 - [ ] URL, capturas reais e vídeo adicionados ao README; pendências atualizadas.
 
@@ -185,14 +189,41 @@ reinício do serviço hospedado e retomada após inatividade continuam pendentes
 [Condições de hospedagem e limites consultados](hosting-options.md).
 
 
-## Atualização de desempenho preparada
+## Histórico: atualização de desempenho preparada
 
 A versão local otimizada reutiliza evidências verificadas na inicialização pública,
-sem armazenar respostas de usuários. O código precisa ser commitado, enviado e implantado
-para que essa mudança alcance a URL pública. Não é necessário repetir a importação do
+sem armazenar respostas de usuários. Naquela etapa, o código ainda precisava ser commitado, enviado e implantado.
+A publicação foi concluída na etapa registrada abaixo. Não é necessário repetir a importação do
 Neon nem gerar novas credenciais. A atualização preserva os limites já gravados no banco.
 
 Em 05/11/2026 às 13:10 UTC, a versão pública anterior respondeu `/healthz` com 200 em
 0,801 segundo após um intervalo sem requisições desta sessão. Não houve confirmação de
 suspensão por inatividade, e outros visitantes não foram excluídos; isso não comprova
 um cold start. [Registro](../runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/idle-response.json).
+
+
+## Otimização publicada e nova instância verificada
+
+O commit `59ca88dfaab2c842da4b70534ca98b3c5e50fdb7` está publicado. O primeiro deploy
+`dep-dbm8hobm8hqs73f1tabg` e o redeploy controlado `dep-dbm8it5bedkc73bi3pjg` chegaram
+a `live`. A nova instância restaurou e verificou os dados antes de receber tráfego.
+[Conferência HTTPS](../runs/render-performance-59ca88d-verified/verification.json): doze caminhos, contagens esperadas, recusa de pergunta
+fora do escopo, token antigo rejeitado e orçamento diário/IA inalterado na troca.
+
+Base maior: 0.563–0.940 segundos por consulta por regras nesta rodada; a rodada
+anterior levou 20–23 segundos. Uma solicitação com IA real levou 1.884 segundos.
+As duas execuções usam o endereço público, mas não são teste controlado de carga.
+
+Uma primeira comparação de tokens foi inválida porque o checkpoint já pertencia à
+instância publicada; esse registro foi preservado e não representa falha estabelecida
+da aplicação. A comparação foi repetida através de um novo deploy do mesmo commit.
+Não foi necessário importar novamente a base ou trocar credenciais.
+
+Essa conferência resolve a pendência de iniciar uma nova instância hospedada da versão
+otimizada. Não esclarece a causa da falha anterior do cliente ASGI local. Retomada após
+suspensão por inatividade, revisão visual completa e vídeo continuam separados.
+
+As recusas intermediárias de uma pergunta no roteiro público foram provocadas por uma
+conversão incorreta dos acentos no próprio arquivo de verificação no Windows. O roteiro
+foi corrigido, as tentativas anteriores foram preservadas e a rodada final passou. Não
+foi necessária alteração do código da aplicação para essa ocorrência.

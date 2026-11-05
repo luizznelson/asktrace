@@ -193,21 +193,20 @@ Once prepared, run `.venv/Scripts/python.exe -m asktrace.web` and open
 credentials, evidence restoration and persistent limits. Public HTTPS was verified
 on November 5, 2026. See the [deployment guide](docs/deployment.md) (Portuguese).
 
-**Measured limitation:** the initial public check took 20–23 seconds per local-rule
-query on the larger dataset and 5–6 seconds on the original; one AI query took
-43 seconds. These are observations from this run, not performance guarantees.
-Latency optimization and wake-up after inactivity still need verification.
+**Observed Render performance:** the six local-rule queries on the larger dataset
+took 0.563–0.940 seconds after optimization, compared with 20–23 seconds before.
+One AI query took 1.884 seconds. These are two observed runs, not a performance
+guarantee. [Evidence and comparison](runs/render-performance-59ca88d-verified/verification.json).
 
 The Neon database was loaded and verified: six routes for each dataset passed with
 restricted logins, evidence was restored from the database, and the budget survived
 restarting the test application. [Remote verification](runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json).
 The separate public HTTPS check is recorded in the [Render evidence](runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/verification.json).
 
-**Optimization ready to deploy:** the public runtime reuses immutable evidence metadata
-verified at startup; each question still reads the database. A local ASGI benchmark with
-Neon passed all six routes for both datasets. [Measurements and limits](runs/runtime-performance-a7a651f7-b68a-402e-9e6f-5f0af9ce7a58/verification.json).
-These are not timings of the optimized version on Render. Deployment of the change
-and verification of its restart are still pending.
+**Optimization deployed and checked:** commit `59ca88d`, twelve queries across both datasets,
+one real AI request, a fresh instance retaining the usage budget, and rejection of the
+previous instance's token. [Public verification](runs/render-performance-59ca88d-verified/verification.json). Wake-up after idle suspension
+is a separate check and remains unverified.
 
 ## Explore further
 

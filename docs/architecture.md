@@ -78,8 +78,8 @@ rota para editar arquivos, trocar snapshots ou invalidar esse estado.
 
 **Consequências:** o custo de ler os arquivos fica concentrado na inicialização e há
 uso adicional de memória. Reinícios continuam sujeitos ao tempo de restauração e
-validação. A melhoria das consultas precisa ser medida novamente na URL pública após
-o commit e o deploy; o benchmark com ASGI/Neon não representa esse teste hospedado.
+validação. A melhoria foi medida na [URL pública](../runs/render-performance-59ca88d-verified/verification.json) após
+o deploy. O benchmark anterior com ASGI/Neon permanece separado dessa medição hospedada.
 
 Os testes cobrem alterações de arquivos entre operações de auditoria, hash de contrato,
 isolamento das cópias, seleção da base, caminho relativo à aplicação e divergência do banco.

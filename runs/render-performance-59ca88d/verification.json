@@ -1,0 +1,33 @@
+{
+  "started_at": "2026-11-05T13:49:07.621061+00:00",
+  "url": "https://asktrace-pyop.onrender.com",
+  "commit": "59ca88dfaab2c842da4b70534ca98b3c5e50fdb7",
+  "deploy_id": "dep-dbm8hobm8hqs73f1tabg",
+  "checks": [
+    {
+      "name": "durable_budget_retained_after_deploy",
+      "passed": true,
+      "daily_before": 52,
+      "daily_after": 52,
+      "ai_before": 1,
+      "ai_after": 1
+    },
+    {
+      "name": "health",
+      "passed": true,
+      "seconds": 0.488
+    },
+    {
+      "name": "new_instance_session",
+      "passed": false
+    }
+  ],
+  "queries": [],
+  "browser_visual_inspection": false,
+  "external_ai_requests_reserved": 0,
+  "passed": false,
+  "error_type": "AssertionError",
+  "finished_at": "2026-11-05T13:49:11.398175+00:00",
+  "measurement_invalid_reason": "The session checkpoint belonged to the already deployed instance; token rotation was not measured across this first deploy.",
+  "application_failure_established": false
+}

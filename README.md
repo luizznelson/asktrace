@@ -193,21 +193,20 @@ Com a base preparada, execute `.venv/Scripts/python.exe -m asktrace.web` e abra
 separadas, restauração das evidências e limites persistentes. O endereço externo foi
 verificado em 05/11/2026. Siga o [guia de publicação](docs/deployment.md).
 
-**Limitação medida:** na primeira conferência pública, consultas por regras levaram
-20–23 segundos na base maior e 5–6 segundos na original; uma consulta com IA levou
-43 segundos. São observações desta execução, sem promessa de desempenho. A otimização
-da latência e a retomada após inatividade ainda precisam de validação.
+**Desempenho observado no Render:** após a otimização, as seis consultas por regras
+da base maior levaram 0.563–0.940 segundos; antes, 20–23 segundos. Uma pergunta com IA
+levou 1.884 segundos. São duas execuções observadas, sem garantia de desempenho.
+[Evidências e comparação](runs/render-performance-59ca88d-verified/verification.json).
 
 O banco no Neon também foi carregado e verificado: os seis caminhos das duas bases
 passaram com os logins restritos, as evidências foram restauradas do banco e o limite
 persistiu após reinicializar a aplicação de teste. [Verificação remota](runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json).
 A conferência do endereço público está registrada separadamente no [Render](runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/verification.json).
 
-**Otimização pronta para publicação:** o serviço público passa a reutilizar em memória
-metadados verificados no startup; cada pergunta continua lendo o banco. No benchmark
-ASGI local com Neon, os seis caminhos de cada base passaram. [Medição e limites](runs/runtime-performance-a7a651f7-b68a-402e-9e6f-5f0af9ce7a58/verification.json).
-Esses tempos não são uma medição da versão otimizada no Render. O novo deploy e a
-conferência de reinício dessa versão ainda estão pendentes.
+**Otimização publicada e conferida:** commit `59ca88d`, doze consultas nas duas bases,
+uma solicitação com IA real, nova instância com o mesmo orçamento de uso e rejeição do
+token da instância anterior. [Conferência pública](runs/render-performance-59ca88d-verified/verification.json). A retomada após suspensão
+por inatividade permanece separada e ainda não foi comprovada.
 
 ## Para aprofundar
 
