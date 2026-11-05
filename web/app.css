@@ -1671,3 +1671,21 @@ body.has-result .welcome {
         max-width: 100%;
     }
 }
+
+.business-context {
+    margin: 26px 0 0;
+    padding: 20px;
+    text-align: left;
+    border-left: 3px solid #00858a;
+    border-radius: 0 10px 10px 0;
+    background: #eef7f6;
+    overflow-wrap: anywhere;
+}
+.business-context .eyebrow { margin: 0 0 8px; }
+.business-context h2 { margin: 0 0 12px; font-size: 19px; line-height: 1.4; }
+.business-context p { font-size: 13px; line-height: 1.7; color: #36566d; }
+.business-context summary { cursor: pointer; font-size: 12px; color: #315568; line-height: 1.7; }
+@media (max-width: 520px) {
+    .business-context { padding: 16px; }
+    .business-context h2 { font-size: 18px; }
+}

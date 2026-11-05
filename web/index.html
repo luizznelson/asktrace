@@ -6,7 +6,7 @@
         <title>AskTrace · Assistente de compras públicas</title>
         <meta
             name="description"
-            content="Explore compras públicas em uma conversa com fontes, recorte e rastreabilidade."
+            content="Compare publicações de compras públicas para preparar uma análise com fontes verificáveis."
         />
         <link rel="stylesheet" href="/app.css" />
         <script src="/formatters.js" defer></script>
@@ -123,19 +123,19 @@
                     <div class="assistant-symbol" aria-hidden="true">
                         <span>✳</span>
                     </div>
-                    <p class="eyebrow" data-i="welcomeLabel">
-                        DADOS PÚBLICOS. PERGUNTAS MELHORES.
-                    </p>
-                    <h1 data-i="assistantTitle">
-                        Entenda as compras públicas<br />do Piauí.
-                    </h1>
-                    <p class="welcome-copy" data-i="assistantLede">
-                        O AskTrace transforma registros do Portal Nacional de
-                        Contratações Públicas (PNCP) em respostas que você pode
-                        conferir. Explore municípios, órgãos e meses de
-                        publicação, confira lacunas e encontre contratos ligados
-                        a uma compra.
-                    </p>
+                    <p class="eyebrow" data-i="welcomeLabel">ANÁLISE DE COMPRAS PÚBLICAS</p>
+                    <h1 data-i="assistantTitle">Saiba por onde começar<br />a análise das compras.</h1>
+                    <p class="welcome-copy" data-i="assistantLede">Prepare uma análise das publicações do PNCP: compare órgãos, municípios e meses para escolher o que merece uma conferência mais detalhada. Consulte uma compra pelo ID e leve os resultados com as fontes.</p>
+                    <section class="business-context" aria-labelledby="business-title">
+                        <p class="eyebrow" data-i="businessLabel">PARA QUE SERVE</p>
+                        <h2 id="business-title" data-i="businessTitle">Do panorama à conferência de uma compra</h2>
+                        <p data-i="businessAudience">Pensado para quem prepara relatórios de acompanhamento de compras públicas. O desafio proposto é escolher o que examinar e sustentar o relatório com dados conferíveis.</p>
+                        <p data-i="businessOutcome">Você pode comparar volumes de publicações, conferir contratos de uma compra identificada e exportar a tabela para apoiar seu relatório. A decisão sobre o que investigar continua com você.</p>
+                        <details>
+                            <summary data-i="businessScopeLabel">Contexto e limites desta proposta</summary>
+                            <p data-i="businessBoundary">Uso proposto, ainda sem validação com usuários. O PNCP já oferece busca e painéis; aqui você explora um recorte histórico por perguntas, sem acompanhamento em tempo real.</p>
+                        </details>
+                    </section>
                     <div class="dataset-stats">
                         <div>
                             <span class="stat-icon">▤</span>
@@ -166,35 +166,25 @@
                         </div>
                     </div>
                     <div class="use-guide">
-                        <p data-i="guideLabel">EM TRÊS PASSOS</p>
+                        <p data-i="guideLabel">UM PERCURSO PARA PREPARAR SUA ANÁLISE</p>
                         <div>
                             <article>
                                 <strong data-i="guide1"
-                                    >1. Escolha a base</strong
+                                    >1. Compare o panorama</strong
                                 >
-                                <p data-i="guide1text">
-                                    Confira o período e a cobertura de contratos
-                                    antes de interpretar os números.
-                                </p>
+                                <p data-i="guide1text">Confira a base e pergunte quais órgãos ou municípios têm mais publicações, ou como o volume muda por mês.</p>
                             </article>
                             <article>
                                 <strong data-i="guide2"
-                                    >2. Faça uma pergunta concreta</strong
+                                    >2. Confira um registro</strong
                                 >
-                                <p data-i="guide2text">
-                                    Comece pelo panorama. Depois explore
-                                    municípios ou use um ID de compra para
-                                    rastrear a origem.
-                                </p>
+                                <p data-i="guide2text">Com um ID PNCP, consulte os dados da compra e seus contratos. O ranking não filtra automaticamente os registros de um órgão.</p>
                             </article>
                             <article>
                                 <strong data-i="guide3"
-                                    >3. Confira a resposta</strong
+                                    >3. Leve a evidência</strong
                                 >
-                                <p data-i="guide3text">
-                                    Abra as fontes e o rastro. Você vê o que foi
-                                    consultado e o que ainda é desconhecido.
-                                </p>
+                                <p data-i="guide3text">Abra as fontes e exporte a tabela CSV ou o registro JSON. Inclua no relatório o recorte e os campos não informados.</p>
                             </article>
                         </div>
                     </div>

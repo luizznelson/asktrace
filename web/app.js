@@ -148,10 +148,15 @@ const text = {
         scopeTitle: "Dados públicos com um recorte explícito.",
         scopeDetail:
             "Confira o período, a quantidade de compras e o andamento da busca de contratos na base selecionada.",
-        welcomeLabel: "DADOS PÚBLICOS. PERGUNTAS MELHORES.",
-        assistantTitle: "Entenda as compras públicas\ndo Piauí.",
-        assistantLede:
-            "O AskTrace transforma registros do Portal Nacional de Contratações Públicas (PNCP) em respostas que você pode conferir. Explore municípios, órgãos e meses de publicação, confira lacunas e encontre contratos ligados a uma compra.",
+        welcomeLabel: "ANÁLISE DE COMPRAS PÚBLICAS",
+        assistantTitle: "Saiba por onde começar\na análise das compras.",
+        assistantLede: "Prepare uma análise das publicações do PNCP: compare órgãos, municípios e meses para escolher o que merece uma conferência mais detalhada. Consulte uma compra pelo ID e leve os resultados com as fontes.",
+        businessLabel: "PARA QUE SERVE",
+        businessScopeLabel: "Contexto e limites desta proposta",
+        businessTitle: "Do panorama à conferência de uma compra",
+        businessAudience: "Pensado para quem prepara relatórios de acompanhamento de compras públicas. O desafio proposto é escolher o que examinar e sustentar o relatório com dados conferíveis.",
+        businessOutcome: "Você pode comparar volumes de publicações, conferir contratos de uma compra identificada e exportar a tabela para apoiar seu relatório. A decisão sobre o que investigar continua com você.",
+        businessBoundary: "Uso proposto, ainda sem validação com usuários. O PNCP já oferece busca e painéis; aqui você explora um recorte histórico por perguntas, sem acompanhamento em tempo real.",
         statPurchases: "compras na base",
         statContracts: "contratos vinculados",
         statCoverage: "compras com contratos pesquisados",
@@ -204,16 +209,13 @@ const text = {
             "Os números vêm do recorte consultado. Abra as fontes para conferir origem e cobertura.",
         refusalInsight:
             "Posso ajudar com contagens, municípios ou uma compra com identificador. Escolha uma sugestão para reformular sua pergunta.",
-        guideLabel: "EM TRÊS PASSOS",
-        guide1: "1. Escolha a base",
-        guide1text:
-            "Confira o período e a cobertura de contratos antes de interpretar os números.",
-        guide2: "2. Faça uma pergunta concreta",
-        guide2text:
-            "Comece pelo panorama. Depois explore municípios ou use um ID de compra para rastrear a origem.",
-        guide3: "3. Confira a resposta",
-        guide3text:
-            "Abra as fontes e o rastro. Você vê o que foi consultado e o que ainda é desconhecido.",
+        guideLabel: "UM PERCURSO PARA PREPARAR SUA ANÁLISE",
+        guide1: "1. Compare o panorama",
+        guide1text: "Confira a base e pergunte quais órgãos ou municípios têm mais publicações, ou como o volume muda por mês.",
+        guide2: "2. Confira um registro",
+        guide2text: "Com um ID PNCP, consulte os dados da compra e seus contratos. O ranking não filtra automaticamente os registros de um órgão.",
+        guide3: "3. Leve a evidência",
+        guide3text: "Abra as fontes e exporte a tabela CSV ou o registro JSON. Inclua no relatório o recorte e os campos não informados.",
         datasetLabel: "Base consultada",
         coverageWarning:
             "A cobertura de contratos pode ser parcial. Compras não consultadas não significam compras sem contrato.",
@@ -384,10 +386,15 @@ const text = {
         scopeTitle: "Public data with an explicit scope.",
         scopeDetail:
             "Check the period, purchase count and contract search progress for the selected dataset.",
-        welcomeLabel: "PUBLIC DATA. BETTER QUESTIONS.",
-        assistantTitle: "Understand public procurement\nin Piauí.",
-        assistantLede:
-            "AskTrace turns records from Brazil’s National Public Procurement Portal (PNCP) into answers you can verify. Explore municipalities, organizations and publication months, check missing data and find contracts linked to a purchase.",
+        welcomeLabel: "PUBLIC PROCUREMENT ANALYSIS",
+        assistantTitle: "Find where to start\nyour procurement analysis.",
+        assistantLede: "Prepare an analysis of PNCP publications: compare organizations, municipalities and months to choose what to examine more closely. Look up a purchase by ID and take the results with their sources.",
+        businessLabel: "WHAT IT IS FOR",
+        businessScopeLabel: "Context and limits of this proposal",
+        businessTitle: "From an overview to checking a purchase",
+        businessAudience: "Designed for people preparing public procurement monitoring reports. The proposed task is choosing what to examine and backing the report with verifiable data.",
+        businessOutcome: "Compare publication volumes, inspect contracts for an identified purchase and export a table to support your report. You decide what warrants investigation.",
+        businessBoundary: "Proposed use, not yet validated with users. PNCP already provides search and dashboards; this app lets you question a historical dataset, without real-time monitoring.",
         statPurchases: "dataset purchases",
         statContracts: "linked contracts",
         statCoverage: "purchases with contracts searched",
@@ -440,16 +447,13 @@ const text = {
             "These numbers come from the queried dataset. Open the sources to verify provenance and coverage.",
         refusalInsight:
             "I can help with counts, municipality groups or a purchase identifier. Choose a suggestion to rephrase your question.",
-        guideLabel: "THREE STEPS",
-        guide1: "1. Choose a dataset",
-        guide1text:
-            "Check the period and contract coverage before interpreting the numbers.",
-        guide2: "2. Ask a concrete question",
-        guide2text:
-            "Start with the overview. Then explore municipalities or use a purchase ID to trace provenance.",
-        guide3: "3. Check the answer",
-        guide3text:
-            "Open sources and trace. You see what was queried and what remains unknown.",
+        guideLabel: "A PATH TO PREPARING YOUR ANALYSIS",
+        guide1: "1. Compare the overview",
+        guide1text: "Check the dataset and ask which organizations or municipalities have more publications, or how volumes change by month.",
+        guide2: "2. Check a record",
+        guide2text: "Use a PNCP ID to inspect a purchase and its contracts. Rankings do not automatically filter an organization’s individual records.",
+        guide3: "3. Take the evidence",
+        guide3text: "Open the sources and export the CSV table or JSON record. Include the scope and unreported fields in your report.",
         datasetLabel: "Selected dataset",
         coverageWarning:
             "Contract coverage may be partial. Unqueried purchases are not purchases without contracts.",
