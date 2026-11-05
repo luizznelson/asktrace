@@ -4,7 +4,7 @@
 
 | Camada | Verificação | Limite |
 | --- | --- | --- |
-| Software | 131 testes Python com PostgreSQL isolado; Ruff e formatação | Não prova ausência de falhas ou implantação em produção |
+| Software | 137 testes Python com PostgreSQL isolado; Ruff e formatação | Não prova ausência de falhas ou implantação em produção |
 | Apresentação | Contratos Node de gráficos, empates, moeda, histórico, CSV e PT/EN | Não é inspeção visual em navegador |
 | Dados reais | Consultas HTTP, contagens de seis meses, permissões e integridade dos snapshots | O PNCP não fornece uma transação única para toda a coleta |
 | Cobertura | 2.536 compras aptas pesquisadas; 679 contratos; 26 cargas repetidas sem duplicação | Uma exclusão por ano inválido; ausência de publicação não prova ausência de contrato |
@@ -57,9 +57,10 @@ dos arquivos de aplicação e teste verificados.
 
 ## Verificações que ainda faltam
 
-Não houve acesso ao navegador nesta etapa, portanto não se afirma que layout, contraste,
-leitores de tela ou dispositivos reais foram visualmente validados. O vídeo de demonstração ainda não foi publicado. A CI inclui os novos testes;
-o resultado remoto precisa ser observado após o push.
+Houve revisão inicial da aplicação publicada: página inicial em tela estreita, idioma,
+resposta, histórico e download CSV. Ainda faltam a revisão visual completa de desktop e
+celular, contraste, leitores de tela e dispositivos reais. O vídeo não foi publicado.
+O resultado remoto da CI precisa ser observado após o push da otimização.
 
 A busca de contratos foi concluída para o snapshot apto, não para todas as contratações
 existentes no estado. Os limites do servidor local e do planejador permanecem documentados
@@ -82,7 +83,8 @@ Uma rodada intermediária falhou em uma asserção HTTP, sem diagnóstico de cau
 As cinco consultas isoladas e a repetição completa passaram; o evento permanece registrado
 na síntese. Isso não equivale a uma garantia de ausência de falhas.
 
-O banco remoto foi verificado no Neon; URL pública, inspeção visual e vídeo continuam pendentes.
+O banco remoto e a URL pública foram verificados. A inspeção visual completa e o vídeo
+continuam pendentes; a atualização de desempenho ainda precisa chegar ao Render.
 
 ## Banco remoto e isolamento dos testes
 
@@ -91,3 +93,17 @@ logins restritos, restauração e limites após reinicialização da aplicação
 A regressão com uma URL de produção configurada comprova que testes opt-in usam somente
 `asktrace_test` local. Após a correção, 131 testes Python passaram. O incidente e a limpeza
 dos cinco registros sintéticos estão documentados no [guia de publicação](deployment.md).
+
+
+## Otimização do runtime público
+
+[Verificação reproduzível](../runs/runtime-performance-a7a651f7-b68a-402e-9e6f-5f0af9ce7a58/verification.json): 137 testes Python passaram com o banco local
+isolado. As doze consultas do benchmark ASGI com o Neon mantiveram contagens e cobertura.
+O teste de caminho relativo cobre a falha encontrada na primeira rodada. Uma tentativa
+de nova instância falhou após as doze consultas; a causa não foi confirmada e a verificação
+de reinício da versão otimizada permanece pendente. A indisponibilidade intermediária
+do Docker também está registrada, separada dos resultados finais.
+
+Os tempos ASGI são locais com banco remoto e não substituem medir o novo deploy no Render.
+A revisão visual inicial hospedada, o histórico e o CSV estão registrados na
+[publicação](deployment.md); revisão completa, vídeo e cold start hospedado continuam pendentes.

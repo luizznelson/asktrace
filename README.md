@@ -147,7 +147,7 @@ desenvolvimento está declarada ao final deste README.
 
 ## Qualidade: software e IA são verificações diferentes
 
-- **Software:** 131 testes Python na última suíte, com PostgreSQL isolado; contratos Node
+- **Software:** 137 testes Python na última suíte, com PostgreSQL isolado; contratos Node
   para interface, gráficos, formatação e CSV. [Como reproduzir e interpretar](docs/quality.md).
 - **Roteamento local v3:** 60/60 casos do corpus final curado, incluindo as seis consultas e recusas.
 - **Contingência de IA v3:** 60 aprovações em 61 execuções, com uma falha preservada.
@@ -202,6 +202,12 @@ O banco no Neon também foi carregado e verificado: os seis caminhos das duas ba
 passaram com os logins restritos, as evidências foram restauradas do banco e o limite
 persistiu após reinicializar a aplicação de teste. [Verificação remota](runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json).
 A conferência do endereço público está registrada separadamente no [Render](runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/verification.json).
+
+**Otimização pronta para publicação:** o serviço público passa a reutilizar em memória
+metadados verificados no startup; cada pergunta continua lendo o banco. No benchmark
+ASGI local com Neon, os seis caminhos de cada base passaram. [Medição e limites](runs/runtime-performance-a7a651f7-b68a-402e-9e6f-5f0af9ce7a58/verification.json).
+Esses tempos não são uma medição da versão otimizada no Render. O novo deploy e a
+conferência de reinício dessa versão ainda estão pendentes.
 
 ## Para aprofundar
 

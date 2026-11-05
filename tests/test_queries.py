@@ -133,3 +133,37 @@ class BusinessQueryTests(unittest.TestCase):
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["purchases"], 2)
         self.assertEqual(rows[0]["estimated_value"], Decimal(30))
+
+    def test_public_evidence_reuse_still_queries_and_checks_database(self):
+        metadata = query.dataset(self.root, self.report)
+        verified = query.VerifiedDataset.capture(self.root, self.report, metadata)
+        with patch.object(query, "dataset", side_effect=AssertionError("unexpected file replay")):
+            result = query.answer(self.root, self.report, "summary", verified=verified)
+        self.assertEqual(result["coverage"]["contracts"], 2)
+        # A cached expectation that differs from PostgreSQL must still fail closed.
+        metadata[1].append(dict(metadata[1][0]))
+        mismatch = query.VerifiedDataset.capture(self.root, self.report, metadata)
+        with self.assertRaisesRegex(ValueError, "database_coverage_mismatch"):
+            query.answer(self.root, self.report, "summary", verified=mismatch)
+
+    def test_public_runner_resolves_relative_report_against_application_root(self):
+        from asktrace.web import Application
+
+        config = self.root / "config"
+        config.mkdir()
+        relative = self.report.relative_to(self.root)
+        (config / "datasets.json").write_text(
+            json.dumps(
+                {
+                    "default": "fixture",
+                    "datasets": [{"id": "fixture", "coverage": relative.as_posix()}],
+                }
+            )
+        )
+        application = Application(self.root, verified_runtime=True)
+        with patch.object(query, "dataset", side_effect=AssertionError("unexpected file replay")):
+            result = application.runner(
+                self.root, relative, "Qual é o resumo da cobertura?", "baseline"
+            )
+        self.assertEqual(result["status"], "answered")
+        self.assertEqual(result["evidence"]["coverage"]["contracts"], 2)

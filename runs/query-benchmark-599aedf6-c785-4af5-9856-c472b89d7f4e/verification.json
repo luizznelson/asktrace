@@ -1,0 +1,92 @@
+{
+  "started_at": "2026-11-05T13:25:24.337384+00:00",
+  "transport": "local ASGI with real Neon, prepared and verified source files",
+  "external_deployment_verified": false,
+  "artifact_restoration_tested": false,
+  "restart_verified": false,
+  "external_ai_calls": 0,
+  "queries": [
+    {
+      "dataset": "expanded",
+      "action": "summary",
+      "seconds": 8.768,
+      "response_sha256": "3f3cb7ab6235c9d02ed373a203295c34258f3e04b4260ef0e83bc375aad2ba8f"
+    },
+    {
+      "dataset": "expanded",
+      "action": "municipalities",
+      "seconds": 5.588,
+      "response_sha256": "88a79290e6595e25a9f59ecdf3e95ebf9acbde3fb9f864d7893ce81db4ffdedb"
+    },
+    {
+      "dataset": "expanded",
+      "action": "monthly",
+      "seconds": 8.666,
+      "response_sha256": "a5ef0b05610ce263fa51810c8de5f70a14cdcfded05dd2ac631882d6e66ad8b1"
+    },
+    {
+      "dataset": "expanded",
+      "action": "organizations",
+      "seconds": 6.319,
+      "response_sha256": "b49d25ca7ddaca281d54b2a7d33e0fcb2234ce9056e07b6455e7a90a7a195a81"
+    },
+    {
+      "dataset": "expanded",
+      "action": "quality",
+      "seconds": 4.09,
+      "response_sha256": "a75eb687c28643dd3ed3f3215aff25db87ba404eb30b2bc8fa03afe233437234"
+    },
+    {
+      "dataset": "expanded",
+      "action": "purchase",
+      "seconds": 9.829,
+      "response_sha256": "18d9185006e14f9c2cfb8bef379a119f73bce13147511324eeb713bd0c644191"
+    },
+    {
+      "dataset": "original",
+      "action": "summary",
+      "seconds": 3.944,
+      "response_sha256": "b1292d9d86c86062919c33ffc6636f011ade9875962d99a8ff0c171c98659e10"
+    },
+    {
+      "dataset": "original",
+      "action": "municipalities",
+      "seconds": 6.685,
+      "response_sha256": "5b561e3efa1164f5e4fc6b52811dbdd3d1193c3e40e8bd53c60f1095038ec460"
+    },
+    {
+      "dataset": "original",
+      "action": "monthly",
+      "seconds": 4.678,
+      "response_sha256": "74889ffaf17f2b21ed412eab3f1d03c24f290173798076027b24aa56dc46bdf6"
+    },
+    {
+      "dataset": "original",
+      "action": "organizations",
+      "seconds": 4.181,
+      "response_sha256": "b91a354b87e4d1794f9ffa3cdadf66ab940baa299d5c146f51a22944f15615bc"
+    },
+    {
+      "dataset": "original",
+      "action": "quality",
+      "seconds": 5.36,
+      "response_sha256": "003c99dea7208a246bf0c01e9c021640770b17d037f630a39f1c18dd6817fddd"
+    },
+    {
+      "dataset": "original",
+      "action": "purchase",
+      "seconds": 6.061,
+      "response_sha256": "99ea54e306ffd223cb3406e445bc7cfa96a2c5d42ec255816386484ccc74969c"
+    }
+  ],
+  "passed": true,
+  "evidence_verification_seconds": 14.066,
+  "finished_at": "2026-11-05T13:27:00.293461+00:00",
+  "source_sha256": {
+    "asktrace/agent.py": "e3ae4f4bd22998a0d3c04db9d7063a478cad82f7b2d220243a81594cc6b10edd",
+    "asktrace/query.py": "8c34692a0be4361ed958e1c6bc7d83e4302c47bdc7ede1dc80b4aa3d8b19e14c",
+    "asktrace/web.py": "b5b2d03ecfda6cf73d6884da4b88e3453e840e471103468999d031c26a707088",
+    "asktrace/public.py": "35d2488721e44bae5440566e1200026865a94b40ad8460bc775ada92b8910e3b",
+    "asktrace/contracts.py": "6b236aa66d97655ae94f00ae89e49cc8f1c2bd180aac346f0e887c14f204cb33"
+  }
+}

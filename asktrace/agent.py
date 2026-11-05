@@ -165,7 +165,7 @@ def render(result):
     )
 
 
-def run(root, report, question, provider="baseline", planner=None, tool=answer):
+def run(root, report, question, provider="baseline", planner=None, tool=answer, *, verified=None):
     started = time.perf_counter()
     if not isinstance(question, str) or not 1 <= len(question.strip()) <= 1000:
         raise ValueError("question_length_must_be_1_to_1000")
@@ -187,10 +187,16 @@ def run(root, report, question, provider="baseline", planner=None, tool=answer):
     else:
         scope_token = None
         try:
-            if planner is None and report.exists() and provider != "baseline":
+            if (
+                planner is None
+                and (verified is not None or report.exists())
+                and provider != "baseline"
+            ):
                 from asktrace.query import dataset
 
-                manifest, _, _, _ = dataset(root, report)
+                manifest, _, _, _ = (
+                    verified.read(root, report) if verified is not None else dataset(root, report)
+                )
                 scope_token = ACTIVE_SCOPE.set(manifest)
             if planner is None:
                 if provider == "gemini":
@@ -224,7 +230,8 @@ def run(root, report, question, provider="baseline", planner=None, tool=answer):
             trace.append({"step": "plan", "plan": plan, "usage": usage})
             if plan["action"] != "refuse":
                 result["tool_calls"] = 1
-                data = tool(root, report, plan["action"], plan["purchase_id"])
+                kwargs = {"verified": verified} if verified is not None else {}
+                data = tool(root, report, plan["action"], plan["purchase_id"], **kwargs)
                 # Free text is not sent to the model or included in the public answer.
                 for row in data["result"]:
                     row.pop("object_text", None)

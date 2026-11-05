@@ -147,7 +147,7 @@ end of this README. Detailed documentation is primarily in Portuguese.
 
 ## Software checks and AI evaluation are different
 
-- **Software:** 131 Python tests in the latest suite, including isolated PostgreSQL;
+- **Software:** 137 Python tests in the latest suite, including isolated PostgreSQL;
   Node contracts cover UI, charts, formatting and CSV. [Verification](docs/quality.md).
 - **Local v3 routing:** 60/60 author-curated release cases covering six queries and refusals.
 - **AI contingency v3:** 60 passes across 61 executions, with one failure preserved.
@@ -202,6 +202,12 @@ The Neon database was loaded and verified: six routes for each dataset passed wi
 restricted logins, evidence was restored from the database, and the budget survived
 restarting the test application. [Remote verification](runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json).
 The separate public HTTPS check is recorded in the [Render evidence](runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/verification.json).
+
+**Optimization ready to deploy:** the public runtime reuses immutable evidence metadata
+verified at startup; each question still reads the database. A local ASGI benchmark with
+Neon passed all six routes for both datasets. [Measurements and limits](runs/runtime-performance-a7a651f7-b68a-402e-9e6f-5f0af9ce7a58/verification.json).
+These are not timings of the optimized version on Render. Deployment of the change
+and verification of its restart are still pending.
 
 ## Explore further
 

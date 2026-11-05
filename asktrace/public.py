@@ -115,7 +115,7 @@ def create_app(root=None, application=None, reserver=reserve, checker=check_data
                 restore_database_artifact(root, os.environ.get("ASKTRACE_DATA_SHA256", ""))
             else:
                 checker(root)
-            app.state.context = application or Application(root)
+            app.state.context = application or Application(root, verified_runtime=True)
         except Exception:
             raise RuntimeError("public_startup_verification_failed") from None
         yield

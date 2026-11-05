@@ -5,6 +5,7 @@ import json
 import os
 import secrets
 from collections import Counter
+from dataclasses import dataclass
 from decimal import Decimal
 from pathlib import Path
 from uuid import UUID
@@ -15,8 +16,7 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
 from asktrace.connections import connect as database_connect
-from asktrace.contracts import verify
-from asktrace.database import verified_snapshot
+from asktrace.contracts import purchase_index, verify
 from asktrace.evidence import read_evidence
 from asktrace.ingest import digest
 
@@ -40,15 +40,14 @@ def dataset(root, report_path):
     report = json.loads(report_bytes)
     UUID(report["parent_run_id"])
     parent = root / "runs" / f"pncp-{report['parent_run_id']}" / "manifest.json"
-    manifest, purchases, parent_hash = verified_snapshot(root, parent)
-    if manifest["mode"] != "live":
-        raise ValueError("live_snapshot_required")
+    index = purchase_index(root, parent)
+    manifest, purchases, parent_hash = index.manifest, index.purchases, index.checksum
     snapshots = []
     for reference in report["snapshots"]:
         path = (root / reference["path"]).resolve()
         if not path.is_relative_to((root / "runs").resolve()):
             raise ValueError("unsafe_snapshot_path")
-        snapshot, checksum = verify(root, path)
+        snapshot, checksum = verify(root, path, index=index)
         if (
             checksum != reference["sha256"]
             or snapshot["parent_run_id"] != manifest["run_id"]
@@ -73,6 +72,31 @@ def dataset(root, report_path):
     ):
         raise ValueError("coverage_evidence_mismatch")
     return manifest, purchases, coverage, digest(report_bytes)
+
+
+@dataclass(frozen=True)
+class VerifiedDataset:
+    """Private in-memory copy of evidence verified during public application startup.
+
+    Immutable bytes avoid sharing mutable query results. This is not a result cache:
+    every question still queries PostgreSQL and checks coverage counts.
+    """
+
+    root: Path
+    report: Path
+    payload: bytes
+
+    @classmethod
+    def capture(cls, root, report, metadata):
+        root, report = root.resolve(), (root / report).resolve()
+        if not report.is_relative_to((root / "runs").resolve()):
+            raise ValueError("unsafe_coverage_path")
+        return cls(root, report, json.dumps(metadata).encode())
+
+    def read(self, root, report):
+        if root.resolve() != self.root or (root / report).resolve() != self.report:
+            raise ValueError("verified_dataset_scope_mismatch")
+        return json.loads(self.payload)
 
 
 CTE = """WITH selected AS (
@@ -130,7 +154,7 @@ QUERIES = {
 }
 
 
-def answer(root, report, question, purchase_id=None):
+def answer(root, report, question, purchase_id=None, *, verified=None):
     if question not in QUERIES or (
         question == "purchase"
         and (not isinstance(purchase_id, str) or not 1 <= len(purchase_id) <= 100)
@@ -139,7 +163,9 @@ def answer(root, report, question, purchase_id=None):
     report = (root / report).resolve()
     if not report.is_relative_to((root / "runs").resolve()):
         raise ValueError("unsafe_coverage_path")
-    manifest, purchases, coverage, checksum = dataset(root, report)
+    manifest, purchases, coverage, checksum = (
+        verified.read(root, report) if verified is not None else dataset(root, report)
+    )
     parent = manifest["run_id"]
     params = [Jsonb(coverage), parent, parent, parent]
     if question == "purchase":

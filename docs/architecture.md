@@ -49,3 +49,37 @@ os dois registros de estado operacional. A credencial administrativa pertence à
 fora do servidor. O startup confere permissões e restaura o artefato privado identificado
 por SHA-256 antes de disponibilizar a aplicação. Quotas não dependem do disco efêmero.
 [Configuração, limites e pendências externas](deployment.md).
+
+
+## ADR-002 — verificar evidências no startup público e consultar o banco por pergunta
+
+**Problema observado:** a primeira versão hospedada gastou 20–23 segundos por consulta
+por regras na base maior. Um perfil local mostrou releituras de milhares de arquivos,
+incluindo a validação repetida do mesmo snapshot de compras em cada lote de contratos.
+Os tempos locais e do Render não são diretamente comparáveis.
+
+**Decisão:** o startup público continua restaurando o pacote fixado por SHA-256 e
+validando manifestos, fontes, contratos e cobertura. Depois guarda metadados verificados
+em bytes imutáveis na memória daquela instância. Cada pergunta recebe uma cópia própria,
+limitada à raiz e ao relatório selecionado. O planejador usa o mesmo recorte verificado
+que a ferramenta de consulta. Não há cache de respostas de usuários nem de resultados SQL.
+
+Cada pergunta ainda executa SQL somente leitura e confere os totais contra a cobertura
+verificada. Uma divergência é recusada. As ferramentas de auditoria e o servidor local
+continuam verificando os arquivos. Dentro de uma operação completa, o índice de compras
+é verificado uma vez e compartilhado entre os lotes; hashes de cada página de contratos
+permanecem obrigatórios. A próxima operação de auditoria volta a ler os arquivos.
+
+**Ciclo de vida:** a cópia em memória vale somente para a instância iniciada com aquela
+configuração. Atualizar a base exige preparar/publicar o novo pacote e reiniciar a
+aplicação; editar arquivos depois do startup não atualiza essa cópia. O hash não é uma
+assinatura contra alguém com controle do servidor. A aplicação pública não expõe uma
+rota para editar arquivos, trocar snapshots ou invalidar esse estado.
+
+**Consequências:** o custo de ler os arquivos fica concentrado na inicialização e há
+uso adicional de memória. Reinícios continuam sujeitos ao tempo de restauração e
+validação. A melhoria das consultas precisa ser medida novamente na URL pública após
+o commit e o deploy; o benchmark com ASGI/Neon não representa esse teste hospedado.
+
+Os testes cobrem alterações de arquivos entre operações de auditoria, hash de contrato,
+isolamento das cópias, seleção da base, caminho relativo à aplicação e divergência do banco.

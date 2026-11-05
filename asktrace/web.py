@@ -14,7 +14,7 @@ from urllib.parse import parse_qs, urlsplit
 from asktrace.agent import run
 from asktrace.evidence import read_evidence
 from asktrace.providers import availability
-from asktrace.query import dataset, serialize
+from asktrace.query import VerifiedDataset, dataset, serialize
 
 COVERAGE = "runs/contracts-resume-c1345679-59ea-49ad-af35-be2cc924ceab/coverage.json"
 ASSETS = {
@@ -27,7 +27,7 @@ ASSETS = {
 
 
 class Application:
-    def __init__(self, root, runner=run):
+    def __init__(self, root, runner=run, *, verified_runtime=False):
         self.root = root.resolve()
         config_path = self.root / "config/datasets.json"
         self.datasets = (
@@ -36,10 +36,16 @@ class Application:
             else {"default": "original", "datasets": [{"id": "original", "coverage": COVERAGE}]}
         )
         self.catalog = []
+        self.verified_datasets = {}
         for item in self.datasets["datasets"]:
             manifest, purchases, covered, checksum = dataset(
                 self.root, self.root / item["coverage"]
             )
+            if verified_runtime:
+                report = self.root / item["coverage"]
+                self.verified_datasets[report.resolve()] = VerifiedDataset.capture(
+                    self.root, report, (manifest, purchases, covered, checksum)
+                )
             coverage_report = json.loads(read_evidence(self.root, Path(item["coverage"])))
             self.catalog.append(
                 {
@@ -66,11 +72,15 @@ class Application:
                 }
             )
         self.token = secrets.token_urlsafe(32)
-        self.runner = runner
+        self.runner = self.run_verified if verified_runtime and runner is run else runner
         self.busy = threading.Lock()
         self.default_coverage = next(
             row["coverage"] for row in self.catalog if row["id"] == self.datasets["default"]
         )
+
+    def run_verified(self, root, report, question, provider="baseline"):
+        verified = self.verified_datasets[(root / report).resolve()]
+        return run(root, report, question, provider, verified=verified)
 
 
 class Server(Application, ThreadingHTTPServer):

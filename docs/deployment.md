@@ -32,7 +32,11 @@ e não é enviado aos modelos. Seu hash é fixado na configuração da publicaç
 
 Na inicialização, o servidor verifica os logins, lê esse pacote do banco, confere seu
 hash e restaura apenas caminhos de `data/raw` e `data/processed`. Em seguida verifica
-manifestos, páginas e normalização como no ambiente local. Não faz nova coleta no PNCP.
+manifestos, páginas e normalização como no ambiente local. A versão otimizada mantém os
+metadados verificados em memória imutável por instância; perguntas continuam consultando
+o banco e conferindo os totais. Atualizar a base exige novo pacote e reinicialização,
+conforme a [decisão de arquitetura](architecture.md#adr-002--verificar-evidências-no-startup-público-e-consultar-o-banco-por-pergunta).
+Não faz nova coleta no PNCP.
 O conteúdo do disco pode desaparecer sem apagar a cópia persistida no banco.
 
 O pacote tem limites de tamanho, rejeita nomes duplicados, travessia de diretórios e
@@ -179,3 +183,16 @@ reinício do serviço hospedado e retomada após inatividade continuam pendentes
 [Neon: conexões seguras](https://neon.com/docs/connect/connect-securely) ·
 [FastAPI: execução com Uvicorn](https://fastapi.tiangolo.com/deployment/server-workers/) ·
 [Condições de hospedagem e limites consultados](hosting-options.md).
+
+
+## Atualização de desempenho preparada
+
+A versão local otimizada reutiliza evidências verificadas na inicialização pública,
+sem armazenar respostas de usuários. O código precisa ser commitado, enviado e implantado
+para que essa mudança alcance a URL pública. Não é necessário repetir a importação do
+Neon nem gerar novas credenciais. A atualização preserva os limites já gravados no banco.
+
+Em 05/11/2026 às 13:10 UTC, a versão pública anterior respondeu `/healthz` com 200 em
+0,801 segundo após um intervalo sem requisições desta sessão. Não houve confirmação de
+suspensão por inatividade, e outros visitantes não foram excluídos; isso não comprova
+um cold start. [Registro](../runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/idle-response.json).

@@ -1,0 +1,65 @@
+{
+  "verified_at": "2026-11-05T13:28:26.151356+00:00",
+  "hosted_optimized_code_verified": false,
+  "transport": "Local ASGI client with actual Neon PostgreSQL; not Render timing",
+  "software_tests": {
+    "passed": 137,
+    "database": "local asktrace_test",
+    "seconds": 37.216
+  },
+  "ruff_check": "passed",
+  "ruff_format": "passed",
+  "git_diff_check": "passed",
+  "remote_verification": "runs/query-benchmark-599aedf6-c785-4af5-9856-c472b89d7f4e/verification.json",
+  "timings": {
+    "expanded": {
+      "min_seconds": 4.09,
+      "max_seconds": 9.829,
+      "queries": 6
+    },
+    "original": {
+      "min_seconds": 3.944,
+      "max_seconds": 6.685,
+      "queries": 6
+    }
+  },
+  "optimized_restart_verified": false,
+  "external_ai_calls": 0,
+  "intermediate_failures": [
+    {
+      "phase": "first remote ASGI verification",
+      "outcome": "failed assertion",
+      "cause": "relative coverage path resolved against process cwd instead of application root",
+      "resolution": "root-relative lookup and regression test, followed by successful verification"
+    },
+    {
+      "phase": "focused database regression rerun",
+      "outcome": "9 connection timeouts",
+      "cause": "Docker Desktop engine unavailable",
+      "resolution": "started Docker and project PostgreSQL; final isolated 137-test suite passed"
+    },
+    {
+      "phase": "second remote cold ASGI verification, after all twelve queries passed",
+      "outcome": "RuntimeError during new application startup; cause not established",
+      "resolution": "not marked successful; separate warm-query benchmark and incremental failure records added"
+    }
+  ],
+  "profile_before_optimization": {
+    "environment": "local Windows, cProfile overhead included",
+    "dataset_seconds": 83.196,
+    "parent_snapshot_verifications": 27,
+    "file_read_calls": 5533,
+    "note": "Not directly comparable with Render or unprofiled ASGI requests"
+  },
+  "source_sha256": {
+    "asktrace/agent.py": "e3ae4f4bd22998a0d3c04db9d7063a478cad82f7b2d220243a81594cc6b10edd",
+    "asktrace/contracts.py": "6b236aa66d97655ae94f00ae89e49cc8f1c2bd180aac346f0e887c14f204cb33",
+    "asktrace/public.py": "35d2488721e44bae5440566e1200026865a94b40ad8460bc775ada92b8910e3b",
+    "asktrace/query.py": "8c34692a0be4361ed958e1c6bc7d83e4302c47bdc7ede1dc80b4aa3d8b19e14c",
+    "asktrace/web.py": "b5b2d03ecfda6cf73d6884da4b88e3453e840e471103468999d031c26a707088",
+    "scripts/verify_remote.py": "4703f37635f8066f27af81dbbe90bbc40ddcff833adbc77b569426dbbc9701e0",
+    "scripts/benchmark_queries.py": "1b8ac799c99a9f7c069f35f8622b4dc6fef0033ecf129aa7ce7e0cfc217b0c0c",
+    "tests/test_queries.py": "a530a23c52eecd0670c46335825d3972669dcdca9346a24166c6141ca8204d38",
+    "tests/test_verified_runtime.py": "a7c829ff395a30d79ec817df37790cd4bd1f77f6f3738a93a809e3a27e699c8f"
+  }
+}

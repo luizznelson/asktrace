@@ -24,7 +24,9 @@ agosto–outubro permanece separado. Sem filtros livres, memória no modelo ou n
 - [x] Avaliação do catálogo atual: 60 aprovações em 61 execuções; uma falha preservada e retomada explícita.
 - [x] Banco Neon carregado; duas bases, logins restritos, restauração e limites persistentes verificados.
 - [x] Publicar no Render Free; seis consultas de ambas as bases e uma consulta com IA verificadas.
-- [ ] Medir e otimizar latência da base maior; conferir reinício e retomada no serviço hospedado.
+- [x] Otimizar a validação repetida; medir os doze caminhos ASGI com Neon.
+- [ ] Enviar o commit da otimização, atualizar o Render e medir a latência pública.
+- [ ] Conferir reinício da versão otimizada e retomada após suspensão no serviço hospedado.
 - [ ] Concluir revisão visual de todas as telas. Navegador disponível; apresentação inicial, idioma, resposta, histórico e CSV já conferidos.
 - [ ] Gravar o vídeo com a aplicação hospedada e acrescentar capturas reais ao README.
 - [ ] Observar a CI do commit publicado; não equiparar testes locais à execução remota.

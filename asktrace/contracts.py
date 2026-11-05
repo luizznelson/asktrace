@@ -4,6 +4,7 @@ import argparse
 import json
 import time
 from collections import Counter
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -46,14 +47,30 @@ def request_url(locator, page=1):
     )
 
 
-def select_purchases(root, parent, limit, offset=0):
+@dataclass(frozen=True)
+class PurchaseIndex:
+    """Verified parent and locator order, scoped to one verification operation."""
+
+    parent: Path
+    manifest: dict
+    purchases: list
+    checksum: str
+    locators: list
+
+    def select(self, limit, offset=0):
+        if (
+            type(limit) is not int
+            or not 1 <= limit <= 100
+            or type(offset) is not int
+            or not 0 <= offset <= len(self.purchases)
+        ):
+            raise ValueError("live_snapshot_and_limit_1_to_100_required")
+        return self.manifest, self.checksum, self.locators[offset : offset + limit]
+
+
+def purchase_index(root, parent):
     manifest, purchases, parent_hash = verified_snapshot(root, parent)
-    if (
-        manifest["mode"] != "live"
-        or not 1 <= limit <= 100
-        or type(offset) is not int
-        or not 0 <= offset <= len(purchases)
-    ):
+    if manifest["mode"] != "live":
         raise ValueError("live_snapshot_and_limit_1_to_100_required")
     sources = {}
     for page in manifest["pages"]:
@@ -89,14 +106,22 @@ def select_purchases(root, parent, limit, offset=0):
             }
         )
     selected = []
-    while groups and len(selected) < limit + offset:
+    while groups:
         for month in sorted(list(groups)):
             selected.append(groups[month].pop(0))
             if not groups[month]:
                 del groups[month]
-            if len(selected) == limit + offset:
-                break
-    return {**manifest, "contract_locator_exclusions": exclusions}, parent_hash, selected[offset:]
+    return PurchaseIndex(
+        parent.resolve(),
+        {**manifest, "contract_locator_exclusions": exclusions},
+        purchases,
+        parent_hash,
+        selected,
+    )
+
+
+def select_purchases(root, parent, limit, offset=0):
+    return purchase_index(root, parent).select(limit, offset)
 
 
 def unpublished_response(body, status):
@@ -285,7 +310,7 @@ def quality(manifest):
     }
 
 
-def verify(root, path):
+def verify(root, path, *, index=None):
     body = read_evidence(root, path)
     manifest = json.loads(body)
     UUID(manifest["run_id"])
@@ -295,8 +320,12 @@ def verify(root, path):
     if manifest["schema_version"] != 2:
         raise ValueError("unsupported_contract_manifest")
     parent = root / "runs" / f"pncp-{manifest['parent_run_id']}" / "manifest.json"
-    parent_manifest, parent_hash, selected = select_purchases(
-        root, parent, len(manifest["selected"]), manifest.get("selection_offset", 0)
+    # Share only within the current operation; never retain file verification across queries.
+    index = index or purchase_index(root, parent)
+    if index.parent != parent.resolve():
+        raise ValueError("parent_index_mismatch")
+    parent_manifest, parent_hash, selected = index.select(
+        len(manifest["selected"]), manifest.get("selection_offset", 0)
     )
     if "excluded_purchases" in manifest and (
         manifest["excluded_purchases"] != parent_manifest["contract_locator_exclusions"]

@@ -23,7 +23,8 @@ from asktrace.connections import connect
 from asktrace.public import create_app
 
 
-def verify():
+def verify(report=None):
+    report = {} if report is None else report
     root = Path.cwd()
     settings = dict(dotenv_values(root / "data/deploy/runtime.env"))
     assert all(
@@ -33,16 +34,19 @@ def verify():
     settings.update(
         ASKTRACE_PUBLIC_ORIGIN="https://asktrace-verification.example", ASKTRACE_PUBLIC_AI="false"
     )
-    report = {
-        "started_at": datetime.now(UTC).isoformat(),
-        "remote_database_verified": False,
-        "external_deployment_verified": False,
-        "browser_visual_inspection": False,
-        "external_ai_calls": 0,
-        "private_settings_file": "data/deploy/runtime.env",
-        "artifact_sha256": settings["ASKTRACE_DATA_SHA256"],
-        "queries": [],
-    }
+    report.update(
+        {
+            "started_at": datetime.now(UTC).isoformat(),
+            "remote_database_verified": False,
+            "external_deployment_verified": False,
+            "browser_visual_inspection": False,
+            "external_ai_calls": 0,
+            "private_settings_file": "data/deploy/runtime.env",
+            "artifact_sha256": settings["ASKTRACE_DATA_SHA256"],
+            "queries": [],
+            "stage": "initial_connection_checks",
+        }
+    )
     with patch.dict(os.environ, settings):
         os.environ.pop("ASKTRACE_ADMIN_DATABASE_URL", None)
         os.environ.pop("ASKTRACE_TEST_DATABASE", None)
@@ -79,14 +83,19 @@ def verify():
                 "organizations": "Quais órgãos têm mais compras?",
                 "quality": "Como está a qualidade dos dados?",
             }
+            report["stage"] = "initial_startup"
+            startup_started = time.perf_counter()
             with TestClient(
                 create_app(cold), base_url=settings["ASKTRACE_PUBLIC_ORIGIN"]
             ) as client:
+                report["startup_seconds"] = round(time.perf_counter() - startup_started, 3)
+                report["immutable_public_evidence_copy"] = True
                 assert client.get("/healthz").status_code == 200
                 session = client.get("/api/session").json()
                 assert session["mode"] == "public"
                 assert session["providers"] == ["baseline"]
                 token = session["token"]
+                report["stage"] = "queries"
                 for dataset in session["datasets"]:
                     expected = {"expanded": (2537, 679, 2536), "original": (1081, 125, 1080)}[
                         dataset["id"]
@@ -95,6 +104,7 @@ def verify():
                         **questions,
                         "purchase": "Rastreie a compra " + dataset["example_purchase_id"] + ".",
                     }.items():
+                        query_started = time.perf_counter()
                         response = client.post(
                             "/api/ask",
                             json={
@@ -125,6 +135,7 @@ def verify():
                             {
                                 "dataset": dataset["id"],
                                 "action": action,
+                                "seconds": round(time.perf_counter() - query_started, 3),
                                 "purchases": facts["purchases"],
                                 "contracts": facts["contracts"],
                                 "covered_purchases": facts["covered_purchases"],
@@ -132,6 +143,7 @@ def verify():
                             }
                         )
                         print("Neon verified:", dataset["id"], action, flush=True)
+            report["stage"] = "restart_startup"
             with TestClient(
                 create_app(cold), base_url=settings["ASKTRACE_PUBLIC_ORIGIN"]
             ) as restarted:
@@ -151,6 +163,7 @@ def verify():
                     },
                 )
                 assert invalid.status_code == 403
+            report["stage"] = "persisted_budget_check"
             with connect(cold, "state", row_factory=dict_row) as db:
                 after = db.execute(
                     "SELECT value FROM asktrace.runtime_state WHERE name='public-budget'"
@@ -162,6 +175,7 @@ def verify():
             report["startup_checks_used_real_remote_roles"] = True
             report["private_artifact_restored_from_database"] = True
             report["remote_database_verified"] = True
+    report["stage"] = "complete"
     report["finished_at"] = datetime.now(UTC).isoformat()
     report["transport_note"] = (
         "ASGI client with actual remote database, artifact and runtime state. "
@@ -189,11 +203,27 @@ def verify():
 
 
 def main():
+    progress = {}
     try:
-        verify()
+        verify(progress)
         return 0
     except Exception as error:
-        print(json.dumps({"error_type": type(error).__name__, "verification": "remote"}))
+        progress.update(error_type=type(error).__name__, failed_at=datetime.now(UTC).isoformat())
+        target = Path.cwd() / "runs" / ("neon-verification-" + str(uuid4()))
+        target.mkdir()
+        (target / "verification.json").write_text(
+            json.dumps(progress, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+        print(
+            json.dumps(
+                {
+                    "error_type": type(error).__name__,
+                    "verification": "remote",
+                    "stage": progress.get("stage"),
+                    "evidence": target.name,
+                }
+            )
+        )
         return 1
 
 
