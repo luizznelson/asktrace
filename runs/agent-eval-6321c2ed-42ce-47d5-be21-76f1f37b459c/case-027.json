@@ -1,0 +1,106 @@
+{
+  "case_id": "release-027",
+  "category": "quality",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Quero conferir a completude dos dados.",
+    "provider": "fallback",
+    "status": "answered",
+    "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Preenchimento: valores ausentes são distintos de zero. Não é classificação de irregularidades. Confira a tabela, o recorte e as fontes.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b",
+        "outcome": "selected"
+      },
+      {
+        "step": "plan",
+        "plan": {
+          "action": "quality",
+          "purchase_id": null
+        },
+        "usage": {
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b",
+          "prompt_sha256": "2455280ad5a2ea87a71fa56f5d9c9b3c99eee9224a74ed8e35529e5ad6e2b29f",
+          "prompt_tokens": 820,
+          "completion_tokens": 14,
+          "total_tokens": 834,
+          "candidate": "groq-qwen",
+          "attempt_count": 1,
+          "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+          "provider_events": [
+            {
+              "candidate": "groq-qwen",
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "outcome": "selected"
+            }
+          ],
+          "fallback_used": false
+        }
+      },
+      {
+        "step": "read_only_query",
+        "action": "quality",
+        "outcome": "answered",
+        "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8"
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 1,
+    "selected_provider": {
+      "candidate": "groq-qwen",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b"
+    },
+    "evidence": {
+      "question": "quality",
+      "purchase_id": null,
+      "status": "answered",
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "coverage": {
+        "purchases": 2537,
+        "covered_purchases": 2536,
+        "purchases_with_contracts": 370,
+        "none_returned": 2166,
+        "contracts": 679,
+        "unknown_awarded_values": 1354
+      },
+      "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8",
+      "sources": {
+        "coverage_report": "runs/contracts-resume-9a175343-9dde-49dc-b1e5-dcf5e760d139/coverage.json",
+        "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+      },
+      "limitations": [
+        "Publication is not payment or financial execution.",
+        "No returned publication does not establish absence of a contract.",
+        "Unknown amounts are not zero; snapshots may have different dates."
+      ],
+      "result": [
+        {
+          "purchases": 2537,
+          "unknown_estimates": 0,
+          "zero_estimates": 286,
+          "unknown_awarded_values": 1354,
+          "zero_awarded_values": 22,
+          "unknown_municipalities": 0,
+          "unknown_org_names": 0
+        }
+      ]
+    },
+    "latency_ms": 5424.19
+  }
+}

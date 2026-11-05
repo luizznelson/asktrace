@@ -1,0 +1,98 @@
+{
+  "started_at": "2026-11-05T01:35:02.252729+00:00",
+  "software_report": "runs/application-review-da5c0e4f-e3c9-435a-9342-f10b5163e0b1/verification.json",
+  "artifact_sha256": "149dffbae561e71edd7380c9c21195720186bf91a6b867896756126389a8ecfd",
+  "artifact_bytes": 3458738,
+  "external_ai_calls": 0,
+  "remote_deployment_tested": false,
+  "browser_visual_inspection": false,
+  "transport_note": "ASGI TestClient and the real local read-only PostgreSQL login. Public role checks and persistent budget are tested separately; deployment uses both.",
+  "queries": [
+    {
+      "dataset": "expanded",
+      "action": "summary",
+      "purchases": 2537,
+      "contracts": 679,
+      "response_sha256": "ea44abfef9404f5fe3499d66d917f56321ba344635717cfb259aa5830436247e"
+    },
+    {
+      "dataset": "expanded",
+      "action": "municipalities",
+      "purchases": 2537,
+      "contracts": 679,
+      "response_sha256": "44ba58da4fd0c61261d78afa5e531247b266168e54d0ca7da72b11f8ba20c337"
+    },
+    {
+      "dataset": "expanded",
+      "action": "monthly",
+      "purchases": 2537,
+      "contracts": 679,
+      "response_sha256": "ae9ccded6b6d61a4d0856440f421ff3736c7a86980aea8e14f6b0fec4b233b64"
+    },
+    {
+      "dataset": "expanded",
+      "action": "organizations",
+      "purchases": 2537,
+      "contracts": 679,
+      "response_sha256": "21b1aee7c95c54c153f26b27e5e8d46c53a40f1653162f708d5f4f5dafc46e4e"
+    },
+    {
+      "dataset": "expanded",
+      "action": "quality",
+      "purchases": 2537,
+      "contracts": 679,
+      "response_sha256": "a973840c99ae449516472f9da990719cc28d40fa24f4f9c9034ea4db61100c3d"
+    },
+    {
+      "dataset": "expanded",
+      "action": "purchase",
+      "purchases": 2537,
+      "contracts": 679,
+      "response_sha256": "be9d33b68cce48322e2fda84d16de28f0ae910db4d6ba7436ad21eabc3ac7875"
+    },
+    {
+      "dataset": "original",
+      "action": "summary",
+      "purchases": 1081,
+      "contracts": 125,
+      "response_sha256": "32a711bc4368d7b8df3294696253890d5d386c5ccebd612b79dd48ed0f29a5f7"
+    },
+    {
+      "dataset": "original",
+      "action": "municipalities",
+      "purchases": 1081,
+      "contracts": 125,
+      "response_sha256": "89e433a3327bcd5cdd234b48508f013a9a31f5c9abec0dee3fa65abfecf53759"
+    },
+    {
+      "dataset": "original",
+      "action": "monthly",
+      "purchases": 1081,
+      "contracts": 125,
+      "response_sha256": "27c9d5679b890ab2b237deb3422e764998f827ab621a5b39406fe1e0a5a38a0a"
+    },
+    {
+      "dataset": "original",
+      "action": "organizations",
+      "purchases": 1081,
+      "contracts": 125,
+      "response_sha256": "316d297301a2158b88445cc1d9796aaaf91081cfe370b2f2c2197527da8f1102"
+    },
+    {
+      "dataset": "original",
+      "action": "quality",
+      "purchases": 1081,
+      "contracts": 125,
+      "response_sha256": "28f66da3039e4f0b02ce8de7f99c5bc9f30e76e1d6afd65d31c3373cc651b4d0"
+    },
+    {
+      "dataset": "original",
+      "action": "purchase",
+      "purchases": 1081,
+      "contracts": 125,
+      "response_sha256": "65fdb30320bfb23e03d9d8505c512001def5b1dbf74028149095ce05bb0eda00"
+    }
+  ],
+  "cold_data_restoration_seconds": 44.299,
+  "finished_at": "2026-11-05T01:36:31.407435+00:00"
+}

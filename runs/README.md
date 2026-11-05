@@ -138,3 +138,11 @@ Não houve validação de negócio com usuários nem inspeção visual em navega
 [Conferência da revisão](communication-review-7ee723b4-8cfe-48b0-820c-449b6da4feb7/verification.json): cenário de uso, pergunta da equipe,
 entrega e uso do resultado antes do detalhamento técnico. Verificações Node e links
 internos passaram. Não houve estudo com usuários ou nova inspeção visual em navegador.
+
+## Preparação da publicação e avaliação final v3
+
+[Síntese](../runs/release-readiness-411e550a-cfc1-4cd5-bac5-a73e3ba2cf33/verification.json): 130 testes de software, restauração privada,
+12 consultas ASGI nas duas bases, regras locais 60/60 e IA com 60 aprovações em 61
+execuções. A falha do caso 51 e a retomada permanecem nos relatórios originais.
+Os arquivos de `data/deploy` contêm dados privados e configurações; não entram no Git.
+Banco remoto, URL externa, inspeção visual e vídeo ainda não foram verificados.

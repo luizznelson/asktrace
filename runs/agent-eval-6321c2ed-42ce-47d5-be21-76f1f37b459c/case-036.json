@@ -1,0 +1,118 @@
+{
+  "case_id": "release-036",
+  "category": "purchase",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Qual é a cobertura da compra 00394452000103-1-011584/2026?",
+    "provider": "fallback",
+    "status": "answered",
+    "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. A compra 00394452000103-1-011584/2026 tem 1 contratos neste snapshot. Situação da consulta: with_contracts. Os identificadores e hashes abaixo permitem conferir a origem. Não são pagamentos.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b",
+        "outcome": "selected"
+      },
+      {
+        "step": "plan",
+        "plan": {
+          "action": "purchase",
+          "purchase_id": "00394452000103-1-011584/2026"
+        },
+        "usage": {
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b",
+          "prompt_sha256": "2455280ad5a2ea87a71fa56f5d9c9b3c99eee9224a74ed8e35529e5ad6e2b29f",
+          "prompt_tokens": 847,
+          "completion_tokens": 42,
+          "total_tokens": 889,
+          "candidate": "groq-qwen",
+          "attempt_count": 1,
+          "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+          "provider_events": [
+            {
+              "candidate": "groq-qwen",
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "outcome": "selected"
+            }
+          ],
+          "fallback_used": false
+        }
+      },
+      {
+        "step": "read_only_query",
+        "action": "purchase",
+        "outcome": "answered",
+        "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8"
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 1,
+    "selected_provider": {
+      "candidate": "groq-qwen",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b"
+    },
+    "evidence": {
+      "question": "purchase",
+      "purchase_id": "00394452000103-1-011584/2026",
+      "status": "answered",
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "coverage": {
+        "purchases": 2537,
+        "covered_purchases": 2536,
+        "purchases_with_contracts": 370,
+        "none_returned": 2166,
+        "contracts": 679,
+        "unknown_awarded_values": 1354
+      },
+      "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8",
+      "sources": {
+        "coverage_report": "runs/contracts-resume-9a175343-9dde-49dc-b1e5-dcf5e760d139/coverage.json",
+        "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+      },
+      "limitations": [
+        "Publication is not payment or financial execution.",
+        "No returned publication does not establish absence of a contract.",
+        "Unknown amounts are not zero; snapshots may have different dates."
+      ],
+      "result": [
+        {
+          "control_id": "00394452000103-1-011584/2026",
+          "org_name": "COMANDO DO EXERCITO",
+          "municipality_name": "Teresina",
+          "publication_date": "2026-06-17",
+          "estimated_value": "81425.34000000",
+          "awarded_value": "67999.00000000",
+          "source_body_sha256": "85f0f3e310598adc03404c270ca453df0b7838616c75381b053feca6b3b5a2ac",
+          "source_record_index": 14,
+          "outcome": "with_contracts",
+          "contract_run_id": "2a0d1e37-dc0e-4006-85bd-f4596efe74dc",
+          "contract_pages_sha256": "6615dcbcecdd22b565e415634aa5d3e7353ca0ddb4bc6272e88476ba8004af45",
+          "contracts": [
+            {
+              "contract_id": "00394452000103-2-007365/2026",
+              "global_value": "67999.00000000",
+              "initial_value": "67999.00000000",
+              "source_record_index": 0
+            }
+          ]
+        }
+      ]
+    },
+    "latency_ms": 5924.45
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "case_id": "release-003",
+  "category": "summary",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Quantos contratos foram encontrados neste recorte?",
+    "provider": "baseline",
+    "status": "answered",
+    "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. O recorte tem 2537 compras; 2536 têm consulta de contratos confirmada. Retornaram 679 contratos vinculados a 370 compras. Em 2166 compras, não retornou publicação. Há 1354 compras com valor homologado desconhecido. Publicação não comprova pagamento.",
+    "trace": [
+      {
+        "step": "plan",
+        "plan": {
+          "action": "summary",
+          "purchase_id": null
+        },
+        "usage": null
+      },
+      {
+        "step": "read_only_query",
+        "action": "summary",
+        "outcome": "answered",
+        "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8"
+      }
+    ],
+    "llm_attempts": 0,
+    "tool_calls": 1,
+    "evidence": {
+      "question": "summary",
+      "purchase_id": null,
+      "status": "answered",
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "coverage": {
+        "purchases": 2537,
+        "covered_purchases": 2536,
+        "purchases_with_contracts": 370,
+        "none_returned": 2166,
+        "contracts": 679,
+        "unknown_awarded_values": 1354
+      },
+      "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8",
+      "sources": {
+        "coverage_report": "runs/contracts-resume-9a175343-9dde-49dc-b1e5-dcf5e760d139/coverage.json",
+        "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+      },
+      "limitations": [
+        "Publication is not payment or financial execution.",
+        "No returned publication does not establish absence of a contract.",
+        "Unknown amounts are not zero; snapshots may have different dates."
+      ],
+      "result": [
+        {
+          "purchases": 2537,
+          "covered_purchases": 2536,
+          "purchases_with_contracts": 370,
+          "none_returned": 2166,
+          "contracts": 679,
+          "unknown_awarded_values": 1354
+        }
+      ]
+    },
+    "latency_ms": 0.32
+  }
+}

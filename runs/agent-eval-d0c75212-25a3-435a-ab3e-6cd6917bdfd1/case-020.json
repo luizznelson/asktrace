@@ -1,0 +1,226 @@
+{
+  "case_id": "release-020",
+  "category": "organizations",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Compare os órgãos por quantidade de compras.",
+    "provider": "baseline",
+    "status": "answered",
+    "answer": "Recorte: PI, modalidade 6, publicação de 2026-05-01 a 2026-10-31. Até 20 órgãos por quantidade de compras; somas usam apenas valores informados. Confira a tabela, o recorte e as fontes.",
+    "trace": [
+      {
+        "step": "plan",
+        "plan": {
+          "action": "organizations",
+          "purchase_id": null
+        },
+        "usage": null
+      },
+      {
+        "step": "read_only_query",
+        "action": "organizations",
+        "outcome": "answered",
+        "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8"
+      }
+    ],
+    "llm_attempts": 0,
+    "tool_calls": 1,
+    "evidence": {
+      "question": "organizations",
+      "purchase_id": null,
+      "status": "answered",
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "coverage": {
+        "purchases": 2537,
+        "covered_purchases": 2536,
+        "purchases_with_contracts": 370,
+        "none_returned": 2166,
+        "contracts": 679,
+        "unknown_awarded_values": 1354
+      },
+      "coverage_report_sha256": "7e0de684a3d02d6156081e8d7a03409c5279d567629bb9e8fe8e09ccc28378c8",
+      "sources": {
+        "coverage_report": "runs/contracts-resume-9a175343-9dde-49dc-b1e5-dcf5e760d139/coverage.json",
+        "purchase_manifest": "runs/pncp-74d68096-1e27-451d-b423-f8cded554d54/manifest.json"
+      },
+      "limitations": [
+        "Publication is not payment or financial execution.",
+        "No returned publication does not establish absence of a contract.",
+        "Unknown amounts are not zero; snapshots may have different dates."
+      ],
+      "result": [
+        {
+          "org_cnpj": "05522917000170",
+          "org_name": "FUNDACAO MUNICIPAL DE SAUDE",
+          "purchases": 60,
+          "estimated_value": "164139334.54000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 36
+        },
+        {
+          "org_cnpj": "06553960000165",
+          "org_name": "MUNICIPIO DE SANTA CRUZ DO PIAUI",
+          "purchases": 55,
+          "estimated_value": "35112001.75000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 4
+        },
+        {
+          "org_cnpj": "06981344000105",
+          "org_name": "TRIBUNAL DE JUSTICA DO ESTADO DO PIAUI",
+          "purchases": 44,
+          "estimated_value": "53730101.63000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 17
+        },
+        {
+          "org_cnpj": "06553606000130",
+          "org_name": "MUNICIPIO DE UNIAO",
+          "purchases": 39,
+          "estimated_value": "33602409.63000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 32
+        },
+        {
+          "org_cnpj": "00394452000103",
+          "org_name": "COMANDO DO EXERCITO",
+          "purchases": 37,
+          "estimated_value": "123101638.22000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 14
+        },
+        {
+          "org_cnpj": "06553861000183",
+          "org_name": "MUNICIPIO DE PIRIPIRI",
+          "purchases": 34,
+          "estimated_value": "21729538.56000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 12
+        },
+        {
+          "org_cnpj": "06553937000170",
+          "org_name": "MUNICIPIO DE OEIRAS",
+          "purchases": 34,
+          "estimated_value": "39506537.38000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 16
+        },
+        {
+          "org_cnpj": "06554406000100",
+          "org_name": "MUNICIPIO DE BARRAS",
+          "purchases": 34,
+          "estimated_value": "58286053.41000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 22
+        },
+        {
+          "org_cnpj": "01612622000133",
+          "org_name": "MUNICIPIO DE BETANIA DO PIAUI",
+          "purchases": 33,
+          "estimated_value": "14233515.78000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 8
+        },
+        {
+          "org_cnpj": "06553481000149",
+          "org_name": "ESTADO DO PIAUI",
+          "purchases": 32,
+          "estimated_value": "268749174.47000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 15
+        },
+        {
+          "org_cnpj": "05957363000133",
+          "org_name": "TRIBUNAL REGIONAL ELEITORAL DO PIAUI",
+          "purchases": 31,
+          "estimated_value": "48964955.46000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 9
+        },
+        {
+          "org_cnpj": "06553713000169",
+          "org_name": "MUNICIPIO DE FRANCISCO SANTOS",
+          "purchases": 31,
+          "estimated_value": "13442465.95000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 17
+        },
+        {
+          "org_cnpj": "15126437000305",
+          "org_name": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
+          "purchases": 31,
+          "estimated_value": "67534312.28000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 8
+        },
+        {
+          "org_cnpj": "10806496000149",
+          "org_name": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO PIAUI",
+          "purchases": 29,
+          "estimated_value": "61232411.69000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 9
+        },
+        {
+          "org_cnpj": "06554430000131",
+          "org_name": "MUNICIPIO DE PARNAIBA",
+          "purchases": 27,
+          "estimated_value": "169066813.45000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 27
+        },
+        {
+          "org_cnpj": "41522178000180",
+          "org_name": "MUNICIPIO DE BAIXA GRANDE DO RIBEIRO",
+          "purchases": 27,
+          "estimated_value": "12714836.35000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 27
+        },
+        {
+          "org_cnpj": "01668772000169",
+          "org_name": "MUNICIPIO DE GEMINIANO - SECRETARIA DE SAUDE E ACAO COMUNITARIA",
+          "purchases": 26,
+          "estimated_value": "27239518.42000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 26
+        },
+        {
+          "org_cnpj": "06772859000103",
+          "org_name": "MUNICIPIO DE SAO RAIMUNDO NONATO",
+          "purchases": 26,
+          "estimated_value": "110651730.63000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 14
+        },
+        {
+          "org_cnpj": "41522145000130",
+          "org_name": "MUNICIPIO DE SAO BRAZ DO PIAUI",
+          "purchases": 26,
+          "estimated_value": "7016758.96000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 4
+        },
+        {
+          "org_cnpj": "06553804000102",
+          "org_name": "MUNICIPIO DE PICOS",
+          "purchases": 25,
+          "estimated_value": "56158086.93000000",
+          "unknown_estimates": 0,
+          "unknown_awarded_values": 7
+        }
+      ]
+    },
+    "latency_ms": 0.49
+  }
+}

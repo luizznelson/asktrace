@@ -1,0 +1,71 @@
+{
+  "finished_at": "2026-11-05T01:41:57.095635+00:00",
+  "status": "implemented_and_locally_verified; external_configuration_pending",
+  "software": {
+    "report": "runs/application-review-da5c0e4f-e3c9-435a-9342-f10b5163e0b1/verification.json",
+    "python_tests": 130,
+    "all_commands_passed": true
+  },
+  "cold_data_and_public_routes": {
+    "report": "runs/release-verification-a981c4f6-f0af-40ca-b91c-dfcbfad55b6c/verification.json",
+    "queries_passed": 12,
+    "artifact_sha256": "149dffbae561e71edd7380c9c21195720186bf91a6b867896756126389a8ecfd"
+  },
+  "baseline": {
+    "report": "runs/agent-eval-d0c75212-25a3-435a-ab3e-6cd6917bdfd1/evaluation.json",
+    "executed": 60,
+    "passed": 60,
+    "external_ai_calls": 0
+  },
+  "ai": {
+    "reports": [
+      "runs/agent-eval-6321c2ed-42ce-47d5-be21-76f1f37b459c/evaluation.json",
+      "runs/agent-eval-413ac3c7-cc78-431a-8fc3-c1ecafbe2a2e/evaluation.json"
+    ],
+    "unique_cases": 60,
+    "executions": 61,
+    "passed_executions": 60,
+    "technical_errors": 1,
+    "cases_successful_after_explicit_retry": 60,
+    "repeated_case_ids": [
+      "release-051"
+    ],
+    "llm_attempts": 46,
+    "note": "Author-curated development cases, one repeated purchase ID, mixed-provider contingency. Not independent accuracy or production reliability."
+  },
+  "intermediate_http_check": {
+    "assertion_failed": true,
+    "root_cause_established": false,
+    "follow_up": "Five isolated queries passed; a full software and HTTP rerun passed. No failure was reclassified as success."
+  },
+  "remote_database_verified": false,
+  "external_deployment_verified": false,
+  "browser_visual_inspection": false,
+  "video_recorded": false,
+  "pending": [
+    "Verify connected accounts and intended project/workspace",
+    "Prepare remote database and validate roles/counts",
+    "Commit and push by the user, then deploy the reviewed revision",
+    "Public restart/cold-start and browser validation",
+    "Hosted demonstration video"
+  ],
+  "relative_document_links_checked": 176,
+  "documentation_sha256": {
+    "README.md": "d2f9462458ef5c6ccf6e3c94d400416fa5980c2b1d0328af6a940cb7dc89ee1b",
+    "README.en.md": "aaf81f4b622792b60ceb3388c8c1d79aa1941226fca1477246c148d0fd70cfba",
+    "PLANO.md": "92c343bef00d6a6319d162db4933e77bea5f7cd8296baf7c4af49594bdd293b2",
+    "docs/README.md": "b330884314310bb10fd9422df54daaf2a1b9daf101e098113f0c4b871e6a0cae",
+    "docs/deployment.md": "07fd8f0afb2dd0e058b7f04557aad6838e799b4921a895b4a01e4130e3d65958",
+    "docs/quality.md": "da382125b8991c5b8ffc177b1c4061782ba348acb809a4dee4de933a60e5d2c8",
+    "docs/agent-evaluation.md": "fa82998d9c0fa805e23ba6e8338176d2e737034a7040e6e7ad7a7ff9068eb68e",
+    "docs/architecture.md": "5826266604e9fd76597acfe60b4730df204b560da526fbe6d5f2d697a46834bf",
+    "docs/case-study.md": "fe4f12d23c1ec5b64cc60878d9b9f397dad3b422b68ff57257f153bf773b2934"
+  },
+  "final_credential_check": {
+    "files_checked": 741,
+    "known_secret_matches": 0,
+    "env_tracked": false,
+    "scope": "current tracked and nonignored files; not complete Git history"
+  },
+  "render_blueprint_validation": "runs/release-readiness-411e550a-cfc1-4cd5-bac5-a73e3ba2cf33/render-schema.json"
+}

@@ -1,0 +1,57 @@
+{
+  "case_id": "release-055",
+  "category": "refuse",
+  "routing_passed": true,
+  "grounding_passed": true,
+  "passed": true,
+  "actual": {
+    "question": "Rastreie uma compra.",
+    "provider": "fallback",
+    "status": "refused",
+    "answer": "Não posso responder com as consultas e o recorte disponíveis.",
+    "trace": [
+      {
+        "step": "provider_attempt",
+        "candidate": "groq-qwen",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b",
+        "outcome": "selected"
+      },
+      {
+        "step": "plan",
+        "plan": {
+          "action": "refuse",
+          "purchase_id": null
+        },
+        "usage": {
+          "provider": "groq",
+          "model": "qwen/qwen3.8-27b",
+          "prompt_sha256": "2455280ad5a2ea87a71fa56f5d9c9b3c99eee9224a74ed8e35529e5ad6e2b29f",
+          "prompt_tokens": 817,
+          "completion_tokens": 15,
+          "total_tokens": 832,
+          "candidate": "groq-qwen",
+          "attempt_count": 1,
+          "provider_config_sha256": "31159c7c873adb472b0c4fa8611c22c9d1b5818897902d76bd22d2405c836495",
+          "provider_events": [
+            {
+              "candidate": "groq-qwen",
+              "provider": "groq",
+              "model": "qwen/qwen3.8-27b",
+              "outcome": "selected"
+            }
+          ],
+          "fallback_used": false
+        }
+      }
+    ],
+    "llm_attempts": 1,
+    "tool_calls": 0,
+    "selected_provider": {
+      "candidate": "groq-qwen",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b"
+    },
+    "latency_ms": 5479.8
+  }
+}
