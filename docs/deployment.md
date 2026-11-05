@@ -126,9 +126,9 @@ antes de criar recursos; a aplicação não comprova a gratuidade da conta dos p
 - [x] Startup restaura o pacote com o hash esperado e saúde retorna 200.
 - [ ] Seis consultas, recusas, histórico, troca de idioma e downloads conferidos na URL pública.
 - [x] Nova instância após redeploy do mesmo commit: orçamento preservado e token antigo rejeitado.
-- [ ] Retomada após suspensão por inatividade conferida separadamente.
+- [x] Retomada após suspensão por inatividade conferida separadamente (registro abaixo).
 - [ ] Inspeção visual de desktop e celular realizada, sem afirmar certificação de acessibilidade.
-- [ ] URL, capturas reais e vídeo adicionados ao README; pendências atualizadas.
+- [x] URL, capturas reais e vídeo adicionados ao README; pendências atualizadas.
 
 ## Verificação executada no Neon
 
@@ -227,3 +227,36 @@ As recusas intermediárias de uma pergunta no roteiro público foram provocadas 
 conversão incorreta dos acentos no próprio arquivo de verificação no Windows. O roteiro
 foi corrigido, as tentativas anteriores foram preservadas e a rodada final passou. Não
 foi necessária alteração do código da aplicação para essa ocorrência.
+
+
+## Retomada após suspensão por inatividade
+
+Em 05/11/2026, os logs do serviço no Render (horários em UTC) registram dois ciclos de
+suspensão e retomada no plano Free:
+
+| Evento | Horário (UTC) | Fonte |
+| --- | --- | --- |
+| Instância `n7z9r` inicia | 19:27:44 | log `Started server process` |
+| Startup concluído | 19:28:05 (21,7 s) | log `Application startup complete` |
+| Desligamento por inatividade | 19:45:35 | log `Shutting down` |
+| Nova instância `849d8` inicia | 19:54:47 | log `Started server process` |
+| Startup concluído | 19:55:09 (22,5 s) | log `Application startup complete` |
+
+No primeiro acesso após o desligamento, a página abriu e, depois de iniciar uma nova
+exploração, exibiu os totais lidos do banco (2.537 compras e 679 contratos). No primeiro
+acesso do ciclo anterior (cerca de 19:28 UTC), o Render respondeu `503 Application loading`
+por aproximadamente 30 segundos antes de a aplicação responder.
+
+**Limites desta medição:** o startup de 22 s vem dos logs da aplicação e não inclui o
+tempo que o Render leva para acordar a máquina. O tempo total percebido por quem visita
+não foi cronometrado. O desligamento ocorreu cerca de 14 minutos depois do último acesso
+desta sessão; outros visitantes não foram excluídos. Quem abrir a demonstração depois de
+um intervalo deve esperar de dezenas de segundos a cerca de um minuto, e a documentação
+deve apresentar isso como característica do plano gratuito.
+
+## Implantação manual
+
+O `render.yaml` mantém `autoDeployTrigger: 'off'`. Um `git push` não atualiza o serviço
+público: é preciso disparar um deploy no Render. Em 05/11/2026 a versão em produção é o
+commit `59ca88d`; o commit `5b2f47e` (textos de estado e idioma) ainda não foi implantado.
+As capturas do vídeo foram feitas na versão `59ca88d`.

@@ -1,6 +1,6 @@
 {
   "url": "https://asktrace-pyop.onrender.com/",
-  "source_commit": "5b2f47e",
+  "source_commit": "59ca88dfaab2c842da4b70534ca98b3c5e50fdb7",
   "captured_at": "2026-11-05T16:28-16:31-03:00",
   "method": "Capturas reais do navegador (painel ~800x726; celular emulado 375x812). Sequência editada; não é gravação contínua.",
   "files": {
@@ -14,5 +14,6 @@
     "08-ingles.jpg": "ee7df807a8707b640435c2fdefabd4a118e2e4d094c9868698be997dead6f263",
     "09-historico.jpg": "c144d44b0c260244b9aa4adfbf62173aa74feb9a1b2c5fa6b2423791107fca8c",
     "10-celular.jpg": "34aa6f08c2b7410e07f9418625f5f4c5e3c1f5ffb11752d63116fd0f5d9f64a8"
-  }
+  },
+  "note": "Versão em produção no momento das capturas (deploy dep-dbm8it5bedkc73bi3pjg). O commit 5b2f47e ainda não estava implantado."
 }
