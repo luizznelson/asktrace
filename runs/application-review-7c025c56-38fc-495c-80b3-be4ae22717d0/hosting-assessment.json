@@ -1,0 +1,19 @@
+{
+  "verified_at": "2026-11-05T00:41:07.698586+00:00",
+  "database_bytes": 12236467,
+  "local_raw_processed_bytes": 12661290,
+  "recommended_stack": [
+    "Render Free web service",
+    "Neon Free PostgreSQL"
+  ],
+  "deployed": false,
+  "browser_visual_inspection": false,
+  "browser_access_error": "Local browser use is disabled in Work settings",
+  "official_sources": [
+    "https://render.com/docs/free",
+    "https://neon.com/pricing",
+    "https://supabase.com/pricing",
+    "https://huggingface.co/docs/hub/spaces-overview"
+  ],
+  "source_note": "Quotas are plan conditions checked during review, not an unlimited-free availability guarantee."
+}

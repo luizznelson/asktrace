@@ -38,7 +38,9 @@ números vêm das consultas de leitura e não são redação livre do modelo.
 
 ## Histórico e privacidade
 
-Até 20 resultados ficam no `sessionStorage` da aba. Nova exploração limpa o histórico.
+Até 20 resultados ficam no `sessionStorage` da aba. Abaixo de 800 px, uma área
+expansível “Perguntas desta aba” mantém o histórico acessível quando a barra lateral
+é reduzida ou ocultada. Abrir um resultado salvo não faz outra consulta. Nova exploração limpa o histórico.
 Cada pergunta é independente: não há memória conversacional nem resolução automática
 de “e essa?”. Resultados de outro hash de cobertura recebem aviso de versão anterior e
 não são restaurados automaticamente como se fossem atuais.

@@ -19,6 +19,7 @@
 | Como coletar e carregar os dados? | [Ingestão](ingestion.md), [contratos](contracts.md), [consultas de leitura](business-queries.md) |
 | Onde conferir as execuções? | [Índice de runs](../runs/README.md) |
 | O que entra no Git? | [Contribuição](../CONTRIBUTING.md), [amostras](../amostras/README.md) |
+| Onde hospedar gratuitamente e o que falta para publicar? | [Avaliação de hospedagem](hosting-options.md) |
 | O que ainda está pendente? | [Plano](../PLANO.md) |
 
 O padrão é maio–outubro/2026: 2.537 compras, 2.536 pesquisas de contratos e 679 contratos.

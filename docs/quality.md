@@ -67,3 +67,7 @@ em [revisão da aplicação](application-review.md) e [análises](analytics.md).
 
 [Histórico das verificações](history/quality-log.md): resultados de etapas e versões
 anteriores foram preservados; suas contagens não são somadas à suíte atual.
+
+## Revisão móvel e prontidão de hospedagem
+
+112 testes Python e os contratos Node passaram. O histórico móvel foi conferido sem nova consulta, junto da marcação de resultados antigos e limpeza da sessão. A revisão por código ampliou controles e rótulos; inspeção visual real continua pendente de habilitar o navegador. [Verificação](../runs/application-review-7c025c56-38fc-495c-80b3-be4ae22717d0/verification.json) · [Hospedagem gratuita e adaptações necessárias](hosting-options.md).

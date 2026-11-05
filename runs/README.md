@@ -122,3 +122,5 @@ contratos Node e consultas HTTP locais. Sem nova coleta ou chamadas externas de 
 [Diário](contracts-completion-d5e1399d-480d-4b8e-b388-388fcdb67f9a/progress.json) · [Cobertura final](contracts-resume-9a175343-9dde-49dc-b1e5-dcf5e760d139/coverage.json) · [Publicação/idempotência](contracts-publication-10f50cf9-aedd-47ba-a17c-1e56f36391d4/verification.json) · [112 testes e HTTP](application-review-fbea3361-f186-4701-97a3-74c4a8af80c8/verification.json). São 2.536 compras aptas pesquisadas, 679 contratos, zero pendências aptas e uma exclusão. Todos os 26 snapshots foram verificados; não somar com o recorte original.
 
 [Apresentação do produto](application-review-7aa7ebba-442d-466f-9642-5b62647dd32e/verification.json): 112 testes Python, contratos de resumo/gráficos, validação de empates, PT/EN, exportação e consultas HTTP reais. Sem inspeção visual ou gravação de vídeo nesta etapa.
+
+[Revisão móvel e hospedagem](application-review-7c025c56-38fc-495c-80b3-be4ae22717d0/verification.json): 112 testes Python, contratos de interface e histórico móvel sem nova chamada. Inspeção visual indisponível; planos gratuitos pesquisados em fontes oficiais.
