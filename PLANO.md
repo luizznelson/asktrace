@@ -28,7 +28,7 @@ agosto–outubro permanece separado. Sem filtros livres, memória no modelo ou n
 - [x] Commit da otimização publicado no Render; doze caminhos e IA real verificados com latência registrada.
 - [x] Conferir nova instância da versão otimizada no Render: orçamento preservado e token anterior rejeitado.
 - [x] Retomada após suspensão por inatividade conferida nos logs do Render: startup de ~22 s; o tempo total percebido não foi cronometrado ([registro](docs/deployment.md#retomada-após-suspensão-por-inatividade)).
-- [ ] Implantar no Render o commit `5b2f47e` (autoDeploy desligado) e conferir os textos de estado e idioma.
+- [x] Commit `5b2f47e` implantado manualmente no Render (autoDeploy desligado); selo e rótulos em inglês conferidos no endereço público.
 - [ ] Concluir revisão visual das telas restantes: rastreio por ID e seletor da base original. Já conferidos no app publicado: apresentação inicial, perguntas sugeridas, resposta mensal com gráfico, origem dos dados, qualidade dos dados, inglês, histórico e celular.
 - [x] Vídeo de demonstração em PT e EN, montado a partir de capturas reais do app publicado, com links nos READMEs (`scripts/build_demo.py`, `docs/media/storyboard.json`).
 - [x] CI observada no GitHub Actions: o commit do vídeo falhou no `ruff`; o commit de correção passou. Testes locais não substituem a execução remota.

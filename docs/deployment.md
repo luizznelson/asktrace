@@ -257,6 +257,12 @@ deve apresentar isso como característica do plano gratuito.
 ## Implantação manual
 
 O `render.yaml` mantém `autoDeployTrigger: 'off'`. Um `git push` não atualiza o serviço
-público: é preciso disparar um deploy no Render. Em 05/11/2026 a versão em produção é o
-commit `59ca88d`; o commit `5b2f47e` (textos de estado e idioma) ainda não foi implantado.
-As capturas do vídeo foram feitas na versão `59ca88d`.
+público: é preciso disparar um deploy no Render. Em 05/11/2026, o deploy
+`dep-dbmdvvrncjis738n9mfg` (disparado pela API do Render) publicou o commit
+`dd794b71034224377a28012afeaf5589b1f4fbf5`, que inclui `5b2f47e` (textos de estado e idioma).
+Ele ficou `live` às 20:00:16 UTC, 81 segundos depois do início. Antes disso, a versão em
+produção era `59ca88d`, e as capturas do vídeo foram feitas nela.
+
+Conferência no endereço público depois do deploy: selo `DEMO` e rótulos de acessibilidade
+em inglês ao trocar o idioma (região `Dataset scope`, seletor `Selected dataset`). Não foram
+repetidas as doze consultas nem a avaliação de desempenho nesta versão.
