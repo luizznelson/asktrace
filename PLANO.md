@@ -29,7 +29,8 @@ agosto–outubro permanece separado. Sem filtros livres, memória no modelo ou n
 - [x] Conferir nova instância da versão otimizada no Render: orçamento preservado e token anterior rejeitado.
 - [x] Retomada após suspensão por inatividade conferida nos logs do Render: startup de ~22 s; o tempo total percebido não foi cronometrado ([registro](docs/deployment.md#retomada-após-suspensão-por-inatividade)).
 - [x] Commit `5b2f47e` implantado manualmente no Render (autoDeploy desligado); selo e rótulos em inglês conferidos no endereço público.
-- [ ] Concluir revisão visual das telas restantes: rastreio por ID e seletor da base original. Já conferidos no app publicado: apresentação inicial, perguntas sugeridas, resposta mensal com gráfico, origem dos dados, qualidade dos dados, inglês, histórico e celular.
+- [x] Revisão visual e funcional no app publicado (`dd794b7`): início, perguntas sugeridas, resposta mensal com gráfico, origem dos dados, qualidade dos dados, inglês, histórico, celular, rastreio por ID (sem IA), troca para a base original e recusa de ID fora do recorte. Sem certificação de acessibilidade.
+- [ ] Acabamento opcional no texto do rastreio: "tem 1 contratos" (concordância) e o código interno `with_contracts` exibido na frase de resumo (`web/app.js` e `asktrace/agent.py`).
 - [x] Vídeo de demonstração em PT e EN, montado a partir de capturas reais do app publicado, com links nos READMEs (`scripts/build_demo.py`, `docs/media/storyboard.json`).
 - [x] CI observada no GitHub Actions: o commit do vídeo falhou no `ruff`; o commit de correção passou. Testes locais não substituem a execução remota.
 
