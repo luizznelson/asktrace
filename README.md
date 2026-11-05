@@ -1,146 +1,133 @@
 # AskTrace
 
+**Explore compras públicas do Piauí e confira de onde veio cada resposta.**
+
+[English](README.en.md) · [Estudo de caso](docs/case-study.md) · [Arquitetura](docs/architecture.md) · [Documentação](docs/README.md)
+
+![Visão geral do AskTrace: 2.537 compras no recorte, 2.536 compras aptas pesquisadas e 679 contratos encontrados](docs/assets/asktrace-overview-pt.svg)
+
 [![Quality](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml)
 
-**Investigar compras públicas com dados de origem e um caminho verificável até a resposta.**
+O AskTrace transforma um recorte do Portal Nacional de Contratações Públicas (PNCP) em
+uma experiência de investigação: faça uma pergunta em português, veja o resumo e a
+visualização dos dados, abra a tabela e confira as fontes. A interface está disponível
+em PT-BR e inglês. O aplicativo é independente do PNCP e opera localmente.
 
-Projeto de portfólio de engenharia de IA aplicada, desenvolvido por Luiz. A primeira entrega constrói a base auditável de pregões eletrônicos do Piauí. Um roteador limitado de perguntas está implementado; o baseline foi avaliado e há contingência explícita entre provedores, com avaliações e limites registrados.
+## O problema que resolve
 
-[English](README.en.md) · [Estudo de caso](docs/case-study.md) · [Decisões de engenharia](docs/architecture.md) · [Documentação](docs/README.md)
+Uma tabela de compras não explica sozinha se todas as páginas foram coletadas, se a
+busca de contratos terminou ou se um valor ausente foi tratado como zero. O AskTrace
+mantém essas diferenças visíveis enquanto você explora os dados. O cenário proposto é
+análise de publicações por quem acompanha compras públicas; não há implantação em
+organização nem ganho de produtividade comprovado.
 
-## Análises disponíveis
+## Experimente uma investigação
 
-Panorama, municípios, evolução por mês de publicação, órgãos com mais compras, qualidade dos dados e rastreio por ID PNCP. A interface permite exportar a tabela em CSV com recorte e hash, além do JSON completo. [Perguntas, interpretação, testes e limites](docs/analytics.md).
+| Pergunte | O que você recebe | Como conferir |
+| --- | --- | --- |
+| Como evoluíram as compras por mês de publicação? | Resumo calculado, seis meses em gráfico e tabela | Junho tem 527 publicações; a série soma 2.537 compras |
+| Quais órgãos têm mais compras na base? | Até 20 órgãos por quantidade, com prévia dos cinco primeiros | CNPJ do órgão, valores estimados e campos ausentes |
+| Rastreie a compra 00394452000103-1-011584/2026. | Dados da compra e contratos vinculados | Identificadores, índices e hashes das páginas de origem |
 
-## Em 1 minuto
+Também estão disponíveis panorama da cobertura, municípios e qualidade dos dados.
+Os resumos e gráficos são calculados a partir das linhas retornadas, sem uma segunda
+chamada de IA. JSON e CSV preservam contexto e valores originais.
 
-| | |
-| --- | --- |
-| **Problema** | Uma resposta sobre compras públicas pode ignorar páginas, tratar um valor ausente como zero ou misturar períodos e modalidades. |
-| **O que construí** | Coletor paginado do PNCP, normalização com precisão decimal, carga transacional no PostgreSQL e relatórios que ligam cada registro à página original. |
-| **Resultado verificado** | Base padrão maio–outubro/2026: 2.537 compras em 54 páginas. Todas as 2.536 compras aptas tiveram contratos pesquisados: 679 contratos em 370 compras; 2.166 respostas sem publicação e nenhuma pendência apta. Uma exclusão por ano inválido. O recorte original continua separado. [Cobertura concluída](docs/contracts-expanded-coverage.md). |
-| **Habilidades demonstradas** | Python 3.14, integração com API pública, qualidade de dados, SQL, PostgreSQL com Docker, rastreabilidade, testes de falhas e CI configurada. |
-| **Estágio atual** | Compras, contratos vinculados e consultas de negócio somente leitura verificados localmente. Roteador com contingência e avaliação local; interface local PT-BR/EN, sem demonstração online. |
-| **Onde começar** | [Resultado e método](docs/ingestion.md) · [Evidência no banco](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) · [Como verificar](docs/quality.md) |
+## Resultado verificado
 
-## 1. O problema: contar registros não basta
+| Base padrão: publicações de maio–outubro/2026, modalidade 6, unidades do Piauí | Quantidade |
+| --- | ---: |
+| Compras na base | 2.537 |
+| Compras aptas com contratos pesquisados | 2.536 |
+| Contratos vinculados a 370 compras | 679 |
+| Compras pesquisadas sem publicação retornada | 2.166 |
+| Compras aptas pendentes | 0 |
+| Exclusão por ano inválido na fonte | 1 |
 
-Uma amostra do PNCP contém 50 registros, mas informa **454 resultados em 10 páginas**. Tomar apenas o arquivo recebido como a base completa eliminaria a maior parte daquela consulta. Essa amostra é de outubro de 2025 e não faz parte dos números da coleta de 2026.
+São contagens deste snapshot, não indicadores de impacto financeiro. Publicação não
+comprova pagamento; ausência no portal não comprova ausência de contrato. Os 1.354 valores
+homologados não informados permanecem desconhecidos. O recorte original de agosto–outubro
+é separado e nunca é somado à base padrão.
 
-O cenário proposto é alguém investigando compras públicas: precisa conhecer o período, a modalidade, a cobertura e a origem de cada valor antes de interpretar uma resposta. A documentação e o código precisam tornar esses limites visíveis.
+[Conferência da cobertura e do banco](docs/contracts-expanded-coverage.md) · [O que as análises permitem concluir](docs/analytics.md)
 
-## 2. A solução atual: uma base antes do agente
-
-**Consulta delimitada → páginas originais → validação → normalização → PostgreSQL → relatório verificável.**
+## Como funciona
 
 ```mermaid
 flowchart LR
-  A[PNCP: PI, modalidade 6<br/>agosto a outubro de 2026] --> B[Coleta por mês e página]
-  B --> C[JSON original e hash]
-  C --> D[Validação de cobertura<br/>e normalização decimal]
-  D --> E[Carga transacional<br/>no PostgreSQL]
-  E --> F[Relatórios e consulta<br/>por execução]
+    P[PNCP: publicações e contratos] --> C[Coleta paginada e validação]
+    C --> E[Arquivos de origem e hashes]
+    C --> D[(PostgreSQL por snapshot)]
+    U[Pergunta na interface] --> R[Regras locais ou planejador de IA]
+    R --> V[Plano validado: seis consultas permitidas]
+    V --> Q[Consulta parametrizada somente leitura]
+    D --> Q
+    Q --> A[Resumo, gráfico e tabela]
+    E --> F[Fontes, cobertura e rastro]
+    A --> F
 ```
 
-Cada execução recebe um identificador. Amostra, falha e coleta real concluída têm estados diferentes. Os snapshots ficam separados, permitindo conferir uma execução sem somar a mesma compra novamente em outra coleta.
+O modelo escolhe uma consulta do catálogo; não escreve SQL nem inventa o resultado
+numérico. Os dados do banco não são enviados ao planejador. Sem API externa, o modo por
+regras atende os mesmos seis caminhos. O histórico organiza a aba, sem memória
+conversacional no modelo, e identifica respostas de versões anteriores da base.
 
-## 3. O que foi verificado no recorte original (ago–out/2026)
+## Decisões de engenharia que você pode verificar
 
-| Pergunta | Evidência disponível |
-| --- | --- |
-| Quantos pregões foram recebidos no recorte? | **1.081**, com totais de paginação conferidos: 412 em agosto, 373 em setembro e 296 em outubro de 2026. |
-| Foram carregados no banco? | Sim. A conferência PostgreSQL encontrou os mesmos 1.081 registros. Uma segunda carga retornou `already_loaded`. |
-| Todos informam valor homologado? | Não. **749** não informam esse campo; ausência não virou zero. |
-| É toda a contratação pública do Piauí? | Não. O recorte é modalidade 6, UF da unidade igual a PI e data de publicação. Não inclui contratos e atas. |
-| Já há respostas de IA avaliadas? | Não. Coleta e testes de software não medem qualidade de respostas de um agente. |
-
-Igualdade entre contagens não prova que o portal permaneceu inalterado durante a coleta. Valor homologado não é valor pago; sua ausência não comprova cancelamento. Ganhos de produtividade ou economia ainda não foram medidos.
-
-[Método, limites e reprodução](docs/ingestion.md) · [Manifesto da coleta](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/manifest.json) · [Qualidade](runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/quality.json)
-
-## 4. O que a implementação demonstra
-
-| Decisão | Por que foi feita | Onde conferir |
+| Decisão | Problema evitado | Evidência |
 | --- | --- | --- |
-| Separar aquisição e carga | Reexaminar os mesmos bytes sem depender de uma nova resposta da API. | [Arquitetura](docs/architecture.md) |
-| Verificar datas, UF e modalidade | Não confiar somente no filtro enviado ao servidor. | `normalize` em [ingest.py](asktrace/ingest.py) |
-| Usar Decimal e NUMERIC | Preservar valores sem passar por float; ausências continuam desconhecidas. | [Ingestão](docs/ingestion.md), [esquema SQL](sql/002_purchases.sql) |
-| Usar transação e identidade da execução | Evitar carga parcial e duplicação ao carregar novamente o mesmo manifesto. | [database.py](asktrace/database.py), [testes PostgreSQL](tests/test_database_integration.py) |
-| Manter estados de falha explícitos | Não apresentar timeout, interrupção ou download limitado como sucesso. | [Testes da ingestão](tests/test_ingestion.py) |
+| Decimal → NUMERIC → texto decimal | Perda de precisão e ausência convertida em zero | [Consultas](asktrace/query.py), [formatação](web/formatters.js) |
+| Hashes, snapshots e carga idempotente | Alteração silenciosa de fontes e duplicação na carga | [Integridade](asktrace/evidence.py), [cobertura concluída](docs/contracts-expanded-coverage.md) |
+| Plano validado e login de leitura | SQL livre gerado pelo modelo e escrita no banco | [Agente](asktrace/agent.py), [permissões](sql/004_reporting.sql) |
+| Tentativas limitadas e espera por provedor | Rotação de modelos para contornar quota e falhas ocultas | [Contingência](docs/provider-contingency.md) |
+| Conteúdo e escopo no CSV | Exportação sem origem e fórmulas de planilha em texto externo | [Exportação](docs/analytics.md) |
 
-## 5. Como conferir sem baixar os dados novamente
+## Qualidade: software e IA são verificações diferentes
 
-Comece pelos relatórios vinculados acima. Para testar o código, use Python 3.14 e uv, na pasta do projeto:
+- **Software:** 112 testes Python na última suíte, com PostgreSQL isolado; contratos Node
+  para interface, gráficos, formatação e CSV. [Como reproduzir e interpretar](docs/quality.md).
+- **Roteamento local v3:** 12/12 casos curados do catálogo ampliado, incluindo recusas.
+- **IA v3:** três testes iniciais reais, um por nova análise. A avaliação ampla do
+  planejador v3 ainda está pendente. Os resultados do prompt anterior são históricos.
+- **Interface:** verificações DOM e HTTP realizadas. A inspeção visual em navegador e
+  o vídeo de demonstração não estão concluídos; não há demo pública hospedada.
+
+Não há promessa de acurácia geral baseada nos testes curados, nem economia de trabalho medida.
+
+## Executar e reproduzir
+
+Para testar o código com fixtures locais, sem baixar novamente o PNCP:
 
 ```powershell
 uv venv --python 3.14
 uv pip install --python .venv/Scripts/python.exe --require-hashes -r requirements.txt
 uv pip install --python .venv/Scripts/python.exe -r requirements-dev.txt
-.venv/Scripts/python.exe -m unittest discover -s tests -v
+.venv/Scripts/python.exe -m unittest discover -s tests -q
+node tests/test_display_formatters.cjs
+node tests/test_result_presentation.cjs
+node tests/test_assistant_ui.cjs
 ```
 
-Se `.venv` já existir e estiver configurado, não é necessário recriá-lo. Sem a opção de integração, dois testes PostgreSQL são ignorados explicitamente. Para executá-los, iniciar o banco e reproduzir a coleta, siga o [guia de ingestão](docs/ingestion.md) e o [guia de desenvolvimento](docs/development.md). No primeiro uso, configure a senha local a partir de `.env.example`; nunca versione `.env`.
+O código usa Python 3.14; os testes JavaScript usam Node 22 na CI. Testes de banco exigem
+PostgreSQL e opt-in explícito. A CI está configurada; o badge acima reflete a execução remota.
 
-## 6. Como investigar o repositório
+**Rodar o app com a base real exige preparação adicional:** PostgreSQL, downloads
+brutos/processados verificados e carga dos snapshots. Esses downloads não estão no Git.
+Os hashes publicados não substituem os arquivos e uma nova coleta pode retornar bytes
+diferentes. Siga [desenvolvimento](docs/development.md), [ingestão](docs/ingestion.md) e
+[contratos](docs/contracts-expanded-coverage.md). A chave de IA é opcional no modo local;
+segredos ficam no `.env` ignorado, nunca no `.env.example` versionado.
 
-| Pasta | O que mostra |
-| --- | --- |
-| `asktrace/` | Coleta, normalização e carga verificável. |
-| `sql/` | Registro de origem, tabelas normalizadas e visão que separa amostras de dados reais. |
-| `tests/` | Paginação, falhas, precisão, integridade e transações PostgreSQL. |
-| `amostras/` | Páginas históricas públicas para exploração; contratos têm cópia mascarada com proveniência. |
-| `runs/` | Manifestos e relatórios publicados, com modo e estado de cada execução. |
-| `docs/` | Caso de uso, decisões, evidências, comandos e limitações. |
+Com a base preparada, execute `.venv/Scripts/python.exe -m asktrace.web` e abra
+`http://127.0.0.1:8010`. O servidor atual é local; não é um serviço multiusuário pronto
+para exposição pública.
 
-Os downloads completos ficam localmente em `data/raw/` e `data/processed/`, excluídos do Git. Os relatórios registram os hashes, mas não disponibilizam esses arquivos por si só. [Índice de documentação](docs/README.md).
+## Para aprofundar
 
-## Contratos vinculados: recorte original preservado
+[Caso de uso e percurso](docs/case-study.md) · [Arquitetura e decisões](docs/architecture.md) ·
+[Análises e exportação](docs/analytics.md) · [Índice de evidências](runs/README.md) · [Plano](PLANO.md)
 
-**Cobertura elegível concluída:** 1.080 compras distintas confirmadas. 125 contratos distintos e 0 compras elegíveis pendentes.
-A população original tem 1081 compras; uma ficou excluída por ano inválido na fonte.
-São 85 compras com contratos e 995 sem publicação retornada.
-Isso descreve o recorte de pregões selecionado, não todos os contratos do Piauí.
-Veja [método, evidências e limites](docs/contract-coverage.md). O roteador limitado e sua avaliação estão descritos abaixo.
-
-## Perguntas de negócio disponíveis
-
-Consultas fixas respondem o resumo da cobertura, a distribuição por município e o rastreio de uma compra. Usam credencial separada somente leitura, sem receber SQL livre. Há exemplos reais e 51 testes locais aprovados. [Como consultar e verificar](docs/business-queries.md). Roteamento em texto e avaliação estão descritos a seguir.
-
-## Perguntas em texto, contingência e avaliação
-
-O modo de contingência usa Qwen e GPT-OSS pela Groq, Xing gratuito pelo OpenRouter e Gemini
-quando sua quota permitir. Pode tentar até três planejadores e executar uma única consulta de negócio.
-Quota compartilhada não é multiplicada trocando modelos da mesma conta; recusas válidas encerram o fluxo.
-
-Foram aprovados os 60 casos de desenvolvimento em dois trechos compatíveis e oito perguntas
-adicionais. No corpus principal foram 40 planos LLM e 20 recusas locais. O GPT-OSS passou em três
-testes reais; o OpenRouter passou em dois e encontrou 429 no terceiro. Os modelos de reserva não
-herdam a nota do principal. O código atual passou em 79 testes locais, incluindo PostgreSQL.
-[Modelos, configuração e limites](docs/provider-contingency.md) · [Método de avaliação](docs/agent-evaluation.md).
-
-## Interface local
-
-Um espaço de assistente PT-BR/EN conecta perguntas, sugestões, histórico restaurável da sessão, respostas e evidências. A engenharia do projeto fica acessível sem interromper a exploração.
-Execute `python -m asktrace.web` no ambiente do projeto e abra `http://127.0.0.1:8010`.
-O início usa IA com contingência; regras locais ficam disponíveis no seletor. As perguntas continuam suportadas em português.
-Seis fluxos HTTP reais passaram; a suíte tem 86 testes locais aprovados. A revisão visual de navegador
-está pendente porque a prévia está desativada no ambiente. [Uso, evidências e limites](docs/interface.md).
-
-## Base ampliada e como começar
-
-O AskTrace ajuda a explorar publicações do PNCP com perguntas e fontes verificáveis. Escolha a base,
-faça uma pergunta concreta e confira cobertura e origem na resposta. As instruções aparecem na aplicação.
-O novo padrão é maio–outubro/2026: **2.537 compras em 54 páginas**, 1.456 compras adicionais no período.
-O primeiro lote confirmou 100 consultas e 21 contratos; restam 2.436 consultas elegíveis, além de uma
-exclusão por ano inválido. O recorte anterior continua disponível com 1.080 consultas e 125 contratos.
-**Não somar snapshots nem interpretar compras ainda não consultadas como compras sem contrato.**
-O histórico da sessão sobrevive a recarregamentos e pode ser limpo. Passaram 89 testes Python,
-contrato DOM e três consultas HTTP dos dois recortes, incluindo IA real. [Uso e evidências](docs/dataset-expansion.md).
-
-## 7. O que vem depois
-
-O próximo passo é ampliar a cobertura de contratos do novo recorte, avaliar suas perguntas e revisar a interface visualmente antes de preparar hospedagem. Atas ainda precisam de estratégia própria. Depois entram ferramentas somente leitura, cálculo exato, busca semântica e avaliação de perguntas. Interface, vídeo e demonstração serão acrescentados quando houver fluxo real para mostrar. [Plano](PLANO.md).
-
-Fonte dos dados: [PNCP](https://www.gov.br/pncp/pt-br) e sua [API oficial](https://pncp.gov.br/api/consulta/swagger-ui/index.html). O projeto é independente do portal. Consulte a [licença do código](LICENSE); ela não determina a licença dos dados de terceiros.
-
-Houve assistência de IA no desenvolvimento. A responsabilidade por compreender, revisar e verificar as entregas é do mantenedor.
+O histórico da construção permanece na documentação e em `runs/`; o README descreve o
+estado atual. Fonte: [PNCP](https://www.gov.br/pncp/pt-br). [Licença do código](LICENSE):
+não determina a licença dos dados de terceiros. Houve assistência de IA no desenvolvimento;
+a responsabilidade por compreender, revisar e verificar o código é do mantenedor.

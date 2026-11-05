@@ -1,6 +1,13 @@
 # Perguntas de negócio com acesso somente leitura
 
-## O que já pode ser respondido
+## Estado atual
+
+O catálogo atual tem seis consultas e interface de perguntas, com base padrão de maio a
+outubro: 2.537 compras e 679 contratos. [Análises e exportação](analytics.md) ·
+[Cobertura concluída](contracts-expanded-coverage.md). As verificações e números do
+recorte original abaixo preservam a etapa inicial da implementação.
+
+## Consultas iniciais do recorte original
 
 | Pergunta | Comando | Resultado e limite |
 | --- | --- | --- |
@@ -8,8 +15,9 @@
 | Como as compras se distribuem por município? | `municipalities` | Até 20 grupos, ordenados por quantidade; estimativas somadas uma vez por compra, com quantidade de valores desconhecidos |
 | Quais dados e contratos sustentam uma compra? | `purchase --purchase-id ID` | Compra, valores, cobertura, identificadores de contratos, hashes e posições na fonte |
 
-Essas são consultas fixas, não um agente de linguagem natural. Não recebem SQL do usuário ou de LLM.
-Nenhum deploy, interface ou credencial de serviço externo é necessário nesta etapa.
+As consultas são fixas e não recebem SQL do usuário ou de LLM. O roteador de linguagem
+natural seleciona essas consultas; o modo local também permite executá-las sem provedor.
+A interface e o endpoint HTTP local já estão implementados.
 
 ## Executar
 
@@ -61,8 +69,8 @@ com filtro para coletas reais completas; não recebe acesso direto às tabelas. 
 O PostgreSQL impõe timeout de dez segundos e leitura por padrão para esse login. As respostas usam
 transação somente leitura e valores parametrizados. Os testes tentam escrita mesmo desativando o
 padrão somente leitura: privilégios e definição das visões continuam bloqueando a alteração.
-O usuário de manutenção permanece administrativo e não deve ser usado futuramente pelo agente.
-Não há endpoint HTTP ou autenticação web nesta entrega. As verificações de arquivos ocorrem antes
+O usuário de manutenção permanece administrativo e não é o login de consulta do agente.
+O endpoint HTTP local verifica origem e token da sessão; não há autenticação multiusuário para hospedagem pública. As verificações de arquivos ocorrem antes
 do timeout SQL e precisam dos downloads locais, não publicados no Git.
 
 ## Evidências e validação

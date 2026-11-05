@@ -1,0 +1,20 @@
+{
+  "verified_at": "2026-11-05T00:21:13.320316+00:00",
+  "markdown_files_checked": 23,
+  "broken_local_links": 0,
+  "svg_xml_validated": 2,
+  "media_type": "authored data overview graphics; not application screenshots",
+  "browser_visual_inspection": false,
+  "video_created": false,
+  "video_status": "deferred",
+  "source_sha256": {
+    "README.md": "151427ad9d64e8809e78d95c8e3bb6d51b2e947b6cb15996000bd39135c78fc5",
+    "README.en.md": "6a25586241648cf1931ea92fcd02f4518fc1d54027b751419ac036c9d66e0e98",
+    "docs/README.md": "39c544d7950e064dc34612ce2825bfde69419be3b97356096dcbc5c7b08df225",
+    "docs/case-study.md": "51442b3e59230075b7bdcaf4109a3d8bd6c9dc6b47c01694fb660a07d4a13706",
+    "docs/quality.md": "7bbbc7a8249aa93c47094a502f0f0bbdcb190ff663c2de0941fc5bc51d32a196",
+    "docs/interface.md": "a4ddd38a239a02993ff013bd414f5346feddd3a90b314f0f0548a838f72142ce",
+    "docs/assets/asktrace-overview-pt.svg": "d4401f88a06e5fc261c1f097393e2fec0bdea7f5b2e5c7322c60b32baf065121",
+    "docs/assets/asktrace-overview-en.svg": "6c5031a7e1db84a90634dee005cd685ed2ea1a44d2c59ffdaa249468780cb66b"
+  }
+}

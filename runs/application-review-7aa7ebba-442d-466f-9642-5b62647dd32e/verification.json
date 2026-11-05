@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "started_at": "2026-11-05T00:17:03.691383+00:00",
+  "external_ai_calls": 0,
+  "browser_visual_inspection": false,
+  "checks": [
+    {
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-q"
+      ],
+      "exit_code": 0,
+      "tests_run": 112
+    },
+    {
+      "command": [
+        ".venv/Scripts/ruff.exe",
+        "check",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/Scripts/ruff.exe",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "web/app.js"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "web/presentation.js"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_result_presentation.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "web/formatters.js"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_display_formatters.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_assistant_ui.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "credential_check": {
+    "scope": "tracked and nonignored untracked files; exact configured secret values",
+    "files_checked": 583,
+    "configured_secret_matches": 0,
+    "env_tracked": false,
+    "limitation": "Not a scan of Git history or unknown/revoked credentials."
+  },
+  "database_permissions": {
+    "rolsuper": false,
+    "rolcreatedb": false,
+    "rolcreaterole": false,
+    "can_read": true,
+    "can_insert": false,
+    "transaction_read_only": "on"
+  },
+  "http_queries": [
+    {
+      "dataset": "original",
+      "action": "summary",
+      "row_count": 1,
+      "status": "answered",
+      "purchases": 1081,
+      "tool_calls": 1,
+      "llm_attempts": 0,
+      "scope": {
+        "purchase_run_id": "3020d59b-d274-4f4c-be4f-d59e8be30101",
+        "date_start": "2026-08-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "response_sha256": "69aa5921991ce12e830398198732fd04a73fcfc70d1918bbf90dbbfc3132997c"
+    },
+    {
+      "dataset": "expanded",
+      "action": "municipalities",
+      "row_count": 20,
+      "status": "answered",
+      "purchases": 2537,
+      "tool_calls": 1,
+      "llm_attempts": 0,
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "response_sha256": "0677ac7da0c173f9cb2e131a743ec32edb5bb2f40bf1d3fb2a582c879bd10d14"
+    },
+    {
+      "dataset": "expanded",
+      "action": "monthly",
+      "row_count": 6,
+      "status": "answered",
+      "purchases": 2537,
+      "tool_calls": 1,
+      "llm_attempts": 0,
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "response_sha256": "abb24faed5e7cdb1b98814f76e4e9e9da05a8406c86ad42534d50d47330a1b1b"
+    },
+    {
+      "dataset": "expanded",
+      "action": "organizations",
+      "row_count": 20,
+      "status": "answered",
+      "purchases": 2537,
+      "tool_calls": 1,
+      "llm_attempts": 0,
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "response_sha256": "1f4ee8725c26a34eb0b335f51d3aaeecd0a6e3eea521d53fa2e7c87007bce43c"
+    },
+    {
+      "dataset": "expanded",
+      "action": "quality",
+      "row_count": 1,
+      "status": "answered",
+      "purchases": 2537,
+      "tool_calls": 1,
+      "llm_attempts": 0,
+      "scope": {
+        "purchase_run_id": "74d68096-1e27-451d-b423-f8cded554d54",
+        "date_start": "2026-05-01",
+        "date_end": "2026-10-31",
+        "uf": "PI",
+        "modality": 6,
+        "date_basis": "publication",
+        "resource": "purchases"
+      },
+      "response_sha256": "34453dea7ca4e37cd11117e2634ee76b74c7178e5d4816d1e01431eb554c12d1"
+    }
+  ],
+  "source_sha256": {
+    "tests/test_result_presentation.cjs": "a6293a3e829b02ef801a3b12c935441e1498ad2b9f3d00b3603de1b4367507ab",
+    "web/presentation.js": "b9f4b2318a8e78ef44903a3d59161527a79d2467c1fddb59fd11a0fd48082594",
+    "asktrace/__init__.py": "6ed54afe74ff44f279d65f0150f8ef984aac58cda4914c79d2ad1cde4ce71a8a",
+    "asktrace/agent.py": "a493cbc83ee75015d160332390b9437cd4b9c56e7621a2ba55c16ff4acda1d29",
+    "asktrace/contract_batches.py": "98a621750734827dc1d04d2492498d839d31309e9c53e5c9f8848c0490098cb8",
+    "asktrace/contracts.py": "41799e3dcbd8dcd3327038e8d72bcd92a8566f169a232a91df290324a832e54d",
+    "asktrace/database.py": "3509627a46b58803829ed5d76e6fca5dd3a8ddcfd4d9a1702d1a5c367bd67ef1",
+    "asktrace/evaluate.py": "46b812db5a17b04c751642455d475a32e75574053f5f1d42e9e685e96ee54f15",
+    "asktrace/evidence.py": "5b1d5998940ea021c440d8f1473e7a59acb8e053f6de8b9e8cd2a0a21740a149",
+    "asktrace/gemini.py": "5e8797ddd1df264948b12873223919c4adf79b3623b9230e803173caa58b052f",
+    "asktrace/http_transport.py": "a3c250adb1419274558c987fb34daffc9e9626a80a06801c39f6682d774b3a3a",
+    "asktrace/ingest.py": "91aaded8a31865a78963a1d06a8fa9bc92e45a7403d400368cd1225b8296c48b",
+    "asktrace/planning.py": "725211fa65eaf47ba7432a63485367d14ef63794ec82609925e3b062bcaffa74",
+    "asktrace/provider_gateway.py": "0a4ef1a8a161b5003fb58c410cb644dab640b85c7b275ddc1a072786f72a7357",
+    "asktrace/providers.py": "33b3b331e09539a5bf964a1639109db4a7f93fbdc587a26098b5a5fe22ea5271",
+    "asktrace/query.py": "a6d6f5be1d96364522d567fc77d3e0ee6a5d681338977015b48ea2ee2f0980ac",
+    "asktrace/rate_limits.py": "9e066d9bc3497ec01a4cab9f9b8582ae9e9ae3fe54ce2ec3648ec84096076346",
+    "asktrace/web.py": "3bdc486b9b0ed79f43419d37add2845200b96e45969c6a13d513b558cca9f664",
+    "tests/test_agent.py": "30e28ff3996d1531addd055e13e566df6fb2213ab2eab0bc39e8e52553a15655",
+    "tests/test_assistant_ui.cjs": "1fdb5d44100cd701653436069ab9f3b8af3236c425e78181e0cd48887166a8d6",
+    "tests/test_availability.py": "bb5cc406320b000e29582dbfbcc0d36720b63d6848a1feb36831d89a9edb5941",
+    "tests/test_contract_batches.py": "da0f6f1a1a861f59f880b1fa94d66e69bfe865109364e1ab3a3b6bc9eb8a1d21",
+    "tests/test_contracts.py": "8d8dafb4141603eba2d77815e3d3898948cab003c75c94c773e65cd644915e16",
+    "tests/test_coverage_publication.py": "75c9f6cc9618e141220189f2831db0c4ffcee9792ebec71bf7ad877834a20f68",
+    "tests/test_database_integration.py": "2151fd3afe52732ec429cd6b53598822caea9247066d6ea9c91ce84a8cb7963d",
+    "tests/test_display_formatters.cjs": "e2645ae4b6f3c93ddd311395a2f4e529e38df0afc016dad53155063509e827e2",
+    "tests/test_evidence.py": "22b4131a701937a1ca4abc616e3ba4d69e60942676d4761a4fb081e9a4a60a8d",
+    "tests/test_expanded_routing.py": "f80ed515af9f27c3c7a82f5e83ab998e2cde6529a43403791f4a7bf4f6181f5f",
+    "tests/test_http_transport.py": "fd1e7740cc0a2cc5216e534ccccddd51ca867d9f3d3779034f966dfd9d349cde",
+    "tests/test_ingestion.py": "ecd6996986d7e2d1825b1bee88e45e060275c4742b065020f4a8108d2cd12cc9",
+    "tests/test_providers.py": "b95e60a4f236b672610a4bf0bab1625e18a5b087f47269e7068892db497de636",
+    "tests/test_queries.py": "b492e748104339f42738733378d46ef18a310f84f25eb97c40f4c25707f815aa",
+    "tests/test_rate_limits.py": "6ed87b28c88c268511966e35a08d9be926c66275c7fe4ad7ac372f019287e1e7",
+    "tests/test_samples.py": "bd01cd7fc25970b6387ab7da121031784ba748096de0ae3a03a619d1e3fc3a70",
+    "tests/test_scope.py": "d934c9b4fa31bf1dcc2d05547b60ef28dd7e73079637ee8b02834e4baa5b1c00",
+    "tests/test_web.py": "7384ba89e0c406cb284835e8082fcab973de540b2f4d754d1d7fdebbc94028a4",
+    "web/app.css": "9822e0a2787f31ae3cc1b741655c100abeb518948dbc4f3e8e862a9eb7987655",
+    "web/app.js": "f8f97c13e7c428b1cf15c585c171a6c288a473765ed079d46ef2be8bd27c1aeb",
+    "web/formatters.js": "7fb7ebc65d3882743203fd638834b7db656085daa357d4b2edff2088e80cd919",
+    "web/index.html": "8eb0b7780c59ca3a292b160ea6ad649038e79ecaafc489020b53956addf06228"
+  },
+  "finished_at": "2026-11-05T00:17:39.337194+00:00"
+}

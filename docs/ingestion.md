@@ -71,7 +71,7 @@ Essas verificações detectam vários problemas de paginação, mas a API não o
 
 A carga valida os hashes e os caminhos antes de acessar o banco, usa parâmetros SQL para valores e uma transação para todas as tabelas da execução. O PostgreSQL guarda snapshots por UUID. A visão `asktrace.live_purchases` exclui amostras, mas ainda exige filtro de `run_id` ao analisar uma execução: somar vários snapshots pode contar uma compra mais de uma vez.
 
-A credencial atual é administrativa e restrita ao banco local. Agente, credencial somente leitura, busca semântica e avaliação de perguntas ainda não foram implementados.
+Este guia descreve aquisição e carga com manutenção administrativa local. O roteador, a credencial somente leitura e as avaliações já estão implementados na camada de consultas. Busca semântica não foi adicionada. Consulte [arquitetura](architecture.md) e [consultas](business-queries.md).
 
 ## Testes com PostgreSQL
 

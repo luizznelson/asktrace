@@ -33,10 +33,34 @@ Esses comandos permitem conferir a seleção sem adicionar arquivos ao índice. 
 
 `complete_dataset` descreve somente a paginação informada pelo arquivo. Não atesta atualização, cobertura geográfica, ausência de duplicados ou correção financeira. Duplicados e IDs ausentes são indicadores separados no relatório.
 
-A auditoria não substitui validação do domínio, testes da ingestão ou revisão de SQL executado por agente. O esquema atual é o registro inicial de origem; as tabelas normalizadas foram adicionadas na migração 002. O usuário de consulta somente leitura ainda não foi implementado. A credencial administrativa do Compose não deve ser usada pelo futuro agente.
+A auditoria não substitui validação do domínio, testes da ingestão ou revisão de SQL executado por agente. O esquema atual é o registro inicial de origem; as tabelas normalizadas foram adicionadas na migração 002. O login de consulta `asktrace_reader` já está implementado em `sql/004_reporting.sql`. A aplicação usa essa credencial para leitura; a credencial administrativa do Compose fica restrita à manutenção e carga. Veja [consultas e permissões](business-queries.md).
 
 Os arquivos de `/docker-entrypoint-initdb.d/` inicializam um volume novo. Alterar o SQL não migra um banco existente; mudanças posteriores precisarão de migrações explícitas, sem apagar o volume para atualizar o esquema.
 
 A entrega de ingestão validou o SQL no PostgreSQL 17.11, com testes de integração em asktrace_test. O Compose fixa o digest da imagem observada. A documentação da primeira revisão descrevia o Docker desligado; essa limitação foi resolvida nesta etapa. Veja ingestion.md para comandos de reprodução e evidências.
 
 [Índice da documentação](README.md) · [Arquitetura](architecture.md) · [Qualidade](quality.md) · [Padrões de contribuição](../CONTRIBUTING.md).
+
+## Aplicação local com a base preparada
+
+É necessário ter PostgreSQL ativo, snapshots carregados e cópias locais verificadas dos
+arquivos brutos/processados referenciados pelos manifestos. Um clone do Git não contém
+esses downloads. Sem eles, ainda é possível executar os testes com fixtures e inspecionar
+os relatórios publicados; não se deve esperar que a aplicação real inicie só com o clone.
+
+```powershell
+.venv/Scripts/python.exe -m asktrace.query setup-reader
+.venv/Scripts/python.exe -m asktrace.web
+```
+
+Abra `http://127.0.0.1:8010`. Configure chaves em `.env` apenas se quiser o modo IA; o modo
+por regras não faz chamadas externas. A interface suporta PT-BR/EN e perguntas em português.
+
+```powershell
+node tests/test_display_formatters.cjs
+node tests/test_result_presentation.cjs
+node tests/test_assistant_ui.cjs
+```
+
+Os testes DOM são verificações de comportamento; não substituem inspeção visual em
+navegador. Rodar `scripts.verify_application_review` exige a base real já preparada.

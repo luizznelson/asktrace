@@ -1,32 +1,65 @@
-# Antes de responder, saber o que foi coletado
+# Da pergunta à fonte: investigar publicações de compras
 
-## Um risco concreto
+## O problema e o usuário proposto
 
-A primeira página de uma consulta histórica do PNCP trouxe 50 pregões do Piauí. A própria resposta informava 454 resultados em 10 páginas. Um sistema que encerrasse ali poderia responder com segurança aparente sobre uma base incompleta.
+Quem acompanha compras públicas precisa comparar publicações sem misturar períodos,
+somar snapshots repetidos ou tratar valor não informado como zero. O cenário de uso do
+AskTrace é uma pessoa investigando esse recorte, com liberdade para conferir a origem de
+cada resultado. Não há implantação em organização nem redução de tempo de trabalho medida.
 
-O usuário proposto é alguém investigando compras públicas e comparando publicações por órgão, município, período e objeto. Precisa conseguir perguntar “de onde veio essa resposta?” e “o que ficou de fora?”. Não há implantação comprovada em uma organização nem economia de trabalho medida.
+O risco apareceu cedo: uma primeira página histórica tinha 50 registros, mas informava
+454 resultados em dez páginas. Esse exemplo permanece nas amostras; não faz parte dos
+números atuais. A solução percorre a paginação, verifica os registros e mantém estados
+diferentes para coleta concluída, amostra e falha.
 
-## Como a primeira entrega responde a esse risco
+## Uma investigação de ponta a ponta
 
-1. Fixar UF, modalidade e período de publicação antes da consulta.
-2. Dividir o período em meses e percorrer as páginas informadas.
-3. Preservar os bytes recebidos e seus hashes.
-4. Conferir o recorte novamente nos registros e separar ausências de zeros.
-5. Carregar um snapshot em transação, sem duplicar ao repetir a carga.
-6. Publicar um manifesto e comparar os números com o banco.
+1. **Escolher o recorte:** maio–outubro/2026, pregões eletrônicos, unidades do Piauí.
+2. **Perguntar:** “Como evoluíram as compras por mês de publicação?”
+3. **Ler a conclusão:** junho teve o maior volume na série, com 527 publicações. Os seis
+   meses somam 2.537 compras. Isso descreve publicação, não pagamento ou execução.
+4. **Explorar:** o gráfico mostra os meses em ordem; a tabela permite conferir estimativas
+   e quantidades ausentes. Rankings de órgãos/municípios têm limite explícito de 20.
+5. **Auditar:** abrir fontes, rastro e cobertura; exportar JSON completo ou CSV contextualizado.
 
-## Resultado concreto
+A conclusão e o gráfico usam as mesmas linhas da tabela. Não há segunda chamada de IA
+para redigir a explicação e não são inferidos ganhos financeiros.
 
-A coleta de agosto a outubro de 2026 recebeu 1.081 pregões em 23 páginas. PostgreSQL confirmou a mesma contagem. A ausência de valor homologado em 749 registros permanece explícita, impedindo interpretar esses campos como zero ou como pagamentos.
+## Resultado construído
 
-O [registro de conferência](../runs/pncp-3020d59b-d274-4f4c-be4f-d59e8be30101/database-load.json) liga o resumo ao snapshot. O teste intencional limitado a uma página também está preservado e identificado como falha por orçamento: ele não entra no resultado completo.
+A base contém 2.537 compras. Todas as 2.536 compras com identificador válido tiveram a
+busca de contratos concluída, com 679 contratos ligados a 370 compras. Em 2.166 pesquisas
+não retornou publicação; uma compra foi excluída por ano inválido. Os 1.354 valores
+homologados não informados permaneceram desconhecidos.
 
-## O que isso ainda não responde
+[Cobertura e conferência no PostgreSQL](contracts-expanded-coverage.md).
 
-Não se pode concluir quais órgãos economizaram mais, quem recebeu pagamentos ou se houve irregularidade. Comparar valores depende de unidade, cobertura, situação e relações entre compras e contratos. Uma contratação pode gerar vários contratos; um contrato não deve ser comparado automaticamente ao orçamento inteiro da compra.
+## Decisões que sustentam a experiência
 
-A próxima camada será o agente, com ferramentas limitadas e avaliação de perguntas. A base atual prepara evidências; ainda não demonstra qualidade de respostas de IA.
+| Desafio | Escolha | Resultado verificável |
+| --- | --- | --- |
+| Dados mudam e páginas podem faltar | Bytes originais, hashes e verificação de paginação | Falhas e orçamento limitado não viram sucesso |
+| Dinheiro perde precisão em float | Decimal e NUMERIC; texto decimal nas respostas | Valor original preservado, apresentação em centavos separada |
+| Uma compra pode ter vários contratos | Agregações partem das compras e usam snapshot explícito | Estimativas não multiplicadas por número de contratos |
+| Um modelo pode gerar comandos inadequados | Catálogo fixo e validação do plano; login de leitura | O modelo não escreve SQL e o banco bloqueia escrita |
+| Serviços gratuitos podem falhar | Contingência limitada e espera compartilhada por provedor | Falha da IA não é apresentada como ausência de dados |
+| O histórico pode ficar antigo | Hash do recorte acompanha cada resposta | Uma resposta anterior não é restaurada como cobertura atual |
 
-## Roteiro de apresentação
+## O que foi avaliado
 
-Mostre o caso de 50 registros versus 454 resultados. Abra o manifesto da coleta real, escolha uma página e localize o hash e seus filtros. Mostre a mesma contagem no banco e o comportamento de carga repetida. Termine explicando um teste de rollback e uma pergunta que ainda não pode ser respondida.
+Software, interface e roteamento têm verificações separadas. A suíte Python inclui banco
+isolado e falhas controladas. Os testes Node conferem gráficos, empates, limites, moeda,
+histórico e CSV. O corpus local v3 teve 12/12; o planejador de IA v3 teve três testes
+iniciais reais. A avaliação ampla v3, validação visual e demo hospedada estão pendentes.
+
+[Qualidade](quality.md) · [Método de avaliação](agent-evaluation.md) · [Arquitetura](architecture.md).
+
+## O que a solução não conclui
+
+O app não determina fraude, economia ou pagamentos. A ausência de publicação não prova
+ausência de contrato, e este recorte não representa todas as compras do Piauí. Perguntas
+com filtros livres ou combinações fora do catálogo não são consultas implementadas.
+O histórico não dá memória conversacional ao modelo.
+
+O objetivo demonstrado é construir uma resposta limitada, compreensível e conferível —
+da integração com a fonte até a apresentação do resultado.
