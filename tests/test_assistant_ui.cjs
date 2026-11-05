@@ -136,6 +136,7 @@ const context = {
 };
 vm.createContext(context);
 vm.runInContext(fs.readFileSync("web/formatters.js", "utf8"), context);
+vm.runInContext(fs.readFileSync("web/presentation.js", "utf8"), context);
 vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
 (async () => {
     await new Promise((resolve) => setImmediate(resolve));
@@ -522,6 +523,46 @@ vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
         get("result-freshness").textContent,
         /earlier dataset version/,
     );
+    analyticsResult.status = "answered";
+    analyticsResult.evidence.question = "monthly";
+    analyticsResult.evidence.result = [
+        {
+            publication_month: "2026-05",
+            purchases: 505,
+            estimated_value: "100.00",
+        },
+        {
+            publication_month: "2026-06",
+            purchases: 527,
+            estimated_value: "200.00",
+        },
+    ];
+    vm.runInContext('lang="pt";render(analyticsResult)', context);
+    assert.equal(get("result-chart").hidden, false);
+    assert.equal(get("chart-bars").children.length, 2);
+    assert.equal(get("chart-bars").children[1].children[2].textContent, "527");
+    assert.equal(get("table-details").open, false);
+    assert.equal(get("coverage-details").open, false);
+    assert.match(get("answer").textContent, /527 compras/);
+    vm.runInContext('lang="en";render(analyticsResult)', context);
+    assert.match(get("answer").textContent, /527 purchases/);
+    assert.match(get("chart-title").textContent, /publication month/);
+    vm.runInContext(
+        'render({status:"error",question:"Resumo",trace:[],tool_calls:0})',
+        context,
+    );
+    assert.equal(get("result-chart").hidden, true);
+    assert.equal(get("result-highlights").hidden, true);
+    assert.equal(get("coverage-details").hidden, true);
+    datasets[0].example_purchase_id = "00000000000000-1-000001/2026";
+    datasets[0].coverage_finished_at = "2026-11-04T22:27:55+00:00";
+    vm.runInContext(
+        'selectedDataset="original";lang="pt";applyDataset()',
+        context,
+    );
+    get("discovery").children[2].click();
+    assert.match(get("question").value, /00000000000000-1-000001\/2026/);
+    assert.match(get("dataset-updated").textContent, /19:27/);
     console.log(
         "Assistant session persistence and DOM contract passed: discovery, submit, response, suggestions, history, language, reset, session.",
     );

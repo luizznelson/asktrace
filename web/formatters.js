@@ -135,7 +135,22 @@ const displayFormat = (() => {
             "\r\n"
         );
     }
+    function timestamp(value, language) {
+        if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}T/.test(value))
+            return missing(language);
+        const parsed = new Date(value);
+        if (!Number.isFinite(parsed.getTime())) return missing(language);
+        return (
+            new Intl.DateTimeFormat(locale(language), {
+                dateStyle: "medium",
+                timeStyle: "short",
+                timeZone: "America/Sao_Paulo",
+            }).format(parsed) +
+            (language === "pt" ? " (Brasília)" : " (Brasília time)")
+        );
+    }
     return {
+        timestamp,
         csv,
         money,
         integer,

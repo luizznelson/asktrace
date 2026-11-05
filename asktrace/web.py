@@ -3,6 +3,7 @@
 import argparse
 import hmac
 import json
+import re
 import secrets
 import socket
 import threading
@@ -11,6 +12,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 from asktrace.agent import run
+from asktrace.evidence import read_evidence
 from asktrace.providers import availability
 from asktrace.query import dataset, serialize
 
@@ -19,6 +21,7 @@ ASSETS = {
     "/": ("index.html", "text/html; charset=utf-8"),
     "/app.css": ("app.css", "text/css; charset=utf-8"),
     "/formatters.js": ("formatters.js", "text/javascript; charset=utf-8"),
+    "/presentation.js": ("presentation.js", "text/javascript; charset=utf-8"),
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
 }
 
@@ -45,6 +48,7 @@ class Server(ThreadingHTTPServer):
             manifest, purchases, covered, checksum = dataset(
                 self.root, self.root / item["coverage"]
             )
+            coverage_report = json.loads(read_evidence(self.root, Path(item["coverage"])))
             self.catalog.append(
                 {
                     "id": item["id"],
@@ -55,10 +59,16 @@ class Server(ThreadingHTTPServer):
                     "covered": len(covered),
                     "contracts": len({cid for row in covered.values() for cid in row["contracts"]}),
                     "unknown_awarded": sum(row["awarded_value"] is None for row in purchases),
-                    "excluded": len(
-                        json.loads((self.root / item["coverage"]).read_bytes()).get(
-                            "excluded_purchases", []
-                        )
+                    "excluded": len(coverage_report.get("excluded_purchases", [])),
+                    "coverage_finished_at": coverage_report.get("finished_at"),
+                    "example_purchase_id": next(
+                        (
+                            identifier
+                            for identifier, row in covered.items()
+                            if row["contracts"]
+                            and re.fullmatch(r"\d{14}-1-\d{6}/\d{4}", identifier)
+                        ),
+                        None,
                     ),
                     "coverage_sha256": checksum,
                 }
@@ -146,8 +156,6 @@ class Handler(BaseHTTPRequestHandler):
             self.send(503 if snapshot.get("status") == "unknown" else 200, snapshot)
         elif path == "/api/evidence":
             # No arbitrary local files, raw responses or .env can be downloaded.
-            from asktrace.evidence import read_evidence
-
             identifier = parse_qs(urlsplit(self.path).query).get("dataset", [None])[0]
             selected = next((row for row in self.server.catalog if row["id"] == identifier), None)
             if identifier and selected is None:

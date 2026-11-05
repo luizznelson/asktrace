@@ -30,6 +30,8 @@ jobs:
           node-version: '22'
       - run: node --check web/formatters.js
       - run: node tests/test_display_formatters.cjs
+      - run: node --check web/presentation.js
+      - run: node tests/test_result_presentation.cjs
       - run: node --check web/app.js
       - run: node tests/test_assistant_ui.cjs
       - run: python -m pip install --require-hashes -r requirements.txt

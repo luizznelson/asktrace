@@ -10,6 +10,7 @@
         />
         <link rel="stylesheet" href="/app.css" />
         <script src="/formatters.js" defer></script>
+        <script src="/presentation.js" defer></script>
         <script src="/app.js" defer></script>
     </head>
     <body>
@@ -120,7 +121,7 @@
                         DADOS PÚBLICOS. PERGUNTAS MELHORES.
                     </p>
                     <h1 data-i="assistantTitle">
-                        O que vamos descobrir<br />nos dados de compras?
+                        Entenda as compras públicas<br />do Piauí.
                     </h1>
                     <p class="welcome-copy" data-i="assistantLede">
                         O AskTrace transforma registros do Portal Nacional de
@@ -199,6 +200,7 @@
                         >
                     </div>
                     <div id="discovery" class="discovery"></div>
+                    <p id="dataset-updated" class="dataset-updated"></p>
                     <p class="welcome-footnote">
                         <span>ⓘ</span
                         ><span data-i="welcomeLimit"
@@ -242,8 +244,37 @@
                             hidden
                         ></p>
                         <p id="answer" class="answer"></p>
-                        <div id="result-table" class="table-scroll"></div>
-                        <div id="coverage" class="coverage"></div>
+                        <div
+                            id="result-highlights"
+                            class="result-highlights"
+                            hidden
+                        ></div>
+                        <section
+                            id="result-chart"
+                            class="result-chart"
+                            hidden
+                            aria-labelledby="chart-title"
+                        >
+                            <h3 id="chart-title"></h3>
+                            <p id="chart-note" class="chart-note"></p>
+                            <ol id="chart-bars" class="chart-bars"></ol>
+                        </section>
+                        <details id="table-details" class="result-disclosure">
+                            <summary id="table-summary">
+                                Ver tabela completa
+                            </summary>
+                            <div id="result-table" class="table-scroll"></div>
+                        </details>
+                        <details
+                            id="coverage-details"
+                            class="result-disclosure coverage-disclosure"
+                        >
+                            <summary data-i="coverageDetails">
+                                Cobertura e campos ausentes
+                            </summary>
+                            <div id="coverage" class="coverage"></div>
+                            <div id="insight" class="insight" hidden></div>
+                        </details>
                         <div class="evidence-grid">
                             <details id="source-panel">
                                 <summary>
@@ -287,7 +318,7 @@
                                 <pre id="technical"></pre>
                             </details>
                         </div>
-                        <div id="insight" class="insight" hidden></div>
+
                         <div
                             id="recovery-actions"
                             class="recovery-actions"
@@ -412,6 +443,23 @@
                         ><span>＋</span>
                     </summary>
                     <div class="story-content">
+                        <div class="query-glossary">
+                            <h3 data-i="glossaryTitle">
+                                Termos da consulta, sem complicar
+                            </h3>
+                            <dl>
+                                <dt data-i="estimatedTerm">Valor estimado</dt>
+                                <dd data-i="estimatedDefinition"></dd>
+                                <dt data-i="awardedTerm">Valor homologado</dt>
+                                <dd data-i="awardedDefinition"></dd>
+                                <dt data-i="scopeTerm">Recorte</dt>
+                                <dd data-i="scopeDefinition"></dd>
+                                <dt data-i="publicationTerm">
+                                    Sem publicação retornada
+                                </dt>
+                                <dd data-i="publicationDefinition"></dd>
+                            </dl>
+                        </div>
                         <article>
                             <b>01</b>
                             <h3 data-i="story1">

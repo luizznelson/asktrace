@@ -53,7 +53,7 @@ class WebTests(unittest.TestCase):
         )
 
     def test_assets_security_headers_and_fixed_route_allowlist(self):
-        for path in ("/", "/app.js", "/formatters.js", "/app.css"):
+        for path in ("/", "/app.js", "/formatters.js", "/presentation.js", "/app.css"):
             status, headers, body = self.request("GET", path)
             self.assertEqual(status, 200)
             self.assertTrue(body)

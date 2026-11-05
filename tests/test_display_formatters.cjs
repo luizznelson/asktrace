@@ -83,3 +83,9 @@ assert.equal(
     "Não informado",
 );
 console.log("CSV safety and publication-month formatting passed.");
+
+assert.equal(
+    display.timestamp("2026-11-04T22:27:55+00:00", "pt").includes("19:27"),
+    true,
+);
+assert.equal(display.timestamp("invalid", "en"), "Not reported");

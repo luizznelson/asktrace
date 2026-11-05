@@ -36,8 +36,8 @@ const text = {
             "Consulte o resumo, compare municípios ou rastreie uma compra pelo identificador PNCP.",
         questionLabel: "Sua pergunta",
         mode: "Modo de consulta",
-        baseline: "Regras locais · sem API externa",
-        fallback: "Assistente IA · com contingência",
+        baseline: "Consultar sem IA · regras locais",
+        fallback: "Perguntar com IA",
         privacy:
             "No modo IA, a pergunta e o catálogo de consultas são enviados aos provedores configurados. A chave e os resultados do banco ficam no servidor local.",
         submit: "Consultar ↗",
@@ -58,7 +58,21 @@ const text = {
         qualityText:
             "Este diagnóstico mostra o preenchimento dos campos da base inteira. Valores zero são contados separadamente dos campos não informados; as contagens podem se sobrepor e não devem ser somadas.",
         responseTitle: "Resposta com contexto",
-        sources: "Fontes e cobertura",
+        sources: "Origem dos dados",
+        coverageDetails: "Cobertura e campos ausentes",
+        glossaryTitle: "Termos da consulta, sem complicar",
+        estimatedTerm: "Valor estimado",
+        estimatedDefinition:
+            "Previsão de valor informada para a compra. Não é um pagamento e pode diferir do valor homologado.",
+        awardedTerm: "Valor homologado",
+        awardedDefinition:
+            "Valor que o PNCP informa para o resultado homologado da compra. Pode não estar preenchido e não comprova pagamento.",
+        scopeTerm: "Recorte",
+        scopeDefinition:
+            "Publicações selecionadas por período, modalidade e UF da unidade compradora. Não é o portal inteiro.",
+        publicationTerm: "Sem publicação retornada",
+        publicationDefinition:
+            "A busca foi concluída, mas o PNCP não retornou contrato publicado para aquela compra. É diferente de falha ou pesquisa pendente.",
         trace: "Rastro da consulta",
         technical: "Registro técnico completo",
         repo: "Explorar código, método e evidências no GitHub ↗",
@@ -134,7 +148,7 @@ const text = {
         scopeDetail:
             "Confira o período, a quantidade de compras e o andamento da busca de contratos na base selecionada.",
         welcomeLabel: "DADOS PÚBLICOS. PERGUNTAS MELHORES.",
-        assistantTitle: "O que vamos descobrir\nnos dados de compras?",
+        assistantTitle: "Entenda as compras públicas\ndo Piauí.",
         assistantLede:
             "O AskTrace transforma registros do Portal Nacional de Contratações Públicas (PNCP) em respostas que você pode conferir. Explore municípios, órgãos e meses de publicação, confira lacunas e encontre contratos ligados a uma compra.",
         statPurchases: "compras na base",
@@ -258,8 +272,8 @@ const text = {
             "View the summary, compare municipalities or trace a purchase by its PNCP identifier. Questions currently support Portuguese.",
         questionLabel: "Your question (Portuguese)",
         mode: "Query mode",
-        baseline: "Local rules · no external API",
-        fallback: "AI assistant · with contingency",
+        baseline: "Query without AI · local rules",
+        fallback: "Ask with AI",
         privacy:
             "In AI mode, the question and query catalog are sent to configured providers. Keys and database results stay on the local server.",
         submit: "Run query ↗",
@@ -280,7 +294,21 @@ const text = {
         qualityText:
             "This diagnostic describes field completeness across the entire dataset. Zeros are counted separately from missing amounts; counts can overlap and must not be added together.",
         responseTitle: "An answer in context",
-        sources: "Sources and coverage",
+        sources: "Data sources",
+        coverageDetails: "Coverage and missing fields",
+        glossaryTitle: "Query terms, explained simply",
+        estimatedTerm: "Estimated amount",
+        estimatedDefinition:
+            "The purchase estimate reported by the source. It is not a payment and can differ from the awarded amount.",
+        awardedTerm: "Awarded amount",
+        awardedDefinition:
+            "The amount PNCP reports for the purchase's awarded outcome. It may be missing and does not establish payment.",
+        scopeTerm: "Dataset scope",
+        scopeDefinition:
+            "Publications selected by period, procurement method and the purchasing unit's state. This is not the whole portal.",
+        publicationTerm: "No publication returned",
+        publicationDefinition:
+            "The search completed, but PNCP returned no published contract for that purchase. This differs from a failed or pending search.",
         trace: "Query trace",
         technical: "Complete technical record",
         repo: "Explore code, methodology and evidence on GitHub ↗",
@@ -355,7 +383,7 @@ const text = {
         scopeDetail:
             "Check the period, purchase count and contract search progress for the selected dataset.",
         welcomeLabel: "PUBLIC DATA. BETTER QUESTIONS.",
-        assistantTitle: "What will we discover\nin procurement data?",
+        assistantTitle: "Understand public procurement\nin Piauí.",
         assistantLede:
             "AskTrace turns records from Brazil’s National Public Procurement Portal (PNCP) into answers you can verify. Explore municipalities, organizations and publication months, check missing data and find contracts linked to a purchase.",
         statPurchases: "dataset purchases",
@@ -968,6 +996,18 @@ function applyDataset() {
         if (item)
             option.textContent = `${displayFormat.date(item.start, lang)} → ${displayFormat.date(item.end, lang)}`;
     });
+    if (d.example_purchase_id) {
+        for (const language of ["pt", "en"])
+            text[language].questions[2] =
+                `Rastreie a compra ${d.example_purchase_id}.`;
+    }
+    const consolidated = d.coverage_finished_at;
+    $("dataset-updated").textContent = consolidated
+        ? (lang === "pt"
+              ? "Cobertura consolidada em "
+              : "Coverage consolidated on ") +
+          displayFormat.timestamp(consolidated, lang)
+        : "";
     const dates = `${displayFormat.date(d.start, lang)} → ${displayFormat.date(d.end, lang)}`;
     document
         .querySelectorAll("[data-i='dateShort']")
@@ -1232,6 +1272,7 @@ function readableTrace(data) {
     }
 }
 function render(data) {
+    renderPresentation(data);
     const historical = isHistoricalResult(data);
     $("result-freshness").hidden = !historical;
     $("result-freshness").textContent = historical
@@ -1242,6 +1283,9 @@ function render(data) {
     $("download-csv").hidden =
         data.status !== "answered" || !data.evidence?.result?.length;
     renderDataset(data);
+    const explanation = resultPresentation.build(data, lang);
+    if (explanation.lead)
+        $("answer").textContent = explanation.lead + " " + text[lang].caution;
     showAvailability(serviceAvailability);
     readableTrace(data);
     const t = text[lang];
@@ -1253,6 +1297,7 @@ function render(data) {
         data.tool_calls === 0 &&
         (data.availability?.component === "ai_planner" || events.length > 0);
     $("source-panel").hidden = !data.evidence;
+    $("coverage-details").hidden = !data.evidence;
     $("coverage").hidden = !data.evidence;
     $("recovery-actions").hidden = !providerError;
     $("recovery-actions").replaceChildren();
@@ -1469,3 +1514,47 @@ $("download-csv").addEventListener("click", () => {
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 100);
 });
+
+function renderPresentation(data) {
+    const p = resultPresentation.build(data, lang);
+    $("result-highlights").replaceChildren();
+    $("result-highlights").hidden = !p.metrics.length;
+    p.metrics.forEach((item) => {
+        const card = node("div");
+        card.append(node("strong", item.value), node("span", item.label));
+        $("result-highlights").append(card);
+    });
+    $("result-chart").hidden = !p.chart;
+    $("chart-bars").replaceChildren();
+    if (p.chart) {
+        $("chart-title").textContent = p.chart.title;
+        $("chart-note").textContent = p.chart.note;
+        const max = Math.max(0, ...p.chart.items.map((item) => item.count));
+        p.chart.items.forEach((item) => {
+            const row = node("li"),
+                label = node("span", item.label, "bar-label"),
+                track = node("span", undefined, "bar-track"),
+                bar = node("span", undefined, "bar-fill"),
+                number = node(
+                    "strong",
+                    displayFormat.integer(item.count, lang),
+                    "bar-value",
+                );
+            label.title = item.label;
+            track.setAttribute("aria-hidden", "true");
+            bar.style.width = (max ? (100 * item.count) / max : 0) + "%";
+            track.append(bar);
+            row.append(label, track, number);
+            $("chart-bars").append(row);
+        });
+    }
+    const e = data.evidence;
+    $("table-details").hidden = !e?.result?.length || e.question === "summary";
+    $("table-details").open = !p.chart;
+    $("table-summary").textContent =
+        (lang === "pt" ? "Ver tabela completa" : "View complete table") +
+        (e?.result?.length
+            ? ` · ${displayFormat.integer(e.result.length, lang)} ${lang === "pt" ? "linha(s)" : "row(s)"}`
+            : "");
+    $("coverage-details").open = e?.question === "summary";
+}
