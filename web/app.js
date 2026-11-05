@@ -81,6 +81,8 @@ const text = {
         waiting:
             "Consultando e verificando as evidências… O modo IA pode levar mais tempo.",
         ready: "Resposta pronta. Confira abaixo as fontes e os limites.",
+        availabilityRefreshed: "Estado local atualizado. Nenhuma pergunta foi enviada.",
+        availabilityRefreshFailed: "Não foi possível atualizar a disponibilidade. Sua pergunta não foi enviada. Tente novamente.",
         sessionError:
             "Não foi possível iniciar a sessão local. Recarregue a página.",
         busy: "Já há uma consulta em andamento. Aguarde e tente novamente.",
@@ -327,6 +329,8 @@ const text = {
         placeholder: "Ask about purchases in this dataset (Portuguese)…",
         waiting: "Querying and verifying evidence… AI mode may take longer.",
         ready: "Answer ready. Review the sources and limitations below.",
+        availabilityRefreshed: "Local status refreshed. No question was sent.",
+        availabilityRefreshFailed: "Could not refresh availability. Your question was not sent. Please try again.",
         sessionError:
             "Could not initialize the local session. Reload the page.",
         busy: "Another query is running. Wait and try again.",
@@ -544,15 +548,30 @@ let lang = "pt",
     token = null,
     latest = null,
     working = false;
-let publicDemo = false;
+let publicDemo = false, sessionReady = false, sessionFailed = false, statusKey = null;
+function setStatus(key = null) {
+    statusKey = key;
+    $("status").textContent = key ? text[lang][key] || text[lang].error : "";
+}
 function environmentLabels() {
-    if (!publicDemo) return;
-    $("environment-badge").textContent = lang === "pt" ? "DEMONSTRAÇÃO" : "DEMO";
-    $("environment-note").textContent = lang === "pt"
-        ? "Demonstração pública · Base histórica · Sem atualização em tempo real"
-        : "Public demo · Historical dataset · No real-time updates";
+    if (!sessionReady) {
+        $("environment-badge").textContent = sessionFailed
+            ? (lang === "pt" ? "SEM CONEXÃO" : "UNAVAILABLE")
+            : (lang === "pt" ? "CONECTANDO" : "CONNECTING");
+        $("environment-note").textContent = sessionFailed
+            ? (lang === "pt" ? "Não foi possível conectar à aplicação" : "Could not connect to the application")
+            : (lang === "pt" ? "Conectando à base selecionada…" : "Connecting to the selected dataset…");
+        return;
+    }
+    $("environment-badge").textContent = publicDemo
+        ? (lang === "pt" ? "DEMONSTRAÇÃO" : "DEMO") : text[lang].local;
+    $("environment-note").textContent = publicDemo
+        ? (lang === "pt" ? "Demonstração pública · Base histórica · Sem atualização em tempo real"
+            : "Public demo · Historical dataset · No real-time updates") : text[lang].footerLocal;
 }
 function applySessionMode(data) {
+    sessionReady = true;
+    sessionFailed = false;
     publicDemo = data.mode === "public";
     if (Array.isArray(data.providers)) {
         $("ai-option").disabled = !data.providers.includes("fallback");
@@ -591,7 +610,7 @@ function languageBase() {
         $("examples").append(button);
     });
     if (latest) render(latest);
-    if (working) $("status").textContent = t.waiting;
+    if (working) setStatus("waiting");
     environmentLabels();
 }
 function count() {
@@ -877,6 +896,8 @@ function languageAssistant() {
         "aria-label",
         lang === "pt" ? "Enviar pergunta" : "Send question",
     );
+    $("dataset").setAttribute("aria-label", text[lang].datasetLabel);
+    $("scope-strip").setAttribute("aria-label", lang === "pt" ? "Recorte da base" : "Dataset scope");
     $("mobile-reset").setAttribute("aria-label", text[lang].newSession);
     $("new-session").setAttribute("aria-label", text[lang].newSession);
 }
@@ -936,7 +957,7 @@ $("new-session").addEventListener("click", () => {
     latest = null;
     $("question").value = "";
     count();
-    $("status").textContent = "";
+    setStatus();
     $("response").hidden = true;
     $("conversation").hidden = true;
     document.body.classList.remove("has-result");
@@ -1264,7 +1285,7 @@ $("dataset").addEventListener("change", () => {
     $("response").hidden = true;
     $("conversation").hidden = true;
     document.body.classList.remove("has-result");
-    $("status").textContent = "";
+    setStatus();
     historyView();
     applyDataset();
     showAvailability(serviceAvailability);
@@ -1421,6 +1442,7 @@ function language() {
     languageAssistant();
     applyDataset();
     showAvailability(serviceAvailability);
+    setStatus(statusKey);
 }
 $("provider").addEventListener("change", () =>
     showAvailability(serviceAvailability),
@@ -1438,15 +1460,9 @@ $("refresh-availability").addEventListener("click", async () => {
         const response = await fetch("/api/availability");
         if (!response.ok) throw new Error("availability_unavailable");
         showAvailability(await response.json());
-        $("status").textContent =
-            lang === "pt"
-                ? "Estado local atualizado. Nenhuma pergunta foi enviada."
-                : "Local status refreshed. No question was sent.";
+        setStatus("availabilityRefreshed");
     } catch (_) {
-        $("status").textContent =
-            lang === "pt"
-                ? "Não foi possível atualizar a disponibilidade. Sua pergunta não foi enviada. Tente novamente."
-                : "Could not refresh availability. Your question was not sent. Please try again.";
+        setStatus("availabilityRefreshFailed");
     } finally {
         button.disabled = false;
     }
@@ -1482,7 +1498,7 @@ $("ask-form").addEventListener("submit", async (event) => {
     $("thinking").hidden = false;
     $("response").hidden = true;
     $("submit").disabled = true;
-    $("status").textContent = text[lang].waiting;
+    setStatus("waiting");
     try {
         const response = await fetch("/api/ask", {
             method: "POST",
@@ -1513,10 +1529,7 @@ $("ask-form").addEventListener("submit", async (event) => {
         render(latest);
         historyView();
         persistSession();
-        $("status").textContent =
-            latest.status === "error"
-                ? text[lang].notCompleted
-                : text[lang].ready;
+        setStatus(latest.status === "error" ? "notCompleted" : "ready");
         $("response").scrollIntoView({
             behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
                 ? "instant"
@@ -1524,7 +1537,7 @@ $("ask-form").addEventListener("submit", async (event) => {
             block: "start",
         });
     } catch (error) {
-        $("status").textContent = text[lang][error.message] || text[lang].error;
+        setStatus(text[lang][error.message] ? error.message : "error");
     } finally {
         working = false;
         $("thinking").hidden = true;
@@ -1547,7 +1560,9 @@ fetch("/api/session")
         $("submit").disabled = false;
     })
     .catch(() => {
-        $("status").textContent = text[lang].sessionError;
+        sessionFailed = true;
+        environmentLabels();
+        setStatus("sessionError");
     });
 
 $("download-csv").addEventListener("click", () => {

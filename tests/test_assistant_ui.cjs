@@ -23,7 +23,10 @@ class Element {
     addEventListener(name, fn) {
         (this.events[name] ??= []).push(fn);
     }
-    setAttribute() {}
+    setAttribute(name, value) {
+        this.attributes ??= {};
+        this.attributes[name] = value;
+    }
     focus() {}
     scrollIntoView() {}
     click() {
@@ -591,6 +594,22 @@ vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
     assert.match(get("environment-note").textContent, /Historical dataset/);
     vm.runInContext('applySessionMode({mode:"public",providers:["baseline","fallback"]})', context);
     assert.equal(get("ai-option").disabled, false);
+    vm.runInContext('lang="pt";setStatus("ready");language()', context);
+    get("language").click();
+    assert.match(get("status").textContent, /Answer ready/);
+    assert.equal(get("dataset").attributes["aria-label"], "Selected dataset");
+    assert.equal(get("scope-strip").attributes["aria-label"], "Dataset scope");
+    vm.runInContext('setStatus("availabilityRefreshFailed")', context);
+    get("language").click();
+    assert.match(get("status").textContent, /Não foi possível atualizar/);
+    vm.runInContext('sessionReady=false;sessionFailed=false;language()', context);
+    assert.equal(get("environment-badge").textContent, "CONECTANDO");
+    get("language").click();
+    assert.equal(get("environment-badge").textContent, "CONNECTING");
+    vm.runInContext('sessionFailed=true;environmentLabels()', context);
+    assert.equal(get("environment-badge").textContent, "UNAVAILABLE");
+    vm.runInContext('applySessionMode({mode:"local"})', context);
+    assert.equal(get("environment-badge").textContent, "LOCAL PREVIEW");
     console.log(
         "Assistant session persistence and DOM contract passed: discovery, submit, response, suggestions, history, language, reset, session.",
     );
