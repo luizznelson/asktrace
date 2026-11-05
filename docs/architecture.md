@@ -37,3 +37,15 @@ PostgreSQL com Docker foi a escolha confirmada pelo mantenedor. O projeto ainda 
 Hashes detectam divergências em relação ao manifesto; não são assinatura nem prova contra alguém que pode substituir arquivos e hashes. O coletor não obtém uma transação única do PNCP para todas as páginas. A visão de dados reais filtra amostras, mas não substitui autenticação: a coleta/carga usa manutenção administrativa local; as consultas do agente usam `asktrace_reader`, com SELECT nas visões de relatório e transação somente leitura. Isso não é isolamento multiusuário ou autenticação de hospedagem.
 
 O [guia de ingestão](ingestion.md) detalha caminhos, filtros e reprodução.
+
+## Execução local e publicação
+
+O servidor local da biblioteca padrão permanece limitado a `127.0.0.1`. A entrada pública
+é `asktrace.public:create_app`, servida por Uvicorn. Ambos compartilham o catálogo e o
+executor de consultas; as fronteiras HTTP têm testes separados.
+
+Na publicação, um login lê os dados e o pacote de evidências; outro atualiza somente
+os dois registros de estado operacional. A credencial administrativa pertence à carga
+fora do servidor. O startup confere permissões e restaura o artefato privado identificado
+por SHA-256 antes de disponibilizar a aplicação. Quotas não dependem do disco efêmero.
+[Configuração, limites e pendências externas](deployment.md).

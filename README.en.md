@@ -145,11 +145,14 @@ end of this README. Detailed documentation is primarily in Portuguese.
 
 ## Software checks and AI evaluation are different
 
-- **Software:** 112 Python tests in the latest suite, including isolated PostgreSQL;
+- **Software:** 130 Python tests in the latest suite, including isolated PostgreSQL;
   Node contracts cover UI, charts, formatting and CSV. [Verification](docs/quality.md).
-- **Local v3 routing:** 12/12 curated expanded-catalog cases, including refusals.
-- **AI v3:** three initial real smoke cases, one per new analysis. A broad v3 planner
-  evaluation is pending; earlier prompt scores remain historical.
+- **Local v3 routing:** 60/60 author-curated release cases covering six queries and refusals.
+- **AI contingency v3:** 60 passes across 61 executions, with one failure preserved.
+  All 60 cases completed after explicitly retrying the failed case.
+  [Method and limitations](docs/agent-evaluation.md#avaliação-final-do-catálogo-v3) (Portuguese).
+- **Data restoration and public routes:** no recollection; 12 actual ASGI queries using
+  local PostgreSQL. [Final verification](runs/release-readiness-411e550a-cfc1-4cd5-bac5-a73e3ba2cf33/verification.json).
 - **Interface:** DOM and HTTP checks are complete. Browser visual inspection and the
   demonstration video are not complete, and there is no publicly hosted demo.
 
@@ -180,7 +183,12 @@ bytes. Follow [development](docs/development.md), [ingestion](docs/ingestion.md)
 local-rule mode. Secrets belong in ignored `.env`, never tracked `.env.example`.
 
 Once prepared, run `.venv/Scripts/python.exe -m asktrace.web` and open
-`http://127.0.0.1:8010`. The current server is local, not a public multiuser service.
+`http://127.0.0.1:8010` for the local preview.
+
+**Deployment prepared:** a FastAPI/Uvicorn entry point and Render Blueprint support remote
+PostgreSQL, separate credentials, evidence restoration and persistent demo limits.
+External deployment has not yet been verified. Follow the [deployment guide](docs/deployment.md)
+(Portuguese); the local preview server above remains restricted to this computer.
 
 ## Explore further
 

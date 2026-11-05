@@ -145,11 +145,14 @@ desenvolvimento está declarada ao final deste README.
 
 ## Qualidade: software e IA são verificações diferentes
 
-- **Software:** 112 testes Python na última suíte, com PostgreSQL isolado; contratos Node
+- **Software:** 130 testes Python na última suíte, com PostgreSQL isolado; contratos Node
   para interface, gráficos, formatação e CSV. [Como reproduzir e interpretar](docs/quality.md).
-- **Roteamento local v3:** 12/12 casos curados do catálogo ampliado, incluindo recusas.
-- **IA v3:** três testes iniciais reais, um por nova análise. A avaliação ampla do
-  planejador v3 ainda está pendente. Os resultados do prompt anterior são históricos.
+- **Roteamento local v3:** 60/60 casos do corpus final curado, incluindo as seis consultas e recusas.
+- **Contingência de IA v3:** 60 aprovações em 61 execuções, com uma falha preservada.
+  Os 60 casos foram concluídos após uma retomada explícita do caso que falhou.
+  [Método, execuções e limites](docs/agent-evaluation.md#avaliação-final-do-catálogo-v3).
+- **Restauração e rotas públicas:** dados restaurados sem coleta e 12 consultas reais
+  pelas rotas ASGI, usando o PostgreSQL local. [Conferência final](runs/release-readiness-411e550a-cfc1-4cd5-bac5-a73e3ba2cf33/verification.json).
 - **Interface:** verificações DOM e HTTP realizadas. A inspeção visual em navegador e
   o vídeo de demonstração não estão concluídos; não há demo pública hospedada.
 
@@ -180,8 +183,12 @@ diferentes. Siga [desenvolvimento](docs/development.md), [ingestão](docs/ingest
 segredos ficam no `.env` ignorado, nunca no `.env.example` versionado.
 
 Com a base preparada, execute `.venv/Scripts/python.exe -m asktrace.web` e abra
-`http://127.0.0.1:8010`. O servidor atual é local; não é um serviço multiusuário pronto
-para exposição pública.
+`http://127.0.0.1:8010` para a prévia local.
+
+**Publicação preparada:** há uma entrada FastAPI/Uvicorn e um Blueprint do Render,
+com PostgreSQL remoto, credenciais separadas, restauração das evidências e limites
+persistentes. O deploy externo ainda não foi verificado. Siga o [guia de publicação](docs/deployment.md);
+o servidor local acima continua restrito ao computador.
 
 ## Para aprofundar
 

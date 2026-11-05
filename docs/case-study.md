@@ -91,8 +91,9 @@ homologados não informados permaneceram desconhecidos.
 
 Software, interface e roteamento têm verificações separadas. A suíte Python inclui banco
 isolado e falhas controladas. Os testes Node conferem gráficos, empates, limites, moeda,
-histórico e CSV. O corpus local v3 teve 12/12; o planejador de IA v3 teve três testes
-iniciais reais. A avaliação ampla v3, validação visual e demo hospedada estão pendentes.
+histórico e CSV. O corpus final v3 teve 60/60 nas regras locais. Com IA houve 60 aprovações
+em 61 execuções, com uma falha preservada e retomada explícita; os 60 casos distintos foram
+concluídos. A validação visual e a demo hospedada estão pendentes.
 
 [Qualidade](quality.md) · [Método de avaliação](agent-evaluation.md) · [Arquitetura](architecture.md).
 
@@ -105,3 +106,18 @@ O histórico não dá memória conversacional ao modelo.
 
 O objetivo demonstrado é construir uma resposta limitada, compreensível e conferível —
 da integração com a fonte até a apresentação do resultado.
+
+## Roteiro para a demonstração hospedada — gravação pendente
+
+1. **Problema e tarefa:** explicar que o objetivo é preparar um panorama de publicações
+   e sustentar as conclusões de um relatório com fontes.
+2. **Pergunta e resultado:** escolher a base e perguntar pela distribuição mensal.
+   Mostrar a conclusão, o gráfico e o período usado, sem interpretar publicação como pagamento.
+3. **Conferência:** usar o exemplo de compra oferecido pela base; abrir contratos e fontes.
+4. **Entrega:** exportar a tabela ou o registro de evidências e mostrar seus limites.
+5. **Engenharia:** encerrar no GitHub com a arquitetura e uma decisão ligada ao problema,
+   como manter os cálculos no banco e validar o plano do modelo.
+
+O vídeo deve registrar uma execução real na URL publicada. Se o modo IA não estiver
+disponível, identificar o modo por regras utilizado; não editar falhas para simular
+uma inferência bem-sucedida. O roteiro não substitui a gravação.

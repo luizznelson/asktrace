@@ -4,14 +4,14 @@
 
 | Camada | Verificação | Limite |
 | --- | --- | --- |
-| Software | 112 testes Python com PostgreSQL isolado; Ruff e formatação | Não prova ausência de falhas ou implantação em produção |
+| Software | 130 testes Python com PostgreSQL isolado; Ruff e formatação | Não prova ausência de falhas ou implantação em produção |
 | Apresentação | Contratos Node de gráficos, empates, moeda, histórico, CSV e PT/EN | Não é inspeção visual em navegador |
 | Dados reais | Consultas HTTP, contagens de seis meses, permissões e integridade dos snapshots | O PNCP não fornece uma transação única para toda a coleta |
 | Cobertura | 2.536 compras aptas pesquisadas; 679 contratos; 26 cargas repetidas sem duplicação | Uma exclusão por ano inválido; ausência de publicação não prova ausência de contrato |
-| Regras locais v3 | 12/12 casos curados do catálogo ampliado | Casos do autor, não benchmark cego |
-| Planejador IA v3 | Três testes iniciais reais das rotas novas | Avaliação ampla v3 pendente; não herda notas de prompts anteriores |
+| Regras locais v3 | 60/60 casos do corpus final | Casos do autor, não benchmark cego |
+| Contingência IA v3 | 60 aprovações em 61 execuções; uma falha preservada e retomada | Pool de provedores, corpus de desenvolvimento e um ID de compra repetido; não é acurácia geral |
 
-[Verificação da apresentação atual](../runs/application-review-7aa7ebba-442d-466f-9642-5b62647dd32e/verification.json) ·
+[Verificação da apresentação atual](../runs/application-review-da5c0e4f-e3c9-435a-9342-f10b5163e0b1/verification.json) ·
 [Cobertura e idempotência](contracts-expanded-coverage.md) · [Avaliação do roteador](agent-evaluation.md).
 
 ## Como conferir
@@ -68,6 +68,18 @@ em [revisão da aplicação](application-review.md) e [análises](analytics.md).
 [Histórico das verificações](history/quality-log.md): resultados de etapas e versões
 anteriores foram preservados; suas contagens não são somadas à suíte atual.
 
-## Revisão móvel e prontidão de hospedagem
+## Histórico: revisão móvel inicial e pesquisa de hospedagem
 
 112 testes Python e os contratos Node passaram. O histórico móvel foi conferido sem nova consulta, junto da marcação de resultados antigos e limpeza da sessão. A revisão por código ampliou controles e rótulos; inspeção visual real continua pendente de habilitar o navegador. [Verificação](../runs/application-review-7c025c56-38fc-495c-80b3-be4ae22717d0/verification.json) · [Hospedagem gratuita e adaptações necessárias](hosting-options.md).
+
+## Fechamento local da primeira versão
+
+[Síntese verificável](../runs/release-readiness-411e550a-cfc1-4cd5-bac5-a73e3ba2cf33/verification.json): 130 testes Python, contratos Node,
+permissões no banco de testes, restauração de dados e os 12 caminhos reais pelas rotas ASGI.
+O pacote de dados privados não está no Git. [Publicação](deployment.md).
+
+Uma rodada intermediária falhou em uma asserção HTTP, sem diagnóstico de causa estabelecido.
+As cinco consultas isoladas e a repetição completa passaram; o evento permanece registrado
+na síntese. Isso não equivale a uma garantia de ausência de falhas.
+
+A validação externa do banco e da URL pública, a inspeção visual e o vídeo continuam pendentes.

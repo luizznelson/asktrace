@@ -72,3 +72,33 @@ Construir a interface para pergunta, resposta, recorte, fonte, rastro e motivo d
 perguntas externas de usuários separadas do corpus de desenvolvimento. A integração local está
 implementada. Interface, deploy e demonstração pública continuam pendentes. O software passou em
 79 testes locais, incluindo PostgreSQL; CI remoto não verificado nesta entrega.
+
+## Avaliação final do catálogo v3
+
+O [corpus final](../evals/release-v3.json) foi congelado antes da execução: 36 perguntas
+suportadas, seis por consulta, e 24 recusas. As seis perguntas de rastreio usam o mesmo
+ID verificado. São casos de desenvolvimento escritos pelo autor, não perguntas externas
+ou um teste cego. Não houve alteração do corpus para favorecer os resultados.
+
+| Execução | Resultado |
+| --- | --- |
+| [Regras locais](../runs/agent-eval-d0c75212-25a3-435a-ab3e-6cd6917bdfd1/evaluation.json) | 60 casos, 60 aprovados, sem chamadas externas |
+| [Primeiro trecho com IA](../runs/agent-eval-6321c2ed-42ce-47d5-be21-76f1f37b459c/evaluation.json) | 51 executados: 50 aprovados e uma falha; nove não executados |
+| [Retomada explícita dos casos 51–60](../runs/agent-eval-413ac3c7-cc78-431a-8fc3-c1ecafbe2a2e/evaluation.json) | Dez executados e dez aprovados |
+
+Os dois trechos de IA têm os mesmos hashes de corpus, cobertura, configuração de provedores
+e código registrados pelo avaliador. **Foram 61 execuções: 60 aprovadas e uma falha.** Os
+60 casos distintos tiveram uma resposta aprovada após a retomada. O caso 51 aparece duas
+vezes; não somar isso como 61 perguntas diferentes nem apresentar uma execução sem erros.
+
+Na falha houve erro de transporte na tentativa Groq e `ValueError` na tentativa OpenRouter.
+O registro não contém resposta de dados; a causa exata do `ValueError` não foi estabelecida.
+A espera registrada foi respeitada e a tentativa foi preservada. O resultado é do modo de
+contingência, não uma nota individual herdada por todos os modelos configurados.
+
+O avaliador compara ação, estado e fatos esperados com consultas determinísticas. Parte
+das recusas é resolvida pelo filtro local, sem chamar um modelo. O cache de consultas do
+avaliador exclui a interpretação de latência como medição de produção. Não houve medição
+de impacto de negócio, faturamento ou qualidade em perguntas desconhecidas.
+
+[Síntese e contagens](../runs/release-readiness-411e550a-cfc1-4cd5-bac5-a73e3ba2cf33/verification.json).

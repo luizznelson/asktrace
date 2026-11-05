@@ -36,9 +36,21 @@ O volume medido cabe com margem nas cotas de armazenamento de banco citadas. Iss
 comprova consumo mensal de compute, egress ou memória da aplicação. O uso precisa ser
 monitorado na demonstração; limites de conta/serviço continuam válidos.
 
-## O que falta adaptar antes de publicar
+## Atualização: preparação implementada
 
-O código atual é explicitamente local. Não basta enviar o repositório ao Render:
+A entrada FastAPI/Uvicorn, conexões remotas com TLS verificado, logins separados,
+artefato privado no PostgreSQL e limites persistentes foram implementados. O código
+local anterior continua disponível. O procedimento está em [Publicação](deployment.md).
+Isso ainda não comprova operação em um endereço público.
+
+O pacote privado é restaurado do próprio PostgreSQL; não é necessário contratar outro
+serviço de arquivos. Configuração do provedor, importação remota, deploy e revisão da URL
+pública permanecem etapas externas pendentes.
+
+## Diagnóstico anterior que orientou a adaptação
+
+No momento da pesquisa inicial, o código era explicitamente local. O diagnóstico abaixo
+registra os motivos das adaptações; consulte o guia de publicação para o estado implementado:
 
 1. **Servidor público:** trocar o servidor de desenvolvimento da biblioteca padrão por
    uma entrada apropriada para publicação, com porta do ambiente e escuta configurável.
@@ -61,8 +73,8 @@ O código atual é explicitamente local. Não basta enviar o repositório ao Ren
 7. **Verificação final:** abrir o endereço público em computador e celular, executar
    os seis caminhos, testar exportação e só então gravar o vídeo.
 
-Esse checklist é avaliação de prontidão; a adaptação e o deploy não foram executados
-nesta pesquisa. Chaves e strings de conexão devem ser cadastradas como segredos do serviço,
+Esse checklist registra a avaliação inicial. A adaptação foi implementada depois; o deploy
+ainda depende da configuração e verificação dos serviços. Chaves e strings de conexão devem ser cadastradas como segredos do serviço,
 sem serem enviadas por chat, colocadas no README ou versionadas.
 
 ## Revisão de interface disponível nesta etapa
