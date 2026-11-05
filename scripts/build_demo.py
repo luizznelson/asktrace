@@ -8,14 +8,13 @@ recording, and it does not measure response time.
 """
 
 import argparse
+import json
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
-
-import json
 
 WIDTH, HEIGHT = 1920, 1080
 NAVY, TEAL, WHITE, MUTED = "#102138", "#61d5cb", "#f5f8fc", "#b3c2d5"
@@ -146,11 +145,27 @@ def main():
         concat.write_text("\n".join(listing) + "\n", encoding="utf-8")
         subprocess.run(
             [
-                ffmpeg_path(), "-y", "-loglevel", "error",
-                "-f", "concat", "-safe", "0", "-i", str(concat),
-                "-vf", "fps=30,format=yuv420p",
-                "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
-                "-movflags", "+faststart", str(output),
+                ffmpeg_path(),
+                "-y",
+                "-loglevel",
+                "error",
+                "-f",
+                "concat",
+                "-safe",
+                "0",
+                "-i",
+                str(concat),
+                "-vf",
+                "fps=30,format=yuv420p",
+                "-c:v",
+                "libx264",
+                "-preset",
+                "veryfast",
+                "-crf",
+                "23",
+                "-movflags",
+                "+faststart",
+                str(output),
             ],
             check=True,
         )
