@@ -1,6 +1,6 @@
 # AskTrace
 
-**Explore compras públicas do Piauí e confira de onde veio cada resposta.**
+**Prepare uma análise de compras públicas: compare publicações, escolha o que conferir e leve as fontes.**
 
 [English](README.en.md) · [Estudo de caso](docs/case-study.md) · [Arquitetura](docs/architecture.md) · [Documentação](docs/README.md)
 
@@ -8,18 +8,44 @@
 
 [![Quality](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml)
 
-O AskTrace transforma um recorte do Portal Nacional de Contratações Públicas (PNCP) em
-uma experiência de investigação: faça uma pergunta em português, veja o resumo e a
-visualização dos dados, abra a tabela e confira as fontes. A interface está disponível
-em PT-BR e inglês. O aplicativo é independente do PNCP e opera localmente.
+O AskTrace é um assistente para explorar um recorte histórico do Portal Nacional de
+Contratações Públicas (PNCP). A proposta é apoiar **analistas que preparam relatórios de
+acompanhamento de compras públicas**: entender a distribuição das publicações e conferir
+registros antes de incluir uma conclusão no relatório. Esse público é uma hipótese de
+produto; ainda não houve entrevistas, adoção em organização ou medição de produtividade.
 
-## O problema que resolve
+## O problema de negócio proposto
 
-Uma tabela de compras não explica sozinha se todas as páginas foram coletadas, se a
-busca de contratos terminou ou se um valor ausente foi tratado como zero. O AskTrace
-mantém essas diferenças visíveis enquanto você explora os dados. O cenário proposto é
-análise de publicações por quem acompanha compras públicas; não há implantação em
-organização nem ganho de produtividade comprovado.
+Ao preparar um relatório, a pergunta é: **“Por onde começar a análise e quais dados
+sustentam o que vou apresentar?”** O AskTrace reúne comparações por órgão, município e
+mês, consulta de uma compra identificada e exportação com contexto. A saída é material
+para a análise humana, sem classificação automática de prioridades ou irregularidades.
+
+O [PNCP já oferece busca, filtros, documentos, painéis e dados abertos](https://www.gov.br/pncp/pt-br/pncp).
+O app complementa esses recursos com perguntas sobre uma base histórica delimitada.
+Não há evidência de uma lacuna de mercado, demanda comercial ou vantagem sobre o portal
+validada com usuários. [Visão de negócio, referências e plano de validação](docs/business-case.md).
+
+## Da pergunta à decisão de análise
+
+| Necessidade do relatório | Pergunta atendida | Como usar o resultado |
+| --- | --- | --- |
+| Escolher onde aprofundar a leitura | Quais órgãos ou municípios têm mais compras? | Comparar volumes de publicações; o ranking é limitado a 20 grupos |
+| Descrever a distribuição no período | Como evoluíram as compras por mês de publicação? | Apresentar a série mensal, sem confundir publicação com pagamento |
+| Conferir uma compra já identificada | Rastreie a compra pelo ID PNCP | Examinar contratos vinculados e sua origem; exige informar o ID |
+| Explicitar limites do relatório | Como está o preenchimento dos dados? | Mostrar campos desconhecidos e cobertura, sem convertê-los em zero |
+
+**Percurso:** conferir o recorte → comparar publicações → consultar uma compra pelo ID
+→ conferir fontes → exportar CSV/JSON. As consultas são independentes: o ranking não
+abre uma lista filtrada de compras por órgão. O usuário escolhe o registro a conferir.
+
+## Onde entra a IA
+
+A IA interpreta uma pergunta em português e escolhe entre seis consultas permitidas.
+Os cálculos e as respostas numéricas vêm do banco. Existe um modo por regras locais,
+sem API externa, para o mesmo catálogo. O valor adicional da linguagem natural ainda
+precisa ser comparado com esse modo em tarefas com usuários. Não é um sistema RAG.
+Interface em PT-BR e inglês; perguntas suportadas em português. Execução atual local.
 
 ## Experimente uma investigação
 
@@ -33,7 +59,7 @@ Também estão disponíveis panorama da cobertura, municípios e qualidade dos d
 Os resumos e gráficos são calculados a partir das linhas retornadas, sem uma segunda
 chamada de IA. JSON e CSV preservam contexto e valores originais.
 
-## Resultado verificado
+## Entregas verificadas: cobertura dos dados
 
 | Base padrão: publicações de maio–outubro/2026, modalidade 6, unidades do Piauí | Quantidade |
 | --- | ---: |

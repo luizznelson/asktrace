@@ -2,6 +2,7 @@
 
 ## Entender o produto
 
+0. [Visão de negócio](business-case.md): público proposto, tarefa, decisões, fontes e validação pendente.
 1. [README](../README.md): problema, perguntas, resultados atuais e funcionamento.
 2. [Estudo de caso](case-study.md): uma investigação completa e decisões de implementação.
 3. [Análises](analytics.md): seis consultas, exportação e interpretação dos números.

@@ -124,3 +124,11 @@ contratos Node e consultas HTTP locais. Sem nova coleta ou chamadas externas de 
 [Apresentação do produto](application-review-7aa7ebba-442d-466f-9642-5b62647dd32e/verification.json): 112 testes Python, contratos de resumo/gráficos, validação de empates, PT/EN, exportação e consultas HTTP reais. Sem inspeção visual ou gravação de vídeo nesta etapa.
 
 [Revisão móvel e hospedagem](application-review-7c025c56-38fc-495c-80b3-be4ae22717d0/verification.json): 112 testes Python, contratos de interface e histórico móvel sem nova chamada. Inspeção visual indisponível; planos gratuitos pesquisados em fontes oficiais.
+
+## Apresentação orientada à tarefa de negócio
+
+[Revisão executada](application-review-bb46d4c7-00fc-4c41-b1cf-67dbf7062115/verification.json):
+112 testes Python, verificações Node e cinco consultas HTTP locais sem API de IA.
+[Conferência da apresentação](application-review-bb46d4c7-00fc-4c41-b1cf-67dbf7062115/business-presentation-review.json):
+referências, links internos, SVGs e distinção editorial entre hipóteses e fatos.
+Não houve validação de negócio com usuários nem inspeção visual em navegador.

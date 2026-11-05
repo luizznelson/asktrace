@@ -1,6 +1,6 @@
 # AskTrace
 
-**Explore public procurement in Piauí, Brazil, and trace every answer to its source.**
+**Prepare a procurement analysis: compare publications, choose what to inspect and take the sources.**
 
 [Português](README.md) · [Case study](docs/case-study.md) · [Architecture](docs/architecture.md) · [Documentation](docs/README.md)
 
@@ -8,17 +8,45 @@
 
 [![Quality](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml)
 
-AskTrace turns a selected dataset from Brazil's National Public Procurement Portal
-(PNCP) into an investigation workspace. Ask a question in Portuguese, read the calculated
-summary and chart, open the table and inspect its sources. The interface supports
-Portuguese and English. This independent application runs locally.
+AskTrace is an assistant for exploring a historical dataset from Brazil's National
+Public Procurement Portal (PNCP). Its proposed audience is **analysts preparing public
+procurement monitoring reports**: understand publication patterns and check records
+before including a conclusion in a report. This audience is a product hypothesis; no
+user interviews, organizational adoption or productivity measurement have taken place.
 
-## The problem
+## The proposed business problem
 
-A procurement table alone does not establish that every page was collected, every contract
-search completed, or missing amounts stayed distinct from zero. AskTrace keeps those
-differences visible. The proposed use case is investigating procurement publications;
-there is no verified organizational deployment or measured productivity improvement.
+When preparing a report, the question is: **“Where should I start the analysis, and what
+data supports the findings I will present?”** AskTrace combines comparisons by purchasing
+organization, municipality and month, lookup of an identified purchase, and contextual
+exports. The output supports human analysis, without automatically ranking investigative
+priorities or classifying irregularities.
+
+[PNCP already provides search, filters, documents, dashboards and open data](https://www.gov.br/pncp/pt-br/pncp).
+This application complements those resources with questions over a bounded historical
+dataset. A market gap, commercial demand or advantage over the portal has not been
+validated with users. [Business rationale, sources and validation plan](docs/business-case.md) (Portuguese).
+
+## From a question to an analysis decision
+
+| Reporting need | Supported question | How to use the result |
+| --- | --- | --- |
+| Choose where to look more closely | Which organizations or municipalities have more purchases? | Compare publication volumes; rankings contain up to 20 groups |
+| Describe the period | How do purchases vary by publication month? | Present the monthly series without treating publication as payment |
+| Inspect an identified purchase | Trace a purchase by its PNCP ID | Examine linked contracts and provenance; an explicit ID is required |
+| Explain the report's limitations | How complete are the fields? | Show unknown fields and coverage without replacing missing values with zero |
+
+**Journey:** check scope → compare publications → look up a purchase by ID → verify
+sources → export CSV/JSON. Queries are independent: rankings do not open a filtered list
+of an organization's purchases. The user selects the record to inspect.
+
+## The role of AI
+
+AI interprets a Portuguese question and selects one of six allowed queries. The database
+provides calculations and numerical answers. A local rules mode supports the same catalog
+without an external API. The added value of natural language still needs a user-task
+comparison with that mode. This is not a RAG system. The interface supports Portuguese and
+English; questions are supported in Portuguese. The application currently runs locally.
 
 ## Try an investigation
 
@@ -32,7 +60,7 @@ Coverage overview, municipalities and data completeness are also available. Summ
 and charts use the returned rows without a second AI call. JSON and CSV preserve scope
 and original values.
 
-## Verified results
+## Verified deliverables: data coverage
 
 | Default scope: May–October 2026 publications, method 6, units in Piauí | Count |
 | --- | ---: |

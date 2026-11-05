@@ -1,11 +1,23 @@
 # Da pergunta à fonte: investigar publicações de compras
 
-## O problema e o usuário proposto
+## Primeiro, a necessidade de análise
 
-Quem acompanha compras públicas precisa comparar publicações sem misturar períodos,
-somar snapshots repetidos ou tratar valor não informado como zero. O cenário de uso do
-AskTrace é uma pessoa investigando esse recorte, com liberdade para conferir a origem de
-cada resultado. Não há implantação em organização nem redução de tempo de trabalho medida.
+**Cenário proposto:** um analista prepara um relatório de acompanhamento de compras
+públicas e precisa escolher o que examinar com mais detalhe. Quer comparar a distribuição
+das publicações e sustentar as conclusões com registros conferíveis. Não houve observação
+desse fluxo em organização: a persona e a necessidade ainda precisam ser validadas.
+
+**Decisão apoiada:** por onde aprofundar a leitura dentro deste recorte. Volume de
+publicações ajuda a descrever a base; sozinho não determina relevância, risco ou gasto.
+O usuário pode conferir uma compra cujo ID já conhece e exportar os resultados para
+seu relatório. Não existe navegação automática do ranking para compras de um órgão.
+
+O PNCP já oferece busca e painéis. A proposta do AskTrace é uma forma adicional de
+explorar um recorte histórico por perguntas, não uma substituição do portal. Veja a
+[visão de negócio e suas fontes](business-case.md) para separar fatos, hipóteses e
+benefícios que ainda precisam de medição.
+
+## Depois, os desafios de implementação
 
 O risco apareceu cedo: uma primeira página histórica tinha 50 registros, mas informava
 454 resultados em dez páginas. Esse exemplo permanece nas amostras; não faz parte dos

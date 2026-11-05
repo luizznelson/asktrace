@@ -1,0 +1,31 @@
+{
+  "review_context_date": "2026-11-04",
+  "change": "Business-first presentation; no new query capabilities or business impact claims.",
+  "relative_document_links_checked": 90,
+  "valid_svg_files": 2,
+  "editorial_review": {
+    "proposed_persona_and_workflow_distinct_from_validated_market_demand": true,
+    "existing_pncp_search_and_dashboards_acknowledged": true,
+    "no_measured_productivity_or_financial_impact_claimed": true,
+    "business_metrics_distinct_from_data_coverage_and_software_tests": true,
+    "ai_role_distinct_from_calculation_and_rag": true,
+    "ranking_to_filtered_purchase_drilldown_explicitly_not_implemented": true,
+    "future_user_validation_plan_not_presented_as_executed": true
+  },
+  "sources": [
+    "https://www.gov.br/pncp/pt-br/pncp",
+    "https://home-wordpress.deeplearning.ai/wp-content/uploads/2022/10/eBook-How-to-Build-a-Career-in-AI.pdf",
+    "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+  ],
+  "browser_visual_inspection": false,
+  "business_user_validation_performed": false,
+  "source_sha256": {
+    "README.md": "4b34020272b7316878de69d356461a48bcd0d0f092840582b3a5a58864b4c21b",
+    "README.en.md": "317f26fdb83dd532aa89a79f1fced9f67f641eda789601085286152ca4c500aa",
+    "docs/README.md": "d5ce20cffca11bfed0ff49d60cd5596d2e0ba9da2737e0ec56a7a7a66bd98299",
+    "docs/case-study.md": "676b43b78ff9a3018f1153e0da191d07c175c400ac3d4ba0b2b7a3f4f6abf9df",
+    "docs/business-case.md": "85eaa261b5e8335900e12d3e6fd5e66f91256f68ea65bcad98319966c3245df3",
+    "docs/assets/asktrace-overview-pt.svg": "c3960cb2db1d20c5edfd4c1069144ac8fe007255fc14c8a0c856cceb1da12a6f",
+    "docs/assets/asktrace-overview-en.svg": "984da897c9c6f7fc572bff6dd170dbfaa424f2ae157350dbb1f677c3d5ef5387"
+  }
+}
