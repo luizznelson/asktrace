@@ -2,6 +2,7 @@ services:
   - type: web
     name: asktrace
     runtime: python
+    region: ohio
     plan: free
     buildCommand: pip install --require-hashes -r requirements.txt
     startCommand: uvicorn asktrace.public:create_app --factory --host 0.0.0.0 --port $PORT --workers 1 --no-access-log --no-proxy-headers
@@ -17,6 +18,12 @@ services:
       - key: ASKTRACE_DATA_SHA256
         sync: false
       - key: ASKTRACE_PUBLIC_AI
-        value: "false"
+        value: "true"
       - key: ASKTRACE_DAILY_AI_LIMIT
         value: "10"
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false

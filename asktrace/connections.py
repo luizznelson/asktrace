@@ -17,6 +17,13 @@ VARIABLES = {
 def options(root, role="reader"):
     load_dotenv(root / ".env", override=False)
     value = os.environ.get(VARIABLES[role])
+    testing = os.environ.get("ASKTRACE_TEST_DATABASE") == "1"
+    if testing:
+        # Tests must never inherit a cloud connection from the developer's .env.
+        if os.environ.get("ASKTRACE_DATABASE_NAME") != "asktrace_test":
+            raise ValueError("isolated_test_database_required")
+        if role != "state":
+            value = None
     if value:
         try:
             result = conninfo_to_dict(value)
@@ -24,6 +31,11 @@ def options(root, role="reader"):
             raise ValueError("invalid_database_configuration") from None
         if not all(result.get(key) for key in ("host", "dbname", "user", "password")):
             raise ValueError("incomplete_database_configuration")
+        if testing and (
+            result["host"] not in {"127.0.0.1", "localhost", "::1"}
+            or result["dbname"] != "asktrace_test"
+        ):
+            raise ValueError("remote_test_connection_forbidden")
         if "," in result["host"] or result.get("hostaddr"):
             raise ValueError("single_database_hostname_required")
         if result["host"] not in {"127.0.0.1", "localhost", "::1"}:

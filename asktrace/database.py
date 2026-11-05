@@ -76,52 +76,55 @@ def load(root: Path, manifest_path: Path, allow_sample: bool = False) -> str:
                     manifest_hash,
                 ),
             )
-            for page in manifest["pages"]:
-                cursor.execute(
-                    """INSERT INTO asktrace.source_pages
-                    (run_id,resource,request_sha256,page_number,fetched_at,body_sha256,relative_path,records_count)
-                    VALUES (%s,'purchases',%s,%s,%s,%s,%s,%s)""",
-                    (
-                        manifest["run_id"],
-                        page["request_sha256"],
-                        page["page"],
-                        page["fetched_at"],
-                        page["body_sha256"],
-                        page["relative_path"],
-                        page["records_count"],
-                    ),
-                )
-            for row in rows:
-                cursor.execute(
-                    """INSERT INTO asktrace.organizations (run_id,cnpj,name)
-                    VALUES (%s,%s,%s) ON CONFLICT (run_id,cnpj) DO NOTHING""",
-                    (manifest["run_id"], row["org_cnpj"], row["org_name"]),
-                )
-                columns = (
-                    "control_id",
-                    "org_cnpj",
-                    "org_name",
-                    "unit_code",
-                    "municipality_ibge",
-                    "municipality_name",
-                    "uf",
-                    "modality",
-                    "publication_date",
-                    "object_text",
-                    "estimated_value",
-                    "awarded_value",
-                    "source_body_sha256",
-                    "source_record_index",
-                )
-                # Identifiers above are fixed application code; all source values use parameters.
-                cursor.execute(
-                    """INSERT INTO asktrace.purchases
-                    (run_id,control_id,org_cnpj,org_name,unit_code,municipality_ibge,municipality_name,
-                     uf,modality,publication_date,object_text,estimated_value,awarded_value,
-                     source_body_sha256,source_record_index)
-                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
-                    (manifest["run_id"], *(row[column] for column in columns)),
-                )
+            # Queue independent inserts without a network round trip for each row.
+            # Leaving the pipeline synchronizes errors before marking the run complete.
+            with connection.pipeline():
+                for page in manifest["pages"]:
+                    cursor.execute(
+                        """INSERT INTO asktrace.source_pages
+                        (run_id,resource,request_sha256,page_number,fetched_at,body_sha256,relative_path,records_count)
+                        VALUES (%s,'purchases',%s,%s,%s,%s,%s,%s)""",
+                        (
+                            manifest["run_id"],
+                            page["request_sha256"],
+                            page["page"],
+                            page["fetched_at"],
+                            page["body_sha256"],
+                            page["relative_path"],
+                            page["records_count"],
+                        ),
+                    )
+                for row in rows:
+                    cursor.execute(
+                        """INSERT INTO asktrace.organizations (run_id,cnpj,name)
+                        VALUES (%s,%s,%s) ON CONFLICT (run_id,cnpj) DO NOTHING""",
+                        (manifest["run_id"], row["org_cnpj"], row["org_name"]),
+                    )
+                    columns = (
+                        "control_id",
+                        "org_cnpj",
+                        "org_name",
+                        "unit_code",
+                        "municipality_ibge",
+                        "municipality_name",
+                        "uf",
+                        "modality",
+                        "publication_date",
+                        "object_text",
+                        "estimated_value",
+                        "awarded_value",
+                        "source_body_sha256",
+                        "source_record_index",
+                    )
+                    # Column identifiers are fixed; source values always use parameters.
+                    cursor.execute(
+                        """INSERT INTO asktrace.purchases
+                        (run_id,control_id,org_cnpj,org_name,unit_code,municipality_ibge,municipality_name,
+                         uf,modality,publication_date,object_text,estimated_value,awarded_value,
+                         source_body_sha256,source_record_index)
+                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
+                        (manifest["run_id"], *(row[column] for column in columns)),
+                    )
             cursor.execute(
                 "UPDATE asktrace.ingestion_runs SET status='complete' WHERE run_id=%s",
                 (manifest["run_id"],),

@@ -366,31 +366,33 @@ def load(root, path):
             "INSERT INTO asktrace.contract_runs VALUES (%s,%s,%s,%s)",
             (manifest["run_id"], manifest["parent_run_id"], checksum, Jsonb(manifest["quality"])),
         )
-        for request in manifest["requests"]:
-            connection.execute(
-                "INSERT INTO asktrace.contract_coverage VALUES (%s,%s,%s,%s,%s,%s)",
-                (
-                    manifest["run_id"],
-                    manifest["parent_run_id"],
-                    request["purchase_id"],
-                    request["outcome"],
-                    digest("".join(page["body_sha256"] for page in request["pages"]).encode()),
-                    request["contracts_count"],
-                ),
-            )
-        for row in manifest["contracts"]:
-            connection.execute(
-                "INSERT INTO asktrace.contracts VALUES (%s,%s,%s,%s,%s,%s,%s)",
-                (
-                    manifest["run_id"],
-                    row["contract_id"],
-                    manifest["parent_run_id"],
-                    row["purchase_id"],
-                    row["initial_value"],
-                    row["global_value"],
-                    row["source_record_index"],
-                ),
-            )
+        # All inserts remain in the same transaction, including pipeline errors.
+        with connection.pipeline():
+            for request in manifest["requests"]:
+                connection.execute(
+                    "INSERT INTO asktrace.contract_coverage VALUES (%s,%s,%s,%s,%s,%s)",
+                    (
+                        manifest["run_id"],
+                        manifest["parent_run_id"],
+                        request["purchase_id"],
+                        request["outcome"],
+                        digest("".join(page["body_sha256"] for page in request["pages"]).encode()),
+                        request["contracts_count"],
+                    ),
+                )
+            for row in manifest["contracts"]:
+                connection.execute(
+                    "INSERT INTO asktrace.contracts VALUES (%s,%s,%s,%s,%s,%s,%s)",
+                    (
+                        manifest["run_id"],
+                        row["contract_id"],
+                        manifest["parent_run_id"],
+                        row["purchase_id"],
+                        row["initial_value"],
+                        row["global_value"],
+                        row["source_record_index"],
+                    ),
+                )
     return "loaded"
 
 

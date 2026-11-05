@@ -78,3 +78,30 @@ class DeploymentDataTests(unittest.TestCase):
             os.environ["ASKTRACE_DATABASE_URL"] = "postgresql://u:p@127.0.0.1/db"
             with self.assertRaises(ValueError):
                 options(Path(folder))
+
+    def test_opted_in_database_tests_ignore_cloud_urls(self):
+        with (
+            tempfile.TemporaryDirectory() as folder,
+            patch.dict(
+                os.environ,
+                {
+                    "ASKTRACE_TEST_DATABASE": "1",
+                    "ASKTRACE_DATABASE_NAME": "asktrace_test",
+                    "ASKTRACE_ADMIN_DATABASE_URL": "postgresql://owner:private@cloud.example/production",
+                    "ASKTRACE_DATABASE_URL": "postgresql://reader:private@cloud.example/production",
+                    "POSTGRES_PASSWORD": "local-test",
+                    "ASKTRACE_READER_PASSWORD": "local-test",
+                },
+                clear=True,
+            ),
+        ):
+            for role in ("admin", "reader"):
+                result = options(Path(folder), role)
+                self.assertEqual(result["host"], "127.0.0.1")
+                self.assertEqual(result["dbname"], "asktrace_test")
+            os.environ["ASKTRACE_STATE_DATABASE_URL"] = "postgresql://u:p@cloud.example/production"
+            with self.assertRaises(ValueError):
+                options(Path(folder), "state")
+            os.environ["ASKTRACE_DATABASE_NAME"] = "production"
+            with self.assertRaises(ValueError):
+                options(Path(folder), "admin")

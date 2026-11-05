@@ -98,7 +98,7 @@ def load_target(root):
                 os.environ[key] = value
     runtime = root / "data/deploy/runtime.env"
     # A private ignored output for transfer to the hosting secret settings. Never print contents.
-    text = f"ASKTRACE_DATA_SHA256={checksum}\nASKTRACE_PUBLIC_AI=false\n"
+    text = f"ASKTRACE_DATA_SHA256={checksum}\n"
     for key, value in generated.items():
         text += key + "=" + json.dumps(value) + "\n"
     runtime.write_text(text, encoding="utf-8")
