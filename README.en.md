@@ -1,5 +1,7 @@
 # AskTrace
 
+**[Open live demo](https://asktrace-pyop.onrender.com)**
+
 **Prepare a procurement analysis: compare publications, choose what to inspect and take the sources.**
 
 [Português](README.md) · [Case study](docs/case-study.md) · [Architecture](docs/architecture.md) · [Documentation](docs/README.md)
@@ -153,8 +155,10 @@ end of this README. Detailed documentation is primarily in Portuguese.
   [Method and limitations](docs/agent-evaluation.md#avaliação-final-do-catálogo-v3) (Portuguese).
 - **Data restoration and public routes:** no recollection; 12 actual ASGI queries using
   local PostgreSQL. [Final verification](runs/release-readiness-411e550a-cfc1-4cd5-bac5-a73e3ba2cf33/verification.json).
-- **Interface:** DOM and HTTP checks are complete. Browser visual inspection and the
-  demonstration video are not complete, and there is no publicly hosted demo.
+- **Deployment:** all six queries for both datasets passed over public HTTPS, along
+  with refusal, session protection and one real AI query. [Render evidence](runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/verification.json).
+- **Interface:** the landing page, PT-BR/EN toggle, query, tab history and CSV download
+  were checked in the hosted browser. Full visual review and video remain pending.
 
 Curated cases do not establish general model accuracy or measured business savings.
 
@@ -185,15 +189,19 @@ local-rule mode. Secrets belong in ignored `.env`, never tracked `.env.example`.
 Once prepared, run `.venv/Scripts/python.exe -m asktrace.web` and open
 `http://127.0.0.1:8010` for the local preview.
 
-**Deployment prepared:** a FastAPI/Uvicorn entry point and Render Blueprint support remote
-PostgreSQL, separate credentials, evidence restoration and persistent demo limits.
-External deployment has not yet been verified. Follow the [deployment guide](docs/deployment.md)
-(Portuguese); the local preview server above remains restricted to this computer.
+**Live application:** [Render Free](https://asktrace-pyop.onrender.com) with Neon PostgreSQL, separate
+credentials, evidence restoration and persistent limits. Public HTTPS was verified
+on November 5, 2026. See the [deployment guide](docs/deployment.md) (Portuguese).
+
+**Measured limitation:** the initial public check took 20–23 seconds per local-rule
+query on the larger dataset and 5–6 seconds on the original; one AI query took
+43 seconds. These are observations from this run, not performance guarantees.
+Latency optimization and wake-up after inactivity still need verification.
 
 The Neon database was loaded and verified: six routes for each dataset passed with
 restricted logins, evidence was restored from the database, and the budget survived
 restarting the test application. [Remote verification](runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json).
-This does not replace verification of a public Render URL.
+The separate public HTTPS check is recorded in the [Render evidence](runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/verification.json).
 
 ## Explore further
 

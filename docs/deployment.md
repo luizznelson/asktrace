@@ -115,8 +115,8 @@ antes de criar recursos; a aplicação não comprova a gratuidade da conta dos p
 ## Checklist de publicação
 
 - [x] Banco Neon preparado e totais das duas bases conferidos.
-- [ ] Segredos de execução cadastrados; credencial administrativa ausente do serviço.
-- [ ] Startup restaura o pacote com o hash esperado e saúde retorna 200.
+- [x] Segredos de execução cadastrados; credencial administrativa ausente do serviço.
+- [x] Startup restaura o pacote com o hash esperado e saúde retorna 200.
 - [ ] Seis consultas, recusas, histórico, troca de idioma e downloads conferidos na URL pública.
 - [ ] Reinício e retomada após inatividade conferidos; limites não são apagados.
 - [ ] Inspeção visual de desktop e celular realizada, sem afirmar certificação de acessibilidade.
@@ -148,6 +148,30 @@ Para repetir a conferência remota antes de receber tráfego público:
 
 Essa verificação consome doze consultas do orçamento compartilhado e usa o arquivo privado
 de execução. Ela não chama modelos nem representa um teste da URL pública do Render.
+
+## Publicação verificada em 05/11/2026
+
+Aplicação: [https://asktrace-pyop.onrender.com](https://asktrace-pyop.onrender.com). Serviço `asktrace-pyop`, plano Free,
+Ohio, um worker. Commit publicado: `bfa7dc928c5e6dab2cc4b12c91504e5c2debbf8b`.
+Deploy `dep-dbm7l7l6e07s73bdc3mg` confirmado como `live` pelo Render.
+Sincronização automática e publicação automática por push permanecem desativadas.
+
+[Evidência HTTP](../runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/verification.json): saúde 200 em 0,807 segundo, arquivos da interface,
+cabeçalhos de segurança, doze consultas nas duas bases, recusa de pergunta sem suporte,
+rejeição sem token e bloqueio do arquivo privado `.env`. Uma solicitação pública com IA
+real retornou o panorama esperado. Essa conferência não equivale a uma auditoria completa
+de segurança nem à repetição da avaliação de 60 casos.
+
+Na interface hospedada, foram conferidos a página inicial em tela estreita de 390 px,
+a troca PT-BR/EN, uma resposta por regras, o histórico da aba e o download CSV.
+[Captura real](assets/asktrace-public-response.jpg). Não se afirma revisão visual de
+todas as telas, teste completo de acessibilidade ou gravação de vídeo.
+
+As consultas por regras da base maior levaram 20,494–22,903 segundos; na original,
+5,226–5,919 segundos. A consulta com IA levou 43,401 segundos. Os tempos incluem o
+percurso HTTP desta execução; ainda não isolam as causas. A revalidação das evidências
+a cada pergunta é uma hipótese a medir antes de alterar a implementação. Otimização,
+reinício do serviço hospedado e retomada após inatividade continuam pendentes.
 
 ## Referências oficiais
 

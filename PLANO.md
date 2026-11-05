@@ -23,8 +23,9 @@ agosto–outubro permanece separado. Sem filtros livres, memória no modelo ou n
 
 - [x] Avaliação do catálogo atual: 60 aprovações em 61 execuções; uma falha preservada e retomada explícita.
 - [x] Banco Neon carregado; duas bases, logins restritos, restauração e limites persistentes verificados.
-- [ ] Publicar e conferir a aplicação na URL externa, incluindo reinício e retomada.
-- [ ] Inspecionar visualmente desktop e celular. O navegador ainda retorna bloqueado nesta sessão.
+- [x] Publicar no Render Free; seis consultas de ambas as bases e uma consulta com IA verificadas.
+- [ ] Medir e otimizar latência da base maior; conferir reinício e retomada no serviço hospedado.
+- [ ] Concluir revisão visual de todas as telas. Navegador disponível; apresentação inicial, idioma, resposta, histórico e CSV já conferidos.
 - [ ] Gravar o vídeo com a aplicação hospedada e acrescentar capturas reais ao README.
 - [ ] Observar a CI do commit publicado; não equiparar testes locais à execução remota.
 

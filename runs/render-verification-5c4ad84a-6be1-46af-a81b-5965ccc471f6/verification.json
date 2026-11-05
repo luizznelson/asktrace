@@ -1,0 +1,188 @@
+{
+  "started_at": "2026-11-05T12:48:01.482434+00:00",
+  "url": "https://asktrace-pyop.onrender.com",
+  "commit": "bfa7dc928c5e6dab2cc4b12c91504e5c2debbf8b",
+  "browser_visual_inspection": false,
+  "checks": [
+    {
+      "name": "public_health",
+      "passed": true,
+      "seconds": 0.807
+    },
+    {
+      "name": "asset:/",
+      "passed": true
+    },
+    {
+      "name": "asset:/app.css",
+      "passed": true
+    },
+    {
+      "name": "asset:/app.js",
+      "passed": true
+    },
+    {
+      "name": "asset:/formatters.js",
+      "passed": true
+    },
+    {
+      "name": "asset:/presentation.js",
+      "passed": true
+    },
+    {
+      "name": "security_headers",
+      "passed": true
+    },
+    {
+      "name": "public_session",
+      "passed": true
+    },
+    {
+      "name": "expanded:summary",
+      "passed": true
+    },
+    {
+      "name": "expanded:municipalities",
+      "passed": true
+    },
+    {
+      "name": "expanded:monthly",
+      "passed": true
+    },
+    {
+      "name": "expanded:organizations",
+      "passed": true
+    },
+    {
+      "name": "expanded:quality",
+      "passed": true
+    },
+    {
+      "name": "expanded:purchase",
+      "passed": true
+    },
+    {
+      "name": "original:summary",
+      "passed": true
+    },
+    {
+      "name": "original:municipalities",
+      "passed": true
+    },
+    {
+      "name": "original:monthly",
+      "passed": true
+    },
+    {
+      "name": "original:organizations",
+      "passed": true
+    },
+    {
+      "name": "original:quality",
+      "passed": true
+    },
+    {
+      "name": "original:purchase",
+      "passed": true
+    },
+    {
+      "name": "unsupported_question_refused",
+      "passed": true
+    },
+    {
+      "name": "missing_session_rejected",
+      "passed": true
+    },
+    {
+      "name": "private_file_not_served",
+      "passed": true
+    },
+    {
+      "name": "ai_summary",
+      "passed": true
+    }
+  ],
+  "queries": [
+    {
+      "dataset": "expanded",
+      "action": "summary",
+      "seconds": 22.903,
+      "response_sha256": "5773cbec7cfbc829795a8183dcefc4ca6e6230a291e60513b6d5da2d24c7f8d3"
+    },
+    {
+      "dataset": "expanded",
+      "action": "municipalities",
+      "seconds": 20.899,
+      "response_sha256": "a10a164f496beb75fe6c8780fc1449bbb73e1b64bd6f8538a057ac03dfcce172"
+    },
+    {
+      "dataset": "expanded",
+      "action": "monthly",
+      "seconds": 20.494,
+      "response_sha256": "49f1feb1039f8a5749cb063b70a73613a1a9dbbc2dde5089deafed60bc6d451a"
+    },
+    {
+      "dataset": "expanded",
+      "action": "organizations",
+      "seconds": 21.109,
+      "response_sha256": "26656718b2bae7f22a23269aaad8e89eea2930b30e8dea14fd8e300218117e97"
+    },
+    {
+      "dataset": "expanded",
+      "action": "quality",
+      "seconds": 21.688,
+      "response_sha256": "7bdd6cd2b6ce436a9fe81e2053f18274dd7d6c6054ca508fadbf4d48a02e1910"
+    },
+    {
+      "dataset": "expanded",
+      "action": "purchase",
+      "seconds": 21.707,
+      "response_sha256": "a5b0d74a5026c12e7116487abb6fdd4df602d6b1e61814bdde6da53c00fb6da7"
+    },
+    {
+      "dataset": "original",
+      "action": "summary",
+      "seconds": 5.919,
+      "response_sha256": "080bd1e09785463433fa23d68e727ae8dd77198ace2356398a7ad6aaf5898d26"
+    },
+    {
+      "dataset": "original",
+      "action": "municipalities",
+      "seconds": 5.7,
+      "response_sha256": "e71fe7c3ffbe25532ccbf6c2964ca5ccbfb807997f33b2522cd404e102c1dd3a"
+    },
+    {
+      "dataset": "original",
+      "action": "monthly",
+      "seconds": 5.384,
+      "response_sha256": "c204440fa1343a648425151a6849ab7d823928e9c90bf154b23bb13148522022"
+    },
+    {
+      "dataset": "original",
+      "action": "organizations",
+      "seconds": 5.226,
+      "response_sha256": "62397907f878de1d88b2d6baa0bd928197ebbd22fa2d98214ed69316577377a5"
+    },
+    {
+      "dataset": "original",
+      "action": "quality",
+      "seconds": 5.515,
+      "response_sha256": "bacd44d83c27854da20d1bb3ccc2e9453118353bfe4b1ccd015bd35abf795f58"
+    },
+    {
+      "dataset": "original",
+      "action": "purchase",
+      "seconds": 5.491,
+      "response_sha256": "56854581208c5538aa05d9053bf259893b608b6922c5481e806ddca7bcb89c0f"
+    }
+  ],
+  "ai_smoke": {
+    "http_status": 200,
+    "status": "answered",
+    "seconds": 43.401,
+    "response_sha256": "74044fd3c86edfbc5ddafcc2df0e922e15170e54ad3edfa0c1e1c8d6e73e2e17",
+    "provider": "fallback",
+    "external_requests_reserved": 1
+  },
+  "finished_at": "2026-11-05T12:51:31.567976+00:00"
+}

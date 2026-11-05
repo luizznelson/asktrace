@@ -1,5 +1,7 @@
 # AskTrace
 
+**[Abrir demonstração](https://asktrace-pyop.onrender.com)**
+
 **Prepare uma análise de compras públicas: compare publicações, escolha o que conferir e leve as fontes.**
 
 [English](README.en.md) · [Estudo de caso](docs/case-study.md) · [Arquitetura](docs/architecture.md) · [Documentação](docs/README.md)
@@ -153,8 +155,10 @@ desenvolvimento está declarada ao final deste README.
   [Método, execuções e limites](docs/agent-evaluation.md#avaliação-final-do-catálogo-v3).
 - **Restauração e rotas públicas:** dados restaurados sem coleta e 12 consultas reais
   pelas rotas ASGI, usando o PostgreSQL local. [Conferência final](runs/release-readiness-411e550a-cfc1-4cd5-bac5-a73e3ba2cf33/verification.json).
-- **Interface:** verificações DOM e HTTP realizadas. A inspeção visual em navegador e
-  o vídeo de demonstração não estão concluídos; não há demo pública hospedada.
+- **Publicação:** seis consultas das duas bases conferidas pela URL pública, além de
+  recusa, proteção de sessão e uma consulta com IA real. [Registro do Render](runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/verification.json).
+- **Interface:** página inicial, troca PT-BR/EN, pergunta, histórico e download CSV
+  conferidos no navegador publicado. Revisão visual completa e vídeo ainda pendentes.
 
 Não há promessa de acurácia geral baseada nos testes curados, nem economia de trabalho medida.
 
@@ -185,15 +189,19 @@ segredos ficam no `.env` ignorado, nunca no `.env.example` versionado.
 Com a base preparada, execute `.venv/Scripts/python.exe -m asktrace.web` e abra
 `http://127.0.0.1:8010` para a prévia local.
 
-**Publicação preparada:** há uma entrada FastAPI/Uvicorn e um Blueprint do Render,
-com PostgreSQL remoto, credenciais separadas, restauração das evidências e limites
-persistentes. O deploy externo ainda não foi verificado. Siga o [guia de publicação](docs/deployment.md);
-o servidor local acima continua restrito ao computador.
+**Aplicação publicada:** [Render Free](https://asktrace-pyop.onrender.com), com PostgreSQL no Neon, credenciais
+separadas, restauração das evidências e limites persistentes. O endereço externo foi
+verificado em 05/11/2026. Siga o [guia de publicação](docs/deployment.md).
+
+**Limitação medida:** na primeira conferência pública, consultas por regras levaram
+20–23 segundos na base maior e 5–6 segundos na original; uma consulta com IA levou
+43 segundos. São observações desta execução, sem promessa de desempenho. A otimização
+da latência e a retomada após inatividade ainda precisam de validação.
 
 O banco no Neon também foi carregado e verificado: os seis caminhos das duas bases
 passaram com os logins restritos, as evidências foram restauradas do banco e o limite
 persistiu após reinicializar a aplicação de teste. [Verificação remota](runs/neon-verification-187bed11-8da5-4be2-8712-d694a4ea11a0/verification.json).
-Isso não substitui a conferência do endereço público no Render.
+A conferência do endereço público está registrada separadamente no [Render](runs/render-verification-5c4ad84a-6be1-46af-a81b-5965ccc471f6/verification.json).
 
 ## Para aprofundar
 

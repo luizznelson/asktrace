@@ -1,0 +1,17 @@
+{
+  "verified_at": "2026-11-05T12:54:18.1219238Z",
+  "url": "https://asktrace-pyop.onrender.com",
+  "method": "actual browser UI",
+  "landing_page": true,
+  "language_toggle_pt_en": true,
+  "mobile_landing_width_px": 390,
+  "baseline_summary_answered": true,
+  "tab_history_contains_question": true,
+  "csv_download_checked": true,
+  "csv_sha256": "134d39784c4972568d9b041c6eaa56d7b2b7f4c82c0fa744885990db2b985e84",
+  "screenshot": "docs/assets/asktrace-public-response.jpg",
+  "full_visual_review": false,
+  "video_recorded": false,
+  "hosted_restart_verified": false,
+  "idle_wakeup_verified": false
+}
