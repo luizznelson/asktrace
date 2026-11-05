@@ -137,6 +137,7 @@ const text = {
         newSession: "Nova exploração",
         sessionLabel: "NESTA SESSÃO",
         historyEmpty: "Suas perguntas aparecem aqui.",
+        mobileHistoryLabel: "Perguntas desta aba",
         projectCode: "Documentação e código",
         runtimeLabel: "Consulta de dados públicos",
         workspaceName: "Área de investigação",
@@ -372,6 +373,7 @@ const text = {
         newSession: "New exploration",
         sessionLabel: "THIS SESSION",
         historyEmpty: "Your questions will appear here.",
+        mobileHistoryLabel: "Questions in this tab",
         projectCode: "Documentation and source code",
         runtimeLabel: "Public data queries",
         workspaceName: "Investigation workspace",
@@ -787,16 +789,17 @@ function isHistoricalResult(data, datasetId = selectedDataset) {
     );
 }
 function historyView() {
-    $("history").replaceChildren();
-    if (!sessionHistory.some((item) => item.dataset === selectedDataset)) {
-        $("history").append(node("p", text[lang].historyEmpty));
-        return;
-    }
-    sessionHistory
+    const entries = sessionHistory
         .filter((item) => item.dataset === selectedDataset)
         .slice()
-        .reverse()
-        .forEach((item) => {
+        .reverse();
+    for (const target of ["history", "mobile-history-list"]) {
+        $(target).replaceChildren();
+        if (!entries.length) {
+            $(target).append(node("p", text[lang].historyEmpty));
+            continue;
+        }
+        entries.forEach((item) => {
             const button = node("button", item.data.question);
             button.type = "button";
             button.title = item.data.question;
@@ -815,9 +818,19 @@ function historyView() {
                 latest = item.data;
                 render(latest);
                 historyView();
+                $("mobile-history").open = false;
+                if (target === "mobile-history-list")
+                    $("response").scrollIntoView({
+                        block: "start",
+                        behavior: matchMedia("(prefers-reduced-motion: reduce)")
+                            .matches
+                            ? "instant"
+                            : "smooth",
+                    });
             });
-            $("history").append(button);
+            $(target).append(button);
         });
+    }
 }
 function languageAssistant() {
     languageBase();
@@ -828,6 +841,7 @@ function languageAssistant() {
         lang === "pt" ? "Enviar pergunta" : "Send question",
     );
     $("mobile-reset").setAttribute("aria-label", text[lang].newSession);
+    $("new-session").setAttribute("aria-label", text[lang].newSession);
 }
 function renderAssistant(data) {
     renderBase(data);
@@ -880,6 +894,7 @@ $("question").addEventListener("keydown", (event) => {
 $("new-session").addEventListener("click", () => {
     if (working) return;
     sessionHistory = [];
+    $("mobile-history").open = false;
     activeHistory = null;
     latest = null;
     $("question").value = "";

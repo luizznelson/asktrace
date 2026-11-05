@@ -563,6 +563,25 @@ vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
     get("discovery").children[2].click();
     assert.match(get("question").value, /00000000000000-1-000001\/2026/);
     assert.match(get("dataset-updated").textContent, /19:27/);
+    assert.equal(
+        get("mobile-history-list").children.length,
+        get("history").children.length,
+    );
+    get("mobile-history").open = true;
+    const apiBeforeMobileHistory = requests.length;
+    get("mobile-history-list").children[0].click();
+    assert.equal(get("mobile-history").open, false);
+    assert.equal(
+        requests.length,
+        apiBeforeMobileHistory,
+        "Opening saved mobile history does not make a model or database request",
+    );
+    assert.match(get("asked-question").textContent, /resumo/i);
+    get("new-session").click();
+    assert.equal(
+        get("mobile-history-list").children[0].textContent,
+        get("history").children[0].textContent,
+    );
     console.log(
         "Assistant session persistence and DOM contract passed: discovery, submit, response, suggestions, history, language, reset, session.",
     );

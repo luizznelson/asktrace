@@ -1554,3 +1554,120 @@ body.has-result .welcome {
         margin-bottom: 12px;
     }
 }
+
+/* Review: retain session history on narrow screens and usable touch controls. */
+.mobile-history {
+    display: none;
+    margin: 12px 20px 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: white;
+}
+.mobile-history > summary {
+    padding: 12px 14px;
+    min-height: 44px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #36566d;
+    font-weight: 600;
+}
+#mobile-history-list {
+    max-height: 260px;
+    overflow: auto;
+    padding: 0 8px 8px;
+}
+#mobile-history-list button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    min-height: 44px;
+    padding: 10px 8px;
+    border: 0;
+    border-top: 1px solid var(--line);
+    background: white;
+    border-radius: 4px;
+    color: #36566d;
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+#mobile-history-list button.active,
+#mobile-history-list button:hover {
+    background: #edf7f6;
+}
+#mobile-history-list p {
+    margin: 0;
+    padding: 10px 8px;
+    color: #60738a;
+    font-size: 12px;
+}
+.header-actions button {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 12px;
+}
+.send-button {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
+.coverage span {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #60738a;
+}
+.dataset-stats div div > span {
+    font-size: 11px;
+    line-height: 1.5;
+    color: #60738a;
+}
+.welcome-footnote,
+.composer-hint,
+.privacy {
+    color: #60738a;
+    font-size: 11px;
+    line-height: 1.7;
+}
+@media (max-width: 800px) {
+    .mobile-history {
+        display: block;
+    }
+    .new-session {
+        min-height: 44px;
+    }
+    .scope-details summary {
+        font-size: 11px;
+        line-height: 1.7;
+    }
+}
+@media (max-width: 520px) {
+    .mobile-history {
+        margin: 10px 14px 0;
+    }
+    .header-actions {
+        gap: 8px;
+    }
+    .dataset-stats > div {
+        flex: 1;
+        min-width: 0;
+        align-items: flex-start;
+    }
+    .composer-toolbar .provider-control {
+        min-width: 0;
+        flex: 1;
+    }
+    .provider-control select {
+        min-width: 0;
+        max-width: 190px;
+        flex-shrink: 1;
+    }
+    .send-actions {
+        flex-shrink: 0;
+    }
+    .discovery .card-description {
+        font-size: 11px !important;
+    }
+    .scope-details > div {
+        max-width: 100%;
+    }
+}
