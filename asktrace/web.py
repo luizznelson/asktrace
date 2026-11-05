@@ -26,16 +26,8 @@ ASSETS = {
 }
 
 
-class Server(ThreadingHTTPServer):
-    daemon_threads = True
-    allow_reuse_address = False
-
-    def server_bind(self):
-        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
-            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
-        super().server_bind()
-
-    def __init__(self, root, port=8010, runner=run):
+class Application:
+    def __init__(self, root, runner=run):
         self.root = root.resolve()
         config_path = self.root / "config/datasets.json"
         self.datasets = (
@@ -76,7 +68,23 @@ class Server(ThreadingHTTPServer):
         self.token = secrets.token_urlsafe(32)
         self.runner = runner
         self.busy = threading.Lock()
-        super().__init__(("127.0.0.1", port), Handler)
+        self.default_coverage = next(
+            row["coverage"] for row in self.catalog if row["id"] == self.datasets["default"]
+        )
+
+
+class Server(Application, ThreadingHTTPServer):
+    daemon_threads = True
+    allow_reuse_address = False
+
+    def server_bind(self):
+        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        ThreadingHTTPServer.server_bind(self)
+
+    def __init__(self, root, port=8010, runner=run):
+        Application.__init__(self, root, runner)
+        ThreadingHTTPServer.__init__(self, ("127.0.0.1", port), Handler)
         self.origin = f"http://127.0.0.1:{self.server_port}"
 
 
@@ -144,7 +152,7 @@ class Handler(BaseHTTPRequestHandler):
                 {
                     "token": self.server.token,
                     "mode": "local",
-                    "coverage": COVERAGE,
+                    "coverage": self.server.default_coverage,
                     "datasets": self.server.catalog,
                     "default_dataset": self.server.datasets["default"],
                     "providers": ["baseline", "fallback"],
@@ -164,7 +172,8 @@ class Handler(BaseHTTPRequestHandler):
             self.send(
                 200,
                 read_evidence(
-                    self.server.root, Path(selected["coverage"] if selected else COVERAGE)
+                    self.server.root,
+                    Path(selected["coverage"] if selected else self.server.default_coverage),
                 ),
             )
         else:
@@ -220,7 +229,7 @@ class Handler(BaseHTTPRequestHandler):
         try:
             result = self.server.runner(
                 self.server.root,
-                Path(selected["coverage"] if selected else COVERAGE),
+                Path(selected["coverage"] if selected else self.server.default_coverage),
                 data["question"],
                 data["provider"],
             )

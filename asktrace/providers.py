@@ -97,7 +97,11 @@ def health_path(root):
 
 def health(root):
     path = health_path(root)
-    if path.exists():
+    if os.environ.get("ASKTRACE_STATE_DATABASE_URL"):
+        from asktrace.runtime_state import read_health
+
+        state = read_health(root)
+    elif path.exists():
         with path.open("rb") as stream:
             body = stream.read(65537)
         if len(body) > 65536:
@@ -146,6 +150,11 @@ def health(root):
 
 
 def save_health(root, state):
+    if os.environ.get("ASKTRACE_STATE_DATABASE_URL"):
+        from asktrace.runtime_state import write_health
+
+        write_health(root, state)
+        return
     path = health_path(root)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".health-{uuid4()}.json")

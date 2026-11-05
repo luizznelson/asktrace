@@ -37,3 +37,6 @@ amostras/pncp-contratos.json
 
 # Local provider cooldown state; not portfolio evidence
 data/runtime/
+
+# Private deployment artifacts contain full source records.
+data/deploy/

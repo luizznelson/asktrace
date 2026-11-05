@@ -582,6 +582,15 @@ vm.runInContext(fs.readFileSync("web/app.js", "utf8"), context);
         get("mobile-history-list").children[0].textContent,
         get("history").children[0].textContent,
     );
+    vm.runInContext('lang="pt";applySessionMode({mode:"public",providers:["baseline"]})', context);
+    assert.equal(get("ai-option").disabled, true);
+    assert.equal(get("provider").value, "baseline");
+    assert.equal(get("environment-badge").textContent, "DEMONSTRAÇÃO");
+    get("language").click();
+    assert.equal(get("environment-badge").textContent, "DEMO");
+    assert.match(get("environment-note").textContent, /Historical dataset/);
+    vm.runInContext('applySessionMode({mode:"public",providers:["baseline","fallback"]})', context);
+    assert.equal(get("ai-option").disabled, false);
     console.log(
         "Assistant session persistence and DOM contract passed: discovery, submit, response, suggestions, history, language, reset, session.",
     );

@@ -131,7 +131,20 @@ try:
             "POST", "/api/ask", {"question": question, "provider": "baseline", "dataset": dataset}
         )
         result = json.loads(body)
-        assert status == 200 and result["status"] == "answered" and result["llm_attempts"] == 0
+        assert (
+            status == 200 and result.get("status") == "answered" and result.get("llm_attempts") == 0
+        ), {
+            "dataset": dataset,
+            "action": action,
+            "http_status": status,
+            "status": result.get("status"),
+            "error": result.get("error"),
+            "failure_types": [
+                step.get("error_type")
+                for step in result.get("trace", [])
+                if step.get("step") == "failure"
+            ],
+        }
         assert result["evidence"]["coverage"]["purchases"] == expected
         assert result["evidence"]["question"] == action
         rows = result["evidence"]["result"]

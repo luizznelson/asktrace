@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: asktrace
+    runtime: python
+    plan: free
+    buildCommand: pip install --require-hashes -r requirements.txt
+    startCommand: uvicorn asktrace.public:create_app --factory --host 0.0.0.0 --port $PORT --workers 1 --no-access-log --no-proxy-headers
+    healthCheckPath: /healthz
+    autoDeployTrigger: 'off'
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.14.3
+      - key: ASKTRACE_DATABASE_URL
+        sync: false
+      - key: ASKTRACE_STATE_DATABASE_URL
+        sync: false
+      - key: ASKTRACE_DATA_SHA256
+        sync: false
+      - key: ASKTRACE_PUBLIC_AI
+        value: "false"
+      - key: ASKTRACE_DAILY_AI_LIMIT
+        value: "10"

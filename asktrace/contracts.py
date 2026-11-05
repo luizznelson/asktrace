@@ -2,7 +2,6 @@
 
 import argparse
 import json
-import os
 import time
 from collections import Counter
 from datetime import UTC, datetime
@@ -338,20 +337,14 @@ def verify(root, path):
 
 
 def load(root, path):
-    import psycopg
     from dotenv import load_dotenv
     from psycopg.types.json import Jsonb
 
+    from asktrace.connections import connect as database_connect
+
     manifest, checksum = verify(root, path)
     load_dotenv(root / ".env", override=False)
-    with psycopg.connect(
-        host="127.0.0.1",
-        port=15432,
-        user="asktrace",
-        dbname=os.environ.get("ASKTRACE_DATABASE_NAME", "asktrace"),
-        password=os.environ["POSTGRES_PASSWORD"],
-        connect_timeout=10,
-    ) as connection:
+    with database_connect(root, "admin") as connection:
         connection.execute("SELECT pg_advisory_xact_lock(717426001)")
         connection.execute((root / "sql/003_contracts.sql").read_text(encoding="utf-8"))
         parent = connection.execute(

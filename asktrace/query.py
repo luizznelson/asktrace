@@ -9,12 +9,12 @@ from decimal import Decimal
 from pathlib import Path
 from uuid import UUID
 
-import psycopg
 from dotenv import load_dotenv, set_key
 from psycopg import sql
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
+from asktrace.connections import connect as database_connect
 from asktrace.contracts import verify
 from asktrace.database import verified_snapshot
 from asktrace.evidence import read_evidence
@@ -22,16 +22,7 @@ from asktrace.ingest import digest
 
 
 def connect(root, reader=True):
-    load_dotenv(root / ".env", override=False)
-    return psycopg.connect(
-        host="127.0.0.1",
-        port=15432,
-        user="asktrace_reader" if reader else "asktrace",
-        password=os.environ["ASKTRACE_READER_PASSWORD" if reader else "POSTGRES_PASSWORD"],
-        dbname=os.environ.get("ASKTRACE_DATABASE_NAME", "asktrace"),
-        connect_timeout=10,
-        row_factory=dict_row,
-    )
+    return database_connect(root, "reader" if reader else "admin", row_factory=dict_row)
 
 
 def setup(root):

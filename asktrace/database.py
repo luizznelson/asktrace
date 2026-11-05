@@ -2,10 +2,10 @@
 
 import argparse
 import json
-import os
 from pathlib import Path
 from uuid import UUID
 
+from asktrace.connections import connect as database_connect
 from asktrace.evidence import read_evidence
 from asktrace.ingest import digest
 
@@ -41,23 +41,11 @@ def verified_snapshot(root: Path, manifest_path: Path, allow_sample: bool = Fals
 
 def load(root: Path, manifest_path: Path, allow_sample: bool = False) -> str:
     manifest, rows, manifest_hash = verified_snapshot(root, manifest_path, allow_sample)
-    import psycopg
     from dotenv import load_dotenv
     from psycopg.types.json import Jsonb
 
     load_dotenv(root / ".env", override=False)
-    password = os.environ.get("POSTGRES_PASSWORD")
-    if not password:
-        raise ValueError("Configure POSTGRES_PASSWORD in the ignored .env")
-    # Never format credentials into a URL, command argument or log.
-    with psycopg.connect(
-        host="127.0.0.1",
-        port=15432,
-        user="asktrace",
-        dbname=os.environ.get("ASKTRACE_DATABASE_NAME", "asktrace"),
-        password=password,
-        connect_timeout=10,
-    ) as connection:
+    with database_connect(root, "admin") as connection:
         with connection.cursor() as cursor:
             cursor.execute("SELECT pg_advisory_xact_lock(717426001)")
             for name in ("001_schema.sql", "002_purchases.sql"):

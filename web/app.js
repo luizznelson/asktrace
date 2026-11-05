@@ -39,7 +39,7 @@ const text = {
         baseline: "Consultar sem IA · regras locais",
         fallback: "Perguntar com IA",
         privacy:
-            "No modo IA, a pergunta e o catálogo de consultas são enviados aos provedores configurados. A chave e os resultados do banco ficam no servidor local.",
+            "No modo IA, a pergunta e o catálogo de consultas são enviados aos provedores configurados. A chave e os resultados do banco ficam no servidor da aplicação.",
         submit: "Consultar ↗",
         limitsLabel: "LEIA O RESULTADO COM CONTEXTO",
         limitTitle: "Publicado não significa pago.",
@@ -84,6 +84,7 @@ const text = {
         sessionError:
             "Não foi possível iniciar a sessão local. Recarregue a página.",
         busy: "Já há uma consulta em andamento. Aguarde e tente novamente.",
+        demoLimit: "A demonstração atingiu um limite compartilhado de consultas. Aguarde para tentar novamente. Se estava usando IA, você também pode tentar o modo por regras.",
         error: "Não foi possível concluir a solicitação. Confira a conexão com a aplicação e tente novamente.",
         answered: "Consulta concluída",
         refused: "Fora das consultas disponíveis",
@@ -285,7 +286,7 @@ const text = {
         baseline: "Query without AI · local rules",
         fallback: "Ask with AI",
         privacy:
-            "In AI mode, the question and query catalog are sent to configured providers. Keys and database results stay on the local server.",
+            "In AI mode, the question and query catalog are sent to configured providers. Keys and database results stay on the application server.",
         submit: "Run query ↗",
         limitsLabel: "READ THE RESULT IN CONTEXT",
         limitTitle: "Published does not mean paid.",
@@ -329,6 +330,7 @@ const text = {
         sessionError:
             "Could not initialize the local session. Reload the page.",
         busy: "Another query is running. Wait and try again.",
+        demoLimit: "The demo reached a shared query limit. Wait before trying again. If you were using AI, you can also try rules mode.",
         error: "Could not complete the request. Check the application connection and try again.",
         answered: "Query completed",
         refused: "Outside available queries",
@@ -542,6 +544,22 @@ let lang = "pt",
     token = null,
     latest = null,
     working = false;
+let publicDemo = false;
+function environmentLabels() {
+    if (!publicDemo) return;
+    $("environment-badge").textContent = lang === "pt" ? "DEMONSTRAÇÃO" : "DEMO";
+    $("environment-note").textContent = lang === "pt"
+        ? "Demonstração pública · Base histórica · Sem atualização em tempo real"
+        : "Public demo · Historical dataset · No real-time updates";
+}
+function applySessionMode(data) {
+    publicDemo = data.mode === "public";
+    if (Array.isArray(data.providers)) {
+        $("ai-option").disabled = !data.providers.includes("fallback");
+        if ($("ai-option").disabled) $("provider").value = "baseline";
+    }
+    environmentLabels();
+}
 function node(tag, value, cls) {
     const el = document.createElement(tag);
     if (value !== undefined) el.textContent = value;
@@ -574,6 +592,7 @@ function languageBase() {
     });
     if (latest) render(latest);
     if (working) $("status").textContent = t.waiting;
+    environmentLabels();
 }
 function count() {
     $("count").textContent = `${$("question").value.length} / 1000`;
@@ -1477,8 +1496,12 @@ $("ask-form").addEventListener("submit", async (event) => {
                 dataset: selectedDataset,
             }),
         });
-        if (!response.ok)
-            throw new Error(response.status === 429 ? "busy" : "error");
+        if (!response.ok) {
+            const failure = await response.json().catch(() => ({}));
+            throw new Error(failure.error === "demo_limit" ? "demoLimit"
+                : failure.error === "ai_disabled" ? "aiUnavailable"
+                : response.status === 429 ? "busy" : "error");
+        }
         latest = await response.json();
         activeHistory = Date.now() + "-" + sessionHistory.length;
         sessionHistory.push({
@@ -1518,6 +1541,7 @@ fetch("/api/session")
     })
     .then((data) => {
         token = data.token;
+        applySessionMode(data);
         initializeDatasets(data);
         showAvailability(data.availability);
         $("submit").disabled = false;

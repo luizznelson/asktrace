@@ -67,7 +67,7 @@
                         aria-label="Nova exploração"
                     >
                         ＋</button
-                    ><span class="local-badge" data-i="local">PRÉVIA LOCAL</span
+                    ><span id="environment-badge" class="local-badge" data-i="local">PRÉVIA LOCAL</span
                     ><button
                         id="language"
                         type="button"
@@ -381,7 +381,7 @@
                                     data-i="mode"
                                     >Modo de consulta</label
                                 ><select id="provider">
-                                    <option value="fallback" data-i="fallback">
+                                    <option id="ai-option" value="fallback" data-i="fallback">
                                         Assistente IA · com contingência
                                     </option>
                                     <option value="baseline" data-i="baseline">
@@ -519,7 +519,7 @@
                     <span data-i="footerShort"
                         >Fonte: PNCP · Sem vínculo oficial</span
                     ></span
-                ><span data-i="footerLocal"
+                ><span id="environment-note" data-i="footerLocal"
                     >Ambiente local · Sem dados em tempo real</span
                 >
             </footer>

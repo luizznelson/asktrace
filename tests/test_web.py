@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-from asktrace.web import COVERAGE, Server
+from asktrace.web import Server
 
 
 class WebTests(unittest.TestCase):
@@ -89,7 +89,9 @@ class WebTests(unittest.TestCase):
 
     def test_only_fixed_coverage_and_one_runner_call(self):
         self.assertEqual(self.ask()[0], 200)
-        self.runner.assert_called_once_with(self.server.root, Path(COVERAGE), "Resumo", "baseline")
+        self.runner.assert_called_once_with(
+            self.server.root, Path(self.server.default_coverage), "Resumo", "baseline"
+        )
 
     def test_concurrent_question_does_not_spend_more_quota(self):
         self.server.busy.acquire()
