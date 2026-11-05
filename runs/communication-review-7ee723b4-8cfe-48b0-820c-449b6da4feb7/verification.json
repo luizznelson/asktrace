@@ -1,0 +1,58 @@
+{
+  "finished_at": "2026-11-05T00:54:31.547498+00:00",
+  "change_scope": "Business communication and progressive explanation; no query or database behavior changed.",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "web/app.js"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_assistant_ui.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_result_presentation.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_display_formatters.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "relative_links_checked": 57,
+  "business_example_sequence": "team question → application deliverable → analytical use and limits",
+  "external_ai_calls": 0,
+  "browser_visual_inspection": false,
+  "business_user_validation_performed": false,
+  "python_suite_rerun": false,
+  "previous_full_suite": "runs/application-review-bb46d4c7-00fc-4c41-b1cf-67dbf7062115/verification.json",
+  "source_sha256": {
+    "README.md": "b60e1f0ffa3939cf0ff21ebfac6fdd6c4c195d4a44d5d2b21f235382c23a4fa8",
+    "README.en.md": "6ff1ac3504e63d53a95e3cf285508a2bc51e8af62234b0193ab2ec447d55e4df",
+    "docs/case-study.md": "8cd373e960d6819fc54f3fb9c3393bad86b43151e943b296ea9d3d24deb1e154",
+    "web/index.html": "63028d2799644ecd1f1ff32a805db69b7c602a8b77f119b0800f4082ea1b7d74",
+    "web/app.js": "126f22662171fe52c0c95556bac371982e71b521bbdc4fdfc4576bd4c3e78c91",
+    "web/app.css": "efe995c0c883ce29c9388d2c6d820402498bce46347859af4d20f9f45f0e57fe"
+  }
+}

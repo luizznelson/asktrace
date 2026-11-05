@@ -8,24 +8,43 @@
 
 [![Quality](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml)
 
-AskTrace is an assistant for exploring a historical dataset from Brazil's National
-Public Procurement Portal (PNCP). Its proposed audience is **analysts preparing public
-procurement monitoring reports**: understand publication patterns and check records
-before including a conclusion in a report. This audience is a product hypothesis; no
-user interviews, organizational adoption or productivity measurement have taken place.
+AskTrace supports the preparation of public procurement monitoring reports. The analyst
+needs to understand the overview, choose what to inspect more closely and explain which
+data supports the findings. The application combines publication comparisons, lookup of
+an identified purchase and exports with sources, using a historical dataset from
+Brazil's National Public Procurement Portal (PNCP).
 
-## The proposed business problem
+## A scenario that explains the purpose
 
-When preparing a report, the question is: **“Where should I start the analysis, and what
-data supports the findings I will present?”** AskTrace combines comparisons by purchasing
-organization, municipality and month, lookup of an identified purchase, and contextual
-exports. The output supports human analysis, without automatically ranking investigative
-priorities or classifying irregularities.
+**Illustrative scenario:** a team wants an overview of purchases published during a
+selected period. The report's author needs to explain where publications are concentrated,
+how they vary across months and what information requires checking.
 
-[PNCP already provides search, filters, documents, dashboards and open data](https://www.gov.br/pncp/pt-br/pncp).
-This application complements those resources with questions over a bounded historical
-dataset. A market gap, commercial demand or advantage over the portal has not been
-validated with users. [Business rationale, sources and validation plan](docs/business-case.md) (Portuguese).
+The task involves more than presenting a total. Records need comparison, unknown fields
+need to stay distinct from known values, and the numbers need an inspectable origin.
+Otherwise, a report could treat publication as payment or present an unknown amount as
+zero. These are interpretation risks explicitly handled by the project, without claiming
+how frequently they occur in organizations that have not been studied.
+
+AskTrace organizes this task into a journey: **ask, compare, check and take the result
+into the report**. The user receives a summary, visualizations when applicable, a table
+and contextual exports. Analysis and the choice of what warrants a closer look remain
+human decisions.
+
+## What each audience receives
+
+| Audience | What they need to understand | What the project delivers |
+| --- | --- | --- |
+| Management | What the overview establishes and where to look more closely | Publication comparisons, context and interpretation limits |
+| Analysts | How to verify and use the numbers in a report | Tables, identifiers, sources and CSV/JSON exports |
+| Engineers | How the system maintains consistent results | Controlled queries, collection evidence and documented tests |
+
+The intended benefit is to support an explainable, verifiable analysis. **User validation
+and measurements of time, cost or error reduction have not yet taken place.** The audience
+is proposed, not an existing customer base.
+[PNCP already provides search and dashboards](https://www.gov.br/pncp/pt-br/pncp); AskTrace
+offers an additional way to explore the dataset through questions. See the
+[business rationale](docs/business-case.md) (Portuguese) for hypotheses and a validation plan.
 
 ## From a question to an analysis decision
 

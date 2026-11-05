@@ -132,3 +132,9 @@ contratos Node e consultas HTTP locais. Sem nova coleta ou chamadas externas de 
 [Conferência da apresentação](application-review-bb46d4c7-00fc-4c41-b1cf-67dbf7062115/business-presentation-review.json):
 referências, links internos, SVGs e distinção editorial entre hipóteses e fatos.
 Não houve validação de negócio com usuários nem inspeção visual em navegador.
+
+## Narrativa para diferentes públicos
+
+[Conferência da revisão](communication-review-7ee723b4-8cfe-48b0-820c-449b6da4feb7/verification.json): cenário de uso, pergunta da equipe,
+entrega e uso do resultado antes do detalhamento técnico. Verificações Node e links
+internos passaram. Não houve estudo com usuários ou nova inspeção visual em navegador.

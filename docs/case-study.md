@@ -17,13 +17,6 @@ explorar um recorte histórico por perguntas, não uma substituição do portal.
 [visão de negócio e suas fontes](business-case.md) para separar fatos, hipóteses e
 benefícios que ainda precisam de medição.
 
-## Depois, os desafios de implementação
-
-O risco apareceu cedo: uma primeira página histórica tinha 50 registros, mas informava
-454 resultados em dez páginas. Esse exemplo permanece nas amostras; não faz parte dos
-números atuais. A solução percorre a paginação, verifica os registros e mantém estados
-diferentes para coleta concluída, amostra e falha.
-
 ## Uma investigação de ponta a ponta
 
 1. **Escolher o recorte:** maio–outubro/2026, pregões eletrônicos, unidades do Piauí.
@@ -36,6 +29,43 @@ diferentes para coleta concluída, amostra e falha.
 
 A conclusão e o gráfico usam as mesmas linhas da tabela. Não há segunda chamada de IA
 para redigir a explicação e não são inferidos ganhos financeiros.
+
+## Como explicar a entrega para a equipe
+
+**Pergunta de negócio:** “Como as publicações se distribuíram ao longo do período?”
+
+Na base padrão, a análise retorna 505 compras em maio, 527 em junho, 424 em julho,
+412 em agosto, 373 em setembro e 296 em outubro. A soma é 2.537. A resposta para o
+relatório pode ser:
+
+> No recorte analisado, junho teve o maior número de compras publicadas: 527. A série
+> descreve o volume de publicações por mês. Esses números não permitem concluir em
+> qual mês houve maior pagamento ou explicar a causa da variação.
+
+**Uso possível:** escolher um mês para uma leitura posterior, documentando o critério.
+O app não lista compras filtradas por mês nem investiga a causa da variação; essa etapa
+exigiria outras consultas ou retorno ao portal. A decisão de aprofundamento é humana.
+
+**Entrega para quem prepara o relatório:** gráfico para entender a distribuição, tabela
+para conferir os números e exportação com período, modalidade e origem. Ao compartilhar,
+o analista pode indicar exatamente a qual base a conclusão se refere.
+
+## Da necessidade de negócio à escolha técnica
+
+| Necessidade explicada em linguagem de negócio | Escolha de engenharia | Como conferir |
+| --- | --- | --- |
+| O relatório precisa dizer de onde veio o número | Evidências da coleta, identificadores e hashes | Fontes e registro de execução |
+| O mesmo valor não pode ser contado várias vezes por ter vários contratos | Agregação parte das compras, sem multiplicação por contratos | SQL e verificações de totais |
+| Um campo desconhecido precisa continuar desconhecido | Preservação de nulos e precisão decimal | Tabela, diagnóstico de campos e testes |
+| Uma pergunta não pode alterar os registros | Catálogo de consultas e acesso de leitura | Arquitetura e permissões do banco |
+| Uma falha da IA precisa ser distinguida de falta de informação | Estado de erro explícito e consulta local opcional | Interface e testes de falhas |
+
+## Depois, os desafios de implementação
+
+O risco apareceu cedo: uma primeira página histórica tinha 50 registros, mas informava
+454 resultados em dez páginas. Esse exemplo permanece nas amostras; não faz parte dos
+números atuais. A solução percorre a paginação, verifica os registros e mantém estados
+diferentes para coleta concluída, amostra e falha.
 
 ## Resultado construído
 

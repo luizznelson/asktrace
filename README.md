@@ -8,23 +8,43 @@
 
 [![Quality](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/luizznelson/asktrace/actions/workflows/quality.yml)
 
-O AskTrace é um assistente para explorar um recorte histórico do Portal Nacional de
-Contratações Públicas (PNCP). A proposta é apoiar **analistas que preparam relatórios de
-acompanhamento de compras públicas**: entender a distribuição das publicações e conferir
-registros antes de incluir uma conclusão no relatório. Esse público é uma hipótese de
-produto; ainda não houve entrevistas, adoção em organização ou medição de produtividade.
+O AskTrace apoia a preparação de relatórios de acompanhamento de compras públicas.
+A pessoa que faz essa análise precisa entender o panorama, escolher o que conferir com
+mais detalhe e explicar quais dados sustentam suas conclusões. O aplicativo reúne
+comparações de publicações, consulta de uma compra identificada e exportação com fontes,
+usando um recorte histórico do Portal Nacional de Contratações Públicas (PNCP).
 
-## O problema de negócio proposto
+## Uma situação que explica a proposta
 
-Ao preparar um relatório, a pergunta é: **“Por onde começar a análise e quais dados
-sustentam o que vou apresentar?”** O AskTrace reúne comparações por órgão, município e
-mês, consulta de uma compra identificada e exportação com contexto. A saída é material
-para a análise humana, sem classificação automática de prioridades ou irregularidades.
+**Cenário ilustrativo:** uma equipe quer um panorama das compras publicadas no período.
+O responsável pelo relatório precisa responder: onde as publicações se concentram,
+como se distribuem ao longo dos meses e quais informações precisam de conferência?
 
-O [PNCP já oferece busca, filtros, documentos, painéis e dados abertos](https://www.gov.br/pncp/pt-br/pncp).
-O app complementa esses recursos com perguntas sobre uma base histórica delimitada.
-Não há evidência de uma lacuna de mercado, demanda comercial ou vantagem sobre o portal
-validada com usuários. [Visão de negócio, referências e plano de validação](docs/business-case.md).
+A tarefa envolve mais do que mostrar um total. É preciso comparar os registros, separar
+informações conhecidas das ausentes e manter a origem dos números disponível. Sem essas
+distinções, o relatório pode tratar uma publicação como pagamento ou apresentar um campo
+desconhecido como zero. São riscos de interpretação que o projeto trata explicitamente,
+sem atribuir sua frequência a organizações que não foram estudadas.
+
+O AskTrace organiza essa tarefa em um percurso: **perguntar, comparar, conferir e levar
+o resultado para o relatório**. O usuário recebe um resumo, visualizações quando cabíveis,
+uma tabela e arquivos de exportação com contexto. A análise e a escolha do que merece
+aprofundamento continuam com a pessoa.
+
+## O valor da entrega para cada público
+
+| Quem lê ou usa | O que precisa entender | O que o projeto entrega |
+| --- | --- | --- |
+| Gestão | O que o panorama permite dizer e onde aprofundar a leitura | Comparações de publicações, contexto e limites da conclusão |
+| Análise | Como conferir e incorporar os números no relatório | Tabelas, identificadores, fontes e exportação CSV/JSON |
+| Engenharia | Como o sistema mantém os resultados consistentes | Consultas controladas, evidências da coleta e testes documentados |
+
+O benefício pretendido é apoiar uma análise explicável e conferível. **Não houve ainda
+validação com usuários ou medição de economia de tempo, custo ou redução de erros.**
+O público descrito é proposto, não uma carteira de clientes. O
+[PNCP já oferece busca e painéis](https://www.gov.br/pncp/pt-br/pncp); o AskTrace apresenta
+uma forma adicional de explorar o recorte por perguntas. As hipóteses e o plano de
+validação estão na [visão de negócio](docs/business-case.md).
 
 ## Da pergunta à decisão de análise
 
