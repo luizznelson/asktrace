@@ -18,10 +18,20 @@ mais detalhe e explicar quais dados sustentam suas conclusões. O aplicativo re�
 comparações de publicações, consulta de uma compra identificada e exportação com fontes,
 usando um recorte histórico do Portal Nacional de Contratações Públicas (PNCP).
 
+## Em um minuto
+
+| | |
+| --- | --- |
+| **Problema** | Um relatório de compras públicas pode tratar publicação como pagamento ou campo vazio como zero. Os números precisam ser conferíveis até a origem. |
+| **Decisão central** | O LLM só escolhe uma entre seis consultas permitidas. Os números vêm de SQL parametrizado e somente leitura, e os dados do banco não são enviados ao modelo. Um modo por regras, sem API externa, atende os mesmos seis caminhos. |
+| **Resultado medido** | Roteamento em **60/60** casos do corpus curado, incluindo recusas; contingência de IA com 60 aprovações em 61 execuções. No Render, as consultas por regras caíram de **20–23 s para 0,56–0,94 s** depois de mover a verificação das evidências para a inicialização (duas execuções observadas). |
+| **Próxima decisão pendente** | Medir com usuários se a pergunta em linguagem natural agrega valor em relação ao modo por regras. |
+| **Onde conferir** | [Decisões de arquitetura](#decisões-de-arquitetura-e-trade-offs), [arquitetura completa](docs/architecture.md) e [qualidade](docs/quality.md). |
+
 ## Escolha seu percurso de leitura
 
 - **Entender a proposta:** cenário, perguntas e exemplo nas seções abaixo; depois o [estudo de caso](docs/case-study.md).
-- **Avaliar a engenharia:** [habilidades e evidências](#habilidades-demonstradas-e-onde-conferir), [arquitetura](docs/architecture.md) e [qualidade](docs/quality.md).
+- **Avaliar a engenharia:** [decisões de arquitetura](#decisões-de-arquitetura-e-trade-offs), [arquitetura](docs/architecture.md) e [qualidade](docs/quality.md).
 - **Executar ou reproduzir:** [instruções neste README](#executar-e-reproduzir) e [preparação do ambiente e da base](docs/development.md).
 
 ## Uma situação que explica a proposta
@@ -128,24 +138,22 @@ numérico. Os dados do banco não são enviados ao planejador. Sem API externa, 
 regras atende os mesmos seis caminhos. O histórico organiza a aba, sem memória
 conversacional no modelo, e identifica respostas de versões anteriores da base.
 
-## Habilidades demonstradas e onde conferir
+## Decisões de arquitetura e trade-offs
 
-As decisões abaixo conectam a tarefa de negócio à implementação. Os links permitem
-examinar o trabalho realizado, seus testes e suas limitações.
+Cada linha resume uma escolha registrada nos ADRs de [docs/architecture.md](docs/architecture.md), com a alternativa descartada e o custo aceito.
 
-| Habilidade | Como aparece no projeto | Evidência para avaliação |
-| --- | --- | --- |
-| Comunicar problema, solução e limites | Cenário de uso, perguntas de negócio e interpretação de um resultado real | [Estudo de caso](docs/case-study.md), [visão de negócio](docs/business-case.md) |
-| Trabalhar com dados de uma fonte real | Coleta paginada, validação, hashes e carga sem duplicar registros | [Ingestão](docs/ingestion.md), [cobertura concluída](docs/contracts-expanded-coverage.md), [integridade](asktrace/evidence.py) |
-| Integrar LLMs com comportamento delimitado | Catálogo de consultas, validação do plano e recusas fora do escopo | [Agente](asktrace/agent.py), [método de avaliação](docs/agent-evaluation.md) |
-| Projetar consultas e preservar valores | Agregações por compra, precisão decimal, ausências e acesso de leitura | [Consultas](asktrace/query.py), [permissões](sql/004_reporting.sql), [formatação](web/formatters.js) |
-| Construir uma experiência utilizável | Interface PT-BR/EN, histórico da aba, resumos, gráficos e exportação contextualizada | [Interface](docs/interface.md), [análises](docs/analytics.md), [código da interface](web/app.js) |
-| Verificar qualidade e lidar com falhas | Testes de software, avaliação de roteamento, tentativas limitadas e espera por provedor | [Qualidade](docs/quality.md), [contingência](docs/provider-contingency.md), [execuções](runs/README.md) |
+| Decisão | Por quê (e o que foi descartado) | Custo aceito | Evidência |
+| --- | --- | --- | --- |
+| **Construir a base auditável antes do agente** | Separar coleta, normalização e carga permite repetir a carga sobre os mesmos bytes; descartado gravar a resposta da API direto no banco | Mais arquivos e um manifesto de hashes para manter | [ADR-001](docs/architecture.md), [ingestão](docs/ingestion.md) |
+| **Snapshot por execução, sem atualizar registros por ID** | Não ocultar mudanças entre coletas | Mais histórico; toda consulta precisa escolher a execução para não contar em dobro | [database.py](asktrace/database.py) |
+| **Decimal, NUMERIC e NULL** | Float ou ausência como zero mudariam o significado dos valores | Contas mais trabalhosas; 1.354 valores homologados ficam como desconhecidos | [Consultas](asktrace/query.py) |
+| **Carga em transação única** | Uma carga parcial poderia parecer uma base concluída | Uma falha exige refazer a carga | [database.py](asktrace/database.py) |
+| **LLM escolhe do catálogo; não escreve SQL nem recebe os dados** | Limitar respostas erradas e o acesso ao banco | Só seis tipos de pergunta são atendidos; o resto é recusado | [Agente](asktrace/agent.py), [permissões](sql/004_reporting.sql) |
+| **Verificar as evidências na inicialização, não a cada pergunta** | A primeira versão relia milhares de arquivos por consulta (20–23 s) | Inicialização mais lenta e mais memória; atualizar a base exige reiniciar | [ADR-002](docs/architecture.md), [medição](runs/render-performance-59ca88d-verified/verification.json) |
+| **Contingência entre provedores de LLM, com tentativas limitadas** | O serviço não depende de um único provedor | Respostas podem variar conforme o provedor usado | [Contingência](docs/provider-contingency.md) |
+| **Logins separados para leitura e estado; carga administrativa fora do servidor** | A aplicação pública não recebe a credencial que altera a base | Mais credenciais para operar | [Publicação](docs/deployment.md) |
 
-A contribuição está na integração dessas partes e nas decisões documentadas. Os testes
-comprovam comportamentos delimitados; os dados coletados comprovam cobertura. A utilidade
-com usuários e a operação pública ainda precisam de validação. A assistência de IA no
-desenvolvimento está declarada ao final deste README.
+Os testes comprovam comportamentos delimitados; a utilidade com usuários ainda precisa de validação. A assistência de IA no desenvolvimento está declarada ao final deste README.
 
 ## Qualidade: software e IA são verificações diferentes
 

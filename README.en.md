@@ -18,10 +18,20 @@ data supports the findings. The application combines publication comparisons, lo
 an identified purchase and exports with sources, using a historical dataset from
 Brazil's National Public Procurement Portal (PNCP).
 
+## In one minute
+
+| | |
+| --- | --- |
+| **Problem** | A procurement report can treat a publication as a payment or a blank field as zero. Numbers must be traceable to their origin. |
+| **Core decision** | The LLM only picks one of six allowed queries. Numbers come from parameterized, read-only SQL, and database rows are never sent to the model. A rule-based mode, with no external API, serves the same six paths. |
+| **Measured result** | Routing passed **60/60** curated cases, including refusals; AI fallback passed 60 of 61 runs. On Render, rule-based queries dropped from **20–23 s to 0.56–0.94 s** after moving evidence verification to startup (two observed runs). |
+| **Next open decision** | Measure with users whether natural-language questions add value over the rule-based mode. |
+| **Where to check** | [Architecture decisions](#architecture-decisions-and-trade-offs), [full architecture](docs/architecture.md) and [quality](docs/quality.md). |
+
 ## Choose a reading path
 
 - **Understand the purpose:** scenario, questions and example below, then the [case study](docs/case-study.md).
-- **Review the engineering:** [skills and evidence](#demonstrated-skills-and-supporting-evidence), [architecture](docs/architecture.md) and [quality](docs/quality.md).
+- **Review the engineering:** [architecture decisions](#architecture-decisions-and-trade-offs), [architecture](docs/architecture.md) and [quality](docs/quality.md).
 - **Run or reproduce:** [instructions in this README](#run-and-reproduce) and [environment and dataset preparation](docs/development.md).
 
 ## A scenario that explains the purpose
@@ -128,24 +138,22 @@ answer. Database results are not sent to the planner. Local rules support the sa
 paths without an external API. Tab history is not model conversation memory and marks
 results from earlier dataset versions.
 
-## Demonstrated skills and supporting evidence
+## Architecture decisions and trade-offs
 
-These decisions connect the business task to implementation. The links expose the
-work, checks and limitations for review.
+Each row summarizes a choice recorded in the ADRs in [docs/architecture.md](docs/architecture.md), with the discarded alternative and the accepted cost.
 
-| Skill | How it appears in this project | Review evidence |
-| --- | --- | --- |
-| Communicating the problem, solution and limits | Use scenario, business questions and interpretation of an actual result | [Case study](docs/case-study.md), [business rationale](docs/business-case.md) |
-| Working with a real data source | Paginated collection, validation, hashes and loading without duplicate records | [Ingestion](docs/ingestion.md), [completed coverage](docs/contracts-expanded-coverage.md), [integrity](asktrace/evidence.py) |
-| Integrating LLMs with bounded behavior | Query catalog, plan validation and out-of-scope refusals | [Agent](asktrace/agent.py), [evaluation method](docs/agent-evaluation.md) |
-| Designing queries and preserving values | Purchase-level aggregation, decimal precision, missing values and read-only access | [Queries](asktrace/query.py), [permissions](sql/004_reporting.sql), [formatting](web/formatters.js) |
-| Building a usable experience | PT-BR/EN interface, tab history, summaries, charts and contextual exports | [Interface](docs/interface.md), [analyses](docs/analytics.md), [UI source](web/app.js) |
-| Verifying quality and handling failure | Software tests, routing evaluation, bounded attempts and provider cooldowns | [Quality](docs/quality.md), [contingency](docs/provider-contingency.md), [execution records](runs/README.md) |
+| Decision | Why (and what was discarded) | Accepted cost | Evidence |
+| --- | --- | --- | --- |
+| **Build the auditable dataset before the agent** | Separating collection, normalization and loading allows reloading the same bytes; writing API responses straight to the database was discarded | More files and a hash manifest to maintain | [ADR-001](docs/architecture.md), [ingestion](docs/ingestion.md) |
+| **One snapshot per run, no in-place updates by ID** | Do not hide changes between collections | More history; every query must pick a run to avoid double counting | [database.py](asktrace/database.py) |
+| **Decimal, NUMERIC and NULL** | Floats or blanks-as-zero would change what values mean | Harder arithmetic; 1,354 awarded values stay unknown | [Queries](asktrace/query.py) |
+| **Single-transaction load** | A partial load could look like a finished dataset | A failure requires reloading | [database.py](asktrace/database.py) |
+| **LLM picks from a catalog; it neither writes SQL nor sees the data** | Limit wrong answers and database access | Only six question types are served; the rest is refused | [Agent](asktrace/agent.py), [permissions](sql/004_reporting.sql) |
+| **Verify evidence at startup, not on every question** | The first version reread thousands of files per query (20–23 s) | Slower startup and more memory; updating the data requires a restart | [ADR-002](docs/architecture.md), [measurement](runs/render-performance-59ca88d-verified/verification.json) |
+| **Fallback across LLM providers with bounded retries** | The service does not depend on a single provider | Answers may vary with the provider used | [Fallback](docs/provider-contingency.md) |
+| **Separate read and state logins; admin loading outside the server** | The public app never gets the credential that changes the data | More credentials to operate | [Deployment](docs/deployment.md) |
 
-The contribution lies in integrating these parts and documenting the decisions. Tests
-establish bounded behaviors; collected data establishes coverage. User value and public
-operation still need validation. AI assistance during development is disclosed at the
-end of this README. Detailed documentation is primarily in Portuguese.
+Tests prove bounded behaviors; usefulness with real users still needs validation. AI assistance during development is declared at the end of this README.
 
 ## Software checks and AI evaluation are different
 
